@@ -1,0 +1,91 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UIState, Notification } from '../../types';
+
+const initialState: UIState = {
+  theme: 'auto',
+  isOnline: true,
+  notifications: [],
+  modals: {
+    achievement: false,
+    quiz: false,
+    location: false,
+  },
+};
+
+const uiSlice = createSlice({
+  name: 'ui',
+  initialState,
+  reducers: {
+    setTheme: (state, action: PayloadAction<'light' | 'dark' | 'auto'>) => {
+      state.theme = action.payload;
+    },
+    setOnlineStatus: (state, action: PayloadAction<boolean>) => {
+      state.isOnline = action.payload;
+    },
+    addNotification: (state, action: PayloadAction<Omit<Notification, 'id' | 'timestamp' | 'isRead'>>) => {
+      const notification: Notification = {
+        ...action.payload,
+        id: Date.now().toString(),
+        timestamp: new Date().toISOString(),
+        isRead: false,
+      };
+      state.notifications.unshift(notification);
+    },
+    markNotificationAsRead: (state, action: PayloadAction<string>) => {
+      const notification = state.notifications.find(n => n.id === action.payload);
+      if (notification) {
+        notification.isRead = true;
+      }
+    },
+    removeNotification: (state, action: PayloadAction<string>) => {
+      state.notifications = state.notifications.filter(n => n.id !== action.payload);
+    },
+    clearAllNotifications: (state) => {
+      state.notifications = [];
+    },
+    markAllNotificationsAsRead: (state) => {
+      state.notifications.forEach(notification => {
+        notification.isRead = true;
+      });
+    },
+    openModal: (state, action: PayloadAction<keyof UIState['modals']>) => {
+      state.modals[action.payload] = true;
+    },
+    closeModal: (state, action: PayloadAction<keyof UIState['modals']>) => {
+      state.modals[action.payload] = false;
+    },
+    closeAllModals: (state) => {
+      Object.keys(state.modals).forEach(key => {
+        state.modals[key as keyof UIState['modals']] = false;
+      });
+    },
+  },
+});
+
+export const {
+  setTheme,
+  setOnlineStatus,
+  addNotification,
+  markNotificationAsRead,
+  removeNotification,
+  clearAllNotifications,
+  markAllNotificationsAsRead,
+  openModal,
+  closeModal,
+  closeAllModals,
+} = uiSlice.actions;
+
+export default uiSlice.reducer;
+
+// Selectors
+export const selectUI = (state: { ui: UIState }) => state.ui;
+export const selectTheme = (state: { ui: UIState }) => state.ui.theme;
+export const selectIsOnline = (state: { ui: UIState }) => state.ui.isOnline;
+export const selectNotifications = (state: { ui: UIState }) => state.ui.notifications;
+export const selectUnreadNotifications = (state: { ui: UIState }) => 
+  state.ui.notifications.filter(n => !n.isRead);
+export const selectUnreadNotificationCount = (state: { ui: UIState }) => 
+  state.ui.notifications.filter(n => !n.isRead).length;
+export const selectModals = (state: { ui: UIState }) => state.ui.modals;
+export const selectIsModalOpen = (modalName: keyof UIState['modals']) => 
+  (state: { ui: UIState }) => state.ui.modals[modalName];

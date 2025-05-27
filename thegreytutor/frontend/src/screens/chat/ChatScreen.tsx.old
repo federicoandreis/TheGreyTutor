@@ -1,0 +1,373 @@
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+  SafeAreaView,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import {
+  sendMessage,
+  addMessage,
+  createChatSession,
+  selectCurrentSession,
+  selectChatLoading,
+  selectChatError,
+} from '../../store/slices/chatSlice';
+import { ChatMessage } from '../../types';
+
+const ChatScreen: React.FC = () => {
+  const [inputText, setInputText] = useState('');
+  const [isInitialized, setIsInitialized] = useState(false);
+  const flatListRef = useRef<FlatList>(null);
+  const dispatch = useAppDispatch();
+  const currentSession = useAppSelector(selectCurrentSession);
+  const isLoading = useAppSelector(selectChatLoading);
+  const error = useAppSelector(selectChatError);
+
+  // Initialize chat session when component mounts
+  useEffect(() => {
+    const initializeChat = async () => {
+      if (!currentSession && !isInitialized) {
+        try {
+          await dispatch(createChatSession({
+            title: 'Chat with Gandalf',
+            location: 'shire'
+          })).unwrap();
+          setIsInitialized(true);
+        } catch (error) {
+          console.error('Failed to initialize chat session:', error);
+          Alert.alert('Error', 'Failed to start chat session. Please try again.');
+        }
+      }
+    };
+
+    initializeChat();
+  }, [dispatch, currentSession, isInitialized]);
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    if (currentSession?.messages?.length && flatListRef.current) {
+      setTimeout(() => {
+        flatListRef.current?.scrollToEnd({ animated: true });
+      }, 300);
+    }
+  }, [currentSession?.messages?.length]);
+
+  // Scroll to bottom when component first loads
+  useEffect(() => {
+    if (currentSession?.messages?.length && flatListRef.current) {
+      setTimeout(() => {
+        flatListRef.current?.scrollToEnd({ animated: false });
+      }, 100);
+    }
+  }, [currentSession?.id]);
+
+  const handleSendMessage = async () => {
+    if (!inputText.trim()) return;
+
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      content: inputText.trim(),
+      role: 'user',
+      timestamp: new Date().toISOString(),
+    };
+
+    // Add user message immediately
+    dispatch(addMessage(userMessage));
+    
+    const messageText = inputText.trim();
+    setInputText('');
+
+    // Scroll to bottom after sending
+    setTimeout(() => {
+      flatListRef.current?.scrollToEnd({ animated: true });
+    }, 100);
+
+    try {
+      await dispatch(sendMessage({
+        message: messageText,
+        sessionId: currentSession?.id,
+        location: 'hobbiton', // Default location for now
+      })).unwrap();
+    } catch (error) {
+      console.error('Failed to send message:', error);
+    }
+  };
+
+  const scrollToBottom = () => {
+    flatListRef.current?.scrollToEnd({ animated: true });
+  };
+
+  const renderMessage = ({ item }: { item: ChatMessage }) => (
+    <View style={styles.messageWrapper}>
+      {item.role === 'assistant' && (
+        <View style={styles.avatarContainer}>
+          <Text style={styles.avatar}>🧙‍♂️</Text>
+        </View>
+      )}
+      <View style={[
+        styles.messageContainer,
+        item.role === 'user' ? styles.userMessage : styles.assistantMessage
+      ]}>
+        <Text style={[
+          styles.messageText,
+          item.role === 'user' ? styles.userMessageText : styles.assistantMessageText
+        ]}>
+          {item.content}
+        </Text>
+        <Text style={styles.timestamp}>
+          {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        </Text>
+      </View>
+      {item.role === 'user' && <View style={styles.spacer} />}
+    </View>
+  );
+
+  const messageCount = currentSession?.messages?.length || 0;
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView 
+        style={styles.keyboardContainer}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+      >
+        <View style={styles.messagesContainer}>
+          {messageCount === 0 ? (
+            <View style={styles.welcomeContainer}>
+              <Text style={styles.welcomeAvatar}>🧙‍♂️</Text>
+              <Text style={styles.welcomeTitle}>Welcome to The Grey Tutor</Text>
+              <Text style={styles.welcomeText}>
+                I'm here to guide you through the vast lore of Middle Earth. Ask me anything about characters, places, events, or themes!
+              </Text>
+            </View>
+          ) : (
+            <FlatList
+              ref={flatListRef}
+              data={currentSession?.messages || []}
+              renderItem={renderMessage}
+              keyExtractor={(item) => item.id}
+              style={styles.messagesList}
+              contentContainerStyle={styles.messagesContent}
+              showsVerticalScrollIndicator={false}
+              onContentSizeChange={() => {
+                setTimeout(() => {
+                  flatListRef.current?.scrollToEnd({ animated: true });
+                }, 100);
+              }}
+            />
+          )}
+
+          {messageCount > 3 && (
+            <TouchableOpacity style={styles.scrollButton} onPress={scrollToBottom}>
+              <Ionicons name="chevron-down" size={20} color="#FFFFFF" />
+            </TouchableOpacity>
+          )}
+        </View>
+
+        {error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{error}</Text>
+          </View>
+        )}
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.textInput}
+            value={inputText}
+            onChangeText={setInputText}
+            placeholder="Ask me about Middle Earth..."
+            placeholderTextColor="#8E8E93"
+            multiline
+            maxLength={500}
+            onFocus={() => {
+              setTimeout(() => {
+                flatListRef.current?.scrollToEnd({ animated: true });
+              }, 300);
+            }}
+          />
+          <TouchableOpacity
+            style={[styles.sendButton, (!inputText.trim() || isLoading) && styles.sendButtonDisabled]}
+            onPress={handleSendMessage}
+            disabled={!inputText.trim() || isLoading}
+          >
+            <Text style={styles.sendButtonText}>
+              {isLoading ? '...' : 'Send'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F2F2F7',
+  },
+  keyboardContainer: {
+    flex: 1,
+  },
+  messagesContainer: {
+    flex: 1,
+    position: 'relative',
+  },
+  welcomeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 40,
+    paddingBottom: 100,
+  },
+  welcomeAvatar: {
+    fontSize: 80,
+    marginBottom: 20,
+  },
+  welcomeTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1C1C1E',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  welcomeText: {
+    fontSize: 16,
+    color: '#6D6D70',
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+  messagesList: {
+    flex: 1,
+  },
+  messagesContent: {
+    padding: 16,
+    paddingBottom: 20,
+  },
+  messageWrapper: {
+    flexDirection: 'row',
+    marginBottom: 16,
+    alignItems: 'flex-end',
+  },
+  avatarContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#FF9500',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8,
+  },
+  avatar: {
+    fontSize: 20,
+  },
+  spacer: {
+    width: 48,
+  },
+  messageContainer: {
+    flex: 1,
+    maxWidth: '80%',
+    padding: 12,
+    borderRadius: 18,
+  },
+  userMessage: {
+    backgroundColor: '#6C7B7F',
+    alignSelf: 'flex-end',
+    borderBottomRightRadius: 4,
+  },
+  assistantMessage: {
+    backgroundColor: '#E9E9EB',
+    alignSelf: 'flex-start',
+    borderBottomLeftRadius: 4,
+  },
+  messageText: {
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  userMessageText: {
+    color: '#FFFFFF',
+  },
+  assistantMessageText: {
+    color: '#1C1C1E',
+  },
+  timestamp: {
+    fontSize: 11,
+    color: '#8E8E93',
+    marginTop: 4,
+    textAlign: 'right',
+  },
+  scrollButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: '#007AFF',
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    padding: 16,
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E5EA',
+    alignItems: 'flex-end',
+  },
+  textInput: {
+    flex: 1,
+    backgroundColor: '#F2F2F7',
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    marginRight: 12,
+    color: '#1C1C1E',
+    fontSize: 16,
+    maxHeight: 100,
+    borderWidth: 1,
+    borderColor: '#E5E5EA',
+  },
+  sendButton: {
+    backgroundColor: '#007AFF',
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sendButtonDisabled: {
+    backgroundColor: '#C7C7CC',
+  },
+  sendButtonText: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  errorContainer: {
+    backgroundColor: '#FF3B30',
+    padding: 12,
+    margin: 16,
+    borderRadius: 8,
+  },
+  errorText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 14,
+  },
+});
+
+export default ChatScreen;

@@ -1,0 +1,19 @@
+import { configureStore } from '@reduxjs/toolkit';
+import authSlice from './slices/authSlice';
+import chatSlice from './slices/chatSlice';
+
+// Simple store configuration with only essential slices
+export const store = configureStore({
+  reducer: {
+    auth: authSlice,
+    chat: chatSlice,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // Disable for now to avoid issues
+    }),
+  devTools: true,
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
