@@ -13,10 +13,11 @@ import uvicorn
 
 from .core.config import settings
 from .core.logging import setup_logging
-from .api.routes import auth, chat, agents, health, analytics
-from .database.connection import init_db, close_db
-from .services.cache import init_redis, close_redis
-from .services.agent_orchestrator import AgentOrchestrator
+# from .api.routes import auth, chat, agents, health, analytics
+from .ingestion import api_graphrag
+# from .database.connection import init_db, close_db
+# from .services.cache import init_redis, close_redis
+# from .services.agent_orchestrator import AgentOrchestrator
 
 # Setup structured logging
 setup_logging()
@@ -29,33 +30,22 @@ security = HTTPBearer()
 async def lifespan(app: FastAPI):
     """Application lifespan manager for startup and shutdown events."""
     logger.info("Starting The Grey Tutor backend...")
-    
-    # Initialize database connections
-    await init_db()
-    logger.info("Database initialized")
-    
-    # Initialize Redis cache
-    await init_redis()
-    logger.info("Redis cache initialized")
-    
-    # Initialize Agent Orchestrator
-    orchestrator = AgentOrchestrator()
-    await orchestrator.initialize()
-    app.state.orchestrator = orchestrator
-    logger.info("Agent orchestrator initialized")
-    
-    logger.info("The Grey Tutor backend started successfully")
-    
+    # Disabled: Database, Redis, and Agent Orchestrator initialization for minimal ingestion API
+    # await init_db()
+    # logger.info("Database initialized")
+    # await init_redis()
+    # logger.info("Redis cache initialized")
+    # orchestrator = AgentOrchestrator()
+    # await orchestrator.initialize()
+    # app.state.orchestrator = orchestrator
+    # logger.info("Agent orchestrator initialized")
+    logger.info("The Grey Tutor backend started successfully (minimal mode)")
     yield
-    
-    # Cleanup on shutdown
-    logger.info("Shutting down The Grey Tutor backend...")
-    
-    await orchestrator.shutdown()
-    await close_redis()
-    await close_db()
-    
-    logger.info("The Grey Tutor backend shut down successfully")
+    # logger.info("Shutting down The Grey Tutor backend...")
+    # await orchestrator.shutdown()
+    # await close_redis()
+    # await close_db()
+    # logger.info("The Grey Tutor backend shut down successfully")
 
 # Create FastAPI application
 app = FastAPI(
@@ -77,11 +67,12 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(health.router, prefix="/health", tags=["health"])
-app.include_router(auth.router, prefix="/auth", tags=["authentication"])
-app.include_router(chat.router, prefix="/chat", tags=["chat"])
-app.include_router(agents.router, prefix="/agents", tags=["agents"])
-app.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
+# app.include_router(health.router, prefix="/health", tags=["health"])
+# app.include_router(auth.router, prefix="/auth", tags=["authentication"])
+# app.include_router(chat.router, prefix="/chat", tags=["chat"])
+# app.include_router(agents.router, prefix="/agents", tags=["agents"])
+# app.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
+app.include_router(api_graphrag.router, prefix="/ingestion", tags=["ingestion"])
 
 @app.get("/")
 async def root():

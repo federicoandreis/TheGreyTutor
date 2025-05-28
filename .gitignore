@@ -9,11 +9,15 @@ build/
 .cache/
 .expo/
 .expo-shared/
+__pycache__/
+*.py[cod]
+*$py.class
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+logs/
 
 # Sensitive files
 .env
@@ -36,6 +40,25 @@ coverage/
 
 # Docs (excluded from repo)
 docs/
+
+# Python
+*.pyc
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+
+# Data files
+input/
+output/
+cache/
+*.db
+*.sqlite3
+
+# Neo4j
+*.jar
+
+# Local development
+tmp/
 
 # Misc
 null.txt
