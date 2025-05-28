@@ -2,7 +2,9 @@ import os
 import logging
 import glob
 import asyncio
+import mimetypes
 from dotenv import load_dotenv
+from pathlib import Path
 
 # Load environment variables
 load_dotenv()
@@ -580,6 +582,37 @@ Summary:
     
     return summary
 
+def is_pdf_file(file_path):
+    """
+    Determine if a file is a PDF using both file extension and MIME type.
+    
+    Args:
+        file_path: Path to the file to check
+        
+    Returns:
+        bool: True if the file is a PDF, False otherwise
+    """
+    # Check file extension
+    file_ext = os.path.splitext(file_path)[1].lower()
+    if file_ext == '.pdf':
+        return True
+    
+    # Check MIME type as a backup
+    mime_type, _ = mimetypes.guess_type(file_path)
+    if mime_type == 'application/pdf':
+        return True
+    
+    # If we have a Path object, try to read the first few bytes to check for PDF signature
+    try:
+        with open(file_path, 'rb') as f:
+            header = f.read(5)
+            if header == b'%PDF-':
+                return True
+    except Exception:
+        pass
+    
+    return False
+
 def resolve_duplicate_entities(driver):
     """
     Post-processing function to resolve duplicate entities like 'Bilbo' and 'Bilbo Baggins'.
@@ -1102,10 +1135,13 @@ Text: "Aragorn, also known as Strider and heir of Isildur, was the rightful king
         from_pdf=False
     )
     
-    # Get list of input files
-    file_list = glob.glob("input/*.txt")
+    # Get list of input files (both TXT and PDF)
+    txt_files = glob.glob("input/*.txt")
+    pdf_files = glob.glob("input/*.pdf")
+    file_list = txt_files + pdf_files
+    
     if not file_list:
-        logging.warning("No .txt files found in input/ directory")
+        logging.warning("No .txt or .pdf files found in input/ directory")
         return
     
     # Set up progress bar if available
@@ -1116,14 +1152,35 @@ Text: "Aragorn, also known as Strider and heir of Isildur, was the rightful king
         logging.info(f"\n---\n[START] Ingesting: {file_path}")
         
         try:
-            # Read file content
-            with open(file_path, "r", encoding="utf-8") as f:
-                text = f.read()
+            # Determine file type using our helper function
+            is_pdf = is_pdf_file(file_path)
             
-            logging.info("[STEP] Running pipeline on file...")
-            
-            # Run the pipeline asynchronously (without examples parameter)
-            result = asyncio.run(pipeline.run_async(text=text))
+            # Create appropriate pipeline based on file type
+            if is_pdf:
+                # Create a PDF-specific pipeline
+                pdf_pipeline = SimpleKGPipeline(
+                    llm=llm,
+                    driver=driver,
+                    embedder=embedder,
+                    entities=ENTITIES,
+                    relations=RELATIONS,
+                    potential_schema=POTENTIAL_SCHEMA,
+                    text_splitter=text_splitter,
+                    perform_entity_resolution=True,
+                    neo4j_database="neo4j",
+                    from_pdf=True  # Set to True for PDF processing
+                )
+                
+                logging.info("[STEP] Running pipeline on PDF file...")
+                # For PDFs, pass the file path directly
+                result = asyncio.run(pdf_pipeline.run_async(file_path=file_path))
+            else:
+                # For text files, read the content and pass as text
+                with open(file_path, "r", encoding="utf-8") as f:
+                    text = f.read()
+                
+                logging.info("[STEP] Running pipeline on text file...")
+                result = asyncio.run(pipeline.run_async(text=text))
             
             logging.info("[DONE] File ingested successfully.")
             logging.info(f"Pipeline result: {result}")
