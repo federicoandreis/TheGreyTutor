@@ -27,6 +27,10 @@ logs/
 *.crt
 *.p12
 
+# Ignore all files in input and output folders
+input/*
+output/*
+
 # System files
 .DS_Store
 Thumbs.db
