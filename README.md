@@ -56,23 +56,47 @@ frontend/
 
 ---
 
-## ⚡ Work in Progress
-- The app is currently in active development.
-- **Chat Mode** is fully functional with an extensive, regex-driven mock Q&A database.
-- **Quiz Mode** is implemented and demo-ready, featuring multiple-choice questions and scoring.
-- The UI is simple, accessible, and mobile-first.
+## 🧙 Knowledge Graph Deduplication & Backend Progress
 
-### What’s Next
-- Add persistent user scores and leaderboards.
-- Integrate real AI/LLM backend for dynamic responses.
-- Polish UI/UX and add animations.
-- Expand Q&A and quiz coverage.
-- Add user authentication and profiles.
+This repo now includes a powerful backend pipeline for knowledge graph deduplication and entity resolution, focused on Tolkien lore. Major improvements include:
+
+- **Advanced Deduplication Logic:**
+  - Merges suspected duplicate nodes using both names and aliases, with robust handling of lists and strings.
+  - Transitive closure logic ensures all related duplicates are grouped correctly.
+- **LLM Integration:**
+  - Uses OpenAI's GPT models to judge whether groups of nodes should be merged or kept separate.
+  - Strict prompt engineering: The LLM is instructed to act as a Tolkien expert and avoid over-merging (e.g., never merges Frodo and Bilbo Baggins).
+  - JSON parsing is hardened for reliability, with detailed error reporting.
+- **Security & Reliability:**
+  - All secrets (API keys, etc.) are loaded from environment variables.
+  - Sensitive and generated data in `input/` and `output/` folders are gitignored.
+  - Improved error handling for LLM/API failures.
+
+---
+
+## ⚡ Work in Progress
+- The app and backend are in active development.
+- **Chat Mode**: Fully functional with a regex-driven mock Q&A database.
+- **Quiz Mode**: Demo-ready with scoring.
+- **Knowledge Graph Deduplication**: Robust, LLM-assisted, and production-grade.
+- Simple, accessible, and mobile-first UI.
+
+### Roadmap / What’s Next
+- [x] **Deduplication pipeline:** Transitive duplicate grouping, robust LLM integration, and strict Tolkien expert prompting.
+- [x] **Error handling:** Hardened JSON parsing and API error reporting.
+- [x] **Security:** .env and data folder gitignore improvements.
+- [ ] **Post-LLM validation:** (Optional) Add canonical name checks to block merges of distinct entities.
+- [ ] **User-facing backend API:** Expose graph and deduplication endpoints for frontend integration.
+- [ ] **Persistent user scores and leaderboards.**
+- [ ] **Production LLM backend for dynamic responses.**
+- [ ] **UI/UX polish and animations.**
+- [ ] **Expanded Q&A and quiz coverage.**
+- [ ] **User authentication and profiles.**
 
 ---
 
 ## 📝 Repo Description
-> The Grey Tutor: An interactive Middle Earth chat and quiz app for exploring Tolkien lore. Features both freeform chat and quiz modes, powered by a mock database. Built with React Native + Expo. **Work in progress.**
+> The Grey Tutor: An interactive Middle Earth chat and quiz app for exploring Tolkien lore. Features both freeform chat and quiz modes, powered by a mock database and a robust knowledge graph deduplication backend. Built with React Native + Expo. **Work in progress.**
 
 ---
 
