@@ -39,6 +39,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Ignore legacy code
+kg_consolidation/legacy/
+
 # Test coverage
 coverage/
 

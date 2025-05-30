@@ -1,0 +1,1333 @@
+[
+  {
+    "node_type": "Artifact",
+    "total_nodes": 62,
+    "duplicate_groups": 4,
+    "total_nodes_in_groups": 9,
+    "groups": [
+      {
+        "group_number": 1,
+        "names": [
+          "['the One Ring', 'the Ring', 'the ring', 'the One', 'the thing']",
+          "['The Ruling Ring', 'The Great Ring', 'The One Ring', 'The One', 'The Three', 'The Ring']",
+          "['Great Rings', 'Great Ring']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1936",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1273",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:416"
+        ]
+      },
+      {
+        "group_number": 2,
+        "names": [
+          "['Rings of Power', 'Rings']",
+          "Rings of Power"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:419",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1499"
+        ]
+      },
+      {
+        "group_number": 3,
+        "names": [
+          "['One Ring', 'One']",
+          "Ruling Ring"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:435",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1710"
+        ]
+      },
+      {
+        "group_number": 4,
+        "names": [
+          "['Ring of the Enemy', 'Ring of Sapphire', 'Ring of Adamant', 'Ring', 'Ring of Power']",
+          "['ring of Thro´r', 'ring']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1891"
+        ]
+      }
+    ]
+  },
+  {
+    "node_type": "Location",
+    "total_nodes": 188,
+    "duplicate_groups": 13,
+    "total_nodes_in_groups": 26,
+    "groups": [
+      {
+        "group_number": 1,
+        "names": [
+          "['the premises', 'the study', 'the West', 'the sea', 'the wood', 'the Shire', 'the Road', 'the River', 'the plain', 'the City', 'the Gate']",
+          "['The Green Dragon', 'The Ivy Bush', 'The Shire', 'The Hill']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:49",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:336"
+        ]
+      },
+      {
+        "group_number": 2,
+        "names": [
+          "Minas Tirith",
+          "['Minas Tirith', 'Minas Morgul', 'Minas Ithil', 'Minas Anor']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:553",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:59"
+        ]
+      },
+      {
+        "group_number": 3,
+        "names": [
+          "['Anduin the Great', 'Anduin']",
+          "['Great Place of the Tooks', 'Great River']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:441",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1092"
+        ]
+      },
+      {
+        "group_number": 4,
+        "names": [
+          "Imladris",
+          "Rivendell"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:646",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:443"
+        ]
+      },
+      {
+        "group_number": 5,
+        "names": [
+          "['Mountains of Shadow', 'Mountains']",
+          "mountains"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:479",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:672"
+        ]
+      },
+      {
+        "group_number": 6,
+        "names": [
+          "Barad-dûr",
+          "['Dark Tower of Mordor', 'Dark Tower']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1717",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:536"
+        ]
+      },
+      {
+        "group_number": 7,
+        "names": [
+          "['Black Gate', 'Black Land']",
+          "Black Gate"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:577",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1587"
+        ]
+      },
+      {
+        "group_number": 8,
+        "names": [
+          "citadel",
+          "Citadel"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1144",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:770"
+        ]
+      },
+      {
+        "group_number": 9,
+        "names": [
+          "['Land of the Periannath', 'Land of Mordor']",
+          "land of the Periannath"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:788",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:792"
+        ]
+      },
+      {
+        "group_number": 10,
+        "names": [
+          "Moria",
+          "Khazad-dûm"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:881",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1389"
+        ]
+      },
+      {
+        "group_number": 11,
+        "names": [
+          "Forest",
+          "forest"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1119",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1110"
+        ]
+      },
+      {
+        "group_number": 12,
+        "names": [
+          "Fiery Mountain",
+          "fiery mountain"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1439",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1576"
+        ]
+      },
+      {
+        "group_number": 13,
+        "names": [
+          "['City of Gondor', 'City Gate', 'City']",
+          "city"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1889",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1548"
+        ]
+      }
+    ]
+  },
+  {
+    "node_type": "Character",
+    "total_nodes": 298,
+    "duplicate_groups": 22,
+    "total_nodes_in_groups": 47,
+    "groups": [
+      {
+        "group_number": 1,
+        "names": [
+          "['Bilbo Baggins', 'Bilbo']",
+          "Bilbo Baggins"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:278"
+        ]
+      },
+      {
+        "group_number": 2,
+        "names": [
+          "Pippin",
+          "Peregrin Took"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:293"
+        ]
+      },
+      {
+        "group_number": 3,
+        "names": [
+          "Hamfast",
+          "['Gaffer Gamgee', 'Gaffer']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1453",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:18"
+        ]
+      },
+      {
+        "group_number": 4,
+        "names": [
+          "['Frodo Baggins', 'Frodo']",
+          "Frodo Baggins"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1505"
+        ]
+      },
+      {
+        "group_number": 5,
+        "names": [
+          "Meriadoc Brandybuck",
+          "Merry Brandybuck",
+          "['Merry Brandybuck', 'Merry']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1172",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:295",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:31"
+        ]
+      },
+      {
+        "group_number": 6,
+        "names": [
+          "Wizard",
+          "wizard"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1563",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:62"
+        ]
+      },
+      {
+        "group_number": 7,
+        "names": [
+          "Enemy",
+          "enemy"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:299",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1776"
+        ]
+      },
+      {
+        "group_number": 8,
+        "names": [
+          "Hobbit",
+          "hobbit"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:311",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:519"
+        ]
+      },
+      {
+        "group_number": 9,
+        "names": [
+          "dwarves",
+          "Dwarves"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:323",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:321"
+        ]
+      },
+      {
+        "group_number": 10,
+        "names": [
+          "Sauron",
+          "['The miserable creature', 'The Wizard', 'The Enemy', 'The Wise', 'The king']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:412",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1148"
+        ]
+      },
+      {
+        "group_number": 11,
+        "names": [
+          "hobbits",
+          "Hobbits"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:464",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:653"
+        ]
+      },
+      {
+        "group_number": 12,
+        "names": [
+          "orcs",
+          "Orcs"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:556",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:955"
+        ]
+      },
+      {
+        "group_number": 13,
+        "names": [
+          "men",
+          "Men of Westernesse",
+          "['Men of Westernesse', 'Men of Bree', 'Men']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1778",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1625",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:565"
+        ]
+      },
+      {
+        "group_number": 14,
+        "names": [
+          "Grandmother",
+          "grandmother"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:657",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:609"
+        ]
+      },
+      {
+        "group_number": 15,
+        "names": [
+          "Mithrandir",
+          "['Gandalf the Grey', 'Gandalf']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:756",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:644"
+        ]
+      },
+      {
+        "group_number": 16,
+        "names": [
+          "['Unknown Traveller', 'Unknown']",
+          "['unknown companion', 'unknown']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:879",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:664"
+        ]
+      },
+      {
+        "group_number": 17,
+        "names": [
+          "['Saruman the White', 'Saruman the Wise', 'Saruman']",
+          "Curunír"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:912",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:757"
+        ]
+      },
+      {
+        "group_number": 18,
+        "names": [
+          "He",
+          "he"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1300",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:956"
+        ]
+      },
+      {
+        "group_number": 19,
+        "names": [
+          "tall man",
+          "Tall Man"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1011",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:993"
+        ]
+      },
+      {
+        "group_number": 20,
+        "names": [
+          "['the White Rider', 'the old fellow', 'the wizard', 'the Gaffer', 'the Enemy', 'the Nine', 'the Lord', 'the cavalry', 'the Prince']",
+          "Ham Gamgee"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1131",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1408"
+        ]
+      },
+      {
+        "group_number": 21,
+        "names": [
+          "halfling",
+          "Halfling"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1454",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1283"
+        ]
+      },
+      {
+        "group_number": 22,
+        "names": [
+          "Forn",
+          "Bombadil",
+          "Orald"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1802",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1798",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1803"
+        ]
+      }
+    ]
+  },
+  {
+    "node_type": "Community",
+    "total_nodes": 213,
+    "duplicate_groups": 59,
+    "total_nodes_in_groups": 184,
+    "groups": [
+      {
+        "group_number": 1,
+        "names": [
+          "Proudfoot & Others (Characters)",
+          "Proudfoot & Others (Characters)",
+          "Proudfoot & Others (Characters)",
+          "Proudfoot & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1672",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2016",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1965",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:95"
+        ]
+      },
+      {
+        "group_number": 2,
+        "names": [
+          "Strider & Others (Characters)",
+          "Strider & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1671",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:96"
+        ]
+      },
+      {
+        "group_number": 3,
+        "names": [
+          "Unknown Traveller & Others (Characters)",
+          "Unknown Traveller & Others (Characters)",
+          "Unknown Traveller & Others (Characters)",
+          "Unknown Traveller & Others (Characters)",
+          "Unknown Traveller & Others (Characters)",
+          "Unknown Traveller & Others (Characters)",
+          "Unknown Traveller & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1174",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:793",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:99",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:670",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:794",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1029",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:673"
+        ]
+      },
+      {
+        "group_number": 4,
+        "names": [
+          "the White Rider & Others (Characters)",
+          "the White Rider & Others (Characters)",
+          "the White Rider & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2000",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:100",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1686"
+        ]
+      },
+      {
+        "group_number": 5,
+        "names": [
+          "cloak (Artifact)",
+          "cloak (Artifact)",
+          "cloak (Artifact)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1974",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1699",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:101"
+        ]
+      },
+      {
+        "group_number": 6,
+        "names": [
+          "Saruman the White & Others (Characters)",
+          "Saruman the White & Others (Characters)",
+          "Saruman the White & Others (Characters)",
+          "Saruman the White & Others (Characters)",
+          "Saruman the White & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:102",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:799",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1040",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:105",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1183"
+        ]
+      },
+      {
+        "group_number": 7,
+        "names": [
+          "manuscript (Artifact)",
+          "manuscript (Artifact)",
+          "manuscript (Artifact)",
+          "manuscript (Artifact)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1976",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:103",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1704",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2028"
+        ]
+      },
+      {
+        "group_number": 8,
+        "names": [
+          "other guests (Character)",
+          "other guests (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:104",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1978"
+        ]
+      },
+      {
+        "group_number": 9,
+        "names": [
+          "Valandil (Character)",
+          "Valandil (Character)",
+          "Valandil (Character)",
+          "Valandil (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:796",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1178",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1033",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:106"
+        ]
+      },
+      {
+        "group_number": 10,
+        "names": [
+          "Black Gate & Others (Locations)",
+          "Black Gate & Others (Locations)",
+          "Black Gate & Others (Locations)",
+          "Black Gate & Others (Locations)",
+          "Black Gate & Others (Locations)",
+          "Black Gate & Others (Locations)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1728",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1180",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:797",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:107",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1034",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1036"
+        ]
+      },
+      {
+        "group_number": 11,
+        "names": [
+          "Mortal Men & Others (Characters)",
+          "Mortal Men & Others (Characters)",
+          "Mortal Men & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:108",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1691",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1973"
+        ]
+      },
+      {
+        "group_number": 12,
+        "names": [
+          "Sindarin & Others (Characters)",
+          "Sindarin & Others (Characters)",
+          "Sindarin & Others (Characters)",
+          "Sindarin & Others (Characters)",
+          "Sindarin & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:109",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1185",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1190",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2036",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1044"
+        ]
+      },
+      {
+        "group_number": 13,
+        "names": [
+          "Radagast the Brown & Others (Characters)",
+          "Radagast the Brown & Others (Characters)",
+          "Radagast the Brown & Others (Characters)",
+          "Radagast the Brown & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1042",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:800",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1186",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:110"
+        ]
+      },
+      {
+        "group_number": 14,
+        "names": [
+          "Misty Mountains & Others (Locations)",
+          "Misty Mountains & Others (Locations)",
+          "Misty Mountains & Others (Locations)",
+          "Misty Mountains & Others (Locations)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1716",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:111",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2030",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1202"
+        ]
+      },
+      {
+        "group_number": 15,
+        "names": [
+          "Lopoldi & Swan (Characters)",
+          "Lopoldi & Swan (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1206",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:112"
+        ]
+      },
+      {
+        "group_number": 16,
+        "names": [
+          "Valandil & Others (Characters)",
+          "Valandil & Others (Characters)",
+          "Valandil & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1722",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1207",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:113"
+        ]
+      },
+      {
+        "group_number": 17,
+        "names": [
+          "Tree-like creature (Character)",
+          "Tree-like creature (Character)",
+          "Tree-like creature (Character)",
+          "Tree-like creature (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1988",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2043",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:115",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1758"
+        ]
+      },
+      {
+        "group_number": 18,
+        "names": [
+          "Orcs & Others (Characters)",
+          "Orcs & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:116",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1196"
+        ]
+      },
+      {
+        "group_number": 19,
+        "names": [
+          "elf-children (Character)",
+          "elf-children (Character)",
+          "elf-children (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:117",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2044",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1989"
+        ]
+      },
+      {
+        "group_number": 20,
+        "names": [
+          "Mittalmar & Others (Locations)",
+          "Mittalmar & Others (Locations)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:119",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1727"
+        ]
+      },
+      {
+        "group_number": 21,
+        "names": [
+          "John & Others (Characters)",
+          "John & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:120",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2019"
+        ]
+      },
+      {
+        "group_number": 22,
+        "names": [
+          "Bear (Character)",
+          "Bear (Character)",
+          "Bear (Character)",
+          "Bear (Character)",
+          "Bear (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1784",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1201",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2047",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1992",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:121"
+        ]
+      },
+      {
+        "group_number": 23,
+        "names": [
+          "Hound (Character)",
+          "Hound (Character)",
+          "Hound (Character)",
+          "Hound (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1993",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2048",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:122",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1786"
+        ]
+      },
+      {
+        "group_number": 24,
+        "names": [
+          "Eagle (Character)",
+          "Eagle (Character)",
+          "Eagle (Character)",
+          "Eagle (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:123",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2049",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1204",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1994"
+        ]
+      },
+      {
+        "group_number": 25,
+        "names": [
+          "Hart (Character)",
+          "Hart (Character)",
+          "Hart (Character)",
+          "Hart (Character)",
+          "Hart (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2050",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:124",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1205",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1789",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1995"
+        ]
+      },
+      {
+        "group_number": 26,
+        "names": [
+          "Swan (Character)",
+          "Swan (Character)",
+          "Swan (Character)",
+          "Swan (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1996",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2051",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:125",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1790"
+        ]
+      },
+      {
+        "group_number": 27,
+        "names": [
+          "Serpent (Character)",
+          "Serpent (Character)",
+          "Serpent (Character)",
+          "Serpent (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:126",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2052",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:597",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1997"
+        ]
+      },
+      {
+        "group_number": 28,
+        "names": [
+          "Peregrin Took & Meriadoc Brandybuck (Characters)",
+          "Peregrin Took & Meriadoc Brandybuck (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:127",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1208"
+        ]
+      },
+      {
+        "group_number": 29,
+        "names": [
+          "Dale & Mountain (Locations)",
+          "Dale & Mountain (Locations)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1753",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:128"
+        ]
+      },
+      {
+        "group_number": 30,
+        "names": [
+          "Wretched Fool (Character)",
+          "Wretched Fool (Character)",
+          "Wretched Fool (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1998",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:598",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2053"
+        ]
+      },
+      {
+        "group_number": 31,
+        "names": [
+          "Pippin & Others (Characters)",
+          "Pippin & Others (Characters)",
+          "Pippin & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:674",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1175",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1969"
+        ]
+      },
+      {
+        "group_number": 32,
+        "names": [
+          "Gandalf the Grey & Others (Characters)",
+          "Gandalf the Grey & Others (Characters)",
+          "Gandalf the Grey & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1031",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1177",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:795"
+        ]
+      },
+      {
+        "group_number": 33,
+        "names": [
+          "Meneldil (Character)",
+          "Meneldil (Character)",
+          "Meneldil (Character)",
+          "Meneldil (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1731",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1037",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1182",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:798"
+        ]
+      },
+      {
+        "group_number": 34,
+        "names": [
+          "Celebrimbor & Others (Characters)",
+          "Celebrimbor & Others (Characters)",
+          "Celebrimbor & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1041",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1184",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1733"
+        ]
+      },
+      {
+        "group_number": 35,
+        "names": [
+          "Siril (Location)",
+          "Siril (Location)",
+          "Siril (Location)",
+          "Siril (Location)",
+          "Siril (Location)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1188",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1982",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1043",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2037",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1736"
+        ]
+      },
+      {
+        "group_number": 36,
+        "names": [
+          "other guests & foxes (Characters)",
+          "other guests & foxes (Characters)",
+          "other guests & foxes (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1045",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1709",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1191"
+        ]
+      },
+      {
+        "group_number": 37,
+        "names": [
+          "the premises & tower of the king’s palace (Locations)",
+          "the premises & tower of the king’s palace (Locations)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1192",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1046"
+        ]
+      },
+      {
+        "group_number": 38,
+        "names": [
+          "Dunedain & Others (Characters)",
+          "Dunedain & Others (Characters)",
+          "Dunedain & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1193",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2018",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1047"
+        ]
+      },
+      {
+        "group_number": 39,
+        "names": [
+          "Andunië & Others (Locations)",
+          "Andunië & Others (Locations)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1701",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1179"
+        ]
+      },
+      {
+        "group_number": 40,
+        "names": [
+          "other guests & Tree-like creature (Characters)",
+          "other guests & Tree-like creature (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2032",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1195"
+        ]
+      },
+      {
+        "group_number": 41,
+        "names": [
+          "Elven-kings & elf-children (Characters)",
+          "Elven-kings & elf-children (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1197",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2033"
+        ]
+      },
+      {
+        "group_number": 42,
+        "names": [
+          "Dwarf-lords & Others (Characters)",
+          "Dwarf-lords & Others (Characters)",
+          "Dwarf-lords & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1198",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1683",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2034"
+        ]
+      },
+      {
+        "group_number": 43,
+        "names": [
+          "Man (Character)",
+          "Man (Character)",
+          "Man (Character)",
+          "Man (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2045",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1199",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1990",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1769"
+        ]
+      },
+      {
+        "group_number": 44,
+        "names": [
+          "Beaver (Character)",
+          "Beaver (Character)",
+          "Beaver (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1200",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1777",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2046"
+        ]
+      },
+      {
+        "group_number": 45,
+        "names": [
+          "wizard & Others (Characters)",
+          "wizard & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1684",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2015"
+        ]
+      },
+      {
+        "group_number": 46,
+        "names": [
+          "Bolgers & Others (Characters)",
+          "Bolgers & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1685",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1972"
+        ]
+      },
+      {
+        "group_number": 47,
+        "names": [
+          "Ea¨rendil & Others (Characters)",
+          "Ea¨rendil & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1966",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1697"
+        ]
+      },
+      {
+        "group_number": 48,
+        "names": [
+          "cloak & hood (Artifacts)",
+          "cloak & hood (Artifacts)",
+          "cloak & hood (Artifacts)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1708",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2025",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1975"
+        ]
+      },
+      {
+        "group_number": 49,
+        "names": [
+          "Elven-kings (Character)",
+          "Elven-kings (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1713",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1979"
+        ]
+      },
+      {
+        "group_number": 50,
+        "names": [
+          "Dwarf-lords (Character)",
+          "Dwarf-lords (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1714",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1980"
+        ]
+      },
+      {
+        "group_number": 51,
+        "names": [
+          "daylight (Location)",
+          "daylight (Location)",
+          "daylight (Location)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2038",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1737",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1983"
+        ]
+      },
+      {
+        "group_number": 52,
+        "names": [
+          "moonshine (Location)",
+          "moonshine (Location)",
+          "moonshine (Location)",
+          "moonshine (Location)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2039",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1763",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1738",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1984"
+        ]
+      },
+      {
+        "group_number": 53,
+        "names": [
+          "Lopoldi (Character)",
+          "Lopoldi (Character)",
+          "Lopoldi (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2040",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1985",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1750"
+        ]
+      },
+      {
+        "group_number": 54,
+        "names": [
+          "foxes (Character)",
+          "foxes (Character)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1754",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2041"
+        ]
+      },
+      {
+        "group_number": 55,
+        "names": [
+          "foxes & Eagle (Characters)",
+          "foxes & Eagle (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1787",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1986"
+        ]
+      },
+      {
+        "group_number": 56,
+        "names": [
+          "Thro´r & Others (Characters)",
+          "Thro´r & Others (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2029",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1968"
+        ]
+      },
+      {
+        "group_number": 57,
+        "names": [
+          "tall man & Beaver (Characters)",
+          "tall man & Beaver (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1991",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2042"
+        ]
+      },
+      {
+        "group_number": 58,
+        "names": [
+          "Ruler & He (Characters)",
+          "Ruler & He (Characters)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2054",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1999"
+        ]
+      },
+      {
+        "group_number": 59,
+        "names": [
+          "Lord of the Rings (Artifact)",
+          "Lord of the Rings (Artifact)"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2001",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2056"
+        ]
+      }
+    ]
+  },
+  {
+    "node_type": "Organization",
+    "total_nodes": 20,
+    "duplicate_groups": 0,
+    "total_nodes_in_groups": 0,
+    "groups": []
+  },
+  {
+    "node_type": "Event",
+    "total_nodes": 82,
+    "duplicate_groups": 6,
+    "total_nodes_in_groups": 12,
+    "groups": [
+      {
+        "group_number": 1,
+        "names": [
+          "['Council of Elrond', 'Council']",
+          "COUNCIL OF ELROND"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:418",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1960"
+        ]
+      },
+      {
+        "group_number": 2,
+        "names": [
+          "['The Coming of the Istari', 'The Party', 'The Quest', 'The Past', 'The Nine have come forth', 'The Council of Elrond', 'The War of the Ring', 'The Siege of Gondor', 'The Siege Of']",
+          "['THE SHADOW OF THE PAST', 'THE SIEGE OF GONDOR']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:755",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1176"
+        ]
+      },
+      {
+        "group_number": 3,
+        "names": [
+          "['Party Preparation', 'Party']",
+          "party"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1598",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1547"
+        ]
+      },
+      {
+        "group_number": 4,
+        "names": [
+          "battle",
+          "['Battle of the Pelennor Fields', 'Battle of Five Armies', 'Battle of Dagorlad', 'Battle']"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1565",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1637"
+        ]
+      },
+      {
+        "group_number": 5,
+        "names": [
+          "Springle-ring",
+          "Dance"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1726",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1723"
+        ]
+      },
+      {
+        "group_number": 6,
+        "names": [
+          "sortie",
+          "Sortie"
+        ],
+        "node_ids": [
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1797",
+          "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1768"
+        ]
+      }
+    ]
+  }
+]
