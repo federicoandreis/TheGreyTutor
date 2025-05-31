@@ -56,21 +56,29 @@ frontend/
 
 ---
 
-## 🧙 Knowledge Graph Deduplication & Backend Progress
+## 🧙 Knowledge Graph & Backend Progress
 
-This repo now includes a powerful backend pipeline for knowledge graph deduplication and entity resolution, focused on Tolkien lore. Major improvements include:
+This repo now includes powerful backend components for knowledge graph management, querying, and deduplication, focused on Tolkien lore. Major improvements include:
 
+### Knowledge Graph Querying (GraphRAG)
+- **Optimized PathRAG Implementation:**
+  - Path-based retrieval with community detection for comprehensive answers
+  - Gandalf-themed LLM integration with strict adherence to Tolkien lore
+  - Organized codebase with dedicated test directory and clear documentation
+  - Caching for both retrieval results and LLM responses
+
+### Knowledge Graph Deduplication
 - **Advanced Deduplication Logic:**
-  - Merges suspected duplicate nodes using both names and aliases, with robust handling of lists and strings.
-  - Transitive closure logic ensures all related duplicates are grouped correctly.
+  - Merges suspected duplicate nodes using both names and aliases, with robust handling of lists and strings
+  - Transitive closure logic ensures all related duplicates are grouped correctly
 - **LLM Integration:**
-  - Uses OpenAI's GPT models to judge whether groups of nodes should be merged or kept separate.
-  - Strict prompt engineering: The LLM is instructed to act as a Tolkien expert and avoid over-merging (e.g., never merges Frodo and Bilbo Baggins).
-  - JSON parsing is hardened for reliability, with detailed error reporting.
+  - Uses OpenAI's GPT models to judge whether groups of nodes should be merged or kept separate
+  - Strict prompt engineering: The LLM is instructed to act as a Tolkien expert and avoid over-merging (e.g., never merges Frodo and Bilbo Baggins)
+  - JSON parsing is hardened for reliability, with detailed error reporting
 - **Security & Reliability:**
-  - All secrets (API keys, etc.) are loaded from environment variables.
-  - Sensitive and generated data in `input/` and `output/` folders are gitignored.
-  - Improved error handling for LLM/API failures.
+  - All secrets (API keys, etc.) are loaded from environment variables
+  - Sensitive and generated data in `input/` and `output/` folders are gitignored
+  - Improved error handling for LLM/API failures
 
 ---
 
@@ -85,6 +93,8 @@ This repo now includes a powerful backend pipeline for knowledge graph deduplica
 - [x] **Deduplication pipeline:** Transitive duplicate grouping, robust LLM integration, and strict Tolkien expert prompting.
 - [x] **Error handling:** Hardened JSON parsing and API error reporting.
 - [x] **Security:** .env and data folder gitignore improvements.
+- [x] **GraphRAG organization:** Moved test scripts to dedicated directory, updated documentation, marked deprecated code.
+- [x] **Gandalf prompt enhancement:** Updated system prompt to strictly enforce Tolkien lore responses.
 - [ ] **Post-LLM validation:** (Optional) Add canonical name checks to block merges of distinct entities.
 - [ ] **User-facing backend API:** Expose graph and deduplication endpoints for frontend integration.
 - [ ] **Persistent user scores and leaderboards.**
