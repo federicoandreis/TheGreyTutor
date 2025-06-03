@@ -1,0 +1,92 @@
+{
+  "conversation_id": "5ecd5acb-a721-45e6-ae13-be906dad6dd6",
+  "student_id": "hobbit1",
+  "quiz_id": "adaptive_quiz_20250602_180807",
+  "metadata": {
+    "student_name": "Frodo Baggins",
+    "strategy": "adaptive",
+    "session_id": "session_20250602_180807"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "Welcome to the Adaptive Quizzing System, Frodo Baggins!",
+      "timestamp": 1748884087.0810788,
+      "timestamp_formatted": "2025-06-02T18:08:07.081079",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Strategy: Adaptive: Questions will be selected based on your performance and learning needs.",
+      "timestamp": 1748884087.0820773,
+      "timestamp_formatted": "2025-06-02T18:08:07.082077",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Let's begin!",
+      "timestamp": 1748884087.0820773,
+      "timestamp_formatted": "2025-06-02T18:08:07.082077",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "Which of the following is difficulty progression Lopoldi?\n\n1. Folk of Marach\n2. Lothlorien\n3. Yavanna\n4. ['Eagles of the Mountains', 'Eagles']",
+      "timestamp": 1748884087.3106687,
+      "timestamp_formatted": "2025-06-02T18:08:07.310669",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 2,
+        "community_id": 112,
+        "question_id": "7483a311-09b4-4ff3-b3e2-8208440d71a7",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "Yavanna",
+      "timestamp": 1748884121.6494005,
+      "timestamp_formatted": "2025-06-02T18:08:41.649400",
+      "metadata": {
+        "correct": false,
+        "quality_score": null,
+        "feedback": {
+          "correct": false,
+          "quality_score": null,
+          "message": "Hmm, not quite so, my friend. Even the wisest cannot see all ends.",
+          "explanation": "The wisdom you seek is thus: Lothlorien",
+          "next_steps": [
+            "Do not be disheartened. Even Aragorn son of Arathorn had much to learn before claiming his throne.",
+            "Perhaps revisit the ancient scrolls that speak of these fundamental truths."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hmm, not quite so, my friend. Even the wisest cannot see all ends.\n\nThe wisdom you seek is thus: Lothlorien\n\n- Do not be disheartened. Even Aragorn son of Arathorn had much to learn before claiming his throne.\n- Perhaps revisit the ancient scrolls that speak of these fundamental truths.",
+      "timestamp": 1748884121.6494005,
+      "timestamp_formatted": "2025-06-02T18:08:41.649400",
+      "metadata": {
+        "correct": false,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "system",
+      "content": "Session Summary:\nDuration: 42s\nQuestions: 1\nCorrect Answers: 0\nAccuracy: 0.0%\nMastery Level: 47.0%",
+      "timestamp": 1748884129.4888,
+      "timestamp_formatted": "2025-06-02T18:08:49.488800",
+      "metadata": {
+        "is_summary": true
+      }
+    }
+  ],
+  "start_time": 1748884087.0542095,
+  "start_time_formatted": "2025-06-02T18:08:07.054209",
+  "end_time": 1748884129.4888,
+  "end_time_formatted": "2025-06-02T18:08:49.488800",
+  "duration_seconds": 42.434590578079224
+}

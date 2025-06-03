@@ -1,0 +1,34 @@
+{
+  "questions_asked": 1,
+  "correct": 0,
+  "incorrect": 0,
+  "start_time": 1748940200.1920092,
+  "end_time": 1748940209.520377,
+  "question_history": [
+    {
+      "question": {
+        "text": "According to the lore kept in the libraries of Rivendell, what is the true name of toys?",
+        "type": "factual",
+        "difficulty": 2,
+        "template_id": "factual_property_2",
+        "entity": "toys",
+        "property": "name",
+        "answer": "toys",
+        "community_id": 128
+      },
+      "answer": null,
+      "correct": null,
+      "quality_score": null,
+      "feedback": null
+    }
+  ],
+  "summary": {
+    "total_questions": 1,
+    "correct_answers": 0,
+    "accuracy": 0.0,
+    "duration": 9.328367710113525,
+    "duration_formatted": "9 seconds",
+    "mastery_after": 52.0,
+    "mastery_change": 0.0
+  }
+}

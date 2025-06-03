@@ -1,0 +1,56 @@
+{
+  "conversation_id": "e6419114-f24e-4e65-b723-289710cda94e",
+  "student_id": "testuser_basic",
+  "quiz_id": "adaptive_quiz_20250603_105658",
+  "metadata": {
+    "student_name": "Gloin",
+    "strategy": "adaptive",
+    "session_id": "session_20250603_105658"
+  },
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "What do you know about White Council?\n\n1. To seek the One Ring\n2. To drive out power from Mirkwood\n3. To unite the Free Peoples\n4. ",
+      "timestamp": 1748944620.8933883,
+      "timestamp_formatted": "2025-06-03T10:57:00.893388",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 1,
+        "community_id": null,
+        "question_id": "a1300eb3-5624-4d94-bbc6-5675c180cfc4",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "To seek the One Ring",
+      "timestamp": 1748944644.7382941,
+      "timestamp_formatted": "2025-06-03T10:57:24.738294",
+      "metadata": {
+        "correct": false,
+        "quality_score": {
+          "explanation": "The student's answer, 'To seek the One Ring,' is not entirely accurate regarding the primary purpose of the White Council. The White Council was formed to combat the growing threat of Sauron and to drive him out of Mirkwood, particularly from Dol Guldur, where he had returned in secret. While the search for the One Ring became a significant concern later, especially for characters like Gandalf and Frodo, the Council's initial focus was on the broader threat posed by Sauron. Understanding the Council's role in Middle-earth's history is crucial, as it highlights the unity of various races against a common enemy.",
+          "strengths": [
+            "The answer identifies a significant aspect of the White Council's activities.",
+            "It shows an awareness of the importance of the One Ring in the larger narrative."
+          ],
+          "weaknesses": [
+            "The answer is overly simplistic and does not capture the full purpose of the White Council.",
+            "It lacks context about the Council's formation and its members."
+          ],
+          "suggestions": [
+            "Expand on the role of the White Council beyond just the One Ring, including its formation and key members like Elrond and Saruman.",
+            "Include details about the Council's efforts against Sauron in Mirkwood and the significance of their actions in the broader context of Middle-earth."
+          ]
+        },
+        "feedback": null,
+        "is_answer": true
+      }
+    }
+  ],
+  "start_time": 1748944618.5757864,
+  "start_time_formatted": "2025-06-03T10:56:58.575786",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

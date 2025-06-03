@@ -1,0 +1,281 @@
+{
+  "conversation_id": "0c332a05-9d72-4dab-b38e-77dd9535339f",
+  "student_id": "test001",
+  "quiz_id": "adaptive_quiz_20250602_175012",
+  "metadata": {
+    "student_name": "Test Student",
+    "strategy": "adaptive",
+    "session_id": "session_20250602_175012"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "Welcome to the Adaptive Quizzing System, Test Student!",
+      "timestamp": 1748883012.244318,
+      "timestamp_formatted": "2025-06-02T17:50:12.244318",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Strategy: Adaptive: Questions will be selected based on your performance and learning needs.",
+      "timestamp": 1748883012.244318,
+      "timestamp_formatted": "2025-06-02T17:50:12.244318",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Let's begin!",
+      "timestamp": 1748883012.244318,
+      "timestamp_formatted": "2025-06-02T17:50:12.244318",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "Which of the following is belongs to community manuscript?\n\n1. Anduni\u00eb\n2. manuscript (Artifact)\n3. ['Eagles of the Mountains', 'Eagles']\n4. hood",
+      "timestamp": 1748883012.5806484,
+      "timestamp_formatted": "2025-06-02T17:50:12.580648",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 2,
+        "community_id": 103,
+        "question_id": "93e0c4af-faac-4bd4-82f0-c0c04cfc0854",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "manuscript (Artifact)",
+      "timestamp": 1748883021.6484718,
+      "timestamp_formatted": "2025-06-02T17:50:21.648472",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "feedback": {
+          "correct": true,
+          "quality_score": null,
+          "message": "Correct!",
+          "explanation": "",
+          "next_steps": [
+            "You're making good progress. Try some more challenging questions."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Correct!\n\n- You're making good progress. Try some more challenging questions.",
+      "timestamp": 1748883021.6484718,
+      "timestamp_formatted": "2025-06-02T17:50:21.648472",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "How is orders related to orders (Event)?",
+      "timestamp": 1748883025.2815058,
+      "timestamp_formatted": "2025-06-02T17:50:25.281506",
+      "metadata": {
+        "question_type": "relationship",
+        "difficulty": 3,
+        "community_id": 2035,
+        "question_id": "0a3f16de-cde3-4663-bd37-ca953738fec4",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "orders",
+      "timestamp": 1748883032.7289565,
+      "timestamp_formatted": "2025-06-02T17:50:32.728956",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "feedback": {
+          "correct": true,
+          "quality_score": null,
+          "message": "Correct!",
+          "explanation": "The answer is: orders belongs to community orders (Event)",
+          "next_steps": [
+            "You're making good progress. Try some more challenging questions."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Correct!\n\nThe answer is: orders belongs to community orders (Event)\n\n- You're making good progress. Try some more challenging questions.",
+      "timestamp": 1748883032.7289565,
+      "timestamp_formatted": "2025-06-02T17:50:32.728956",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Which of the following is belongs to community Plague of Gondor?\n\n1. hood\n2. Arandor\n3. Meneldil (Character)\n4. Meneldil",
+      "timestamp": 1748883039.2556906,
+      "timestamp_formatted": "2025-06-02T17:50:39.255691",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 2,
+        "community_id": 1731,
+        "question_id": "f396ebe4-ab11-472f-9370-d63f86318aca",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "Meneldil (Character)",
+      "timestamp": 1748883049.2088733,
+      "timestamp_formatted": "2025-06-02T17:50:49.208873",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "feedback": {
+          "correct": true,
+          "quality_score": null,
+          "message": "Correct!",
+          "explanation": "",
+          "next_steps": [
+            "You're making good progress. Try some more challenging questions."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Correct!\n\n- You're making good progress. Try some more challenging questions.",
+      "timestamp": 1748883049.2088733,
+      "timestamp_formatted": "2025-06-02T17:50:49.208873",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "How is Plague of Gondor related to Meneldil (Character)?",
+      "timestamp": 1748883051.195339,
+      "timestamp_formatted": "2025-06-02T17:50:51.195339",
+      "metadata": {
+        "question_type": "relationship",
+        "difficulty": 3,
+        "community_id": 1182,
+        "question_id": "24092f09-39c1-46e6-a309-37797743720d",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "belongs",
+      "timestamp": 1748883054.735687,
+      "timestamp_formatted": "2025-06-02T17:50:54.735687",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "feedback": {
+          "correct": true,
+          "quality_score": null,
+          "message": "Correct!",
+          "explanation": "The answer is: Plague of Gondor belongs to community Meneldil (Character)",
+          "next_steps": [
+            "You're making good progress. Try some more challenging questions."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Correct!\n\nThe answer is: Plague of Gondor belongs to community Meneldil (Character)\n\n- You're making good progress. Try some more challenging questions.",
+      "timestamp": 1748883054.735687,
+      "timestamp_formatted": "2025-06-02T17:50:54.735687",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "How is inland related to Lothlorien?",
+      "timestamp": 1748883056.632896,
+      "timestamp_formatted": "2025-06-02T17:50:56.632896",
+      "metadata": {
+        "question_type": "relationship",
+        "difficulty": 3,
+        "community_id": 1185,
+        "question_id": "475acdc1-eacf-4e65-95eb-1501eae9fd34",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "do you always say correct?",
+      "timestamp": 1748883061.0371594,
+      "timestamp_formatted": "2025-06-02T17:51:01.037159",
+      "metadata": {
+        "correct": false,
+        "quality_score": null,
+        "feedback": {
+          "correct": false,
+          "quality_score": null,
+          "message": "Incorrect.",
+          "explanation": "The correct answer is: inland difficulty progression Lothlorien",
+          "next_steps": [
+            "Don't worry, learning takes time and practice.",
+            "Focus on understanding the relationships between entities."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Incorrect.\n\nThe correct answer is: inland difficulty progression Lothlorien\n\n- Don't worry, learning takes time and practice.\n- Focus on understanding the relationships between entities.",
+      "timestamp": 1748883061.0371594,
+      "timestamp_formatted": "2025-06-02T17:51:01.037159",
+      "metadata": {
+        "correct": false,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Which of the following is from chunk Dale?\n\n1. ['Elros Tar-Minyatur', 'Elros']\n2. Tol Eress\u00eba\n3. Armelelos\n4. None",
+      "timestamp": 1748883065.5555036,
+      "timestamp_formatted": "2025-06-02T17:51:05.555504",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 2,
+        "community_id": 1973,
+        "question_id": "591fb1bc-dc4f-4718-b2d8-13c26cf72bf6",
+        "is_question": true
+      }
+    },
+    {
+      "role": "system",
+      "content": "Session Summary:\nDuration: 59s\nQuestions: 6\nCorrect Answers: 4\nAccuracy: 66.7%\nMastery Level: 53.0%",
+      "timestamp": 1748883072.0228727,
+      "timestamp_formatted": "2025-06-02T17:51:12.022873",
+      "metadata": {
+        "is_summary": true
+      }
+    }
+  ],
+  "start_time": 1748883012.2141848,
+  "start_time_formatted": "2025-06-02T17:50:12.214185",
+  "end_time": 1748883072.0228727,
+  "end_time_formatted": "2025-06-02T17:51:12.022873",
+  "duration_seconds": 59.808687925338745
+}

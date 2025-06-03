@@ -1,0 +1,16 @@
+{
+  "conversation_id": "0e74da91-20cd-4927-a759-00ceec454934",
+  "student_id": "test_user",
+  "quiz_id": "adaptive_quiz_20250603_092831",
+  "metadata": {
+    "student_name": "Test User",
+    "strategy": "adaptive",
+    "session_id": "session_20250603_092831"
+  },
+  "messages": [],
+  "start_time": 1748939311.440952,
+  "start_time_formatted": "2025-06-03T09:28:31.440952",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

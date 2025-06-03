@@ -1,0 +1,153 @@
+﻿[
+  {
+    "type": "procedure",
+    "name": "apoc.meta.data",
+    "text": "Examines the full graph and returns a table of metadata.",
+    "signature": "apoc.meta.data(config = {} :: MAP) :: (label :: STRING, property :: STRING, count :: INTEGER, unique :: BOOLEAN, index :: BOOLEAN, existence :: BOOLEAN, type :: STRING, array :: BOOLEAN, sample :: LIST<ANY>, left :: INTEGER, right :: INTEGER, other :: LIST<STRING>, otherLabels :: LIST<STRING>, elementType :: STRING)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "procedure",
+    "name": "apoc.meta.data.of",
+    "text": "Examines the given sub-graph and returns a table of metadata.",
+    "signature": "apoc.meta.data.of(graph :: ANY, config = {} :: MAP) :: (label :: STRING, property :: STRING, count :: INTEGER, unique :: BOOLEAN, index :: BOOLEAN, existence :: BOOLEAN, type :: STRING, array :: BOOLEAN, sample :: LIST<ANY>, left :: INTEGER, right :: INTEGER, other :: LIST<STRING>, otherLabels :: LIST<STRING>, elementType :: STRING)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "procedure",
+    "name": "apoc.meta.graph",
+    "text": "Examines the full graph and returns a meta-graph.",
+    "signature": "apoc.meta.graph(config = {} :: MAP) :: (nodes :: LIST<NODE>, relationships :: LIST<RELATIONSHIP>)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "procedure",
+    "name": "apoc.meta.graph.of",
+    "text": "Examines the given sub-graph and returns a meta-graph.",
+    "signature": "apoc.meta.graph.of(graph = {} :: ANY, config = {} :: MAP) :: (nodes :: LIST<NODE>, relationships :: LIST<RELATIONSHIP>)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "procedure",
+    "name": "apoc.meta.graphSample",
+    "text": "Examines the full graph and returns a meta-graph.
+Unlike `apoc.meta.graph`, this procedure does not filter away non-existing paths.",
+    "signature": "apoc.meta.graphSample(config = {} :: MAP) :: (nodes :: LIST<NODE>, relationships :: LIST<RELATIONSHIP>)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "procedure",
+    "name": "apoc.meta.nodeTypeProperties",
+    "text": "Examines the full graph and returns a table of metadata with information about the `NODE` values therein.",
+    "signature": "apoc.meta.nodeTypeProperties(config = {} :: MAP) :: (nodeType :: STRING, nodeLabels :: LIST<STRING>, propertyName :: STRING, propertyTypes :: LIST<STRING>, mandatory :: BOOLEAN, propertyObservations :: INTEGER, totalObservations :: INTEGER)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "procedure",
+    "name": "apoc.meta.relTypeProperties",
+    "text": "Examines the full graph and returns a table of metadata with information about the `RELATIONSHIP` values therein.",
+    "signature": "apoc.meta.relTypeProperties(config = {} :: MAP) :: (relType :: STRING, sourceNodeLabels :: LIST<STRING>, targetNodeLabels :: LIST<STRING>, propertyName :: STRING, propertyTypes :: LIST<STRING>, mandatory :: BOOLEAN, propertyObservations :: INTEGER, totalObservations :: INTEGER)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "procedure",
+    "name": "apoc.meta.schema",
+    "text": "Examines the given sub-graph and returns metadata as a `MAP`.",
+    "signature": "apoc.meta.schema(config = {} :: MAP) :: (value :: MAP)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "procedure",
+    "name": "apoc.meta.stats",
+    "text": "Returns the metadata stored in the transactional database statistics.",
+    "signature": "apoc.meta.stats() :: (labelCount :: INTEGER, relTypeCount :: INTEGER, propertyKeyCount :: INTEGER, nodeCount :: INTEGER, relCount :: INTEGER, labels :: MAP, relTypes :: MAP, relTypesCount :: MAP, stats :: MAP)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "procedure",
+    "name": "apoc.meta.subGraph",
+    "text": "Examines the given sub-graph and returns a meta-graph.",
+    "signature": "apoc.meta.subGraph(config :: MAP) :: (nodes :: LIST<NODE>, relationships :: LIST<RELATIONSHIP>)",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "function",
+    "name": "apoc.meta.cypher.isType",
+    "text": "Returns true if the given value matches the given type.",
+    "signature": "apoc.meta.cypher.isType(value :: ANY, type :: STRING) :: BOOLEAN",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "function",
+    "name": "apoc.meta.cypher.type",
+    "text": "Returns the type name of the given value.",
+    "signature": "apoc.meta.cypher.type(value :: ANY) :: STRING",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "function",
+    "name": "apoc.meta.cypher.types",
+    "text": "Returns a `MAP` containing the type names of the given values.",
+    "signature": "apoc.meta.cypher.types(props :: ANY) :: MAP",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "function",
+    "name": "apoc.meta.nodes.count",
+    "text": "Returns the sum of the `NODE` values with the given labels in the `LIST<STRING>`.",
+    "signature": "apoc.meta.nodes.count(nodes = [] :: LIST<STRING>, config = {} :: MAP) :: INTEGER",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  },
+  {
+    "type": "function",
+    "name": "apoc.text.doubleMetaphone",
+    "text": "Returns the double metaphone phonetic encoding of all words in the given `STRING` value.",
+    "signature": "apoc.text.doubleMetaphone(value :: STRING) :: STRING",
+    "roles": null,
+    "writes": null,
+    "core": true,
+    "isDeprecated": false
+  }
+]

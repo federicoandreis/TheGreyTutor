@@ -1,0 +1,42 @@
+{
+  "questions_asked": 1,
+  "correct_answers": 0,
+  "incorrect_answers": 1,
+  "start_time": 1748884087.0542095,
+  "end_time": 1748884129.4888,
+  "question_history": [
+    {
+      "question": {
+        "text": "Which of the following is difficulty progression Lopoldi?",
+        "type": "multiple_choice",
+        "difficulty": 2,
+        "template_id": "multiple_choice_1",
+        "entity": "Lopoldi",
+        "relationship_type": "DIFFICULTY_PROGRESSION",
+        "options": [
+          "Folk of Marach",
+          "Lothlorien",
+          "Yavanna",
+          [
+            "Eagles of the Mountains",
+            "Eagles"
+          ]
+        ],
+        "correct_answer": "Lothlorien",
+        "community_id": 112
+      },
+      "answer": "Yavanna",
+      "correct": false,
+      "quality_score": null
+    }
+  ],
+  "summary": {
+    "duration_seconds": 42.434590578079224,
+    "duration_formatted": "42s",
+    "total_questions": 1,
+    "correct_answers": 0,
+    "accuracy": 0.0,
+    "mastery_before": 47.0,
+    "mastery_after": 47.0
+  }
+}

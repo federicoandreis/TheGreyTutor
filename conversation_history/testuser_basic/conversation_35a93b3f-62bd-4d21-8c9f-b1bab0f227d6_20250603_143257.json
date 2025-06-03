@@ -1,0 +1,69 @@
+{
+  "conversation_id": "35a93b3f-62bd-4d21-8c9f-b1bab0f227d6",
+  "student_id": "testuser_basic",
+  "quiz_id": "adaptive_quiz_20250603_143257",
+  "metadata": {
+    "student_name": "fede",
+    "strategy": "adaptive",
+    "session_id": "session_20250603_143257"
+  },
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "In the verdant fields of the Shire, where the gentle breeze dances through the tall grass, one might encounter a curious Hobbit known for his youthful spirit and adventurous heart. This Hobbit, a companion of Frodo and Sam, ventured far beyond the borders of his homeland. Pray tell, what is the name of this brave Hobbit who is often affectionately called 'Pippin'?",
+      "timestamp": 1748957580.1667492,
+      "timestamp_formatted": "2025-06-03T14:33:00.166749",
+      "metadata": {
+        "question_type": "factual",
+        "difficulty": 2,
+        "community_id": null,
+        "question_id": "b6064f26-7a46-4520-b39e-f34cc5d8f966",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "Peregrine Tuck",
+      "timestamp": 1748957595.0810905,
+      "timestamp_formatted": "2025-06-03T14:33:15.081090",
+      "metadata": {
+        "correct": false,
+        "quality_score": {
+          "explanation": "The student's answer contains a minor error in the spelling of the name. The correct name is 'Peregrin Took,' not 'Peregrine Tuck.' Pippin, as he is affectionately known, is a beloved character from J.R.R. Tolkien's 'The Lord of the Rings.' He is a member of the Fellowship of the Ring and is known for his youthful exuberance and bravery, particularly during the quest to destroy the One Ring. His adventures take him far from the Shire, showcasing the growth and courage of Hobbits in the face of great peril.",
+          "strengths": [
+            "The student correctly identifies the character as a Hobbit.",
+            "The student recognizes the character's adventurous nature."
+          ],
+          "weaknesses": [
+            "The spelling of the name is incorrect.",
+            "The answer lacks additional context about the character's role in the story."
+          ],
+          "suggestions": [
+            "Double-check the spelling of character names to ensure accuracy.",
+            "Include more context about the character's significance in the story to enhance the answer."
+          ]
+        },
+        "feedback": null,
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "In the land of Eriador, there lies a sanctuary known for its beauty and tranquility, home to the Elven Lord Elrond. What is the name of this refuge?\n\n1. Lothl\u00f3rien\n2. Rivendell\n3. Mirkwood\n4. Valinor",
+      "timestamp": 1748957606.6455247,
+      "timestamp_formatted": "2025-06-03T14:33:26.645525",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 2,
+        "community_id": null,
+        "question_id": "39011e10-5a60-4020-9c59-d939f851033e",
+        "is_question": true
+      }
+    }
+  ],
+  "start_time": 1748957577.8980224,
+  "start_time_formatted": "2025-06-03T14:32:57.898022",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

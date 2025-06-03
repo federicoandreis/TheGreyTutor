@@ -1,0 +1,47 @@
+{
+  "questions_asked": 1,
+  "correct": 0,
+  "incorrect": 1,
+  "start_time": 1748957527.186785,
+  "end_time": 1748957574.2641044,
+  "question_history": [
+    {
+      "question": {
+        "text": "In the shadowed depths of Mirkwood, a great corruption took root, casting its dark influence upon the forest and its denizens. What name dost thou give to this spreading malevolence that troubled the woodland realms and the hearts of its creatures?",
+        "type": "relationship",
+        "difficulty": 2,
+        "tier": "basic",
+        "entity": "Evil Spread in Mirkwood",
+        "community_id": null,
+        "answer": "Evil Spread in Mirkwood"
+      },
+      "answer": "",
+      "correct": false,
+      "quality_score": 60,
+      "feedback": {
+        "explanation": "The student's answer identifies the malevolence in Mirkwood as 'Evil Spread in Mirkwood,' which is a reasonable interpretation but lacks specificity. The correct term for the corruption that plagued Mirkwood is 'The Necromancer' or 'Sauron,' who was the source of the darkness that affected the forest and its creatures. This corruption led to the emergence of the spiders and other dark creatures within the woods. Understanding this context is crucial, as it highlights the broader struggle against evil in Middle-earth and the impact of Sauron's influence on the natural world.",
+        "strengths": [
+          "The answer captures the essence of corruption in Mirkwood.",
+          "It demonstrates an understanding of the dark influence affecting the forest."
+        ],
+        "weaknesses": [
+          "The term used is too vague and does not specify the source of the corruption.",
+          "Lacks depth in explaining the consequences of this malevolence on the forest's inhabitants."
+        ],
+        "suggestions": [
+          "Use more specific terminology, such as 'The Necromancer' or 'Sauron,' to accurately describe the source of the corruption.",
+          "Expand on the effects of this corruption on the creatures of Mirkwood and the forest itself to provide a richer context."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 1,
+    "correct_answers": 0,
+    "accuracy": 0.0,
+    "duration": 47.077319383621216,
+    "duration_formatted": "47 seconds",
+    "mastery_after": 38.0,
+    "mastery_change": 0.0
+  }
+}

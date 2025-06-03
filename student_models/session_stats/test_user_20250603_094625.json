@@ -1,0 +1,70 @@
+{
+  "questions_asked": 2,
+  "correct": 2,
+  "incorrect": 0,
+  "start_time": 1748940316.0961466,
+  "end_time": 1748940385.650673,
+  "question_history": [
+    {
+      "question": {
+        "text": "According to the lore kept in the libraries of Rivendell, what is the Race of E\u00e4rnil?",
+        "type": "factual",
+        "difficulty": 2,
+        "template_id": "factual_property_2",
+        "entity": "E\u00e4rnil",
+        "property": "race",
+        "answer": "human",
+        "community_id": 1180
+      },
+      "answer": "human",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+        "explanation": "",
+        "next_steps": [
+          "Continue your journey through the deeper mysteries of Middle-earth.",
+          "Share your wisdom with others who seek to understand these ancient tales."
+        ]
+      }
+    },
+    {
+      "question": {
+        "text": "According to the archives of Minas Tirith, which one of these is dwells within Mithrandir?",
+        "type": "multiple_choice",
+        "difficulty": 3,
+        "template_id": "multiple_choice_2",
+        "entity": "Mithrandir",
+        "relationship_type": "DWELLS_IN",
+        "options": [
+          "Dior",
+          "Isildur\u2019s Bane",
+          "Sword-that-was-Broken",
+          "Land of the Periannath"
+        ],
+        "correct_answer": "Land of the Periannath",
+        "community_id": 1697
+      },
+      "answer": "Isildur\u2019s Bane",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+        "explanation": "",
+        "next_steps": [
+          "Continue your journey through the deeper mysteries of Middle-earth.",
+          "Share your wisdom with others who seek to understand these ancient tales."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 2,
+    "correct_answers": 2,
+    "accuracy": 100.0,
+    "duration": 69.55452632904053,
+    "duration_formatted": "1 minute, 9 seconds",
+    "mastery_after": 52.0,
+    "mastery_change": 10.0
+  }
+}

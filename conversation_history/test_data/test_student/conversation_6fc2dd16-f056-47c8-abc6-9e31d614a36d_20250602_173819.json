@@ -1,0 +1,61 @@
+{
+  "conversation_id": "6fc2dd16-f056-47c8-abc6-9e31d614a36d",
+  "student_id": "test_student",
+  "quiz_id": "test_quiz",
+  "metadata": {
+    "strategy": "adaptive",
+    "test": true
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "Welcome to the test quiz!",
+      "timestamp": 1748882299.666091,
+      "timestamp_formatted": "2025-06-02T17:38:19.666091",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "What is the capital of France?\n\n1. London\n2. Paris\n3. Berlin\n4. Madrid",
+      "timestamp": 1748882299.666091,
+      "timestamp_formatted": "2025-06-02T17:38:19.666091",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 2,
+        "community_id": 1,
+        "question_id": "q1",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "Paris",
+      "timestamp": 1748882299.666091,
+      "timestamp_formatted": "2025-06-02T17:38:19.666091",
+      "metadata": {
+        "correct": true,
+        "quality_score": 5,
+        "feedback": {
+          "explanation": "Correct answer!"
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Great job!\n\nParis is indeed the capital of France.\n\n- Continue to the next question",
+      "timestamp": 1748882299.666091,
+      "timestamp_formatted": "2025-06-02T17:38:19.666091",
+      "metadata": {
+        "correct": true,
+        "quality_score": 5,
+        "is_feedback": true
+      }
+    }
+  ],
+  "start_time": 1748882299.666091,
+  "start_time_formatted": "2025-06-02T17:38:19.666091",
+  "end_time": 1748882299.666091,
+  "end_time_formatted": "2025-06-02T17:38:19.666091",
+  "duration_seconds": 0.0
+}

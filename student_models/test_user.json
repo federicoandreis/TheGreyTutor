@@ -1,0 +1,264 @@
+{
+  "id": "test_user",
+  "name": "Frodo",
+  "community_mastery": {
+    "1182": 47.5,
+    "793": 55.0,
+    "798": 52.25,
+    "1037": 55.0,
+    "1199": 47.5,
+    "1964": 47.5,
+    "1967": 55.0,
+    "1175": 47.5,
+    "1992": 55.0,
+    "2024": 47.5,
+    "95": 55.0,
+    "1716": 55.0,
+    "1697": 55.0,
+    "121": 55.0,
+    "1671": 47.5,
+    "None": 69.200382255625
+  },
+  "entity_familiarity": {
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:533": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:623": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:708": 67,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1146": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:911": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1588": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1964": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1412": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1138": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1151": 62,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:478": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1092": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1467": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:688": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:590": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1406": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1157": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:720": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:879": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:382": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1540": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:718": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:756": 55
+  },
+  "question_type_performance": {
+    "multiple_choice": 74,
+    "factual": 54,
+    "relationship": 46,
+    "unknown": 76
+  },
+  "difficulty_performance": {
+    "2": 52,
+    "1": 62,
+    "3": 81,
+    "4": 55
+  },
+  "recent_questions": [
+    {
+      "text": "Which of the following is connected to Plague of Gondor?",
+      "type": "multiple_choice",
+      "difficulty": 2,
+      "template_id": "multiple_choice_1",
+      "entity": "Plague of Gondor",
+      "relationship_type": "BELONGS_TO_COMMUNITY",
+      "options": [
+        "E\u00e4rendil",
+        "Meneltarma",
+        "Meneldil (Character)",
+        "John"
+      ],
+      "correct_answer": "Meneldil (Character)",
+      "community_id": 798
+    },
+    {
+      "text": "What is the region of Ettenmoors?",
+      "type": "factual",
+      "difficulty": 1,
+      "template_id": "factual_property_1",
+      "entity": "Ettenmoors",
+      "property": "region",
+      "answer": "",
+      "community_id": 1967
+    },
+    {
+      "text": "What is the name of Treebeard?",
+      "type": "factual",
+      "difficulty": 1,
+      "template_id": "factual_property_1",
+      "entity": "Treebeard",
+      "property": "name",
+      "answer": "Treebeard",
+      "community_id": 1175
+    },
+    {
+      "text": "Which of the following is connected to Bear?",
+      "type": "multiple_choice",
+      "difficulty": 2,
+      "template_id": "multiple_choice_1",
+      "entity": "Bear",
+      "relationship_type": "BELONGS_TO_COMMUNITY",
+      "options": [
+        "Arandor",
+        "Bear (Character)",
+        [
+          "Eagles of the Mountains",
+          "Eagles"
+        ],
+        "E\u00e4rendil"
+      ],
+      "correct_answer": "Bear (Character)",
+      "community_id": 1992
+    },
+    {
+      "text": "How is Wilderland related to ['Great Place of the Tooks', 'Great River']?",
+      "type": "relationship",
+      "difficulty": 3,
+      "template_id": "relationship_1",
+      "entity1": "Wilderland",
+      "entity2": [
+        "Great Place of the Tooks",
+        "Great River"
+      ],
+      "relationship_type": "LOCATED_IN",
+      "answer": "The lore of Middle-earth connects Wilderland with ['Great Place of the Tooks', 'Great River'] through located in.",
+      "community_id": 2024
+    },
+    {
+      "text": "Among these choices, which one is dwells in Drogo Baggins and Drogo, according to the archives of Minas Tirith?",
+      "type": "multiple_choice",
+      "difficulty": 3,
+      "template_id": "multiple_choice_2",
+      "entity": [
+        "Drogo Baggins",
+        "Drogo"
+      ],
+      "relationship_type": "DWELLS_IN",
+      "options": [
+        "Goodbody",
+        "Hugo Bracegirdle",
+        "Hobbiton",
+        "mathom"
+      ],
+      "correct_answer": "Hobbiton",
+      "community_id": 95
+    },
+    {
+      "text": "Among these choices, which one is difficulty progression highlands, according to the archives of Minas Tirith?",
+      "type": "multiple_choice",
+      "difficulty": 3,
+      "template_id": "multiple_choice_2",
+      "entity": "highlands",
+      "relationship_type": "DIFFICULTY_PROGRESSION",
+      "options": [
+        "hood",
+        "Anduni\u00eb",
+        [
+          "journey to Weathertop",
+          "journey"
+        ],
+        "Meneltarma"
+      ],
+      "correct_answer": [
+        "journey to Weathertop",
+        "journey"
+      ],
+      "community_id": 1716
+    },
+    {
+      "text": "What bond exists between Morgul Vale and None in the chronicles of the Third Age?",
+      "type": "relationship",
+      "difficulty": 4,
+      "template_id": "relationship_2",
+      "entity1": "Morgul Vale",
+      "entity2": null,
+      "relationship_type": "FROM_CHUNK",
+      "answer": "The lore of Middle-earth connects Morgul Vale with None through from chunk.",
+      "community_id": 1697
+    },
+    {
+      "text": "According to the archives of Minas Tirith, which one of these is connected to Bear?",
+      "type": "multiple_choice",
+      "difficulty": 3,
+      "template_id": "multiple_choice_2",
+      "entity": "Bear",
+      "relationship_type": "BELONGS_TO_COMMUNITY",
+      "options": [
+        "Meneltarma",
+        "Anduni\u00eb",
+        "E\u00e4rendil",
+        "Bear (Character)"
+      ],
+      "correct_answer": "Bear (Character)",
+      "community_id": 121
+    },
+    {
+      "text": "According to the lore kept in the libraries of Rivendell, what is the Significance of Bilbo's Birthday?",
+      "type": "factual",
+      "difficulty": 2,
+      "template_id": "factual_property_2",
+      "entity": "Bilbo's Birthday",
+      "property": "significance",
+      "answer": "Milestone birthday",
+      "community_id": 1671
+    },
+    {
+      "entity": "Hart",
+      "difficulty": 3,
+      "type": "unknown"
+    },
+    {
+      "entity": "Osgiliath",
+      "difficulty": 2,
+      "type": "unknown"
+    },
+    {
+      "entity": "Plague of Gondor",
+      "difficulty": 3,
+      "type": "unknown"
+    },
+    {
+      "entity": [
+        "Unknown Traveller",
+        "Unknown"
+      ],
+      "difficulty": 3,
+      "type": "unknown"
+    },
+    {
+      "entity": "One Ring",
+      "difficulty": 1,
+      "type": "unknown"
+    },
+    {
+      "entity": "manuscript",
+      "difficulty": 3,
+      "type": "unknown"
+    },
+    {
+      "entity": "Last Alliance of Elves and Men",
+      "difficulty": 2,
+      "type": "unknown"
+    },
+    {
+      "entity": "Bear",
+      "difficulty": 2,
+      "type": "unknown"
+    },
+    {
+      "entity": "E\u00e4rnil",
+      "difficulty": 2,
+      "type": "unknown"
+    },
+    {
+      "entity": "Mithrandir",
+      "difficulty": 3,
+      "type": "unknown"
+    }
+  ],
+  "mastered_objectives": [],
+  "current_objective": "lo_community_None",
+  "overall_mastery": 52.0
+}

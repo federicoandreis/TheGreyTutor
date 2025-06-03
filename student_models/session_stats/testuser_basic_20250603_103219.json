@@ -1,0 +1,53 @@
+{
+  "questions_asked": 1,
+  "correct": 0,
+  "incorrect": 1,
+  "start_time": 1748943095.3899226,
+  "end_time": 1748943139.243196,
+  "question_history": [
+    {
+      "question": {
+        "text": "In the shadowy realm of Mordor, where darkness dwells and the fires of Mount Doom rage, there lies a being known to all as the Enemy of old. By what name is this dark Lord, once a Maia of great power, known to those who speak of his treachery? Is he: A) Morgoth, the Black Foe of the World, B) Sauron, the Dark Lord, C) Saruman, the White Wizard, or D) Melkor, the Great Enemy?",
+        "type": "multiple_choice",
+        "difficulty": 1,
+        "tier": "basic",
+        "entity": "Sauron",
+        "community_id": null,
+        "answer": "B",
+        "options": [
+          "A) Morgoth, the Black Foe of the World",
+          "B) Sauron, the Dark Lord",
+          "C) Saruman, the White Wizard",
+          "B"
+        ]
+      },
+      "answer": "B) Sauron, the Dark Lord",
+      "correct": false,
+      "quality_score": 70,
+      "feedback": {
+        "explanation": "The student has chosen 'B) Sauron, the Dark Lord,' which, while a significant figure in the lore of Middle-earth, is not the most ancient name associated with the title of the Enemy of old. The correct answer is 'D) Melkor, the Great Enemy,' who is indeed the original dark power and the first to fall into darkness, later becoming known as Morgoth.",
+        "strengths": [
+          "The student correctly identifies Sauron as a dark lord, demonstrating an understanding of his role in the narrative.",
+          "The answer reflects familiarity with the terminology used in Tolkien's works, such as 'Dark Lord.'"
+        ],
+        "weaknesses": [
+          "The student has overlooked the deeper historical context, failing to recognize that Melkor, also known as Morgoth, is the true Enemy of old.",
+          "The answer lacks a nuanced understanding of the hierarchy of evil in Tolkien's legendarium, where Sauron is a servant of Melkor."
+        ],
+        "suggestions": [
+          "I encourage the student to explore the origins of Sauron and his master, Melkor, to gain a fuller understanding of their intertwined fates.",
+          "Reading 'The Silmarillion' may illuminate the ancient tales of these dark powers and enrich the student's comprehension of the lore."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 1,
+    "correct_answers": 0,
+    "accuracy": 0.0,
+    "duration": 43.85327339172363,
+    "duration_formatted": "43 seconds",
+    "mastery_after": 47.0,
+    "mastery_change": 0.0
+  }
+}

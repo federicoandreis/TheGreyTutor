@@ -41,6 +41,7 @@ Thumbs.db
 
 # Ignore legacy code
 kg_consolidation/legacy/
+kg_queries/legacy/
 
 # Test coverage
 coverage/

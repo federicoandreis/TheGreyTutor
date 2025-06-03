@@ -1,0 +1,120 @@
+{
+  "questions_asked": 3,
+  "correct": 3,
+  "incorrect": 0,
+  "start_time": 1748962695.6998434,
+  "end_time": 1748962754.231854,
+  "question_history": [
+    {
+      "question": {
+        "question": "Which realm is ruled by Aragorn after the War of the Ring?",
+        "type": "relationship",
+        "difficulty": 2,
+        "tier": "basic",
+        "entity": "Weathertop",
+        "community_id": null,
+        "correct_answer": "Gondor",
+        "options": [
+          "Rohan",
+          "The Shire",
+          "Gondor",
+          "Mordor"
+        ]
+      },
+      "answer": "Gondor",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "explanation": "You have answered correctly, dear student. Aragorn, son of Arathorn, indeed rules Gondor after the War of the Ring, becoming its rightful king. His reign marks the restoration of the line of Elendil and the beginning of a new age for both Gondor and Arnor, uniting the kingdoms of Men. Well done!",
+        "strengths": [
+          "The answer is correct and directly addresses the question.",
+          "You have demonstrated knowledge of a significant event in Middle-earth's history."
+        ],
+        "weaknesses": [
+          "The answer could benefit from additional context or detail about Aragorn's role as king."
+        ],
+        "suggestions": [
+          "Consider expanding your answer to include how Aragorn's leadership impacted Gondor and its people.",
+          "You might also explore the significance of his lineage and the unification of the kingdoms."
+        ]
+      }
+    },
+    {
+      "question": {
+        "question": "Which realm is ruled by Aragorn after the War of the Ring?",
+        "type": "multiple_choice",
+        "difficulty": 3,
+        "tier": "basic",
+        "entity": "Lopoldi",
+        "community_id": null,
+        "correct_answer": "Gondor",
+        "options": [
+          "Gondor",
+          "Rohan",
+          "The Shire",
+          "Mordor"
+        ]
+      },
+      "answer": "Gondor",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "explanation": "You have answered correctly, dear student. Aragorn, son of Arathorn, indeed rules Gondor after the War of the Ring, becoming its rightful king. His reign marks the restoration of the line of Elendil and the beginning of a new age for both Gondor and Arnor, uniting the kingdoms of Men. Well done!",
+        "strengths": [
+          "The answer is correct and directly addresses the question.",
+          "You have demonstrated knowledge of a significant event in Middle-earth's history."
+        ],
+        "weaknesses": [
+          "The answer could benefit from additional context or detail about Aragorn's role as king."
+        ],
+        "suggestions": [
+          "Consider expanding your answer to include how Aragorn's leadership impacted Gondor and its people.",
+          "You might also explore the significance of his lineage and the unification of the kingdoms."
+        ]
+      }
+    },
+    {
+      "question": {
+        "question": "Which realm is ruled by Aragorn after the War of the Ring?",
+        "type": "relationship",
+        "difficulty": 1,
+        "tier": "basic",
+        "entity": "Ann\u00faminas",
+        "community_id": null,
+        "correct_answer": "Gondor",
+        "options": [
+          "The Shire",
+          "Mordor",
+          "Gondor",
+          "Rohan"
+        ]
+      },
+      "answer": "Gondor",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "explanation": "You have answered correctly, dear student. Aragorn, son of Arathorn, indeed rules Gondor after the War of the Ring, becoming its rightful king. His reign marks the restoration of the line of Elendil and the beginning of a new age for both Gondor and Arnor, uniting the kingdoms of Men. Well done!",
+        "strengths": [
+          "The answer is correct and directly addresses the question.",
+          "You have demonstrated knowledge of a significant event in Middle-earth's history."
+        ],
+        "weaknesses": [
+          "The answer could benefit from additional context or detail about Aragorn's role as king."
+        ],
+        "suggestions": [
+          "Consider expanding your answer to include how Aragorn's leadership impacted Gondor and its people.",
+          "You might also explore the significance of his lineage and the unification of the kingdoms."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 3,
+    "correct_answers": 3,
+    "accuracy": 100.0,
+    "duration": 58.532010555267334,
+    "duration_formatted": "58 seconds",
+    "mastery_after": 93.0,
+    "mastery_change": 10.0
+  }
+}

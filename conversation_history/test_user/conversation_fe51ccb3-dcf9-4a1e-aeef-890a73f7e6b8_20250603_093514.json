@@ -1,0 +1,50 @@
+{
+  "conversation_id": "fe51ccb3-dcf9-4a1e-aeef-890a73f7e6b8",
+  "student_id": "test_user",
+  "quiz_id": "adaptive_quiz_20250603_093514",
+  "metadata": {
+    "student_name": "Test User",
+    "strategy": "adaptive",
+    "session_id": "session_20250603_093514"
+  },
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "According to the lore kept in the libraries of Rivendell, what is the Significance of Osgiliath?",
+      "timestamp": 1748939714.4158585,
+      "timestamp_formatted": "2025-06-03T09:35:14.415859",
+      "metadata": {
+        "question_type": "factual",
+        "difficulty": 2,
+        "community_id": 107,
+        "question_id": "f5071d6e-a82c-4a35-8eb2-9df562db9370",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "tower",
+      "timestamp": 1748939719.277963,
+      "timestamp_formatted": "2025-06-03T09:35:19.277963",
+      "metadata": {
+        "correct": false,
+        "quality_score": {
+          "message": "Even the wisest cannot see all ends. Let us explore this matter further.",
+          "explanation": "The lore of Middle-earth tells us that deserted city.",
+          "next_steps": [
+            "Consult the ancient texts for more knowledge on this subject.",
+            "Reflect on the connections between different realms of Middle-earth's lore.",
+            "Consider how this knowledge fits into the broader tapestry of Tolkien's world."
+          ]
+        },
+        "feedback": null,
+        "is_answer": true
+      }
+    }
+  ],
+  "start_time": 1748939714.2776885,
+  "start_time_formatted": "2025-06-03T09:35:14.277689",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

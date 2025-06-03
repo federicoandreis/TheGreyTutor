@@ -1,0 +1,67 @@
+{
+  "conversation_id": "e40a4410-4def-4c7e-b0a5-a9a3237fc5c1",
+  "student_id": "test_user",
+  "quiz_id": "adaptive_quiz_20250603_075627",
+  "metadata": {
+    "student_name": "Frodo",
+    "strategy": "adaptive",
+    "session_id": "session_20250603_075627"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "Welcome to the Adaptive Quizzing System, Frodo!",
+      "timestamp": 1748933787.5458705,
+      "timestamp_formatted": "2025-06-03T07:56:27.545871",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Strategy: Adaptive: Questions will be selected based on your performance and learning needs.",
+      "timestamp": 1748933787.5458705,
+      "timestamp_formatted": "2025-06-03T07:56:27.545871",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Current Learning Objective: Understand the key entities and relationships in Thra\u00b4in & Thorin (Characters)",
+      "timestamp": 1748933787.5751517,
+      "timestamp_formatted": "2025-06-03T07:56:27.575152",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Let's begin!",
+      "timestamp": 1748933787.5751517,
+      "timestamp_formatted": "2025-06-03T07:56:27.575152",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "According to the lore kept in the libraries of Rivendell, what is the Chunk Index of Bear?",
+      "timestamp": 1748933787.6847882,
+      "timestamp_formatted": "2025-06-03T07:56:27.684788",
+      "metadata": {
+        "question_type": "factual",
+        "difficulty": 2,
+        "community_id": 1201,
+        "question_id": "49c55ea7-35ac-4700-a2f3-a31da93c3112",
+        "is_question": true
+      }
+    },
+    {
+      "role": "system",
+      "content": "Session Summary:\nDuration: 8s\nQuestions: 1\nCorrect Answers: 0\nAccuracy: 0.0%\nMastery Level: 51.0%",
+      "timestamp": 1748933795.699491,
+      "timestamp_formatted": "2025-06-03T07:56:35.699491",
+      "metadata": {
+        "is_summary": true
+      }
+    }
+  ],
+  "start_time": 1748933787.5149798,
+  "start_time_formatted": "2025-06-03T07:56:27.514980",
+  "end_time": 1748933795.699491,
+  "end_time_formatted": "2025-06-03T07:56:35.699491",
+  "duration_seconds": 8.184511184692383
+}

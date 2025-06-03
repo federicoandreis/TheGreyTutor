@@ -1,0 +1,83 @@
+{
+  "questions_asked": 2,
+  "correct": 2,
+  "incorrect": 0,
+  "start_time": 1748939913.4728932,
+  "end_time": 1748939929.7657216,
+  "question_history": [
+    {
+      "question": {
+        "text": "According to the archives of Minas Tirith, which one of these is connected to Unknown Traveller and Unknown?",
+        "type": "multiple_choice",
+        "difficulty": 3,
+        "template_id": "multiple_choice_2",
+        "entity": [
+          "Unknown Traveller",
+          "Unknown"
+        ],
+        "relationship_type": "KNOWS_ABOUT",
+        "options": [
+          "",
+          [
+            "The Ruling Ring",
+            "The Great Ring",
+            "The One Ring",
+            "The One",
+            "The Three",
+            "The Ring"
+          ],
+          [
+            "Frodo Baggins",
+            "Frodo"
+          ],
+          "Dwarves"
+        ],
+        "correct_answer": [
+          "Frodo Baggins",
+          "Frodo"
+        ],
+        "community_id": 99
+      },
+      "answer": "",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+        "explanation": "",
+        "next_steps": [
+          "Continue your journey through the deeper mysteries of Middle-earth.",
+          "Share your wisdom with others who seek to understand these ancient tales."
+        ]
+      }
+    },
+    {
+      "question": {
+        "text": "What is the significance of the One Ring in the Lord of the Rings?",
+        "type": "factual",
+        "difficulty": 1,
+        "entity": "One Ring",
+        "requires_llm_evaluation": true
+      },
+      "answer": "ring",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+        "explanation": "",
+        "next_steps": [
+          "Continue your journey through the deeper mysteries of Middle-earth.",
+          "Share your wisdom with others who seek to understand these ancient tales."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 2,
+    "correct_answers": 2,
+    "accuracy": 100.0,
+    "duration": 16.29282832145691,
+    "duration_formatted": "16 seconds",
+    "mastery_after": 52.0,
+    "mastery_change": 10.0
+  }
+}

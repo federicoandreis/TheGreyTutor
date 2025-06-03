@@ -1,0 +1,75 @@
+{
+  "conversation_id": "4a5b862e-df31-4525-8502-e3ad4b653d67",
+  "student_id": "api_test_student",
+  "quiz_id": "api_test_quiz",
+  "metadata": {
+    "student_name": null,
+    "strategy": "adaptive",
+    "session_id": null,
+    "tags": null
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "Welcome to the API test quiz!",
+      "timestamp": 1748882366.5284288,
+      "timestamp_formatted": "2025-06-02T17:39:26.528429",
+      "metadata": {
+        "question_type": null,
+        "difficulty": null,
+        "community_id": null,
+        "question_id": null,
+        "is_question": null,
+        "correct": null,
+        "quality_score": null,
+        "feedback": null,
+        "is_answer": null,
+        "is_feedback": null,
+        "is_summary": null
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "What is the capital of France?",
+      "timestamp": 1748882368.574332,
+      "timestamp_formatted": "2025-06-02T17:39:28.574332",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 2,
+        "community_id": null,
+        "question_id": null,
+        "is_question": true,
+        "correct": null,
+        "quality_score": null,
+        "feedback": null,
+        "is_answer": null,
+        "is_feedback": null,
+        "is_summary": null
+      }
+    },
+    {
+      "role": "user",
+      "content": "Paris",
+      "timestamp": 1748882370.604004,
+      "timestamp_formatted": "2025-06-02T17:39:30.604004",
+      "metadata": {
+        "question_type": null,
+        "difficulty": null,
+        "community_id": null,
+        "question_id": null,
+        "is_question": null,
+        "correct": true,
+        "quality_score": 5,
+        "feedback": null,
+        "is_answer": true,
+        "is_feedback": null,
+        "is_summary": null
+      }
+    }
+  ],
+  "start_time": 1748882366.5284288,
+  "start_time_formatted": "2025-06-02T17:39:26.528429",
+  "end_time": 1748882366.5284288,
+  "end_time_formatted": "2025-06-02T17:39:26.528429",
+  "duration_seconds": 0.0
+}

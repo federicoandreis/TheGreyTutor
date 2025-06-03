@@ -1,0 +1,111 @@
+{
+  "questions_asked": 3,
+  "correct": 0,
+  "incorrect": 3,
+  "start_time": 1748944436.552814,
+  "end_time": 1748944514.9259887,
+  "question_history": [
+    {
+      "question": {
+        "text": "In the soft glow of moonlight, I recall the cherished brew favored by the Hobbits of the Shire, known for its warming qualities. What is the name of this moonlit drink, often enjoyed under the stars?",
+        "type": "factual",
+        "difficulty": 2,
+        "tier": "basic",
+        "entity": "moonshine",
+        "community_id": null,
+        "answer": "Moonshine"
+      },
+      "answer": "Beer",
+      "correct": false,
+      "quality_score": 60,
+      "feedback": {
+        "explanation": "The student's answer of 'Beer' is not the correct response to the question posed. The drink favored by Hobbits, particularly enjoyed under the stars and in the moonlight, is known as 'Moonshine.' This term refers to a type of homemade alcoholic beverage, often associated with the rural and rustic lifestyle of the Hobbits in the Shire. It is a cherished part of their culture, embodying the warmth and camaraderie of their gatherings. While beer is indeed a popular drink among Hobbits, it does not specifically capture the essence of the moonlit drink referenced in the question.",
+        "strengths": [
+          "The student correctly identifies a beverage associated with Hobbits.",
+          "The answer reflects an understanding of Hobbit culture and their enjoyment of drinks."
+        ],
+        "weaknesses": [
+          "The answer does not specifically address the question regarding the moonlit drink.",
+          "The student may have overlooked the specific term 'Moonshine' that captures the essence of the question."
+        ],
+        "suggestions": [
+          "Review the specific terms and drinks mentioned in Tolkien's works, especially those related to Hobbit culture.",
+          "Consider the context of the question more carefully to ensure that the answer aligns with the specific details requested."
+        ]
+      }
+    },
+    {
+      "question": {
+        "text": "As we wander through the verdant glades of Mirkwood, I find my thoughts drawn to the nimble Prince who calls this forest his home. With keen eyes and unmatched skill, he aids our quest against the encroaching shadow. Pray tell, what is the name of this illustrious Elf, known for his grace and valor, who bears the title of Prince of the Woodland Realm?",
+        "type": "factual",
+        "difficulty": 3,
+        "tier": "basic",
+        "entity": "Legolas",
+        "community_id": null,
+        "answer": "Legolas"
+      },
+      "answer": "Glorfindel",
+      "correct": false,
+      "quality_score": 40,
+      "feedback": {
+        "explanation": "The student's answer is incorrect. The illustrious Elf known for his grace and valor, who bears the title of Prince of the Woodland Realm, is Legolas. He is a member of the Fellowship of the Ring and is renowned for his archery skills and keen senses. Glorfindel, while also a noble Elf of great renown, is not associated with Mirkwood but rather with Rivendell and has a different role in the lore of Middle-earth.",
+        "strengths": [
+          "The student demonstrates familiarity with Elvish characters in Tolkien's works.",
+          "The answer reflects an understanding of the significance of Elves in Middle-earth."
+        ],
+        "weaknesses": [
+          "The answer does not correctly identify the character in question.",
+          "There is a lack of specificity regarding the character's title and home region."
+        ],
+        "suggestions": [
+          "Review the characters associated with Mirkwood, particularly focusing on Legolas and his role in 'The Lord of the Rings'.",
+          "Consider the context of the question more closely to ensure the answer aligns with the details provided."
+        ]
+      }
+    },
+    {
+      "question": {
+        "text": "In the peaceful lands of the Shire, a merry Hobbit by the name of Peregrin Took, known affectionately as Pippin, embarked on many adventures. What is the name of the esteemed family to which he belongs?",
+        "type": "multiple_choice",
+        "difficulty": 1,
+        "tier": "basic",
+        "entity": "Peregrin Took",
+        "community_id": null,
+        "answer": "The Tooks",
+        "options": [
+          "The Baggins",
+          "The Gamgees",
+          "The Tooks",
+          "The Brandybucks"
+        ]
+      },
+      "answer": "The Baggins",
+      "correct": false,
+      "quality_score": 40,
+      "feedback": {
+        "explanation": "The student's answer is incorrect. The esteemed family to which Peregrin Took, affectionately known as Pippin, belongs is the Tooks. The Tooks are one of the prominent Hobbit families in the Shire, known for their adventurous spirit and notable lineage, which includes the famous Thain of the Shire. In contrast, the Baggins family, to which Bilbo and Frodo belong, is known for its more reserved and home-loving nature. Understanding the distinctions between these families is crucial in appreciating the rich tapestry of Hobbit culture in Tolkien's works.",
+        "strengths": [
+          "The student attempted to answer the question, showing engagement with the material.",
+          "The answer reflects some knowledge of Hobbit families, indicating familiarity with the lore."
+        ],
+        "weaknesses": [
+          "The answer is incorrect, as it confuses two distinct Hobbit families.",
+          "The student did not provide any reasoning or context for their answer, which is important in demonstrating understanding."
+        ],
+        "suggestions": [
+          "Review the family trees of Hobbits, particularly the Tooks and the Bagginses, to better understand their characteristics and significance.",
+          "Consider providing explanations or context when answering questions to demonstrate a deeper understanding of the lore."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 3,
+    "correct_answers": 0,
+    "accuracy": 0.0,
+    "duration": 78.3731746673584,
+    "duration_formatted": "1 minute, 18 seconds",
+    "mastery_after": 38.0,
+    "mastery_change": 0.0
+  }
+}

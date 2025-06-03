@@ -1,0 +1,200 @@
+{
+  "conversation_id": "9c235bd3-8973-4c61-bd25-37a6eeafb3d3",
+  "student_id": "hobbit1",
+  "quiz_id": "adaptive_quiz_20250602_180904",
+  "metadata": {
+    "student_name": "Frodo Baggins",
+    "strategy": "adaptive",
+    "session_id": "session_20250602_180904"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "Welcome to the Adaptive Quizzing System, Frodo Baggins!",
+      "timestamp": 1748884144.3916538,
+      "timestamp_formatted": "2025-06-02T18:09:04.391654",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Strategy: Adaptive: Questions will be selected based on your performance and learning needs.",
+      "timestamp": 1748884144.3916538,
+      "timestamp_formatted": "2025-06-02T18:09:04.391654",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Current Learning Objective: Understand the key entities and relationships in Thra\u00b4in & Thorin (Characters)",
+      "timestamp": 1748884144.4347394,
+      "timestamp_formatted": "2025-06-02T18:09:04.434739",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Let's begin!",
+      "timestamp": 1748884144.4347394,
+      "timestamp_formatted": "2025-06-02T18:09:04.434739",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "What is the material of manuscript?",
+      "timestamp": 1748884144.5547395,
+      "timestamp_formatted": "2025-06-02T18:09:04.554739",
+      "metadata": {
+        "question_type": "factual",
+        "difficulty": 1,
+        "community_id": 1704,
+        "question_id": "4b34538d-5238-4e88-8d12-0752eb5ef6ab",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "parchment",
+      "timestamp": 1748884159.7675097,
+      "timestamp_formatted": "2025-06-02T18:09:19.767510",
+      "metadata": {
+        "correct": false,
+        "quality_score": null,
+        "feedback": {
+          "correct": false,
+          "quality_score": null,
+          "message": "Hmm, not quite so, my friend. Even the wisest cannot see all ends.",
+          "explanation": "The lore of the Eldar reveals: leather-bound",
+          "next_steps": [
+            "Do not be disheartened. Even Aragorn son of Arathorn had much to learn before claiming his throne.",
+            "Perhaps revisit the ancient scrolls that speak of these fundamental truths."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hmm, not quite so, my friend. Even the wisest cannot see all ends.\n\nThe lore of the Eldar reveals: leather-bound\n\n- Do not be disheartened. Even Aragorn son of Arathorn had much to learn before claiming his throne.\n- Perhaps revisit the ancient scrolls that speak of these fundamental truths.",
+      "timestamp": 1748884159.7675097,
+      "timestamp_formatted": "2025-06-02T18:09:19.767510",
+      "metadata": {
+        "correct": false,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "What is the home region of Eagle?",
+      "timestamp": 1748884171.5007837,
+      "timestamp_formatted": "2025-06-02T18:09:31.500784",
+      "metadata": {
+        "question_type": "factual",
+        "difficulty": 1,
+        "community_id": 1994,
+        "question_id": "23f28166-6994-4292-b544-7cf099216ef3",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "Misty mountains",
+      "timestamp": 1748884185.8366208,
+      "timestamp_formatted": "2025-06-02T18:09:45.836621",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "feedback": {
+          "correct": true,
+          "quality_score": null,
+          "message": "Indeed! Your wisdom serves you well on this matter.",
+          "explanation": "The ancient scrolls tell us: ",
+          "next_steps": [
+            "Your journey through Middle-earth's wisdom progresses well. Seek now the deeper mysteries that await."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Indeed! Your wisdom serves you well on this matter.\n\nThe ancient scrolls tell us: \n\n- Your journey through Middle-earth's wisdom progresses well. Seek now the deeper mysteries that await.",
+      "timestamp": 1748884185.8366208,
+      "timestamp_formatted": "2025-06-02T18:09:45.836621",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "How is cloak related to cloak (Artifact)?",
+      "timestamp": 1748884207.6429822,
+      "timestamp_formatted": "2025-06-02T18:10:07.642982",
+      "metadata": {
+        "question_type": "relationship",
+        "difficulty": 3,
+        "community_id": 2025,
+        "question_id": "176ca868-a945-4198-aae2-9dcb4bb39d1e",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "cloak",
+      "timestamp": 1748884210.6548357,
+      "timestamp_formatted": "2025-06-02T18:10:10.654836",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "feedback": {
+          "correct": true,
+          "quality_score": null,
+          "message": "Indeed! Your wisdom serves you well on this matter.",
+          "explanation": "The ancient scrolls tell us: cloak belongs to community cloak (Artifact)",
+          "next_steps": [
+            "Your journey through Middle-earth's wisdom progresses well. Seek now the deeper mysteries that await."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Indeed! Your wisdom serves you well on this matter.\n\nThe ancient scrolls tell us: cloak belongs to community cloak (Artifact)\n\n- Your journey through Middle-earth's wisdom progresses well. Seek now the deeper mysteries that await.",
+      "timestamp": 1748884210.6548357,
+      "timestamp_formatted": "2025-06-02T18:10:10.654836",
+      "metadata": {
+        "correct": true,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "What is the community id of hood?",
+      "timestamp": 1748884215.5592725,
+      "timestamp_formatted": "2025-06-02T18:10:15.559273",
+      "metadata": {
+        "question_type": "factual",
+        "difficulty": 1,
+        "community_id": 102,
+        "question_id": "588adb02-6a4b-4dac-a799-bfdd64d02b03",
+        "is_question": true
+      }
+    },
+    {
+      "role": "system",
+      "content": "Session Summary:\nDuration: 1m 19s\nQuestions: 4\nCorrect Answers: 2\nAccuracy: 50.0%\nMastery Level: 51.0%",
+      "timestamp": 1748884223.9780812,
+      "timestamp_formatted": "2025-06-02T18:10:23.978081",
+      "metadata": {
+        "is_summary": true
+      }
+    }
+  ],
+  "start_time": 1748884144.384611,
+  "start_time_formatted": "2025-06-02T18:09:04.384611",
+  "end_time": 1748884223.9780812,
+  "end_time_formatted": "2025-06-02T18:10:23.978081",
+  "duration_seconds": 79.59347033500671
+}

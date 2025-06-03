@@ -1,0 +1,64 @@
+{
+  "questions_asked": 4,
+  "correct_answers": 2,
+  "incorrect_answers": 1,
+  "start_time": 1748884144.384611,
+  "end_time": 1748884223.9780812,
+  "question_history": [
+    {
+      "question": {
+        "text": "What is the material of manuscript?",
+        "type": "factual",
+        "difficulty": 1,
+        "template_id": "factual_property_1",
+        "entity": "manuscript",
+        "property": "material",
+        "answer": "leather-bound",
+        "community_id": 1704
+      },
+      "answer": "parchment",
+      "correct": false,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "What is the home region of Eagle?",
+        "type": "factual",
+        "difficulty": 1,
+        "template_id": "factual_property_1",
+        "entity": "Eagle",
+        "property": "home_region",
+        "answer": "",
+        "community_id": 1994
+      },
+      "answer": "Misty mountains",
+      "correct": true,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "How is cloak related to cloak (Artifact)?",
+        "type": "relationship",
+        "difficulty": 3,
+        "template_id": "relationship_1",
+        "entity1": "cloak",
+        "entity2": "cloak (Artifact)",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "answer": "cloak belongs to community cloak (Artifact)",
+        "community_id": 2025
+      },
+      "answer": "cloak",
+      "correct": true,
+      "quality_score": null
+    }
+  ],
+  "summary": {
+    "duration_seconds": 79.59347033500671,
+    "duration_formatted": "1m 19s",
+    "total_questions": 4,
+    "correct_answers": 2,
+    "accuracy": 50.0,
+    "mastery_before": 51.0,
+    "mastery_after": 51.0
+  }
+}

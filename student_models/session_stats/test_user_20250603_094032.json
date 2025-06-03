@@ -1,0 +1,95 @@
+{
+  "questions_asked": 3,
+  "correct": 1,
+  "incorrect": 2,
+  "start_time": 1748940004.0646994,
+  "end_time": 1748940032.8878262,
+  "question_history": [
+    {
+      "question": {
+        "text": "According to the archives of Minas Tirith, which one of these is connected to manuscript?",
+        "type": "multiple_choice",
+        "difficulty": 3,
+        "template_id": "multiple_choice_2",
+        "entity": "manuscript",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "options": [
+          "manuscript (Artifact)",
+          "N\u00famenor",
+          "Meneltarma",
+          "hood"
+        ],
+        "correct_answer": "manuscript (Artifact)",
+        "community_id": 2028
+      },
+      "answer": "manuscript (Artifact)",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+        "explanation": "",
+        "next_steps": [
+          "Continue your journey through the deeper mysteries of Middle-earth.",
+          "Share your wisdom with others who seek to understand these ancient tales."
+        ]
+      }
+    },
+    {
+      "question": {
+        "text": "According to the lore kept in the libraries of Rivendell, what is the true name of Last Alliance of Elves and Men?",
+        "type": "factual",
+        "difficulty": 2,
+        "template_id": "factual_property_2",
+        "entity": "Last Alliance of Elves and Men",
+        "property": "name",
+        "answer": "Last Alliance of Elves and Men",
+        "community_id": 2022
+      },
+      "answer": "fellowship of the ring",
+      "correct": false,
+      "quality_score": 0.0,
+      "feedback": {
+        "message": "Even the wisest cannot see all ends. Let us explore this matter further.",
+        "explanation": "The lore of Middle-earth tells us that Last Alliance of Elves and Men.",
+        "next_steps": [
+          "Consult the ancient texts for more knowledge on this subject.",
+          "Reflect on the connections between different realms of Middle-earth's lore.",
+          "Consider how this knowledge fits into the broader tapestry of Tolkien's world."
+        ]
+      }
+    },
+    {
+      "question": {
+        "text": "According to the lore kept in the libraries of Rivendell, what is the Title of Bear?",
+        "type": "factual",
+        "difficulty": 2,
+        "template_id": "factual_property_2",
+        "entity": "Bear",
+        "property": "title",
+        "answer": "Bee-hunter",
+        "community_id": 2047
+      },
+      "answer": "beorn",
+      "correct": false,
+      "quality_score": 0.0,
+      "feedback": {
+        "message": "Even the wisest cannot see all ends. Let us explore this matter further.",
+        "explanation": "The lore of Middle-earth tells us that Bee-hunter.",
+        "next_steps": [
+          "Consult the ancient texts for more knowledge on this subject.",
+          "Reflect on the connections between different realms of Middle-earth's lore.",
+          "Consider how this knowledge fits into the broader tapestry of Tolkien's world."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 3,
+    "correct_answers": 1,
+    "accuracy": 33.33333333333333,
+    "duration": 28.823126792907715,
+    "duration_formatted": "28 seconds",
+    "mastery_after": 52.0,
+    "mastery_change": 3.3333333333333326
+  }
+}

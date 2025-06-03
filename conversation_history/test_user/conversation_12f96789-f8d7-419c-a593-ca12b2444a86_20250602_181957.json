@@ -1,0 +1,112 @@
+{
+  "conversation_id": "12f96789-f8d7-419c-a593-ca12b2444a86",
+  "student_id": "test_user",
+  "quiz_id": "adaptive_quiz_20250602_181957",
+  "metadata": {
+    "student_name": "Frodo",
+    "strategy": "adaptive",
+    "session_id": "session_20250602_181957"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "Welcome to the Adaptive Quizzing System, Frodo!",
+      "timestamp": 1748884797.6733403,
+      "timestamp_formatted": "2025-06-02T18:19:57.673340",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Strategy: Adaptive: Questions will be selected based on your performance and learning needs.",
+      "timestamp": 1748884797.6733403,
+      "timestamp_formatted": "2025-06-02T18:19:57.673340",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Current Learning Objective: Understand the key entities and relationships in Thra\u00b4in & Thorin (Characters)",
+      "timestamp": 1748884797.7046144,
+      "timestamp_formatted": "2025-06-02T18:19:57.704614",
+      "metadata": {}
+    },
+    {
+      "role": "system",
+      "content": "Let's begin!",
+      "timestamp": 1748884797.7046144,
+      "timestamp_formatted": "2025-06-02T18:19:57.704614",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "How is black horseman related to Master Peregrin & Others (Characters)?",
+      "timestamp": 1748884797.8292677,
+      "timestamp_formatted": "2025-06-02T18:19:57.829268",
+      "metadata": {
+        "question_type": "relationship",
+        "difficulty": 3,
+        "community_id": 1964,
+        "question_id": "070d8732-9251-47e4-b7ea-8a48687a32fd",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "chases them",
+      "timestamp": 1748884802.4353454,
+      "timestamp_formatted": "2025-06-02T18:20:02.435345",
+      "metadata": {
+        "correct": false,
+        "quality_score": null,
+        "feedback": {
+          "correct": false,
+          "quality_score": null,
+          "message": "Hmm, not quite so, my friend. Even the wisest cannot see all ends.",
+          "explanation": "The ancient records of Gondor show that  is bound to the realm of Master Peregrin & Others (Characters), as written in the scrolls of lore.",
+          "next_steps": [
+            "Do not be disheartened. Even Aragorn son of Arathorn had much to learn before claiming his throne.",
+            "Consider how the threads of fate bind these elements together, like the fellowship that united against the shadow."
+          ]
+        },
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hmm, not quite so, my friend. Even the wisest cannot see all ends.\n\nThe ancient records of Gondor show that  is bound to the realm of Master Peregrin & Others (Characters), as written in the scrolls of lore.\n\n- Do not be disheartened. Even Aragorn son of Arathorn had much to learn before claiming his throne.\n- Consider how the threads of fate bind these elements together, like the fellowship that united against the shadow.",
+      "timestamp": 1748884802.4353454,
+      "timestamp_formatted": "2025-06-02T18:20:02.435345",
+      "metadata": {
+        "correct": false,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "What is the id of Bombadil?",
+      "timestamp": 1748884815.303978,
+      "timestamp_formatted": "2025-06-02T18:20:15.303978",
+      "metadata": {
+        "question_type": "factual",
+        "difficulty": 1,
+        "community_id": 2020,
+        "question_id": "c1443916-ed4c-4f37-85cc-2c8cfc0e0545",
+        "is_question": true
+      }
+    },
+    {
+      "role": "system",
+      "content": "Session Summary:\nDuration: 1h 22m 46s\nQuestions: 2\nCorrect Answers: 0\nAccuracy: 0.0%\nMastery Level: 51.0%",
+      "timestamp": 1748889764.547485,
+      "timestamp_formatted": "2025-06-02T19:42:44.547485",
+      "metadata": {
+        "is_summary": true
+      }
+    }
+  ],
+  "start_time": 1748884797.6577868,
+  "start_time_formatted": "2025-06-02T18:19:57.657787",
+  "end_time": 1748889764.547485,
+  "end_time_formatted": "2025-06-02T19:42:44.547485",
+  "duration_seconds": 4966.889698266983
+}

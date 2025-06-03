@@ -1,0 +1,201 @@
+"""
+Quiz Orchestrator for Adaptive Quizzing.
+
+This module orchestrates the adaptive quizzing system, managing quiz sessions
+and database setup.
+"""
+import os
+import logging
+import time
+from typing import Dict, Any
+
+# Import conversation history module
+import sys
+
+# Add the parent directory to sys.path to enable relative imports
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Import QuizSession
+from kg_quizzing.scripts.quiz_session import QuizSession
+
+from kg_quizzing.scripts.quiz_utils import (
+    check_educational_metadata_exists,
+    get_available_communities
+)
+
+from kg_quizzing.scripts.schema_extension import (
+    create_educational_schema,
+    create_question_templates,
+    create_learning_objectives,
+    create_difficulty_progression_paths,
+    create_community_bridges
+)
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+
+class QuizOrchestrator:
+    """Main class for orchestrating the adaptive quizzing system."""
+
+    def __init__(self, conversation_dir: str = "conversation_history", use_llm: bool = True):
+        """Initialize the quiz orchestrator."""
+        self.current_session = None
+        self.conversation_dir = conversation_dir
+        self.use_llm = use_llm
+
+        # Create the conversation directory if it doesn't exist
+        os.makedirs(conversation_dir, exist_ok=True)
+
+    def setup_database(self, force: bool = False):
+        """
+        Set up the database with educational metadata.
+
+        Args:
+            force: Whether to force setup even if metadata already exists
+        """
+        if force or not check_educational_metadata_exists():
+            logger.info("Setting up educational metadata...")
+            create_educational_schema()
+            create_question_templates()
+            create_learning_objectives()
+            create_difficulty_progression_paths()
+            create_community_bridges()
+            logger.info("Educational metadata setup complete.")
+        else:
+            logger.info("Educational metadata already exists.")
+
+    def start_session(self, student_id: str, student_name: str, strategy: str = "adaptive"):
+        """
+        Start a new quiz session.
+
+        Args:
+            student_id: Unique identifier for the student
+            student_name: Name of the student
+            strategy: Question selection strategy
+        """
+        self.current_session = QuizSession(
+            student_id,
+            student_name,
+            strategy,
+            conversation_dir=self.conversation_dir,
+            use_llm=self.use_llm
+        )
+
+    def run_interactive_session(self):
+        """Run an interactive quiz session with Tolkien-themed language and clear formatting."""
+        if not self.current_session:
+            logger.error("No active session. Please start a session first.")
+            return
+
+        try:
+            # Start the session
+            self.current_session.start_session()
+
+            # Print welcome message with Gandalf-themed language and clear formatting
+            print("\n" + "="*80)
+            print("THE GREY TUTOR: A JOURNEY THROUGH THE LORE OF MIDDLE-EARTH")
+            print("="*80)
+            print(f"\nAh, {self.current_session.student_name}! Welcome to our scholarly discourse on the lore of Middle-earth.")
+            print("I am Gandalf the Grey, and I shall be your guide through the ancient wisdom.")
+
+            # Explain the strategy in Tolkien-themed language
+            if self.current_session.strategy == "adaptive":
+                print("Like the paths through Mirkwood, our journey shall adapt to your knowledge and wisdom. I shall pose questions that challenge your understanding, yet remain within your grasp.")
+            elif self.current_session.strategy == "depth_first":
+                print("We shall delve deep like the Dwarves of Moria, exploring one realm of knowledge thoroughly before moving to another.")
+            elif self.current_session.strategy == "breadth_first":
+                print("Our journey shall be wide-ranging, like an Elf's view from the tallest mallorn tree in Lothlórien, touching upon many realms of Middle-earth's lore.")
+            elif self.current_session.strategy == "spiral":
+                print("Like the winding stair of Orthanc, we shall revisit topics with increasing depth and complexity as your understanding grows.")
+
+            print("\nShould you wish to end our discourse, simply say 'farewell' or 'I must depart'.")
+
+            while True:
+                # Get the next question
+                question = self.current_session.next_question()
+
+                # Print the question with clear formatting
+                print("\n" + "-"*60)
+                print("A RIDDLE FROM THE SCROLLS OF MIDDLE-EARTH:")
+                print("-"*60)
+                print(f"\n{question['text']}")
+
+                # If it's a multiple-choice question, print the options with clear formatting
+                if "options" in question:
+                    print("\nConsider these possibilities from the ancient lore:")
+                    for i, option in enumerate(question["options"]):
+                        print(f"  {i+1}. {option}")
+
+                # Get the student's answer with thematic prompt
+                answer = input("\nYour answer, wise traveler: ")
+
+                # Check if the student wants to quit with Tolkien-themed exit phrases
+                if answer.lower() in ["quit", "exit", "q", "farewell", "i must depart", "goodbye"]:
+                    print("\nVery well. May the light of Eärendil guide your path until our next meeting.")
+                    break
+
+                # For multiple-choice questions, convert numeric answers to the actual option
+                if "options" in question and answer.isdigit():
+                    option_index = int(answer) - 1
+                    if 0 <= option_index < len(question["options"]):
+                        answer = question["options"][option_index]
+
+                # Process the answer
+                correct, quality_score, feedback = self.current_session.process_answer(answer)
+
+                # Print feedback with Gandalf-themed language and clear formatting
+                print("\n" + "-"*60)
+                print("GANDALF'S WISDOM:")
+                print("-"*60)
+                print(f"\n{feedback['message']}")
+                if feedback["explanation"]:
+                    print(f"\n{feedback['explanation']}")
+
+                if feedback["next_steps"]:
+                    print("\nFor your continued journey through Middle-earth's lore:")
+                    for step in feedback["next_steps"]:
+                        print(f"  • {step}")
+
+                # Print current mastery level with Tolkien-themed language
+                print("\n" + "-"*60)
+                print("YOUR MASTERY OF THE ANCIENT LORE:")
+                print("-"*60)
+
+                mastery = self.current_session.student_model.overall_mastery
+                if mastery < 30:
+                    print(f"\nYour understanding of the lore is like a hobbit who has never left the Shire: {mastery}% of the wisdom awaits you.")
+                elif mastery < 60:
+                    print(f"\nYour knowledge grows like Bilbo's courage on his journey: {mastery}% of the way to true wisdom.")
+                elif mastery < 90:
+                    print(f"\nYour wisdom approaches that of the Elven-lords of old: {mastery}% of the lore is known to you.")
+                else:
+                    print(f"\nYou have attained the wisdom of the White Council itself: {mastery}% mastery of the ancient lore!")
+
+                # Ask if the student wants to continue with Tolkien-themed language
+                continue_quiz = input("\nShall we continue our journey through the lore of Middle-earth? (yes/no): ")
+                if continue_quiz.lower() not in ["y", "yes", "continue", "proceed", "go on"]:
+                    print("\nVery well. Until our next meeting, may the light of Eärendil guide your path.")
+                    break
+
+        finally:
+            # End the session
+            stats = self.current_session.end_session()
+
+            # Print session summary with Tolkien-themed language and improved formatting
+            print("\n" + "="*80)
+            print("THE CHRONICLES OF YOUR JOURNEY THROUGH MIDDLE-EARTH")
+            print("="*80)
+
+            print(f"\n• Time in the company of Gandalf: {stats['summary']['duration_formatted']}")
+            print(f"• Ancient riddles encountered: {stats['summary']['total_questions']}")
+            print(f"• Wisdom demonstrated: {stats['summary']['correct_answers']} correct answers")
+            print(f"• Your insight into the lore: {stats['summary']['accuracy']:.1f}% accuracy")
+            print(f"• Mastery of the ancient knowledge: {stats['summary']['mastery_after']}%")
+
+            # Add a thematic farewell message
+            print("\n" + "-"*80)
+            print("May your path be ever lit by the light of the Eldar, and may the wisdom")
+            print("you have gained serve you well on your continued journeys through Middle-earth.")
+            print("-"*80)

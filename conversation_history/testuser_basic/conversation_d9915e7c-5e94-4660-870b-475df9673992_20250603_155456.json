@@ -1,0 +1,30 @@
+{
+  "conversation_id": "d9915e7c-5e94-4660-870b-475df9673992",
+  "student_id": "testuser_basic",
+  "quiz_id": "adaptive_quiz_20250603_155456",
+  "metadata": {
+    "student_name": "fede",
+    "strategy": "adaptive",
+    "session_id": "session_20250603_155456"
+  },
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "\n\n1. Gondor\n2. Rohan\n3. The Shire\n4. Mordor",
+      "timestamp": 1748962499.8137403,
+      "timestamp_formatted": "2025-06-03T15:54:59.813740",
+      "metadata": {
+        "question_type": null,
+        "difficulty": null,
+        "community_id": null,
+        "question_id": "b08d0604-78d1-4351-9e71-a0b4e199ec9c",
+        "is_question": true
+      }
+    }
+  ],
+  "start_time": 1748962496.6680071,
+  "start_time_formatted": "2025-06-03T15:54:56.668007",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

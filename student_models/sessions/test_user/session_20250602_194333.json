@@ -1,0 +1,112 @@
+{
+  "questions_asked": 5,
+  "correct_answers": 2,
+  "incorrect_answers": 3,
+  "start_time": 1748889813.308668,
+  "end_time": 1748889894.5207314,
+  "question_history": [
+    {
+      "question": {
+        "text": "Which of the following is connected to Plague of Gondor?",
+        "type": "multiple_choice",
+        "difficulty": 2,
+        "template_id": "multiple_choice_1",
+        "entity": "Plague of Gondor",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "options": [
+          "E\u00e4rendil",
+          "Meneltarma",
+          "Meneldil (Character)",
+          "John"
+        ],
+        "correct_answer": "Meneldil (Character)",
+        "community_id": 798
+      },
+      "answer": "John",
+      "correct": false,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "What is the region of Ettenmoors?",
+        "type": "factual",
+        "difficulty": 1,
+        "template_id": "factual_property_1",
+        "entity": "Ettenmoors",
+        "property": "region",
+        "answer": "",
+        "community_id": 1967
+      },
+      "answer": "a region",
+      "correct": true,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "What is the name of Treebeard?",
+        "type": "factual",
+        "difficulty": 1,
+        "template_id": "factual_property_1",
+        "entity": "Treebeard",
+        "property": "name",
+        "answer": "Treebeard",
+        "community_id": 1175
+      },
+      "answer": "Fangorn",
+      "correct": false,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "Which of the following is connected to Bear?",
+        "type": "multiple_choice",
+        "difficulty": 2,
+        "template_id": "multiple_choice_1",
+        "entity": "Bear",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "options": [
+          "Arandor",
+          "Bear (Character)",
+          [
+            "Eagles of the Mountains",
+            "Eagles"
+          ],
+          "E\u00e4rendil"
+        ],
+        "correct_answer": "Bear (Character)",
+        "community_id": 1992
+      },
+      "answer": "Bear (Character)",
+      "correct": true,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "How is Wilderland related to ['Great Place of the Tooks', 'Great River']?",
+        "type": "relationship",
+        "difficulty": 3,
+        "template_id": "relationship_1",
+        "entity1": "Wilderland",
+        "entity2": [
+          "Great Place of the Tooks",
+          "Great River"
+        ],
+        "relationship_type": "LOCATED_IN",
+        "answer": "The lore of Middle-earth connects Wilderland with ['Great Place of the Tooks', 'Great River'] through located in.",
+        "community_id": 2024
+      },
+      "answer": "commnity",
+      "correct": false,
+      "quality_score": null
+    }
+  ],
+  "summary": {
+    "duration_seconds": 81.2120635509491,
+    "duration_formatted": "1m 21s",
+    "total_questions": 5,
+    "correct_answers": 2,
+    "accuracy": 40.0,
+    "mastery_before": 50.0,
+    "mastery_after": 50.0
+  }
+}

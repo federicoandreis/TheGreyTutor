@@ -1,0 +1,53 @@
+{
+  "questions_asked": 1,
+  "correct": 1,
+  "incorrect": 0,
+  "start_time": 1748962602.24736,
+  "end_time": 1748962624.615869,
+  "question_history": [
+    {
+      "question": {
+        "question": "Eagle",
+        "type": "multiple_choice",
+        "difficulty": 3,
+        "tier": "basic",
+        "entity": "Eagle",
+        "community_id": null,
+        "correct_answer": "Mordor",
+        "options": [
+          "Gondor",
+          "Rohan",
+          "The Shire",
+          "Mordor"
+        ]
+      },
+      "answer": "Mordor",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "explanation": "Alas, dear student, your answer of 'Mordor' is not correct in relation to the entity 'Eagle.' The Eagles of Middle-earth are noble creatures, often serving as messengers and rescuers, particularly in times of great need. They are not tied to Mordor, which is a land of darkness and evil ruled by Sauron. Instead, the Eagles are often associated with the lands of the West, such as the Misty Mountains and the realm of Gondor. They played a crucial role in the War of the Ring, notably in the rescue of Frodo and Sam from Mount Doom. Remember, the Eagles are allies of the Free Peoples, not of the dark forces of Mordor.",
+        "strengths": [
+          "You attempted to engage with the question, showing a willingness to participate.",
+          "Your answer reflects an understanding of a significant location in Middle-earth."
+        ],
+        "weaknesses": [
+          "The answer does not correctly identify the relationship between Eagles and Mordor.",
+          "There is a lack of specific knowledge regarding the role and nature of Eagles in Tolkien's lore."
+        ],
+        "suggestions": [
+          "Study the role of the Eagles in 'The Hobbit' and 'The Lord of the Rings' to understand their significance better.",
+          "Consider the characteristics and allegiances of various creatures and locations in Middle-earth to improve your knowledge."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 1,
+    "correct_answers": 1,
+    "accuracy": 100.0,
+    "duration": 22.36850905418396,
+    "duration_formatted": "22 seconds",
+    "mastery_after": 90.0,
+    "mastery_change": 10.0
+  }
+}

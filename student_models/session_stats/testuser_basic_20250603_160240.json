@@ -1,0 +1,86 @@
+{
+  "questions_asked": 2,
+  "correct": 2,
+  "incorrect": 0,
+  "start_time": 1748962819.7737498,
+  "end_time": 1748962960.854214,
+  "question_history": [
+    {
+      "question": {
+        "question": "What is the name of the inn at Bree where Frodo meets Aragorn?",
+        "type": "relationship",
+        "difficulty": 1,
+        "tier": "basic",
+        "entity": "Mardil the Faithful",
+        "community_id": null,
+        "correct_answer": "The Prancing Pony",
+        "options": [
+          "The Ivy Bush",
+          "The Prancing Pony",
+          "The Golden Perch",
+          "The Green Dragon"
+        ]
+      },
+      "answer": "The Prancing Pony",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "explanation": "Your answer is indeed correct! The inn where Frodo meets Aragorn is called The Prancing Pony. It is a significant location in 'The Fellowship of the Ring,' serving as a meeting place for various characters and a gateway to the adventures that lie ahead. The inn is known for its warm hospitality and the lively atmosphere created by its patrons, including the famous singing of the hobbits. Well done, young scholar!",
+        "strengths": [
+          "The answer is correct and directly addresses the question.",
+          "You demonstrated knowledge of a key location in Middle-earth."
+        ],
+        "weaknesses": [
+          "The answer could be enhanced with additional context or details about the inn."
+        ],
+        "suggestions": [
+          "Consider adding a brief description of The Prancing Pony's significance in the story.",
+          "Explore the characters associated with the inn, such as Butterbur, the innkeeper, to deepen your understanding."
+        ]
+      }
+    },
+    {
+      "question": {
+        "question": "Which creature did Gandalf face on the Bridge of Khazad-d\u00fbm?",
+        "type": "relationship",
+        "difficulty": 1,
+        "tier": "basic",
+        "entity": "cloak",
+        "community_id": null,
+        "correct_answer": "Balrog",
+        "options": [
+          "Dragon",
+          "Warg",
+          "Orc",
+          "Balrog"
+        ]
+      },
+      "answer": "Balrog",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "explanation": "Your answer is indeed correct, brave student! Gandalf faced a Balrog on the Bridge of Khazad-d\u00fbm, a fearsome creature of shadow and flame. This encounter was pivotal, as it led to Gandalf's fall into the abyss, but also to his transformation into Gandalf the White. Remember, the Balrog was once a Maia, corrupted by Morgoth, and its presence in Moria signified the darkness that had overtaken the Dwarven realm.",
+        "strengths": [
+          "You correctly identified the creature Gandalf faced.",
+          "Your answer is concise and to the point."
+        ],
+        "weaknesses": [
+          "The answer could benefit from additional context about the Balrog or the significance of the encounter."
+        ],
+        "suggestions": [
+          "Consider adding a sentence or two about the Balrog's origins or its role in the story.",
+          "Explore the implications of this battle on Gandalf's character development."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 2,
+    "correct_answers": 2,
+    "accuracy": 100.0,
+    "duration": 141.08046412467957,
+    "duration_formatted": "2 minutes, 21 seconds",
+    "mastery_after": 95.0,
+    "mastery_change": 10.0
+  }
+}

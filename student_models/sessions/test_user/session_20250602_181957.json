@@ -1,0 +1,34 @@
+{
+  "questions_asked": 2,
+  "correct_answers": 0,
+  "incorrect_answers": 1,
+  "start_time": 1748884797.657263,
+  "end_time": 1748889764.547485,
+  "question_history": [
+    {
+      "question": {
+        "text": "How is black horseman related to Master Peregrin & Others (Characters)?",
+        "type": "relationship",
+        "difficulty": 3,
+        "template_id": "relationship_1",
+        "entity1": "black horseman",
+        "entity2": "Master Peregrin & Others (Characters)",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "answer": "black horseman belongs to community Master Peregrin & Others (Characters)",
+        "community_id": 1964
+      },
+      "answer": "chases them",
+      "correct": false,
+      "quality_score": null
+    }
+  ],
+  "summary": {
+    "duration_seconds": 4966.890222072601,
+    "duration_formatted": "1h 22m 46s",
+    "total_questions": 2,
+    "correct_answers": 0,
+    "accuracy": 0.0,
+    "mastery_before": 51.0,
+    "mastery_after": 51.0
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "questions_asked": 0,
+  "correct": 0,
+  "incorrect": 0,
+  "start_time": 1748939311.440952,
+  "end_time": 1748939311.440952,
+  "question_history": [],
+  "summary": {
+    "total_questions": 0,
+    "correct_answers": 0,
+    "accuracy": 0,
+    "duration": 0.0,
+    "duration_formatted": "0 seconds",
+    "mastery_after": 51.0,
+    "mastery_change": 0
+  }
+}

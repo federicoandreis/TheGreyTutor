@@ -1,0 +1,111 @@
+{
+  "questions_asked": 6,
+  "correct_answers": 4,
+  "incorrect_answers": 1,
+  "start_time": 1748883012.213181,
+  "end_time": 1748883072.0228727,
+  "question_history": [
+    {
+      "question": {
+        "text": "Which of the following is belongs to community manuscript?",
+        "type": "multiple_choice",
+        "difficulty": 2,
+        "template_id": "multiple_choice_1",
+        "entity": "manuscript",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "options": [
+          "Anduni\u00eb",
+          "manuscript (Artifact)",
+          [
+            "Eagles of the Mountains",
+            "Eagles"
+          ],
+          "hood"
+        ],
+        "correct_answer": "manuscript (Artifact)",
+        "community_id": 103
+      },
+      "answer": "manuscript (Artifact)",
+      "correct": true,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "How is orders related to orders (Event)?",
+        "type": "relationship",
+        "difficulty": 3,
+        "template_id": "relationship_1",
+        "entity1": "orders",
+        "entity2": "orders (Event)",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "answer": "orders belongs to community orders (Event)",
+        "community_id": 2035
+      },
+      "answer": "orders",
+      "correct": true,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "Which of the following is belongs to community Plague of Gondor?",
+        "type": "multiple_choice",
+        "difficulty": 2,
+        "template_id": "multiple_choice_1",
+        "entity": "Plague of Gondor",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "options": [
+          "hood",
+          "Arandor",
+          "Meneldil (Character)",
+          "Meneldil"
+        ],
+        "correct_answer": "Meneldil (Character)",
+        "community_id": 1731
+      },
+      "answer": "Meneldil (Character)",
+      "correct": true,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "How is Plague of Gondor related to Meneldil (Character)?",
+        "type": "relationship",
+        "difficulty": 3,
+        "template_id": "relationship_1",
+        "entity1": "Plague of Gondor",
+        "entity2": "Meneldil (Character)",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "answer": "Plague of Gondor belongs to community Meneldil (Character)",
+        "community_id": 1182
+      },
+      "answer": "belongs",
+      "correct": true,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "How is inland related to Lothlorien?",
+        "type": "relationship",
+        "difficulty": 3,
+        "template_id": "relationship_1",
+        "entity1": "inland",
+        "entity2": "Lothlorien",
+        "relationship_type": "DIFFICULTY_PROGRESSION",
+        "answer": "inland difficulty progression Lothlorien",
+        "community_id": 1185
+      },
+      "answer": "do you always say correct?",
+      "correct": false,
+      "quality_score": null
+    }
+  ],
+  "summary": {
+    "duration_seconds": 59.80969166755676,
+    "duration_formatted": "59s",
+    "total_questions": 6,
+    "correct_answers": 4,
+    "accuracy": 66.66666666666666,
+    "mastery_before": 53.0,
+    "mastery_after": 53.0
+  }
+}

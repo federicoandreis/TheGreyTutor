@@ -1,0 +1,82 @@
+{
+  "id": "hobbit1",
+  "name": "Frodo Baggins",
+  "community_mastery": {
+    "112": 47.5,
+    "1704": 47.5,
+    "1994": 55.0,
+    "2025": 55.0
+  },
+  "entity_familiarity": {
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:968": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:382": 52,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1153": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:374": 55,
+    "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:101": 55
+  },
+  "question_type_performance": {
+    "multiple_choice": 47,
+    "factual": 52,
+    "relationship": 55
+  },
+  "difficulty_performance": {
+    "2": 47,
+    "1": 52,
+    "3": 55
+  },
+  "recent_questions": [
+    {
+      "text": "Which of the following is difficulty progression Lopoldi?",
+      "type": "multiple_choice",
+      "difficulty": 2,
+      "template_id": "multiple_choice_1",
+      "entity": "Lopoldi",
+      "relationship_type": "DIFFICULTY_PROGRESSION",
+      "options": [
+        "Folk of Marach",
+        "Lothlorien",
+        "Yavanna",
+        [
+          "Eagles of the Mountains",
+          "Eagles"
+        ]
+      ],
+      "correct_answer": "Lothlorien",
+      "community_id": 112
+    },
+    {
+      "text": "What is the material of manuscript?",
+      "type": "factual",
+      "difficulty": 1,
+      "template_id": "factual_property_1",
+      "entity": "manuscript",
+      "property": "material",
+      "answer": "leather-bound",
+      "community_id": 1704
+    },
+    {
+      "text": "What is the home region of Eagle?",
+      "type": "factual",
+      "difficulty": 1,
+      "template_id": "factual_property_1",
+      "entity": "Eagle",
+      "property": "home_region",
+      "answer": "",
+      "community_id": 1994
+    },
+    {
+      "text": "How is cloak related to cloak (Artifact)?",
+      "type": "relationship",
+      "difficulty": 3,
+      "template_id": "relationship_1",
+      "entity1": "cloak",
+      "entity2": "cloak (Artifact)",
+      "relationship_type": "BELONGS_TO_COMMUNITY",
+      "answer": "cloak belongs to community cloak (Artifact)",
+      "community_id": 2025
+    }
+  ],
+  "mastered_objectives": [],
+  "current_objective": "lo_community_None",
+  "overall_mastery": 51.0
+}

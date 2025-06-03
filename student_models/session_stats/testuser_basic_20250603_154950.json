@@ -1,0 +1,34 @@
+{
+  "questions_asked": 1,
+  "correct": 0,
+  "incorrect": 0,
+  "start_time": 1748962188.5230057,
+  "end_time": 1748962190.3174846,
+  "question_history": [
+    {
+      "question": {
+        "question": "Lothlorien",
+        "options": [
+          "Gondor",
+          "Rohan",
+          "The Shire",
+          "Mordor"
+        ],
+        "correct_answer": "Mordor"
+      },
+      "answer": null,
+      "correct": null,
+      "quality_score": null,
+      "feedback": null
+    }
+  ],
+  "summary": {
+    "total_questions": 1,
+    "correct_answers": 0,
+    "accuracy": 0.0,
+    "duration": 1.7944788932800293,
+    "duration_formatted": "1 second",
+    "mastery_after": 88.0,
+    "mastery_change": 0.0
+  }
+}

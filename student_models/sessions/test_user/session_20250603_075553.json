@@ -1,0 +1,54 @@
+{
+  "questions_asked": 2,
+  "correct_answers": 1,
+  "incorrect_answers": 1,
+  "start_time": 1748933753.6126385,
+  "end_time": 1748933782.707241,
+  "question_history": [
+    {
+      "question": {
+        "text": "According to the archives of Minas Tirith, which one of these is connected to Bear?",
+        "type": "multiple_choice",
+        "difficulty": 3,
+        "template_id": "multiple_choice_2",
+        "entity": "Bear",
+        "relationship_type": "BELONGS_TO_COMMUNITY",
+        "options": [
+          "Meneltarma",
+          "Anduni\u00eb",
+          "E\u00e4rendil",
+          "Bear (Character)"
+        ],
+        "correct_answer": "Bear (Character)",
+        "community_id": 121
+      },
+      "answer": "Bear (Character)",
+      "correct": true,
+      "quality_score": null
+    },
+    {
+      "question": {
+        "text": "According to the lore kept in the libraries of Rivendell, what is the Significance of Bilbo's Birthday?",
+        "type": "factual",
+        "difficulty": 2,
+        "template_id": "factual_property_2",
+        "entity": "Bilbo's Birthday",
+        "property": "significance",
+        "answer": "Milestone birthday",
+        "community_id": 1671
+      },
+      "answer": "i don't know",
+      "correct": false,
+      "quality_score": null
+    }
+  ],
+  "summary": {
+    "duration_seconds": 29.094602584838867,
+    "duration_formatted": "29s",
+    "total_questions": 2,
+    "correct_answers": 1,
+    "accuracy": 50.0,
+    "mastery_before": 51.0,
+    "mastery_after": 51.0
+  }
+}

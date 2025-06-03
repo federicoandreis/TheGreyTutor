@@ -1,0 +1,30 @@
+{
+  "conversation_id": "4abce00e-747b-421f-b701-eedaa1a976d2",
+  "student_id": "test_user",
+  "quiz_id": "adaptive_quiz_20250603_094120",
+  "metadata": {
+    "student_name": "Test User",
+    "strategy": "adaptive",
+    "session_id": "session_20250603_094120"
+  },
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "According to the lore kept in the libraries of Rivendell, what is the true name of other guests?",
+      "timestamp": 1748940081.012499,
+      "timestamp_formatted": "2025-06-03T09:41:21.012499",
+      "metadata": {
+        "question_type": "factual",
+        "difficulty": 2,
+        "community_id": 1709,
+        "question_id": "e554c910-58d3-449e-a71e-b28c4ef7af78",
+        "is_question": true
+      }
+    }
+  ],
+  "start_time": 1748940080.8900707,
+  "start_time_formatted": "2025-06-03T09:41:20.890071",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

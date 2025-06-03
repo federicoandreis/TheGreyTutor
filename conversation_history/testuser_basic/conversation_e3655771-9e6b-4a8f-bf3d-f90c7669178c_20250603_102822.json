@@ -1,0 +1,30 @@
+{
+  "conversation_id": "e3655771-9e6b-4a8f-bf3d-f90c7669178c",
+  "student_id": "testuser_basic",
+  "quiz_id": "adaptive_quiz_20250603_102822",
+  "metadata": {
+    "student_name": "Galuf",
+    "strategy": "adaptive",
+    "session_id": "session_20250603_102822"
+  },
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "As we gather 'neath the stars in Rivendell, let us recall the noble Hound, a creature loyal and true. In the tales of old, which of the following is known to have been a faithful companion to the mighty hero T\u00farin Turambar? Was it: A) Huan, the hound of Valinor, B) Garm, the guardian of the underworld, C) Hound of the West, a breed from Rohan, or D) Gwindor's steed, swift and strong?\n\n1. Huan, the hound of Valinor\n2. Garm, the guardian of the underworld\n3. Hound of the West, a breed from Rohan\n4. A) Huan, the hound of Valinor",
+      "timestamp": 1748942906.1029813,
+      "timestamp_formatted": "2025-06-03T10:28:26.102981",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 1,
+        "community_id": null,
+        "question_id": "21072777-82ba-4e0b-8987-082b7ef46a54",
+        "is_question": true
+      }
+    }
+  ],
+  "start_time": 1748942902.6437795,
+  "start_time_formatted": "2025-06-03T10:28:22.643780",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}
