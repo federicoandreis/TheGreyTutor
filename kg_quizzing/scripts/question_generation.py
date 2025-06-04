@@ -11,7 +11,7 @@ import argparse
 from typing import Dict, List, Any, Optional, Tuple
 import re
 
-from kg_quizzing.scripts.quiz_utils import (
+from quiz_utils import (
     execute_query, 
     get_entity_by_name, 
     get_entity_relationships,

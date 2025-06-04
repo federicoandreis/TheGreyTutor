@@ -1,0 +1,17 @@
+Conversation ID: c3c03307-8c15-4f9b-80dd-5350b694fcb6
+Student ID: test_user
+Quiz ID: custom_conv_123
+Start Time: 2025-06-04T11:08:14.002715
+
+[2025-06-04 11:08:14] SYSTEM:
+What is the name of Frodo's sword?
+
+[2025-06-04 11:08:14] USER:
+Orcrist
+
+[2025-06-04 11:08:14] ASSISTANT:
+
+
+Alas, dear student, your answer is not correct. Frodo's sword is named Sting, a blade that glows blue in the presence of Orcs. Orcrist, which you mentioned, is actually the sword of Thorin Oakenshield, the leader of the Company of Dwarves in 'The Hobbit'. Sting, on the other hand, was given to Frodo by Bilbo Baggins and is a significant part of his journey. Remember, the names of weapons in Middle-earth often carry great history and meaning.
+
+

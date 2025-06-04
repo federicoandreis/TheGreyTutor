@@ -11,18 +11,18 @@ import logging
 from typing import Dict, List, Any, Optional, Tuple
 
 # Import from the new modular structure
-from kg_quizzing.scripts.llm_services.question_generator import LLMQuestionGenerator
-from kg_quizzing.scripts.llm_services.openai_client import is_openai_available, get_default_model
+from llm_services.question_generator import LLMQuestionGenerator
+from llm_services.openai_client import is_openai_available, get_default_model
 
 # Import from quiz_utils for backward compatibility
-from kg_quizzing.scripts.quiz_utils import (
+from quiz_utils import (
     execute_query,
     get_entity_by_name,
     get_entity_relationships,
     get_entities_in_community
 )
 
-from kg_quizzing.scripts.question_generation import (
+from question_generation import (
     get_available_communities
 )
 

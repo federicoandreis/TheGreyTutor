@@ -1,0 +1,40 @@
+{
+  "conversation_id": "86d92a30-cdc8-4795-81a9-a818377631eb",
+  "student_id": "test_user",
+  "quiz_id": "assessment_807a49a8-f65a-4c63-bc69-95a8216b3871",
+  "metadata": {
+    "mode": "assessment"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "What is the name of Frodo's sword?",
+      "timestamp": 1749031414.0067675,
+      "timestamp_formatted": "2025-06-04T11:03:34.006768",
+      "metadata": {}
+    },
+    {
+      "role": "user",
+      "content": "Sting",
+      "timestamp": 1749031414.0067675,
+      "timestamp_formatted": "2025-06-04T11:03:34.006768",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "\n\nWell done, young scholar! You have correctly identified Frodo's sword as Sting. This blade, forged by the Elves of Gondolin, served Frodo well during his perilous journey, glowing blue in the presence of Orcs. It is a symbol of courage and the strength of the Hobbits, proving that even the smallest can make a great difference in the world.",
+      "timestamp": 1749031414.0067675,
+      "timestamp_formatted": "2025-06-04T11:03:34.006768",
+      "metadata": {
+        "correct": null,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    }
+  ],
+  "start_time": 1749031414.0067675,
+  "start_time_formatted": "2025-06-04T11:03:34.006768",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

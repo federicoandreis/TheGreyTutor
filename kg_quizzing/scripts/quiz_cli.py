@@ -4,7 +4,7 @@ Handles argument parsing, session startup, and user interaction loop.
 """
 import argparse
 import os
-from kg_quizzing.scripts.quiz_orchestrator import QuizOrchestrator
+from quiz_orchestrator import QuizOrchestrator
 
 def main():
     parser = argparse.ArgumentParser(

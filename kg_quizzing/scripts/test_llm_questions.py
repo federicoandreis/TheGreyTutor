@@ -21,8 +21,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 load_dotenv()
 
 # Import the required modules - use proper relative imports
-from kg_quizzing.scripts.quiz_session import QuizSession
-from kg_quizzing.scripts.llm_services.question_generator import LLMQuestionGenerator
+from quiz_session import QuizSession
+from llm_services.question_generator import LLMQuestionGenerator
 
 def clear_question_cache():
     """Clear the question cache to force generation of new questions."""

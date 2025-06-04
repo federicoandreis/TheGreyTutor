@@ -1,0 +1,40 @@
+{
+  "conversation_id": "6d7a16a3-9ac4-4f9c-a3b3-a5437ca808a8",
+  "student_id": "test_user",
+  "quiz_id": "assessment_e6da2f54-1357-4b36-8441-d2a9088c793d",
+  "metadata": {
+    "mode": "assessment"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "What is the name of Frodo's sword?",
+      "timestamp": 1749030038.3572164,
+      "timestamp_formatted": "2025-06-04T10:40:38.357216",
+      "metadata": {}
+    },
+    {
+      "role": "user",
+      "content": "Glamdring",
+      "timestamp": 1749030038.3572164,
+      "timestamp_formatted": "2025-06-04T10:40:38.357216",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "\n\nAlas, dear student, your answer is not correct. Frodo's sword is named Sting, a blade that glows blue in the presence of Orcs. Glamdring, on the other hand, is the sword of Gandalf himself, forged in the ancient days and known as the Foe-hammer. It is important to remember the distinctions between these legendary weapons as they each hold their own tales and significance in our world.",
+      "timestamp": 1749030038.3572164,
+      "timestamp_formatted": "2025-06-04T10:40:38.357216",
+      "metadata": {
+        "correct": null,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    }
+  ],
+  "start_time": 1749030038.3572164,
+  "start_time_formatted": "2025-06-04T10:40:38.357216",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

@@ -88,7 +88,7 @@ class QuizSession:
         
         # Always initialize the LLM question generator if not already done
         if not self.llm_question_generator:
-            from kg_quizzing.scripts.llm_question_generation import LLMQuestionGenerator
+            from llm_question_generation import LLMQuestionGenerator
             self.llm_question_generator = LLMQuestionGenerator()
             self.use_llm = True
             

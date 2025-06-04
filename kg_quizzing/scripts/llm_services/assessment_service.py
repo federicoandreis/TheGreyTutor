@@ -10,20 +10,20 @@ import json
 from typing import Dict, List, Any, Optional, Tuple
 
 # Import from llm_services package
-from kg_quizzing.scripts.llm_services.openai_client import (
+from .openai_client import (
     get_openai_client,
     is_openai_available,
     get_default_model
 )
-from kg_quizzing.scripts.llm_services.cache_manager import create_assessment_cache
-from kg_quizzing.scripts.llm_services.prompt_templates import (
+from .cache_manager import create_assessment_cache
+from .prompt_templates import (
     ASSESSMENT_SYSTEM_PROMPT,
     generate_assessment_prompt
 )
-from kg_quizzing.scripts.llm_services.response_parser import parse_assessment_response
+from .response_parser import parse_assessment_response
 
 # Import from quiz_utils
-from kg_quizzing.scripts.quiz_utils import (
+from quiz_utils import (
     execute_query,
     get_entity_by_name
 )

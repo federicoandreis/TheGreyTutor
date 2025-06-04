@@ -9,7 +9,7 @@ import logging
 import argparse
 from typing import Dict, List, Any, Optional
 
-from kg_quizzing.scripts.quiz_utils import execute_query, check_educational_metadata_exists, get_available_communities
+from quiz_utils import execute_query, check_educational_metadata_exists, get_available_communities
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

@@ -16,14 +16,14 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Import QuizSession
-from kg_quizzing.scripts.quiz_session import QuizSession
+from .quiz_session import QuizSession
 
-from kg_quizzing.scripts.quiz_utils import (
+from .quiz_utils import (
     check_educational_metadata_exists,
     get_available_communities
 )
 
-from kg_quizzing.scripts.schema_extension import (
+from .schema_extension import (
     create_educational_schema,
     create_question_templates,
     create_learning_objectives,

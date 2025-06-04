@@ -13,14 +13,14 @@ from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass, asdict, field
 from pathlib import Path
 
-from kg_quizzing.scripts.quiz_utils import (
+from quiz_utils import (
     execute_query, 
     get_entity_by_name, 
     get_entity_relationships,
     get_entities_in_community,
     get_available_communities
 )
-from kg_quizzing.scripts.question_generation import (
+from question_generation import (
     generate_question,
     QuestionGeneratorFactory
 )

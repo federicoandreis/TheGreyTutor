@@ -198,5 +198,82 @@
     "entity": "Rivendell",
     "community_id": null,
     "answer": "Strider"
+  },
+  "factual_Thro\u00b4r_1": {
+    "question": "My dear fellow, who was Thro\u00b4r in the lineage of the Dwarves?",
+    "text": "My dear fellow, who was Thro\u00b4r in the lineage of the Dwarves?",
+    "type": "factual",
+    "difficulty": 1,
+    "tier": "basic",
+    "entity": "Thro\u00b4r",
+    "community_id": null,
+    "answer": "Thro\u00b4r was the King under the Mountain, ancestor of Thorin Oakenshield."
+  },
+  "application_Tree-like creature_1": {
+    "question": "What is the name of the wise tree-like creature found in Fangorn Forest, known for its deep connection to nature?",
+    "text": "What is the name of the wise tree-like creature found in Fangorn Forest, known for its deep connection to nature?",
+    "type": "application",
+    "difficulty": 1,
+    "tier": "basic",
+    "entity": "Tree-like creature",
+    "community_id": null,
+    "answer": "Ent"
+  },
+  "relationship_ordinary Men_2": {
+    "question": "My dear fellow, what is the name given to the race of Men who are not of noble lineage, yet possess great courage and resilience in the face of darkness?",
+    "text": "My dear fellow, what is the name given to the race of Men who are not of noble lineage, yet possess great courage and resilience in the face of darkness?",
+    "type": "relationship",
+    "difficulty": 2,
+    "tier": "basic",
+    "entity": "ordinary Men",
+    "community_id": null,
+    "answer": "Ordinary Men"
+  },
+  "relationship_Valandil_1": {
+    "question": "Who was Valandil, the son of Isildur, in the lineage of Gondor?",
+    "text": "Who was Valandil, the son of Isildur, in the lineage of Gondor?",
+    "type": "relationship",
+    "difficulty": 1,
+    "tier": "basic",
+    "entity": "Valandil",
+    "community_id": null,
+    "answer": "He was the second King of Arnor."
+  },
+  "synthesis_Siril_3": {
+    "question": "My dear fellow, dost thou know who Siril is within the tales of Middle-earth?",
+    "text": "My dear fellow, dost thou know who Siril is within the tales of Middle-earth?",
+    "type": "synthesis",
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "Siril",
+    "community_id": null,
+    "answer": "Siril is a name associated with an Elf in the lore of J.R.R. Tolkien."
+  },
+  "multiple_choice_Hoom_1": {
+    "question": "Who is Hoom in Tolkien's legendarium?",
+    "text": "Who is Hoom in Tolkien's legendarium?",
+    "type": "multiple_choice",
+    "difficulty": 1,
+    "tier": "basic",
+    "entity": "Hoom",
+    "community_id": null,
+    "answer": "A creature of legend",
+    "options": [
+      "A Hobbit",
+      "A creature of legend",
+      "A Dwarf",
+      "An Elf"
+    ],
+    "correct_answer": "A creature of legend"
+  },
+  "factual_elf-children_3": {
+    "question": "What is the term used to refer to the children of Elves in Tolkien's legendarium?",
+    "text": "What is the term used to refer to the children of Elves in Tolkien's legendarium?",
+    "type": "factual",
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "elf-children",
+    "community_id": null,
+    "answer": "Elf-children"
   }
 }

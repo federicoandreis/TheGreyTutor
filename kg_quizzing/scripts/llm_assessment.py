@@ -11,8 +11,8 @@ import logging
 from typing import Dict, List, Any, Optional, Tuple
 
 # Import from the new modular structure
-from kg_quizzing.scripts.llm_services.assessment_service import LLMAssessmentService
-from kg_quizzing.scripts.llm_services.openai_client import is_openai_available, get_default_model
+from llm_services.assessment_service import LLMAssessmentService
+from llm_services.openai_client import is_openai_available, get_default_model
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

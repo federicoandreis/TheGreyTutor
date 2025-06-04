@@ -1,0 +1,40 @@
+{
+  "conversation_id": "4cf5f96b-398b-4271-85e0-9296ec86d930",
+  "student_id": "test_user",
+  "quiz_id": "custom_conv_123",
+  "metadata": {
+    "mode": "assessment"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "What is the name of Frodo's sword?",
+      "timestamp": 1749030046.148709,
+      "timestamp_formatted": "2025-06-04T10:40:46.148709",
+      "metadata": {}
+    },
+    {
+      "role": "user",
+      "content": "Orcrist",
+      "timestamp": 1749030046.148709,
+      "timestamp_formatted": "2025-06-04T10:40:46.148709",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "\n\nAh, dear student, while Orcrist is indeed a notable sword, it belongs to Thorin Oakenshield, the leader of the Company of Dwarves in 'The Hobbit.' The correct name of Frodo's sword is Sting, a blade that served him well in his perilous journey to destroy the One Ring. Sting was forged by the Elves of Gondolin and glows blue in the presence of Orcs, a most useful trait for a hobbit on such an adventure.",
+      "timestamp": 1749030046.148709,
+      "timestamp_formatted": "2025-06-04T10:40:46.148709",
+      "metadata": {
+        "correct": null,
+        "quality_score": null,
+        "is_feedback": true
+      }
+    }
+  ],
+  "start_time": 1749030046.148709,
+  "start_time_formatted": "2025-06-04T10:40:46.148709",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

@@ -373,7 +373,8 @@ def call_llm(prompt: str, use_cache: bool = True) -> str:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.3,  # Lower temperature for more factual responses
+                temperature=0.3
+                ,  # Lower temperature for more factual responses
                 max_tokens=1000
             )
             response = response.choices[0].message.content
