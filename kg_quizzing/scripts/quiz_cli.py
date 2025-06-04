@@ -18,6 +18,7 @@ def main():
     parser.add_argument("--llm", action="store_true", help="Enable LLM-based question generation and assessment")
     parser.add_argument("--conversation-dir", type=str, default="conversation_history", help="Directory for conversation history")
     parser.add_argument("--fussiness", type=int, default=3, help="Gandalf's fussiness (1=very lenient, 10=very strict, default=3)")
+    parser.add_argument("--theme", type=str, default=None, help="Broad theme or topic for the quiz session (e.g., Elves, Rings, Battles)")
     args = parser.parse_args()
 
     orchestrator = QuizOrchestrator(
@@ -26,13 +27,15 @@ def main():
         strategy=args.strategy,
         use_llm=args.llm,
         conversation_dir=args.conversation_dir,
-        tier=args.tier
+        tier=args.tier,
+        fussiness=args.fussiness,
+        theme=args.theme
     )
 
     student_name = args.name or input("And by what name shall I address you, traveler of Middle-earth? ")
     print("\nPreparing the ancient scrolls of wisdom... Gandalf the Grey shall be your guide.")
 
-    orchestrator.start_session(args.student, student_name, args.strategy)
+    orchestrator.start_session(args.student, student_name, args.strategy, theme=args.theme)
     orchestrator.run_interactive_session()
 
 if __name__ == "__main__":

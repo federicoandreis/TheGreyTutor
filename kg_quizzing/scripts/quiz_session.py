@@ -32,7 +32,7 @@ class QuizSession:
     def __init__(self, student_id: str, student_name: str, 
                  strategy: str = "adaptive", models_dir: str = "student_models",
                  conversation_dir: str = "conversation_history", use_llm: bool = True,
-                 tier: str = None, fussiness: int = 3):
+                 tier: str = None, fussiness: int = 3, theme: str = None):
         self.student_id = student_id
         self.student_name = student_name
         self.strategy = strategy
@@ -41,6 +41,7 @@ class QuizSession:
         self.use_llm = use_llm  # Allow configuring LLM usage
         self.tier = tier  # Store the tier preference
         self.fussiness = fussiness
+        self.theme = theme
         self.student_model = load_or_create_student_model(
             student_id, student_name, models_dir
         )
@@ -57,15 +58,18 @@ class QuizSession:
         }
         self.current_question = None
         self.conversation_manager = ConversationHistoryManager(conversation_dir)
+        metadata = {
+            "student_name": student_name,
+            "strategy": strategy,
+            "session_id": f"session_{time.strftime('%Y%m%d_%H%M%S')}",
+            "theme": theme
+        }
         self.conversation = QuizConversation(
             student_id=student_id,
             quiz_id=f"{strategy}_quiz_{time.strftime('%Y%m%d_%H%M%S')}",
-            metadata={
-                "student_name": student_name,
-                "strategy": strategy,
-                "session_id": f"session_{time.strftime('%Y%m%d_%H%M%S')}"
-            }
+            metadata=metadata
         )
+
     def next_question(self) -> Dict[str, Any]:
         """Generate the next question based on the selected strategy."""
         # Get the next question parameters based on the strategy
@@ -115,7 +119,8 @@ class QuizSession:
             question = self.llm_question_generator.generate_question(
                 question_type=question_type,
                 difficulty=difficulty,
-                entity_data=entity_data
+                entity_data=entity_data,
+                theme=self.theme
             )
         except Exception as e:
             logger.error(f"LLM question generation failed: {e}")

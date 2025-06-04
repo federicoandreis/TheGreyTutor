@@ -1,0 +1,32 @@
+{
+  "questions_asked": 1,
+  "correct": 0,
+  "incorrect": 0,
+  "start_time": 1748965643.7766995,
+  "end_time": 1748965643.8220537,
+  "question_history": [
+    {
+      "question": {
+        "text": "Gandalf the Grey fell in Moria, only to return as Gandalf the White. How did this transformation change his role in the War of the Ring?",
+        "type": "application",
+        "difficulty": 6,
+        "tier": "intermediate",
+        "entity": "Gandalf",
+        "requires_llm_evaluation": true
+      },
+      "answer": null,
+      "correct": null,
+      "quality_score": null,
+      "feedback": null
+    }
+  ],
+  "summary": {
+    "total_questions": 1,
+    "correct_answers": 0,
+    "accuracy": 0.0,
+    "duration": 0.04535412788391113,
+    "duration_formatted": "0 seconds",
+    "mastery_after": 0,
+    "mastery_change": 0.0
+  }
+}

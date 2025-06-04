@@ -1,0 +1,41 @@
+{
+  "questions_asked": 1,
+  "correct": 0,
+  "incorrect": 0,
+  "start_time": 1748967606.877338,
+  "end_time": 1748967700.4396813,
+  "question_history": [
+    {
+      "question": {
+        "question": "",
+        "text": "",
+        "type": "multiple_choice",
+        "difficulty": 1,
+        "tier": "basic",
+        "entity": "Lord of the Rings",
+        "community_id": null,
+        "answer": "",
+        "options": [
+          "Lothl\u00f3rien",
+          "Rivendell",
+          "Mirkwood",
+          "Valinor"
+        ],
+        "correct_answer": "Mirkwood"
+      },
+      "answer": null,
+      "correct": null,
+      "quality_score": null,
+      "feedback": null
+    }
+  ],
+  "summary": {
+    "total_questions": 1,
+    "correct_answers": 0,
+    "accuracy": 0.0,
+    "duration": 93.56234335899353,
+    "duration_formatted": "1 minute, 33 seconds",
+    "mastery_after": 0,
+    "mastery_change": 0.0
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "conversation_id": "45dce02e-b7b9-4bc8-bce9-5e224866226c",
+  "student_id": "testuser",
+  "quiz_id": "adaptive_quiz_20250603_172535",
+  "metadata": {
+    "student_name": "Test User",
+    "strategy": "adaptive",
+    "session_id": "session_20250603_172535"
+  },
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "My dear fellow, dost thou recall the name of the great treasure sought by Thorin Oakenshield and his company, which lay beneath the lonely mountain, a prize coveted by both Dwarves and Elves alike?",
+      "timestamp": 1748967937.3902233,
+      "timestamp_formatted": "2025-06-03T17:25:37.390223",
+      "metadata": {
+        "question_type": "application",
+        "difficulty": 3,
+        "community_id": null,
+        "question_id": "a98a03d2-5eda-4087-9b8e-b7b9ff667d2a",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "The Arkenstone",
+      "timestamp": 1748967943.4091167,
+      "timestamp_formatted": "2025-06-03T17:25:43.409117",
+      "metadata": {
+        "correct": true,
+        "quality_score": {
+          "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+          "explanation": "",
+          "next_steps": [
+            "Continue your journey through the deeper mysteries of Middle-earth.",
+            "Share your wisdom with others who seek to understand these ancient tales."
+          ]
+        },
+        "feedback": null,
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "My dear fellow, what is the name of the Shire-dwelling Hobbit who bears the One Ring on a perilous quest?",
+      "timestamp": 1748967947.2525983,
+      "timestamp_formatted": "2025-06-03T17:25:47.252598",
+      "metadata": {
+        "question_type": "factual",
+        "difficulty": 3,
+        "community_id": null,
+        "question_id": "8bdf8244-4fe3-44b5-ac48-a2c29c628adc",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "Frodo Baggins",
+      "timestamp": 1748967952.1704595,
+      "timestamp_formatted": "2025-06-03T17:25:52.170460",
+      "metadata": {
+        "correct": true,
+        "quality_score": {
+          "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+          "explanation": "",
+          "next_steps": [
+            "Continue your journey through the deeper mysteries of Middle-earth.",
+            "Share your wisdom with others who seek to understand these ancient tales."
+          ]
+        },
+        "feedback": null,
+        "is_answer": true
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "What is the color of the banner that the Elves of Lothl\u00f3rien raised to signal their presence in Middle-earth?\n\n1. Red\n2. Blue\n3. Green\n4. White",
+      "timestamp": 1748967957.9425468,
+      "timestamp_formatted": "2025-06-03T17:25:57.942547",
+      "metadata": {
+        "question_type": "multiple_choice",
+        "difficulty": 3,
+        "community_id": null,
+        "question_id": "b77abe4e-4261-4eab-8a96-e927a3bfbe34",
+        "is_question": true
+      }
+    },
+    {
+      "role": "user",
+      "content": "White",
+      "timestamp": 1748967963.614237,
+      "timestamp_formatted": "2025-06-03T17:26:03.614237",
+      "metadata": {
+        "correct": false,
+        "quality_score": {
+          "message": "Even the wisest cannot see all ends. Let us explore this matter further.",
+          "explanation": "The lore of Middle-earth tells us that Blue.",
+          "next_steps": [
+            "Consult the ancient texts for more knowledge on this subject.",
+            "Reflect on the connections between different realms of Middle-earth's lore.",
+            "Consider how this knowledge fits into the broader tapestry of Tolkien's world."
+          ]
+        },
+        "feedback": null,
+        "is_answer": true
+      }
+    }
+  ],
+  "start_time": 1748967935.2071612,
+  "start_time_formatted": "2025-06-03T17:25:35.207161",
+  "end_time": null,
+  "end_time_formatted": null,
+  "duration_seconds": null
+}

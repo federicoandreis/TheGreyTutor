@@ -1,227 +1,77 @@
 {
-  "factual_Legolas_3": {
-    "text": "As we wander through the verdant glades of Mirkwood, I find my thoughts drawn to the nimble Prince who calls this forest his home. With keen eyes and unmatched skill, he aids our quest against the encroaching shadow. Pray tell, what is the name of this illustrious Elf, known for his grace and valor, who bears the title of Prince of the Woodland Realm?",
-    "type": "factual",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Legolas",
-    "community_id": null,
-    "answer": "Legolas"
-  },
-  "multiple_choice_Hound_1": {
-    "text": "As we gather 'neath the stars in Rivendell, let us recall the noble Hound, a creature loyal and true. In the tales of old, which of the following is known to have been a faithful companion to the mighty hero T\u00farin Turambar? Was it: A) Huan, the hound of Valinor, B) Garm, the guardian of the underworld, C) Hound of the West, a breed from Rohan, or D) Gwindor's steed, swift and strong?",
-    "type": "multiple_choice",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Hound",
-    "community_id": null,
-    "answer": "A) Huan, the hound of Valinor",
-    "options": [
-      "Huan, the hound of Valinor",
-      "Garm, the guardian of the underworld",
-      "Hound of the West, a breed from Rohan",
-      "A) Huan, the hound of Valinor"
-    ]
-  },
-  "multiple_choice_Sauron_1": {
-    "text": "In the shadowy realm of Mordor, where darkness dwells and the fires of Mount Doom rage, there lies a being known to all as the Enemy of old. By what name is this dark Lord, once a Maia of great power, known to those who speak of his treachery? Is he: A) Morgoth, the Black Foe of the World, B) Sauron, the Dark Lord, C) Saruman, the White Wizard, or D) Melkor, the Great Enemy?",
-    "type": "multiple_choice",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Sauron",
-    "community_id": null,
-    "answer": "B",
-    "options": [
-      "A) Morgoth, the Black Foe of the World",
-      "B) Sauron, the Dark Lord",
-      "C) Saruman, the White Wizard",
-      "B"
-    ]
-  },
-  "factual_Ad\u00fbnaic_1": {
-    "text": "As we stand upon the ancient shores of N\u00famenor, where the winds whisper forgotten tales, I ponder the language once spoken by its noble people. Pray tell, what is the name of the language of Ad\u00fbnaic, that echoes with the voices of their proud history?",
-    "type": "factual",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Ad\u00fbnaic",
-    "community_id": null,
-    "answer": "Ad\u00fbnaic is the language spoken by the people of N\u00famenor."
-  },
-  "relationship_highlands_2": {
-    "text": "In the highlands of Middle-earth, a rugged terrain of ancient stone and shadow, many tales intertwine. It was in these lands that the courageous D\u00fanedain roamed, guarding the realm against the shadows of the East. Canst thou name the noble lineage that claims the highlands as their ancestral home, often associated with the great city of Minas Tirith?",
-    "type": "relationship",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "highlands",
-    "community_id": null,
-    "answer": "The noble lineage of the D\u00fanedain, specifically the heirs of Isildur, who protected the highlands and the lands of Gondor."
-  },
-  "application_Beaver_2": {
-    "text": "As we traverse the verdant banks of the Anduin, I find myself pondering the nature of the humble Beaver, known as the Builder. In the tales of old, this creature is said to possess skills that aid in the crafting of his home. Pray tell, what vital role does the Beaver play in the ecosystem of Middle-earth, and how might his talents be of use to those who dwell near the waters?",
-    "type": "application",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Beaver",
-    "community_id": null,
-    "answer": "The Beaver, in his industriousness, creates dams that form ponds and wetlands, providing habitats for various creatures. His work contributes to the balance of nature, fostering life and ensuring the flow of rivers remains steady. Understanding his role helps one appreciate the interconnectedness of all beings in Middle-earth."
-  },
-  "application_foxes_1": {
-    "text": "My dear fellow, as you wander through the ancient woods of Eriador, you come across a sly fox peering from behind a tree, its eyes glinting with cunning. In the tales of old, the fox is often seen as a creature of cleverness and adaptability. What wisdom might you draw from the nature of this fox, and how could its traits inspire you on your quest?",
-    "type": "application",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "foxes",
-    "community_id": null,
-    "answer": "A good answer would reflect on the fox's cleverness and adaptability, suggesting that one should be resourceful and quick-witted in difficult situations, just as the fox navigates the challenges of its environment. This wisdom could apply to overcoming obstacles or making strategic decisions during a journey."
-  },
-  "factual_other guests_1": {
-    "text": "As we gather in the tranquil halls of Rivendell, surrounded by the whispering leaves and the timeless melodies of Elven song, I am reminded of our noble allies. Speak, my dear friend, of the other guests who joined us at the Council of Elrond. Canst thou name one of the great Dwarves who lent his wisdom and courage to our cause?",
-    "type": "factual",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "other guests",
-    "community_id": null,
-    "answer": "Gimli, son of Gl\u00f3in, stood among the guests as a representative of the Dwarves, offering his loyalty and strength."
-  },
-  "factual_moonshine_2": {
-    "text": "In the soft glow of moonlight, I recall the cherished brew favored by the Hobbits of the Shire, known for its warming qualities. What is the name of this moonlit drink, often enjoyed under the stars?",
-    "type": "factual",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "moonshine",
-    "community_id": null,
-    "answer": "Moonshine"
-  },
-  "multiple_choice_Peregrin Took_1": {
-    "text": "In the peaceful lands of the Shire, a merry Hobbit by the name of Peregrin Took, known affectionately as Pippin, embarked on many adventures. What is the name of the esteemed family to which he belongs?",
-    "type": "multiple_choice",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Peregrin Took",
-    "community_id": null,
-    "answer": "The Tooks",
-    "options": [
-      "The Baggins",
-      "The Gamgees",
-      "The Tooks",
-      "The Brandybucks"
-    ]
-  },
-  "multiple_choice_White Council_1": {
-    "text": "What do you know about White Council?",
-    "type": "multiple_choice",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "White Council",
-    "community_id": null,
-    "answer": "",
-    "options": [
-      "To seek the One Ring",
-      "To drive out power from Mirkwood",
-      "To unite the Free Peoples",
-      ""
-    ]
-  },
-  "relationship_other guests_1": {
-    "text": "In the halls of Rivendell, where the song of the Elves mingles with the whispers of ancient lore, many fates entwined. Which noble guest, known for his unyielding spirit and kindness, was ever at the side of the One Ring's bearer, guiding him through shadows and peril?",
-    "type": "relationship",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "other guests",
-    "community_id": null,
-    "answer": "Frodo Baggins"
-  },
-  "multiple_choice_Valandil_3": {
-    "text": "What was the title of Valandil, the son of Isildur?",
+  "multiple_choice_Frodo Baggins_3": {
+    "question": "Who is the Ring-bearer in the Fellowship of the Ring?",
+    "text": "Who is the Ring-bearer in the Fellowship of the Ring?",
     "type": "multiple_choice",
     "difficulty": 3,
     "tier": "basic",
-    "entity": "Valandil",
+    "entity": "Frodo Baggins",
     "community_id": null,
-    "answer": "King of Arnor",
+    "answer": "Frodo Baggins",
     "options": [
-      "King of Arnor",
-      "Lord of Gondor",
-      "Prince of Rohan",
-      "Chieftain of the D\u00fanedain"
-    ]
+      "Samwise Gamgee",
+      "Frodo Baggins",
+      "Gandalf the Grey",
+      "Aragorn"
+    ],
+    "correct_answer": "Frodo Baggins"
   },
-  "relationship_foxes_3": {
-    "text": "In the quiet glades of Middle-earth, tales of cunning and grace weave through the ages. Among these creatures, the fox, known for its cleverness, has a connection with the folk of the woods. What name did the wise Elves of the woodland realms give to the fox in their ancient tongue, reflecting its nimble spirit?",
-    "type": "relationship",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "foxes",
-    "community_id": null,
-    "answer": "Rohirric"
-  },
-  "factual_Man_3": {
-    "text": "In the shadow of the Misty Mountains, I find myself pondering the nature of those who walk upon the earth with fragile strength and boundless potential. They are indeed called Men, known for their courage and fallibility. Tell me, what race do we call these beings, who are gifted with free will and the burden of mortality?",
-    "type": "factual",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Man",
-    "community_id": null,
-    "answer": "Men are the race known as Humans."
-  },
-  "factual_Hound_1": {
-    "text": "As we wander through the tranquil woods of Lothl\u00f3rien, I ponder the noble creatures that roam the lands of Middle-earth. Among them, the Hound is a faithful companion to those who seek companionship and loyalty. Pray, what is the race of the Hound?",
-    "type": "factual",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Hound",
-    "community_id": null,
-    "answer": "The Hound is a creature of the race of Dogs."
-  },
-  "relationship_Ann\u00faminas_2": {
-    "text": "In the ancient realm of Ann\u00faminas, where the kings of men once reigned, what significant relationship did this city hold to the line of Isildur, the first King of Gondor?",
-    "type": "relationship",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Ann\u00faminas",
-    "community_id": null,
-    "answer": "Ann\u00faminas was the capital of the Kingdom of Arnor, established by Isildur and important to the lineage of the D\u00fanedain."
-  },
-  "factual_Last Alliance of Elves and Men_1": {
-    "text": "As the ancient tales of yore whisper through the winds of Eriador, I am compelled to recall the great union forged between the Elves of Lothl\u00f3rien and the Men of Gondor. In that fateful alliance, what was the ultimate goal that drew these noble races together against the shadow of Mordor?",
-    "type": "factual",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Last Alliance of Elves and Men",
-    "community_id": null,
-    "answer": "To defeat Sauron and reclaim the One Ring."
-  },
-  "application_Hound_2": {
-    "text": "In the tales of old, Hound was an esteemed companion known for his loyalty and bravery. To whom did Hound serve as a companion, and what role did he play in the great quests undertaken in Middle-earth?",
-    "type": "application",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Hound",
-    "community_id": null,
-    "answer": "Hound served as the companion of the noble hero Beren, assisting him in the quest to win the hand of L\u00fathien and in their adventures against Sauron's dark minions."
-  },
-  "relationship_Evil Spread in Mirkwood_2": {
-    "text": "In the shadowed depths of Mirkwood, a great corruption took root, casting its dark influence upon the forest and its denizens. What name dost thou give to this spreading malevolence that troubled the woodland realms and the hearts of its creatures?",
-    "type": "relationship",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Evil Spread in Mirkwood",
-    "community_id": null,
-    "answer": "Evil Spread in Mirkwood"
-  },
-  "factual_Peregrin Took_2": {
-    "text": "In the verdant fields of the Shire, where the gentle breeze dances through the tall grass, one might encounter a curious Hobbit known for his youthful spirit and adventurous heart. This Hobbit, a companion of Frodo and Sam, ventured far beyond the borders of his homeland. Pray tell, what is the name of this brave Hobbit who is often affectionately called 'Pippin'?",
-    "type": "factual",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Peregrin Took",
-    "community_id": null,
-    "answer": "Peregrin Took"
-  },
-  "multiple_choice_Rivendell_2": {
-    "text": "In the land of Eriador, there lies a sanctuary known for its beauty and tranquility, home to the Elven Lord Elrond. What is the name of this refuge?",
+  "multiple_choice_The One Ring_3": {
+    "question": "What is the name of the powerful Ring created by Sauron?",
+    "text": "What is the name of the powerful Ring created by Sauron?",
     "type": "multiple_choice",
-    "difficulty": 2,
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "The One Ring",
+    "community_id": null,
+    "answer": "The One Ring",
+    "options": [
+      "The One Ring",
+      "The Master Ring",
+      "The Ring of Doom",
+      "The Elven Ring"
+    ],
+    "correct_answer": "The One Ring"
+  },
+  "multiple_choice_Gandalf_3": {
+    "question": "What is the name of the wizard known as Gandalf?",
+    "text": "What is the name of the wizard known as Gandalf?",
+    "type": "multiple_choice",
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "Gandalf",
+    "community_id": null,
+    "answer": "Mithrandir",
+    "options": [
+      "Mithrandir",
+      "Saruman",
+      "Radagast",
+      "Alatar"
+    ],
+    "correct_answer": "Mithrandir"
+  },
+  "multiple_choice_Mordor_3": {
+    "question": "What is the name of the dark land ruled by Sauron?",
+    "text": "What is the name of the dark land ruled by Sauron?",
+    "type": "multiple_choice",
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "Mordor",
+    "community_id": null,
+    "answer": "Mordor",
+    "options": [
+      "Gondor",
+      "Rohan",
+      "Mordor",
+      "Isengard"
+    ],
+    "correct_answer": "Mordor"
+  },
+  "multiple_choice_Rivendell_3": {
+    "question": "What is the name of the refuge of Elrond?",
+    "text": "What is the name of the refuge of Elrond?",
+    "type": "multiple_choice",
+    "difficulty": 3,
     "tier": "basic",
     "entity": "Rivendell",
     "community_id": null,
@@ -230,704 +80,42 @@
       "Lothl\u00f3rien",
       "Rivendell",
       "Mirkwood",
-      "Valinor"
-    ]
-  },
-  "relationship_Ered Nimrais_3": {
-    "text": "In the shadow of the towering Ered Nimrais, the White Mountains, many a tale has been spun of those who traversed their slopes. One such group, seeking refuge and respite, found sanctuary within these ancient peaks during the War of the Ring. Which brave fellowship sought the protection of these mountains while journeying through the trials of their quest?",
-    "type": "relationship",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Ered Nimrais",
-    "community_id": null,
-    "answer": "The Fellowship of the Ring"
-  },
-  "multiple_choice_Man_2": {
-    "text": "What is the race of the beings known as Man in the tales of Middle-earth?",
-    "type": "multiple_choice",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Man",
-    "community_id": null,
-    "answer": "Human",
-    "options": [
-      "Elf",
-      "Dwarf",
-      "Human",
-      "Hobbit"
-    ]
-  },
-  "synthesis_orders_1": {
-    "text": "In the great tapestry of Middle-earth, many commands have echoed through the ages, shaping the destinies of its peoples. Reflect upon the orders given by prominent figures such as Elendil in rallying the Men of the West against Sauron or by Gandalf himself in guiding the Fellowship of the Ring. How do these commands reveal the themes of leadership and sacrifice within Tolkien's works?",
-    "type": "synthesis",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "orders",
-    "community_id": null,
-    "answer": "These commands illustrate how leadership is often intertwined with sacrifice and the heavy burdens borne by those who guide others. They highlight the importance of courage in the face of darkness and the collective struggle against evil."
-  },
-  "multiple_choice_inland_3": {
-    "text": "In the realm of Middle-earth, which of these locations is known for being a vast expanse of land rather than a coastal region? Choose wisely: ",
-    "type": "multiple_choice",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "inland",
-    "community_id": null,
-    "answer": "Rohan",
-    "options": [
-      "Rohan",
-      "Hobbiton",
-      "Erebor",
       "Gondor"
-    ]
-  },
-  "multiple_choice_great horn_3": {
-    "text": "What is the material of the great horn, an ancient musical instrument of Middle-earth?",
-    "type": "multiple_choice",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "great horn",
-    "community_id": null,
-    "answer": "Silver",
-    "options": [
-      "Gold",
-      "Bronze",
-      "Silver",
-      "Iron"
-    ]
-  },
-  "multiple_choice_Ruler_2": {
-    "text": "My dear fellow, in the great histories of Middle-earth, what title is often bestowed upon the rulers of the realm of Gondor?",
-    "type": "multiple_choice",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Ruler",
-    "community_id": null,
-    "answer": "King",
-    "options": [
-      "King",
-      "Duke",
-      "Lord",
-      "Sovereign"
-    ]
-  },
-  "synthesis_Rohan_2": {
-    "text": "As the sun rises over the golden fields of Rohan, a land celebrated for its noble Horse-lords, I find myself reflecting upon the bond between its people and the creatures they cherish. How does the deep connection of the Riders of Rohan with their horses reveal the virtues of loyalty and courage within Tolkien's tales?",
-    "type": "synthesis",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Rohan",
-    "community_id": null,
-    "answer": "The bond between the Riders of Rohan and their horses exemplifies loyalty, courage, and the harmony between man and nature. This relationship reinforces the theme that true strength lies in unity, echoing the greater struggle against darkness in Middle-earth."
-  },
-  "relationship_elf-children_1": {
-    "text": "In the realm of Valinor, the immortal Elves were blessed with the gift of long life and beauty, and among them, the elf-children flourished. What is the term used to refer to the children of the Elves, marking their innocence and the hope they bring to the world?",
-    "type": "relationship",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "elf-children",
-    "community_id": null,
-    "answer": "elf-children",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "elf-children"
-    ]
-  },
-  "multiple_choice_Frodo Baggins_3": {
-    "text": "Who is Frodo Baggins, known as the Heir of Bilbo?",
-    "type": "multiple_choice",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Frodo Baggins",
-    "community_id": null,
-    "answer": "A Hobbit from the Shire",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "A Hobbit from the Shire"
-    ]
-  },
-  "synthesis_Man_1": {
-    "text": "In the twilight of the Third Age, as the shadows grow long across Middle-earth, let us reflect upon the legacy of Man. Born of the earth and gifted with the Flame Imperishable, what defining trait distinguishes Men from the Elves, and how does this quality shape their destiny within the grand tapestry of Arda?",
-    "type": "synthesis",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Man",
-    "community_id": null,
-    "answer": "The defining trait that distinguishes Men from the Elves is their mortality, which leads them to value their time and choices more acutely, shaping their actions and ambitions throughout the ages.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The defining trait that distinguishes Men from the Elves is their mortality, which leads them to value their time and choices more acutely, shaping their actions and ambitions throughout the ages."
-    ]
-  },
-  "application_Tooks_2": {
-    "text": "My dear fellow, ponder the clan of the Tooks, renowned among Hobbits for their adventurous spirits. What race do they belong to?",
-    "type": "application",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Tooks",
-    "community_id": null,
-    "answer": "The Tooks are Hobbits.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The Tooks are Hobbits."
-    ]
-  },
-  "relationship_Hart_3": {
-    "text": "In the ancient woods of Middle-earth, there dwells a creature known as Hart, crowned with mighty horns. This noble being is often linked to the untamed spirit of the forest. Pray tell, with which race of beings is Hart, the Horn-crowned, most closely associated?",
-    "type": "relationship",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Hart",
-    "community_id": null,
-    "answer": "Deer",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Deer"
-    ]
-  },
-  "multiple_choice_D\u00fanedain_3": {
-    "text": "What race do the D\u00fanedain belong to in the lore of Middle-earth?",
-    "type": "multiple_choice",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "D\u00fanedain",
-    "community_id": null,
-    "answer": "Men",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Men"
-    ]
-  },
-  "application_Lopoldi_1": {
-    "text": "In the realm of Middle-earth, should thou encounter the spirit of Lopoldi, what is the nature of this being according to the ancient texts?",
-    "type": "application",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Lopoldi",
-    "community_id": null,
-    "answer": "Lopoldi is not a prominent figure within the known lore of Middle-earth and may represent a forgotten tale or character lost to the ages.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Lopoldi is not a prominent figure within the known lore of Middle-earth and may represent a forgotten tale or character lost to the ages."
-    ]
-  },
-  "relationship_Bear_2": {
-    "text": "In the heart of the Misty Mountains, where the echoes of ancient songs linger, one may hear tales of a creature known as Bear, the Bee-hunter. This being, revered for his strength and skill, is often mentioned alongside the noble and wise creatures of the wilderness. What race does Bear belong to, as whispered in the lore of old?",
-    "type": "relationship",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Bear",
-    "community_id": null,
-    "answer": "Bear is of the race of Animals.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Bear is of the race of Animals."
-    ]
-  },
-  "multiple_choice_Bear_1": {
-    "text": "What title is Bear known by in the lore of Middle-earth?",
-    "type": "multiple_choice",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Bear",
-    "community_id": null,
-    "answer": "Bee-hunter",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Bee-hunter"
-    ]
-  },
-  "multiple_choice_league of Elves and Men_1": {
-    "text": "What is the name of the alliance formed between the Elves and Men during the struggle against Morgoth?",
-    "type": "multiple_choice",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "league of Elves and Men",
-    "community_id": null,
-    "answer": "The League of Elves and Men",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The League of Elves and Men"
-    ]
-  },
-  "relationship_Manw\u00eb_3": {
-    "text": "In the high heavens of Arda, where the winds of change are guided by the great Manw\u00eb, who is known as the Lord of the Valar, whom does he count among his dearest kin, the Queen of the Stars, who shares his throne in the realm of the Blessed?",
-    "type": "relationship",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Manw\u00eb",
-    "community_id": null,
-    "answer": "Varda",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Varda"
-    ]
-  },
-  "multiple_choice_other guests_1": {
-    "text": "Whom did Frodo Baggins invite to his birthday party in Hobbiton?",
-    "type": "multiple_choice",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "other guests",
-    "community_id": null,
-    "answer": "Meriadoc Brandybuck",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Meriadoc Brandybuck"
-    ]
-  },
-  "multiple_choice_Baggins_3": {
-    "text": "Who is known as 'Generous' and hails from the Shire among the Hobbits?",
-    "type": "multiple_choice",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Baggins",
-    "community_id": null,
-    "answer": "Bilbo Baggins",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Bilbo Baggins"
-    ]
-  },
-  "application_other guests_2": {
-    "text": "Imagine thou art attending the grand feast in the halls of Elrond, where many noble guests have gathered. Among them are representatives from various races of Middle-earth, each with their own tales and wisdom. Canst thou name one of the other guests present at this moment, known for his unmatched skill in forging and crafting?",
-    "type": "application",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "other guests",
-    "community_id": null,
-    "answer": "The correct answer is Gimli, son of Gl\u00f3in, who is known for his skill as a dwarf and also for his friendship with Legolas the Elf.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The correct answer is Gimli, son of Gl\u00f3in, who is known for his skill as a dwarf and also for his friendship with Legolas the Elf."
-    ]
-  },
-  "multiple_choice_elf-children_2": {
-    "text": "What is the term used to refer to the children of Elves, who are known for their ethereal beauty and grace?",
-    "type": "multiple_choice",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "elf-children",
-    "community_id": null,
-    "answer": "Elflings",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Elflings"
-    ]
-  },
-  "multiple_choice_other guests_2": {
-    "text": "In the halls of Rivendell, where wisdom flows like the sparkling waters of the Bruinen, who among these was a guest at the Last Alliance of Elves and Men? Was it: ",
-    "type": "multiple_choice",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "other guests",
-    "community_id": null,
-    "answer": "Elrond, the Half-elven",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Elrond, the Half-elven"
-    ]
-  },
-  "factual_Mountain_2": {
-    "text": "As we gaze upon the mighty peaks that pierce the heavens, I am reminded of the ancient places where the Dwarves once thrived. In their hidden halls, they crafted wondrous toys and treasures. Pray tell, from what majestic Mountain did these skilled artisans source their playful creations?",
-    "type": "factual",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Mountain",
-    "community_id": null,
-    "answer": "The Mountain of Erebor.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The Mountain of Erebor."
-    ]
-  },
-  "factual_Trees_1": {
-    "text": "As I wander through the ancient woods of Lothl\u00f3rien, I ponder the great fabled trees that stand sentinel in this realm of light and beauty. What is the name of the noble trees, said to be the fairest of all in Middle-earth, that grow in this enchanted forest?",
-    "type": "factual",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Trees",
-    "community_id": null,
-    "answer": "The Mallorn trees.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The Mallorn trees."
-    ]
-  },
-  "factual_elf-children_2": {
-    "text": "In the twilight of Valinor, where the stars weave their silver songs above, there exists a time when the Elves first welcomed their children into the world. Pray tell, what do the Eldar call these innocent offspring of their kin, who carry the beauty and grace of their lineage?",
-    "type": "factual",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "elf-children",
-    "community_id": null,
-    "answer": "They are called the elf-children.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "They are called the elf-children."
-    ]
-  },
-  "application_great horn_1": {
-    "text": "Imagine thou art in the halls of a great feast among the noble Men of Gondor, where the call to revelry and the sound of music fills the air. In thine hands lies the great horn, a silver instrument of ancient craft. How wouldst thou use this horn to honor thy kin and summon the spirits of valor, knowing its power lies not only in its sound but in the hearts of those who hear it?",
-    "type": "application",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "great horn",
-    "community_id": null,
-    "answer": "To honor my kin, I would lift the great horn to my lips and blow a resounding call, filling the hall with its powerful sound. The notes would resonate through the hearts of those gathered, reminding them of courage and unity in the face of darkness. In that moment, the great horn would stir memories of past victories and inspire hope for future battles against the shadow.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "To honor my kin, I would lift the great horn to my lips and blow a resounding call, filling the hall with its powerful sound. The notes would resonate through the hearts of those gathered, reminding them of courage and unity in the face of darkness. In that moment, the great horn would stir memories of past victories and inspire hope for future battles against the shadow."
-    ]
-  },
-  "factual_manuscript_3": {
-    "text": "As I peruse the ancient tomes of lore within the halls of Rivendell, my gaze falls upon a leather-bound manuscript, its secrets cloaked in mystery. What is the current status of this precious artifact, locked away from prying eyes?",
-    "type": "factual",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "manuscript",
-    "community_id": null,
-    "answer": "The manuscript is currently locked in a strong-box.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The manuscript is currently locked in a strong-box."
-    ]
-  },
-  "multiple_choice_Serpent_3": {
-    "text": "What is the title of the Serpent known as the Coldest in the annals of Middle-earth?",
-    "type": "multiple_choice",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Serpent",
-    "community_id": null,
-    "answer": "The Coldest",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The Coldest"
-    ]
-  },
-  "factual_Took_3": {
-    "text": "In the warm embrace of a cozy hobbit-hole, where the scent of fresh-baked bread wafts through the air, I recall the proud lineage of the Tooks, known for their adventurous spirit. Pray tell, which race do the Tooks belong to, that they might call the Shire their home and partake in its simple pleasures?",
-    "type": "factual",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Took",
-    "community_id": null,
-    "answer": "Hobbit",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Hobbit"
-    ]
-  },
-  "multiple_choice_Bolgers_2": {
-    "text": "What is the surname of the family known as the Bolgers in the Shire?",
-    "type": "multiple_choice",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Bolgers",
-    "community_id": null,
-    "answer": "Bolger",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Bolger"
-    ]
-  },
-  "synthesis_Gondor_1": {
-    "text": "In the ancient realm of Gondor, a bastion of Men, consider its role in the great struggle against Sauron's darkness. How did Gondor's fall and resilience reflect the themes of hope and sacrifice found throughout the tales of Middle-earth?",
-    "type": "synthesis",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Gondor",
-    "community_id": null,
-    "answer": "Gondor's history exemplifies the struggle between light and darkness, illustrating how courage and unity in the face of despair can inspire hope. Its fall during the War of the Ring highlights the sacrifices made by its people, echoing the greater theme of standing against overwhelming evil, while its eventual resilience symbolizes the enduring spirit of humanity.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Gondor's history exemplifies the struggle between light and darkness, illustrating how courage and unity in the face of despair can inspire hope. Its fall during the War of the Ring highlights the sacrifices made by its people, echoing the greater theme of standing against overwhelming evil, while its eventual resilience symbolizes the enduring spirit of humanity."
-    ]
-  },
-  "relationship_Meneltarma_3": {
-    "text": "In the ancient lands of Arandor, where the sacred peaks rise towards the heavens, the mountain known as Meneltarma holds a place of great significance to the Edain. What role does this towering landmark play in the lore of the Second Age, particularly in the hearts of Men as they sought wisdom from the Valar?",
-    "type": "relationship",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Meneltarma",
-    "community_id": null,
-    "answer": "Meneltarma is revered as a sacred mountain where the Edain offered their prayers and sacrifices to the Valar.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Meneltarma is revered as a sacred mountain where the Edain offered their prayers and sacrifices to the Valar."
-    ]
-  },
-  "factual_Plague of Gondor_2": {
-    "text": "As I sit upon the high walls of Minas Tirith, gazing out upon the lands of Gondor, I am reminded of a dark time that befell this realm, a terrible affliction that brought great sorrow. Can you tell me, what was the outcome of the Plague of Gondor that so deeply affected its people and led to the demise of its regal line?",
-    "type": "factual",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Plague of Gondor",
-    "community_id": null,
-    "answer": "The death of the King and his children.",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The death of the King and his children."
-    ]
-  },
-  "multiple_choice_Planting of the Last Sapling_3": {
-    "text": "What significant act is known as the Planting of the Last Sapling in the lore of Middle-earth?",
-    "type": "multiple_choice",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Planting of the Last Sapling",
-    "community_id": null,
-    "answer": "The planting of the final White Tree",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "The planting of the final White Tree"
-    ]
-  },
-  "multiple_choice_Lothlorien_2": {
-    "question": "Lothlorien",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Mordor"
     ],
-    "correct_answer": "Mordor"
+    "correct_answer": "Rivendell"
   },
-  "multiple_choice_Hrum_1": {
-    "question": "Hrum",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Mordor"
-    ],
-    "correct_answer": "Mordor"
-  },
-  "relationship_land of the Periannath_2": {
-    "question": "In the tranquil land of the Periannath, where the gentle hills roll and the rivers sing, there lies a bond of kinship with the great heroes of the Fellowship. Canst thou name the brave soul, a son of the Shire, who ventured forth from this land to bear the One Ring, forever changing the fate of Middle-earth?",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Mordor"
-    ],
-    "correct_answer": "Frodo Baggins"
-  },
-  "synthesis_Siril_1": {
-    "question": "In the shimmering waters of the river that bears his name, Siril has been known for its bounty in fishing. Reflect upon the significance of rivers in the lore of Middle-earth. How do these waterways, like the Siril, serve as lifelines for the peoples and creatures inhabiting these realms, and what do they symbolize in the broader tapestry of Tolkien's tales?",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Mordor"
-    ],
-    "correct_answer": "Rivers in Middle-earth often symbolize sustenance, life, and the passage of time. They connect different cultures and regions, providing a vital resource for survival while also serving as metaphors for the journey and choices made by individuals in their quests. The Siril, as a fishing river, reflects the importance of nature's gifts and the harmony between the inhabitants and their environment."
-  },
-  "multiple_choice_Eagle_3": {
-    "question": "Eagle",
-    "type": "multiple_choice",
+  "relationship_Misty Mountains_3": {
+    "question": "My dear fellow, what is the name of the mountain range that lies to the east of the Shire, a place often traversed by hobbits on their journeys?",
+    "text": "My dear fellow, what is the name of the mountain range that lies to the east of the Shire, a place often traversed by hobbits on their journeys?",
+    "type": "relationship",
     "difficulty": 3,
     "tier": "basic",
-    "entity": "Eagle",
+    "entity": "Misty Mountains",
     "community_id": null,
-    "correct_answer": "Mordor",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Mordor"
-    ]
-  },
-  "relationship_Weathertop_2": {
-    "question": "Which realm is ruled by Aragorn after the War of the Ring?",
-    "type": "relationship",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Weathertop",
-    "community_id": null,
-    "correct_answer": "Gondor",
+    "answer": "Misty Mountains",
+    "correct_answer": "Misty Mountains",
     "options": [
       "Rohan",
-      "The Shire",
       "Gondor",
-      "Mordor"
-    ]
-  },
-  "multiple_choice_Lopoldi_3": {
-    "question": "Which realm is ruled by Aragorn after the War of the Ring?",
-    "type": "multiple_choice",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Lopoldi",
-    "community_id": null,
-    "correct_answer": "Gondor",
-    "options": [
-      "Gondor",
-      "Rohan",
-      "The Shire",
-      "Mordor"
-    ]
-  },
-  "relationship_Ann\u00faminas_1": {
-    "question": "Which realm is ruled by Aragorn after the War of the Ring?",
-    "type": "relationship",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Ann\u00faminas",
-    "community_id": null,
-    "correct_answer": "Gondor",
-    "options": [
-      "The Shire",
-      "Mordor",
-      "Gondor",
-      "Rohan"
-    ]
-  },
-  "relationship_Mardil the Faithful_1": {
-    "question": "What is the name of the inn at Bree where Frodo meets Aragorn?",
-    "type": "relationship",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Mardil the Faithful",
-    "community_id": null,
-    "correct_answer": "The Prancing Pony",
-    "options": [
-      "The Ivy Bush",
-      "The Prancing Pony",
-      "The Golden Perch",
-      "The Green Dragon"
-    ]
-  },
-  "relationship_cloak_1": {
-    "question": "Which creature did Gandalf face on the Bridge of Khazad-d\u00fbm?",
-    "type": "relationship",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "cloak",
-    "community_id": null,
-    "correct_answer": "Balrog",
-    "options": [
-      "Dragon",
-      "Warg",
-      "Orc",
-      "Balrog"
-    ]
-  },
-  "relationship_Aul\u00eb_2": {
-    "question": "What is the name of the inn at Bree where Frodo meets Aragorn?",
-    "type": "relationship",
-    "difficulty": 2,
-    "tier": "basic",
-    "entity": "Aul\u00eb",
-    "community_id": null,
-    "correct_answer": "The Prancing Pony",
-    "options": [
-      "The Green Dragon",
-      "The Ivy Bush",
-      "The Golden Perch",
-      "The Prancing Pony"
-    ]
-  },
-  "synthesis_Swan_1": {
-    "question": "Which realm is ruled by Aragorn after the War of the Ring?",
-    "type": "synthesis",
-    "difficulty": 1,
-    "tier": "basic",
-    "entity": "Swan",
-    "community_id": null,
-    "correct_answer": "Gondor",
-    "options": [
-      "Mordor",
-      "Gondor",
-      "Rohan",
+      "Misty Mountains",
       "The Shire"
     ]
   },
-  "application_tower of the king\u2019s palace_3": {
-    "question": "Which creature did Gandalf face on the Bridge of Khazad-d\u00fbm?",
-    "type": "application",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "tower of the king\u2019s palace",
-    "community_id": null,
-    "correct_answer": "Balrog",
-    "options": [
-      "Dragon",
-      "Balrog",
-      "Orc",
-      "Warg"
-    ]
-  },
-  "multiple_choice_Siril_3": {
-    "question": "Who forges the Three Elven Rings of Power?",
+  "multiple_choice_moonshine_4": {
+    "question": "As I stand beneath the silvery glow of the moon, deep within the sacred woods of Lothl\u00f3rien, I am reminded of a certain elixir cherished among the folk of the Shire. It is said that this nectar, which shimmers with the light of the stars, offers a taste of joy and warmth, especially during the long, cold nights. Pray tell, what is this delightful brew known as, celebrated for its sweetness and often shared among friends? Is it: A) Mead, B) Cider, C) Moonshine, or D) Ale?",
+    "text": "As I stand beneath the silvery glow of the moon, deep within the sacred woods of Lothl\u00f3rien, I am reminded of a certain elixir cherished among the folk of the Shire. It is said that this nectar, which shimmers with the light of the stars, offers a taste of joy and warmth, especially during the long, cold nights. Pray tell, what is this delightful brew known as, celebrated for its sweetness and often shared among friends? Is it: A) Mead, B) Cider, C) Moonshine, or D) Ale?",
     "type": "multiple_choice",
-    "difficulty": 3,
-    "tier": "basic",
-    "entity": "Siril",
+    "difficulty": 4,
+    "tier": "intermediate",
+    "entity": "moonshine",
     "community_id": null,
-    "correct_answer": "Celebrimbor",
+    "answer": "C) Moonshine",
     "options": [
-      "F\u00ebanor",
-      "Elrond",
-      "Celebrimbor",
-      "Sauron"
-    ]
+      "A) Mead",
+      "B) Cider",
+      "C) Moonshine",
+      "D) Ale"
+    ],
+    "correct_answer": "C) Moonshine"
   }
 }

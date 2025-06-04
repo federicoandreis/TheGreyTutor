@@ -1,0 +1,101 @@
+{
+  "questions_asked": 3,
+  "correct": 2,
+  "incorrect": 0,
+  "start_time": 1748968309.75537,
+  "end_time": 1748968739.3566022,
+  "question_history": [
+    {
+      "question": {
+        "question": "My dear fellow, which noble Elven lord was known to have a special friendship with the Dwarves, particularly during the forging of the great jewels of F\u00ebanor?",
+        "text": "My dear fellow, which noble Elven lord was known to have a special friendship with the Dwarves, particularly during the forging of the great jewels of F\u00ebanor?",
+        "type": "factual",
+        "difficulty": 3,
+        "tier": "basic",
+        "entity": "Dwarf-lords",
+        "community_id": null,
+        "answer": "Gimli, son of Gl\u00f3in, had a friendship with Legolas, who represents the Elves.",
+        "correct_answer": "Gimli, son of Gl\u00f3in, had a friendship with Legolas, who represents the Elves.",
+        "options": [
+          "The Shire",
+          "Gimli, son of Gl\u00f3in, had a friendship with Legolas, who represents the Elves.",
+          "Rohan",
+          "Gondor"
+        ]
+      },
+      "answer": "Gimli, son of Gl\u00f3in, had a friendship with Legolas, who represents the Elves.",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+        "explanation": "",
+        "next_steps": [
+          "Continue your journey through the deeper mysteries of Middle-earth.",
+          "Share your wisdom with others who seek to understand these ancient tales."
+        ]
+      }
+    },
+    {
+      "question": {
+        "question": "My dear fellow, what is the name of the special cloaks made by the Elves of Lothl\u00f3rien that grant concealment to those who wear them?",
+        "text": "My dear fellow, what is the name of the special cloaks made by the Elves of Lothl\u00f3rien that grant concealment to those who wear them?",
+        "type": "relationship",
+        "difficulty": 3,
+        "tier": "basic",
+        "entity": "cloak",
+        "community_id": null,
+        "answer": "Elven cloaks",
+        "correct_answer": "Elven cloaks",
+        "options": [
+          "Rohan",
+          "The Shire",
+          "Gondor",
+          "Elven cloaks"
+        ]
+      },
+      "answer": "Elven cloaks",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+        "explanation": "",
+        "next_steps": [
+          "Continue your journey through the deeper mysteries of Middle-earth.",
+          "Share your wisdom with others who seek to understand these ancient tales."
+        ]
+      }
+    },
+    {
+      "question": {
+        "question": "As we gather by the serene banks of a river, my dear fellow, let us reflect upon the waters that bear the name Siril. This river flows through a region steeped in the art of fishing, providing sustenance to its inhabitants. What is the significance of this river in the lore of Middle-earth? Is it known for: A) Its shimmering scales of fish that draw both Elves and Men alike, B) The legendary battles fought upon its banks, C) The ancient ruins that whisper tales of lost kingdoms, or D) The haunting songs sung by its flowing waters?",
+        "text": "As we gather by the serene banks of a river, my dear fellow, let us reflect upon the waters that bear the name Siril. This river flows through a region steeped in the art of fishing, providing sustenance to its inhabitants. What is the significance of this river in the lore of Middle-earth? Is it known for: A) Its shimmering scales of fish that draw both Elves and Men alike, B) The legendary battles fought upon its banks, C) The ancient ruins that whisper tales of lost kingdoms, or D) The haunting songs sung by its flowing waters?",
+        "type": "multiple_choice",
+        "difficulty": 4,
+        "tier": "intermediate",
+        "entity": "Siril",
+        "community_id": null,
+        "answer": "A) Its shimmering scales of fish that draw both Elves and Men alike.",
+        "options": [
+          "A) Its shimmering scales of fish that draw both Elves and Men alike",
+          "C) The ancient ruins that whisper tales of lost kingdoms",
+          "B) The legendary battles fought upon its banks",
+          "D) The haunting songs sung by its flowing waters"
+        ],
+        "correct_answer": "A) Its shimmering scales of fish that draw both Elves and Men alike"
+      },
+      "answer": null,
+      "correct": null,
+      "quality_score": null,
+      "feedback": null
+    }
+  ],
+  "summary": {
+    "total_questions": 3,
+    "correct_answers": 2,
+    "accuracy": 66.66666666666666,
+    "duration": 429.60123229026794,
+    "duration_formatted": "7 minutes, 9 seconds",
+    "mastery_after": 71.0,
+    "mastery_change": 6.666666666666665
+  }
+}

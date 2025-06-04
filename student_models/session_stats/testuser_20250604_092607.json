@@ -1,0 +1,90 @@
+{
+  "questions_asked": 2,
+  "correct": 2,
+  "incorrect": 0,
+  "start_time": 1749024966.772803,
+  "end_time": 1749025567.674273,
+  "question_history": [
+    {
+      "question": {
+        "question": "In the shadow of Mordor, which Elven-king led the resistance against the darkness of Sauron during the Second Age?",
+        "text": "In the shadow of Mordor, which Elven-king led the resistance against the darkness of Sauron during the Second Age?",
+        "type": "synthesis",
+        "difficulty": 2,
+        "tier": "basic",
+        "entity": "Elven-kings",
+        "community_id": null,
+        "answer": "Gil-galad",
+        "correct_answer": "Gil-galad",
+        "options": [
+          "Gondor",
+          "Rohan",
+          "Gil-galad",
+          "The Shire"
+        ]
+      },
+      "answer": "Gil-galad",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "explanation": "Your answer is indeed correct! Gil-galad was the last High King of the Noldor in Middle-earth and led the Elves in the Last Alliance against Sauron during the Second Age. His bravery and sacrifice were pivotal in the struggle against the darkness that threatened our world. Well done, young scholar!",
+        "strengths": [
+          "You provided the correct name of the Elven-king.",
+          "Your answer is concise and directly addresses the question."
+        ],
+        "weaknesses": [
+          "The answer could benefit from additional context about Gil-galad's role and significance."
+        ],
+        "suggestions": [
+          "Consider elaborating on Gil-galad's achievements and his alliance with men, particularly Isildur, to enrich your understanding.",
+          "Explore the broader context of the Second Age and the events leading up to the Last Alliance for a deeper grasp of the lore."
+        ]
+      }
+    },
+    {
+      "question": {
+        "question": "What is the name of the dark land to which Frodo Baggins journeyed to destroy the One Ring?",
+        "text": "What is the name of the dark land to which Frodo Baggins journeyed to destroy the One Ring?",
+        "type": "factual",
+        "difficulty": 3,
+        "tier": "basic",
+        "entity": "Frodo Baggins",
+        "community_id": null,
+        "answer": "Mordor",
+        "correct_answer": "Mordor",
+        "options": [
+          "Rohan",
+          "Gondor",
+          "Mordor",
+          "The Shire"
+        ]
+      },
+      "answer": "Mordor",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "explanation": "Your answer is indeed correct, young scholar! Mordor is the dark land where Frodo Baggins undertook his perilous journey to destroy the One Ring. It is a place of shadow and malice, ruled by the Dark Lord Sauron. Your knowledge of this crucial aspect of the tale is commendable, for it is in Mordor that the fate of Middle-earth hangs in the balance.",
+        "strengths": [
+          "The answer is correct and directly addresses the question.",
+          "You have demonstrated a clear understanding of a key location in Tolkien's lore."
+        ],
+        "weaknesses": [
+          "The answer could benefit from additional context or details about Mordor's significance."
+        ],
+        "suggestions": [
+          "Consider elaborating on the characteristics of Mordor, such as its geography and its role in the story.",
+          "Explore the implications of Frodo's journey to Mordor and how it affects the fate of Middle-earth."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 2,
+    "correct_answers": 2,
+    "accuracy": 100.0,
+    "duration": 600.9014699459076,
+    "duration_formatted": "10 minutes, 0 seconds",
+    "mastery_after": 76.0,
+    "mastery_change": 10.0
+  }
+}

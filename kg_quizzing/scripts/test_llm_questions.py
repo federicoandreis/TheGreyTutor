@@ -5,6 +5,9 @@ This script demonstrates the new immersive, narrative-driven questions.
 import os
 import sys
 import logging
+import argparse
+import json
+import shutil
 from dotenv import load_dotenv
 
 # Configure logging
@@ -12,19 +15,40 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # Add the parent directory to sys.path to enable imports
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))  
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))  
 
 # Load environment variables
 load_dotenv()
 
-# Import the required modules
-# Import the required modules - use direct imports since we're in the same directory
-from quiz_session import QuizSession
-from llm_question_generation import LLMQuestionGenerator
+# Import the required modules - use proper relative imports
+from kg_quizzing.scripts.quiz_session import QuizSession
+from kg_quizzing.scripts.llm_services.question_generator import LLMQuestionGenerator
 
-def test_llm_question_generation():
+def clear_question_cache():
+    """Clear the question cache to force generation of new questions."""
+    cache_dir = "question_cache"
+    cache_file = os.path.join(cache_dir, "question_cache.json")
+    
+    if os.path.exists(cache_file):
+        # Create a backup
+        backup_file = os.path.join(cache_dir, "question_cache_backup.json")
+        shutil.copy2(cache_file, backup_file)
+        
+        # Clear the cache by writing an empty dictionary
+        with open(cache_file, 'w') as f:
+            json.dump({}, f)
+        
+        print(f"Cleared question cache. Backup saved to {backup_file}")
+    else:
+        print("No cache file found to clear.")
+
+def test_llm_question_generation(clear_cache=False, question_type=None):
     """Test the LLM question generation with different question types and topics."""
     print("\n===== TESTING LLM QUESTION GENERATION =====\n")
+    
+    # Clear cache if requested
+    if clear_cache:
+        clear_question_cache()
     
     # Create a question generator
     llm_generator = LLMQuestionGenerator()
@@ -39,7 +63,10 @@ def test_llm_question_generation():
     ]
     
     # Test different question types
-    question_types = ["factual", "relationship", "multiple_choice", "synthesis", "application"]
+    if question_type and question_type in ["factual", "relationship", "multiple_choice", "synthesis", "application"]:
+        question_types = [question_type]
+    else:
+        question_types = ["factual", "relationship", "multiple_choice", "synthesis", "application"]
     
     # Generate and display questions
     for topic in test_topics:
@@ -59,13 +86,17 @@ def test_llm_question_generation():
                 
                 # Display the question
                 print(f"Q: {question['text']}")
-                print(f"A: {question['answer']}")
-                
                 # Display options for multiple choice
                 if q_type == "multiple_choice" and "options" in question:
-                    print("Options:")
+                    print("\nOptions:")
                     for i, option in enumerate(question["options"]):
                         print(f"  {chr(65+i)}) {option}")
+                    # Show the correct answer (prefer 'correct_answer' if present)
+                    correct = question.get('correct_answer', question.get('answer', ''))
+                    print(f"\nCorrect Answer: {correct}")
+                else:
+                    # Display answer for non-MCQ
+                    print(f"A: {question.get('answer', '')}")
                 
             except Exception as e:
                 logger.error(f"Error generating {q_type} question for {topic}: {e}")
@@ -106,20 +137,22 @@ def test_quiz_session():
         print("\n" + "-"*50)
 
 if __name__ == "__main__":
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="Test LLM question generation")
+    parser.add_argument("--clear-cache", action="store_true", help="Clear the question cache before testing")
+    parser.add_argument("--type", type=str, choices=["factual", "relationship", "multiple_choice", "synthesis", "application"],
+                        help="Test only a specific question type")
+    parser.add_argument("--skip-session", action="store_true", help="Skip the quiz session test")
+    args = parser.parse_args()
+    
     # Check if OpenAI API key is set
     if not os.getenv("OPENAI_API_KEY"):
         print("ERROR: OPENAI_API_KEY environment variable is not set.")
-        print("Please set it in your .env file or environment variables.")
+        print("Please set it before running this script.")
         sys.exit(1)
     
     # Run the tests
-    try:
-        # Test individual question generation
-        test_llm_question_generation()
-        
-        # Test the quiz session
+    test_llm_question_generation(clear_cache=args.clear_cache, question_type=args.type)
+    
+    if not args.skip_session:
         test_quiz_session()
-        
-    except Exception as e:
-        logger.error(f"Test failed: {e}")
-        print(f"Test failed: {e}")

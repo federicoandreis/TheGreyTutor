@@ -1,0 +1,87 @@
+{
+  "multiple_choice_Frodo Baggins_3": {
+    "question": "Who is the bearer of the One Ring?",
+    "text": "Who is the bearer of the One Ring?",
+    "type": "multiple_choice",
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "Frodo Baggins",
+    "community_id": null,
+    "answer": "Frodo Baggins",
+    "options": [
+      "Thorin Oakenshield",
+      "Frodo Baggins",
+      "Gollum",
+      "Th\u00e9oden"
+    ],
+    "correct_answer": "Thorin Oakenshield"
+  },
+  "multiple_choice_The One Ring_3": {
+    "question": "What is the name of the powerful artifact created by Sauron?",
+    "text": "What is the name of the powerful artifact created by Sauron?",
+    "type": "multiple_choice",
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "The One Ring",
+    "community_id": null,
+    "answer": "The One Ring",
+    "options": [
+      "White Tree of Gondor",
+      "The One Ring",
+      "Mithril",
+      "Narsil"
+    ],
+    "correct_answer": "White Tree of Gondor"
+  },
+  "multiple_choice_Gandalf_3": {
+    "question": "What is Gandalf's name among the Elves?",
+    "text": "What is Gandalf's name among the Elves?",
+    "type": "multiple_choice",
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "Gandalf",
+    "community_id": null,
+    "answer": "Mithrandir",
+    "options": [
+      "Tom Bombadil",
+      "Boromir",
+      "Gandalf",
+      "Legolas"
+    ],
+    "correct_answer": "Tom Bombadil"
+  },
+  "multiple_choice_Mordor_3": {
+    "question": "What is the dark land ruled by Sauron?",
+    "text": "What is the dark land ruled by Sauron?",
+    "type": "multiple_choice",
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "Mordor",
+    "community_id": null,
+    "answer": "Mordor",
+    "options": [
+      "Ithilien",
+      "Bree",
+      "Weathertop",
+      "Mordor"
+    ],
+    "correct_answer": "Ithilien"
+  },
+  "multiple_choice_Rivendell_3": {
+    "question": "What is the name of the Elven refuge founded by Elrond?",
+    "text": "What is the name of the Elven refuge founded by Elrond?",
+    "type": "multiple_choice",
+    "difficulty": 3,
+    "tier": "basic",
+    "entity": "Rivendell",
+    "community_id": null,
+    "answer": "Rivendell",
+    "options": [
+      "Rivendell",
+      "Glorfindel",
+      "Th\u00e9oden",
+      "\u00c9omer"
+    ],
+    "correct_answer": "Rivendell"
+  }
+}

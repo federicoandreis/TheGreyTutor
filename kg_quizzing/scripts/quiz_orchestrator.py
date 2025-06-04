@@ -41,7 +41,7 @@ class QuizOrchestrator:
 
     def __init__(self, student_id: str = None, student_name: str = None, 
                  strategy: str = "adaptive", conversation_dir: str = "conversation_history", 
-                 use_llm: bool = True, tier: str = None, fussiness: int = 3):
+                 use_llm: bool = True, tier: str = None, fussiness: int = 3, theme: str = None):
         """Initialize the quiz orchestrator.
         
         Args:
@@ -52,6 +52,7 @@ class QuizOrchestrator:
             use_llm: Whether to use LLM for question generation
             tier: The question tier to use (basic, intermediate, advanced)
             fussiness: Gandalf's fussiness (1=very lenient, 10=very strict)
+            theme: The theme of the quiz
         """
         self.current_session = None
         self.conversation_dir = conversation_dir
@@ -61,6 +62,7 @@ class QuizOrchestrator:
         self.strategy = strategy
         self.tier = tier
         self.fussiness = fussiness
+        self.theme = theme
 
         # Create the conversation directory if it doesn't exist
         os.makedirs(conversation_dir, exist_ok=True)
@@ -83,7 +85,7 @@ class QuizOrchestrator:
         else:
             logger.info("Educational metadata already exists.")
 
-    def start_session(self, student_id: str = None, student_name: str = None, strategy: str = None):
+    def start_session(self, student_id: str = None, student_name: str = None, strategy: str = None, theme: str = None):
         """
         Start a new quiz session.
 
@@ -96,6 +98,7 @@ class QuizOrchestrator:
         student_id = student_id or self.student_id
         student_name = student_name or self.student_name
         strategy = strategy or self.strategy
+        theme = theme or self.theme
         
         if not student_id:
             raise ValueError("Student ID is required to start a session")
@@ -107,7 +110,8 @@ class QuizOrchestrator:
             conversation_dir=self.conversation_dir,
             use_llm=self.use_llm,
             tier=self.tier,
-            fussiness=self.fussiness
+            fussiness=self.fussiness,
+            theme=theme
         )
 
     def run_interactive_session(self):
@@ -156,7 +160,21 @@ class QuizOrchestrator:
                     print("A PROFOUND MYSTERY FROM THE ANCIENT SCROLLS:")
                     
                 print("-"*60)
-                print(f"\n{question['question']}")
+                
+                # Get the question text - could be under 'question' or 'text' key
+                question_text = question.get('question', question.get('text', 'What do you know about this topic?'))
+                
+                # Make sure we have a question text to display
+                if not question_text or question_text.strip() == '':
+                    # If no question text, try to create one based on the entity
+                    entity = question.get('entity', 'this topic')
+                    if question.get('type') == 'multiple_choice':
+                        question_text = f"Which of these options best describes {entity}?"
+                    else:
+                        question_text = f"What do you know about {entity}?"
+                
+                # Print the question text with proper spacing
+                print(f"\n{question_text}\n")
 
                 # If it's a multiple-choice question, print the options with clear formatting
                 # Always display 4 options, even if missing or blank
@@ -178,6 +196,14 @@ class QuizOrchestrator:
                 answer = question.get("correct_answer") or question.get("answer")
                 if answer and answer not in options:
                     options[-1] = answer
+                
+                # Randomize the options to avoid having the correct answer always in position 4
+                import random
+                random.shuffle(options)
+                
+                # Update the correct answer in the question to match the shuffled options
+                if answer:
+                    question["correct_answer"] = answer
                 print("\nConsider these possibilities from the ancient lore:")
                 import re
                 for i, option in enumerate(options):
@@ -227,14 +253,32 @@ class QuizOrchestrator:
                 print("\n" + "-"*60)
                 print("GANDALF'S WISDOM:")
                 print("-"*60)
-                # Print only one feedback message: prefer 'message', else 'explanation', but not both
+                
+                # Print the main explanation
                 feedback_msg = feedback.get('message') or feedback.get('explanation') or str(feedback)
                 print(f"\n{feedback_msg}")
-
-                if feedback.get("next_steps"):
+                
+                # Print strengths if available
+                if feedback.get("strengths") and len(feedback.get("strengths")) > 0:
+                    print("\nYour strengths:")
+                    for strength in feedback["strengths"]:
+                        print(f"  • {strength}")
+                
+                # Print weaknesses if available and answer was incorrect
+                if not correct and feedback.get("weaknesses") and len(feedback.get("weaknesses")) > 0:
+                    print("\nAreas for improvement:")
+                    for weakness in feedback["weaknesses"]:
+                        print(f"  • {weakness}")
+                
+                # Print next steps or suggestions
+                if feedback.get("next_steps") and len(feedback.get("next_steps")) > 0:
                     print("\nFor your continued journey through Middle-earth's lore:")
                     for step in feedback["next_steps"]:
                         print(f"  • {step}")
+                elif feedback.get("suggestions") and len(feedback.get("suggestions")) > 0:
+                    print("\nFor your continued journey through Middle-earth's lore:")
+                    for suggestion in feedback["suggestions"]:
+                        print(f"  • {suggestion}")
 
                 # Print current mastery level with Tolkien-themed language
                 print("\n" + "-"*60)

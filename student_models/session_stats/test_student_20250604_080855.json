@@ -1,0 +1,55 @@
+{
+  "questions_asked": 1,
+  "correct": 1,
+  "incorrect": 0,
+  "start_time": 1749020870.3762836,
+  "end_time": 1749020934.999028,
+  "question_history": [
+    {
+      "question": {
+        "question": "My dear fellow, canst thou tell me the name of the hobbit who is known for his affection for food and drink, and is often heard uttering the phrase 'Hoom'?",
+        "text": "My dear fellow, canst thou tell me the name of the hobbit who is known for his affection for food and drink, and is often heard uttering the phrase 'Hoom'?",
+        "type": "synthesis",
+        "difficulty": 2,
+        "tier": "basic",
+        "entity": "Hoom",
+        "community_id": null,
+        "answer": "Hoom is a name associated with the hobbits and their love for food.",
+        "correct_answer": "Hoom is a name associated with the hobbits and their love for food.",
+        "options": [
+          "Hoom is a name associated with the hobbits and their love for food.",
+          "Gondor",
+          "The Shire",
+          "Rohan"
+        ]
+      },
+      "answer": "Hoom is a name associated with the hobbits and their love for food.",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "explanation": "Ah, dear student, while you have mentioned 'Hoom' in relation to hobbits and their love for food, it is important to note that 'Hoom' is actually a characteristic sound made by the hobbit known as Fatty Bolger, who is often associated with his fondness for food and drink. The phrase is not merely a name but a reflection of his jovial nature. In the grand tapestry of Middle-earth, it is the hobbits, particularly those like Samwise Gamgee and Merry Brandybuck, who embody this love for sustenance. Thus, a more precise answer would be to name Fatty Bolger or refer to hobbits in general, rather than just 'Hoom.'",
+        "strengths": [
+          "You correctly identified the connection between hobbits and their love for food.",
+          "Your answer reflects an understanding of hobbit culture."
+        ],
+        "weaknesses": [
+          "The answer lacks specificity regarding the hobbit associated with 'Hoom.'",
+          "It does not address the context of the phrase or its significance."
+        ],
+        "suggestions": [
+          "Consider providing the name of the hobbit associated with 'Hoom,' which is Fatty Bolger.",
+          "Expand your answer to include more context about hobbits and their culinary delights."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 1,
+    "correct_answers": 1,
+    "accuracy": 100.0,
+    "duration": 64.62274432182312,
+    "duration_formatted": "1 minute, 4 seconds",
+    "mastery_after": 55.0,
+    "mastery_change": 10.0
+  }
+}

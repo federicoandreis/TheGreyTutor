@@ -1,0 +1,107 @@
+{
+  "questions_asked": 3,
+  "correct": 2,
+  "incorrect": 1,
+  "start_time": 1748967935.2071612,
+  "end_time": 1748967973.7985342,
+  "question_history": [
+    {
+      "question": {
+        "question": "My dear fellow, dost thou recall the name of the great treasure sought by Thorin Oakenshield and his company, which lay beneath the lonely mountain, a prize coveted by both Dwarves and Elves alike?",
+        "text": "My dear fellow, dost thou recall the name of the great treasure sought by Thorin Oakenshield and his company, which lay beneath the lonely mountain, a prize coveted by both Dwarves and Elves alike?",
+        "type": "application",
+        "difficulty": 3,
+        "tier": "basic",
+        "entity": "dwarves",
+        "community_id": null,
+        "answer": "The Arkenstone",
+        "options": [
+          "Gondor",
+          "Rohan",
+          "The Shire",
+          "The Arkenstone"
+        ]
+      },
+      "answer": "The Arkenstone",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+        "explanation": "",
+        "next_steps": [
+          "Continue your journey through the deeper mysteries of Middle-earth.",
+          "Share your wisdom with others who seek to understand these ancient tales."
+        ]
+      }
+    },
+    {
+      "question": {
+        "question": "My dear fellow, what is the name of the Shire-dwelling Hobbit who bears the One Ring on a perilous quest?",
+        "text": "My dear fellow, what is the name of the Shire-dwelling Hobbit who bears the One Ring on a perilous quest?",
+        "type": "factual",
+        "difficulty": 3,
+        "tier": "basic",
+        "entity": "Frodo Baggins",
+        "community_id": null,
+        "answer": "Frodo Baggins",
+        "options": [
+          "Gondor",
+          "Rohan",
+          "The Shire",
+          "Frodo Baggins"
+        ]
+      },
+      "answer": "Frodo Baggins",
+      "correct": true,
+      "quality_score": 1.0,
+      "feedback": {
+        "message": "Excellent! Your wisdom rivals that of the White Council itself!",
+        "explanation": "",
+        "next_steps": [
+          "Continue your journey through the deeper mysteries of Middle-earth.",
+          "Share your wisdom with others who seek to understand these ancient tales."
+        ]
+      }
+    },
+    {
+      "question": {
+        "question": "What is the color of the banner that the Elves of Lothl\u00f3rien raised to signal their presence in Middle-earth?",
+        "text": "What is the color of the banner that the Elves of Lothl\u00f3rien raised to signal their presence in Middle-earth?",
+        "type": "multiple_choice",
+        "difficulty": 3,
+        "tier": "basic",
+        "entity": "blue banner",
+        "community_id": null,
+        "answer": "",
+        "options": [
+          "Red",
+          "Blue",
+          "Green",
+          "White"
+        ],
+        "correct_answer": "Blue"
+      },
+      "answer": "White",
+      "correct": false,
+      "quality_score": 0.0,
+      "feedback": {
+        "message": "Even the wisest cannot see all ends. Let us explore this matter further.",
+        "explanation": "The lore of Middle-earth tells us that Blue.",
+        "next_steps": [
+          "Consult the ancient texts for more knowledge on this subject.",
+          "Reflect on the connections between different realms of Middle-earth's lore.",
+          "Consider how this knowledge fits into the broader tapestry of Tolkien's world."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 3,
+    "correct_answers": 2,
+    "accuracy": 66.66666666666666,
+    "duration": 38.59137296676636,
+    "duration_formatted": "38 seconds",
+    "mastery_after": 60.0,
+    "mastery_change": 6.666666666666665
+  }
+}
