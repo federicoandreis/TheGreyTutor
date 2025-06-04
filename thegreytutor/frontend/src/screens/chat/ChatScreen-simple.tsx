@@ -78,17 +78,37 @@ const ChatScreen: React.FC = () => {
     setIsLoading(true);
 
     if (!quizMode) {
-      // Use the mock database for AI response
-      setTimeout(() => {
+      try {
+        const response = await fetch('http://localhost:8000/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            question: messageText,
+            verbose: false,
+            use_cache: true
+          }),
+        });
+        const data = await response.json();
         const aiResponse: ChatMessage = {
           id: (Date.now() + 1).toString(),
-          content: getMockAnswer(messageText),
+          content: data.answer || "Gandalf is silent... (no answer received)",
           role: 'assistant',
           timestamp: new Date().toISOString(),
         };
         setMessages(prev => [...prev, aiResponse]);
+      } catch (err) {
+        setMessages(prev => [
+          ...prev,
+          {
+            id: (Date.now() + 1).toString(),
+            content: "Sorry, there was a problem contacting Gandalf.",
+            role: 'assistant',
+            timestamp: new Date().toISOString(),
+          },
+        ]);
+      } finally {
         setIsLoading(false);
-      }, 1000);
+      }
     } else {
       // Quiz mode logic
       setTimeout(() => {

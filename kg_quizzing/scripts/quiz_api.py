@@ -13,6 +13,7 @@ Usage:
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 import uuid
@@ -46,6 +47,15 @@ from .conversation_history import ConversationHistoryManager, QuizConversation
 
 app = FastAPI(title="Quiz API", description="API for Adaptive Quizzing System", version="0.1.0")
 
+# Enable CORS for all origins (for development)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, specify allowed origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Standalone conversation history manager for assessments
 assessment_convo_dir = "assessment_conversations"
 assessment_history_manager = ConversationHistoryManager(assessment_convo_dir)
@@ -75,6 +85,9 @@ class ChatRequest(BaseModel):
     question: str
     verbose: Optional[bool] = False
     use_cache: Optional[bool] = True
+    user_id: Optional[str] = None
+    session_id: Optional[str] = None
+    metadata: Optional[dict] = None
 
 class ChatResponse(BaseModel):
     answer: str
@@ -275,14 +288,45 @@ def query_kg(req: QueryRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+from fastapi import Request
+
 @app.post("/chat", response_model=ChatResponse)
-def chat_endpoint(req: ChatRequest):
+def chat_endpoint(req: ChatRequest, request: Request):
     if process_query is None:
         raise HTTPException(status_code=500, detail=f"Could not import process_query from run_pathrag: {llm_import_error}")
     try:
         # Use Gandalf in-character retriever; match run_pathrag.py signature
         result = process_query(req.question, use_cache=req.use_cache, verbose=req.verbose)
-        return ChatResponse(answer=result["answer"])
+        answer = result["answer"]
+
+        # Gather metadata
+        user_id = req.user_id or "anonymous"
+        session_id = req.session_id or str(uuid.uuid4())
+        user_agent = request.headers.get("user-agent", "unknown")
+        client_host = request.client.host if request.client else "unknown"
+        base_metadata = req.metadata or {}
+        convo_metadata = {
+            "mode": "chat",
+            "user_id": user_id,
+            "session_id": session_id,
+            "user_agent": user_agent,
+            "client_host": client_host,
+            **base_metadata
+        }
+
+        convo = QuizConversation(
+            student_id=user_id,
+            quiz_id=session_id,
+            metadata=convo_metadata
+        )
+        from .conversation_history import ConversationMessage
+        user_msg = ConversationMessage(role="user", content=req.question, metadata={"user_agent": user_agent, "client_host": client_host, **base_metadata})
+        assistant_msg = ConversationMessage(role="assistant", content=answer, metadata={"user_agent": user_agent, "client_host": client_host})
+        convo.messages.append(user_msg)
+        convo.messages.append(assistant_msg)
+        assessment_history_manager.save_conversation(convo)
+
+        return ChatResponse(answer=answer)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
