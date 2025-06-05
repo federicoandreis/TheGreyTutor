@@ -80,12 +80,31 @@ coverage/
 /docs/
 
 # Data files
-*.db
-*.sqlite3
+input/
+output/
+cache/
+**/cache/
+question_cache/
+conversation_history/
+assessment_cache/
+student_models/
 
-# JSON dumps
-*.json
-**/*.json
+# Ignore JSON dumps in cache and conversation directories only
+cache/**/*.json
+question_cache/**/*.json
+conversation_history/**/*.json
+assessment_cache/**/*.json
+student_models/**/*.json
+
+# But DO NOT ignore main config and app json files
+!app.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!thegreytutor/frontend/app.json
+!thegreytutor/frontend/package.json
+!thegreytutor/frontend/package-lock.json
+!thegreytutor/frontend/tsconfig.json
 
 # Neo4j
 *.jar
