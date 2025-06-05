@@ -83,6 +83,10 @@ coverage/
 *.db
 *.sqlite3
 
+# JSON dumps
+*.json
+**/*.json
+
 # Neo4j
 *.jar
 
