@@ -1,0 +1,368 @@
+{
+  "strategy": "pathrag",
+  "query": "Who is Frodo Baggins?",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+      "labels": [
+        "Character",
+        "__Entity__",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "name": [
+          "Frodo Baggins",
+          "Frodo"
+        ],
+        "title": [
+          "",
+          "heir of Bilbo"
+        ]
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+      "labels": [
+        "Character",
+        "__Entity__",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "name": [
+          "Bilbo Baggins",
+          "Bilbo"
+        ],
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+      "labels": [
+        "Character",
+        "__Entity__",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "name": "Pippin",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:84",
+      "labels": [
+        "Location",
+        "__Entity__",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "name": "Shire"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:592",
+      "labels": [
+        "Character",
+        "__Entity__",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "name": "Baggins",
+        "title": "Generous"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1505",
+      "labels": [
+        "Character",
+        "__Entity__",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "name": "Frodo Baggins",
+        "title": "Heir of Bilbo"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:1105",
+      "type": "PARENT_OF",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6177",
+      "type": "DWELLS_IN",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:3038",
+      "type": "DWELLS_IN",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:84",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:1777",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:592",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:4980",
+      "type": "DWELLS_IN",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1505",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:84",
+      "properties": {}
+    }
+  ],
+  "paths": [
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "labels": [
+            "Character",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": [
+              "Frodo Baggins",
+              "Frodo"
+            ],
+            "title": [
+              "",
+              "heir of Bilbo"
+            ]
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "labels": [
+            "Character",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": [
+              "Bilbo Baggins",
+              "Bilbo"
+            ],
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:1105",
+          "type": "PARENT_OF",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "labels": [
+            "Character",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": [
+              "Frodo Baggins",
+              "Frodo"
+            ],
+            "title": [
+              "",
+              "heir of Bilbo"
+            ]
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "labels": [
+            "Character",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": "Pippin",
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6177",
+          "type": "DWELLS_IN",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "labels": [
+            "Character",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": [
+              "Frodo Baggins",
+              "Frodo"
+            ],
+            "title": [
+              "",
+              "heir of Bilbo"
+            ]
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:84",
+          "labels": [
+            "Location",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": "Shire"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:3038",
+          "type": "DWELLS_IN",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:84",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:592",
+          "labels": [
+            "Character",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": "Baggins",
+            "title": "Generous"
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "labels": [
+            "Character",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": [
+              "Bilbo Baggins",
+              "Bilbo"
+            ],
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:1777",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:592",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1505",
+          "labels": [
+            "Character",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": "Frodo Baggins",
+            "title": "Heir of Bilbo"
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:84",
+          "labels": [
+            "Location",
+            "__Entity__",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "name": "Shire"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:4980",
+          "type": "DWELLS_IN",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1505",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:84",
+          "properties": {}
+        }
+      ]
+    }
+  ],
+  "execution_time": 0.35492587089538574,
+  "total_results": 16,
+  "metadata": {
+    "entities": [
+      "Frodo",
+      "Baggins",
+      "Frodo Baggins"
+    ],
+    "communities": [
+      42,
+      1,
+      20
+    ],
+    "community_entities": [
+      [
+        "Bilbo Baggins",
+        "Bilbo"
+      ],
+      [
+        "Frodo Baggins",
+        "Frodo"
+      ],
+      "Pippin",
+      [
+        "Drogo Baggins",
+        "Drogo"
+      ],
+      "Brandybuck",
+      "Shire"
+    ]
+  }
+}

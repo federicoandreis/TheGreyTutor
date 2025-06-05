@@ -1,0 +1,16 @@
+{
+  "strategy": "pathrag",
+  "query": "who is folco?",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.17873883247375488,
+  "total_results": 0,
+  "metadata": {
+    "entities": [
+      "who is folco"
+    ],
+    "communities": [],
+    "community_entities": []
+  }
+}

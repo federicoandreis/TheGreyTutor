@@ -119,25 +119,89 @@ def get_entities_in_community(community_id: int, limit: int = 10):
     
     return execute_query(query, {"community_id": community_id, "limit": limit})
 
-def get_entity_by_name(name: str):
+import difflib
+
+def get_entity_by_name_robust(name: str, threshold: float = 0.8):
     """
-    Get an entity by its name.
-    
+    Robustly get an entity by its name, alias, or fuzzy match.
+
     Args:
-        name: The name of the entity
-        
+        name: The name (or alias, or similar) of the entity
+        threshold: Fuzzy match threshold (0-1)
     Returns:
         Entity information if found, None otherwise
     """
+    # 1. Try exact match on name
     query = """
     MATCH (n)
     WHERE n.name = $name
-    RETURN n, labels(n) AS labels
+    RETURN n, labels(n) AS labels, n.alias AS alias
     LIMIT 1
     """
-    
     results = execute_query(query, {"name": name})
-    return results[0] if results else None
+    if results:
+        return results[0]
+
+    # 2. Try match on aliases (if alias property exists)
+    query_alias = """
+    MATCH (n)
+    WHERE ($name IN n.alias)
+    RETURN n, labels(n) AS labels, n.alias AS alias
+    LIMIT 1
+    """
+    results = execute_query(query_alias, {"name": name})
+    if results:
+        return results[0]
+
+    # 3. Fuzzy match against all entity names and aliases
+    # Get all entity names and aliases (limit for performance)
+    query_all = """
+    MATCH (n)
+    WHERE exists(n.name)
+    RETURN n.name AS name, n.alias AS alias, id(n) AS id
+    LIMIT 1000
+    """
+    candidates = execute_query(query_all)
+    names = [(c['name'], c['id']) for c in candidates if c.get('name')]
+    aliases = []
+    for c in candidates:
+        alias_list = c.get('alias')
+        if alias_list and isinstance(alias_list, list):
+            for a in alias_list:
+                aliases.append((a, c['id']))
+        elif alias_list and isinstance(alias_list, str):
+            aliases.append((alias_list, c['id']))
+    # Fuzzy match on names
+    best_name = difflib.get_close_matches(name, [n[0] for n in names], n=1, cutoff=threshold)
+    if best_name:
+        match_id = [n[1] for n in names if n[0] == best_name[0]][0]
+        query = """
+        MATCH (n)
+        WHERE id(n) = $id
+        RETURN n, labels(n) AS labels, n.alias AS alias
+        LIMIT 1
+        """
+        results = execute_query(query, {"id": match_id})
+        if results:
+            return results[0]
+    # Fuzzy match on aliases
+    best_alias = difflib.get_close_matches(name, [a[0] for a in aliases], n=1, cutoff=threshold)
+    if best_alias:
+        match_id = [a[1] for a in aliases if a[0] == best_alias[0]][0]
+        query = """
+        MATCH (n)
+        WHERE id(n) = $id
+        RETURN n, labels(n) AS labels, n.alias AS alias
+        LIMIT 1
+        """
+        results = execute_query(query, {"id": match_id})
+        if results:
+            return results[0]
+    # Not found
+    return None
+
+# For backward compatibility
+get_entity_by_name = get_entity_by_name_robust
 
 def get_entity_relationships(entity_id: str, limit: int = 10):
     """

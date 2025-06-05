@@ -1,0 +1,19 @@
+{
+  "strategy": "pathrag",
+  "query": "What do you know of Mickey Mouse?",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.0357511043548584,
+  "total_results": 0,
+  "metadata": {
+    "entities": [
+      "What",
+      "Mickey",
+      "Mouse",
+      "Mickey Mouse"
+    ],
+    "communities": [],
+    "community_entities": []
+  }
+}

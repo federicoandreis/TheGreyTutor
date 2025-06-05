@@ -1,0 +1,404 @@
+{
+  "strategy": "pathrag",
+  "query": "What role did Galadriel play in the War of the Ring?",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+      "labels": [
+        "__KGBuilder__",
+        "Artifact",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": [
+          "Ring of the Enemy",
+          "Ring of Sapphire",
+          "Ring of Adamant",
+          "Ring",
+          "Ring of Power"
+        ]
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+      "labels": [
+        "Character",
+        "__KGBuilder__",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Elrond",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:357",
+      "labels": [
+        "Character",
+        "__KGBuilder__",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Gollum",
+        "title": "creature"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:412",
+      "labels": [
+        "Character",
+        "__KGBuilder__",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Sauron",
+        "title": "Enemy of old"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:644",
+      "labels": [
+        "Character",
+        "__KGBuilder__",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": [
+          "Gandalf the Grey",
+          "Gandalf"
+        ],
+        "title": [
+          "Wizard",
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:912",
+      "labels": [
+        "Character",
+        "__KGBuilder__",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": [
+          "Saruman the White",
+          "Saruman the Wise",
+          "Saruman"
+        ],
+        "title": [
+          "White",
+          "",
+          "White Wizard"
+        ]
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:7914",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6629",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:357",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:7894",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:412",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:7883",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:644",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:7882",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:912",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+      "properties": {}
+    }
+  ],
+  "paths": [
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "labels": [
+            "__KGBuilder__",
+            "Artifact",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Ring of the Enemy",
+              "Ring of Sapphire",
+              "Ring of Adamant",
+              "Ring",
+              "Ring of Power"
+            ]
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+          "labels": [
+            "Character",
+            "__KGBuilder__",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Elrond",
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:7914",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "labels": [
+            "__KGBuilder__",
+            "Artifact",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Ring of the Enemy",
+              "Ring of Sapphire",
+              "Ring of Adamant",
+              "Ring",
+              "Ring of Power"
+            ]
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:357",
+          "labels": [
+            "Character",
+            "__KGBuilder__",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Gollum",
+            "title": "creature"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6629",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:357",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "labels": [
+            "__KGBuilder__",
+            "Artifact",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Ring of the Enemy",
+              "Ring of Sapphire",
+              "Ring of Adamant",
+              "Ring",
+              "Ring of Power"
+            ]
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:412",
+          "labels": [
+            "Character",
+            "__KGBuilder__",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Sauron",
+            "title": "Enemy of old"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:7894",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:412",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "labels": [
+            "__KGBuilder__",
+            "Artifact",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Ring of the Enemy",
+              "Ring of Sapphire",
+              "Ring of Adamant",
+              "Ring",
+              "Ring of Power"
+            ]
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:644",
+          "labels": [
+            "Character",
+            "__KGBuilder__",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Gandalf the Grey",
+              "Gandalf"
+            ],
+            "title": [
+              "Wizard",
+              ""
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:7883",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:644",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "labels": [
+            "__KGBuilder__",
+            "Artifact",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Ring of the Enemy",
+              "Ring of Sapphire",
+              "Ring of Adamant",
+              "Ring",
+              "Ring of Power"
+            ]
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:912",
+          "labels": [
+            "Character",
+            "__KGBuilder__",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Saruman the White",
+              "Saruman the Wise",
+              "Saruman"
+            ],
+            "title": [
+              "White",
+              "",
+              "White Wizard"
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:7882",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:912",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1170",
+          "properties": {}
+        }
+      ]
+    }
+  ],
+  "execution_time": 0.1422269344329834,
+  "total_results": 16,
+  "metadata": {
+    "entities": [
+      "What",
+      "Galadriel",
+      "War",
+      "Ring",
+      "War of the Ring"
+    ],
+    "communities": [
+      82,
+      55,
+      100,
+      53,
+      108
+    ],
+    "community_entities": [
+      [
+        "Gandalf the Grey",
+        "Gandalf"
+      ],
+      "Elrond",
+      "Sauron",
+      [
+        "Saruman the White",
+        "Saruman the Wise",
+        "Saruman"
+      ],
+      "Gollum",
+      [
+        "Ring of the Enemy",
+        "Ring of Sapphire",
+        "Ring of Adamant",
+        "Ring",
+        "Ring of Power"
+      ]
+    ]
+  }
+}

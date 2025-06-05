@@ -1,23 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# Virtual Environment
+venv/
+ENV/
+
 # Node and Expo
 node_modules/
 .expo/
 .expo-shared/
 
 # Build and cache directories
-dist/
-build/
 .cache/
 .expo/
 .expo-shared/
-__pycache__/
-*.py[cod]
-*$py.class
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 logs/
+*.log
 
 # Sensitive files
 .env
@@ -36,10 +61,14 @@ output/*
 Thumbs.db
 
 # IDE files
-.vscode/
 .idea/
+.vscode/
+*.swp
+*.swo
 
 # Ignore legacy code
+legacy/
+**/legacy/
 kg_consolidation/legacy/
 kg_queries/legacy/
 kg_queries/quizzing/legacy/
@@ -48,18 +77,9 @@ kg_queries/quizzing/legacy/
 coverage/
 
 # Docs (excluded from repo)
-docs/
-
-# Python
-*.pyc
-__pycache__/
-.pytest_cache/
-.mypy_cache/
+/docs/
 
 # Data files
-input/
-output/
-cache/
 *.db
 *.sqlite3
 
@@ -69,5 +89,9 @@ cache/
 # Local development
 tmp/
 
-# Misc
-null.txt
+# Alembic
+# Only track specific migration scripts
+# (add new migrations to the list below as needed)
+database/migrations/versions/*
+!database/migrations/versions/001_initial_schema.py
+!database/migrations/versions/002_rename_metadata_to_meta_data.py

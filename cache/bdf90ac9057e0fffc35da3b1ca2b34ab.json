@@ -1,0 +1,14 @@
+{
+  "strategy": "pathrag",
+  "query": "who is thranduil",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.0,
+  "total_results": 0,
+  "metadata": {
+    "entities": [],
+    "communities": [],
+    "community_entities": []
+  }
+}

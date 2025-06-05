@@ -1,0 +1,12 @@
+{
+  "strategy": "relationship_aware",
+  "query": "How are the hobbits connected?",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.0,
+  "total_results": 0,
+  "metadata": {
+    "entities_found": []
+  }
+}

@@ -1,0 +1,421 @@
+{
+  "strategy": "pathrag",
+  "query": "What is the relationship between Pippin and Strider?",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Pippin",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": [
+          "Bilbo Baggins",
+          "Bilbo"
+        ],
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": [
+          "Frodo Baggins",
+          "Frodo"
+        ],
+        "title": [
+          "",
+          "heir of Bilbo"
+        ]
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:306",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Strider",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:6",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": [
+          "Milo Burrows",
+          "Milo"
+        ],
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:54",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Brandybuck",
+        "title": ""
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:4339",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6177",
+      "type": "DWELLS_IN",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5072",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:306",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:1835",
+      "type": "OWNS",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:6",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:1765",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:54",
+      "properties": {}
+    }
+  ],
+  "paths": [
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Pippin",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Bilbo Baggins",
+              "Bilbo"
+            ],
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:4339",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Pippin",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Frodo Baggins",
+              "Frodo"
+            ],
+            "title": [
+              "",
+              "heir of Bilbo"
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6177",
+          "type": "DWELLS_IN",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:306",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Strider",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Frodo Baggins",
+              "Frodo"
+            ],
+            "title": [
+              "",
+              "heir of Bilbo"
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5072",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:306",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 2,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Pippin",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Bilbo Baggins",
+              "Bilbo"
+            ],
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:6",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Milo Burrows",
+              "Milo"
+            ],
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:4339",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "properties": {}
+        },
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:1835",
+          "type": "OWNS",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:6",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 2,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Pippin",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": [
+              "Bilbo Baggins",
+              "Bilbo"
+            ],
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:54",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Brandybuck",
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:4339",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+          "properties": {}
+        },
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:1765",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:54",
+          "properties": {}
+        }
+      ]
+    }
+  ],
+  "execution_time": 0.18817830085754395,
+  "total_results": 16,
+  "metadata": {
+    "entities": [
+      "What",
+      "Pippin",
+      "Strider",
+      "Pippin and Strider"
+    ],
+    "communities": [
+      42,
+      487,
+      1,
+      20,
+      23
+    ],
+    "community_entities": [
+      [
+        "Bilbo Baggins",
+        "Bilbo"
+      ],
+      "party",
+      "Took",
+      [
+        "Frodo Baggins",
+        "Frodo"
+      ],
+      [
+        "Milo Burrows",
+        "Milo"
+      ],
+      "Brandybuck",
+      "Boffin",
+      [
+        "Drogo Baggins",
+        "Drogo"
+      ],
+      "Grubb"
+    ]
+  }
+}

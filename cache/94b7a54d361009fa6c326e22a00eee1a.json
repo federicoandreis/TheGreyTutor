@@ -1,0 +1,19 @@
+{
+  "strategy": "pathrag",
+  "query": "Tell me about Glaurung",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.0258028507232666,
+  "total_results": 0,
+  "metadata": {
+    "entities": [
+      "Glaurungs",
+      "glaurungs",
+      "Glaurung",
+      "glaurung"
+    ],
+    "communities": [],
+    "community_entities": []
+  }
+}

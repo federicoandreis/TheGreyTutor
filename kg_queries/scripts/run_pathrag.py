@@ -243,7 +243,38 @@ def create_llm_prompt(query: str, result: Any) -> str:
             for i, entities in enumerate(community_entities):
                 if i < len(communities) and entities:
                     prompt_parts.append(f"- **Circle of Lore {i+1}**: {', '.join(entities[:10])}")
-    
+
+    # --- Retrieved Facts Summary ---
+    prompt_parts.append("")
+    prompt_parts.append("## RETRIEVED FACTS")
+    facts = []
+    # Summarize key nodes
+    if result.nodes:
+        for node in result.nodes[:10]:
+            node_name = get_node_name(node)
+            node_type = ', '.join([label for label in node['labels'] if not label.startswith('__')])
+            facts.append(f"- **{node_name}** ({node_type})")
+    # Summarize key relationships
+    if result.relationships:
+        for rel in result.relationships[:10]:
+            rel_type = rel.get("type", "?").replace('_', ' ')
+            src = rel.get("start_node", rel.get("source_id", "?"))
+            tgt = rel.get("end_node", rel.get("target_id", "?"))
+            facts.append(f"- *{rel_type}* between `{src}` and `{tgt}`")
+    if not facts:
+        facts.append("- No specific facts were retrieved from the knowledge graph.")
+    prompt_parts.extend(facts)
+
+    # --- Instructions for Gandalf ---
+    prompt_parts.append("")
+    prompt_parts.append("## HOW TO SHARE YOUR WISDOM")
+    prompt_parts.append("1. **Your answer MUST be based on the scrolls, memories, and connections retrieved above.** If there is information in these sections, use it as your primary source.")
+    prompt_parts.append("2. **Only use your own memory or general lore if the scrolls and connections above are empty or insufficient.**")
+    prompt_parts.append("3. **Clearly reference the names, figures, and connections from the retrieved knowledge in your explanation.**")
+    prompt_parts.append("4. **Present your answer as Gandalf, but ensure that the factual details come from the retrieved knowledge, not your own imagination.**")
+    prompt_parts.append("5. **If there is no retrieved information, then and only then, you may fall back on 'ancient lore lost to time' or 'mysteries that even the Wise cannot fully comprehend.'**")
+    prompt_parts.append("6. **NEVER mention knowledge graphs, databases, or technical terms** – you are Gandalf sharing wisdom from memory and experience, not analyzing data.")
+
     # Add comprehensive instructions for the LLM
     prompt_parts.append("")
     prompt_parts.append("## HOW TO SHARE YOUR WISDOM")

@@ -1,0 +1,13 @@
+{
+  "strategy": "hybrid",
+  "query": "Who is the main character?",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.0,
+  "total_results": 0,
+  "metadata": {
+    "entity_results": 0,
+    "relationship_results": 0
+  }
+}

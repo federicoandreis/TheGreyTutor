@@ -12,74 +12,284 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getMockAnswer } from '../../services/mockChatDatabase';
-import { mockQuizQuestions, QuizQuestion } from '../../services/mockQuizDatabase';
+import {
+  startQuizSession,
+  getNextQuestion,
+  submitQuizAnswer,
+  getQuizSessionState,
+  QuestionResponse,
+  SubmitAnswerResponse
+} from '../../services/quizApi';
+import { BASE_URL } from '../../services/quizApi';
 
 interface ChatMessage {
   id: string;
   content: string;
   role: 'user' | 'assistant';
   timestamp: string;
+  question?: any; // allow quiz question object for assistant messages
 }
 
-const ChatScreen: React.FC = () => {
+function ChatScreen() {
   const [inputText, setInputText] = useState('');
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [quizMessages, setQuizMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [quizMode, setQuizMode] = useState(false);
-  const [quizIndex, setQuizIndex] = useState(0);
+  const [quizSessionId, setQuizSessionId] = useState<string | null>(null);
   const [quizScore, setQuizScore] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
+  const [currentQuizQuestion, setCurrentQuizQuestion] = useState<any | null>(null);
+  const [quizQuestionNumber, setQuizQuestionNumber] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
-  const startQuiz = () => {
+  // Utility: Normalize question text (handles string, array, object)
+  function normalizeQuestionText(text: any): string {
+    if (!text) return '';
+    if (typeof text === 'string') return text;
+    if (Array.isArray(text)) return text.join('');
+    if (typeof text === 'object') {
+      // If it's a character map like {0: 'W', 1: 'h', ...}
+      return Object.values(text).join('');
+    }
+    return String(text);
+  }
+
+  const startQuiz = async () => {
     setQuizMode(true);
-    setQuizIndex(0);
     setQuizScore(0);
     setQuizFinished(false);
-    setMessages([
+    setQuizMessages([
       {
         id: Date.now().toString(),
-        content: 'Quiz mode activated! Answer the following questions:',
-        role: 'assistant' as 'assistant',
+        content: 'Quiz mode activated! Gandalf will test your knowledge of Middle-earth. Answer the following questions:',
+        role: 'assistant',
         timestamp: new Date().toISOString(),
-      },
-      {
-        id: (Date.now() + 1).toString(),
-        content: mockQuizQuestions[0].question + (mockQuizQuestions[0].choices ? '\n' + mockQuizQuestions[0].choices.map((c, i) => `${i+1}. ${c}`).join('\n') : ''),
-        role: 'assistant' as 'assistant',
-        timestamp: new Date().toISOString(),
-      },
+      }
     ]);
     setInputText('');
+    setIsLoading(true);
+    try {
+      // For now, use anonymous user
+      const student_id = 'demo_user';
+      const student_name = 'Adventurer';
+      const session = await startQuizSession(student_id, student_name);
+      setQuizSessionId(session.session_id);
+      const q = await getNextQuestion(session.session_id);
+      // Robust normalization: handle both {question: {...}} and {...} API shapes
+      let rawQuestion = q.question ? q.question : q;
+      let options: string[] = [];
+      if (Array.isArray(rawQuestion.options)) {
+        options = rawQuestion.options as string[];
+      } else if (typeof rawQuestion.options === 'string') {
+        try {
+          const parsed = JSON.parse(rawQuestion.options);
+          if (Array.isArray(parsed)) {
+            options = parsed;
+          } else if (typeof parsed === 'string') {
+            options = [parsed];
+          }
+        } catch {
+          // fallback: split by comma, but only if not a single word/letter
+          if (rawQuestion.options.includes(',')) {
+            options = rawQuestion.options.split(',').map((x: string) => x.trim());
+          } else {
+            options = [rawQuestion.options];
+          }
+        }
+      }
+      // Defensive: if options is not array, fallback to empty array
+      if (!Array.isArray(options)) options = [];
+      const normQuestion = {
+        ...rawQuestion,
+        text: normalizeQuestionText(rawQuestion.question_text || rawQuestion.text || rawQuestion.question),
+        options,
+      };
+      setCurrentQuizQuestion(normQuestion);
+      setQuizQuestionNumber(q.question_number || 1);
+      setQuizMessages(prev => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          content: formatQuizQuestion(normQuestion, q.question_number || 1),
+          role: 'assistant',
+          timestamp: new Date().toISOString(),
+          question: normQuestion // Attach normalized question object for option rendering
+        } as any // type patch
+      ]);
+    } catch (err) {
+      setQuizMessages(prev => [
+        ...prev,
+        {
+          id: (Date.now() + 2).toString(),
+          content: 'Sorry, there was a problem starting the quiz. Please try again later.',
+          role: 'assistant',
+          timestamp: new Date().toISOString(),
+        }
+      ]);
+      setQuizMode(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  function cleanQuizQuestionText(text?: string): string {
+    if (!text) return '';
+    // Remove MC options like 'Is it: A) ...' or numbered lists
+    let cleaned = text.replace(/Is it:.*?(A\)).*?(B\)).*?(C\)).*?(D\)).*?(\?|$)/i, '').trim();
+    // Remove lines like '1. Option', '2. Option', etc.
+    cleaned = cleaned.replace(/^[0-9]+\.\s.*$/gm, '').trim();
+    // Remove lines like 'A) Option', etc.
+    cleaned = cleaned.replace(/^[A-D]\)\s.*$/gm, '').trim();
+    // Remove extra whitespace
+    cleaned = cleaned.replace(/\n{2,}/g, '\n').trim();
+    return cleaned;
+  }
+
+  function formatQuizQuestion(q: any, number?: number) {
+    let text = `Q${number ? number : ''}: ${cleanQuizQuestionText(q.text || q.question)}`;
+    if (q.options && Array.isArray(q.options)) {
+      text += '\n' + q.options.map((opt: string, i: number) => `${i+1}. ${opt}`).join('\n');
+    }
+    return text;
+  }
 
   const stopQuiz = () => {
     setQuizMode(false);
-    setQuizIndex(0);
-    setQuizScore(0);
+    setQuizSessionId(null);
     setQuizFinished(false);
-    setMessages([]);
+    setCurrentQuizQuestion(null);
+    setQuizQuestionNumber(0);
     setInputText('');
   };
 
   const handleSendMessage = async () => {
     if (!inputText.trim()) return;
 
-    const userMessage: ChatMessage = {
-      id: Date.now().toString(),
-      content: inputText.trim(),
-      role: 'user',
-      timestamp: new Date().toISOString(),
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    const messageText = inputText.trim();
-    setInputText('');
-    setIsLoading(true);
-
-    if (!quizMode) {
+    if (quizMode) {
+      // Quiz mode: send answer to quiz API
+      setIsLoading(true);
+      const userMessage: ChatMessage = {
+        id: Date.now().toString(),
+        content: inputText.trim(),
+        role: 'user',
+        timestamp: new Date().toISOString(),
+      };
+      setQuizMessages(prev => [...prev, userMessage]);
+      setInputText('');
       try {
-        const response = await fetch('http://localhost:8000/chat', {
+        // Accept answer by number or text
+        let answerToSend = inputText.trim();
+        if (currentQuizQuestion.options && Array.isArray(currentQuizQuestion.options)) {
+          const idx = parseInt(answerToSend, 10);
+          if (!isNaN(idx) && currentQuizQuestion.options[idx - 1]) {
+            answerToSend = currentQuizQuestion.options[idx - 1];
+          }
+        }
+        if (!quizSessionId) {
+          setQuizMessages(prev => [
+            ...prev,
+            {
+              id: (Date.now() + 10).toString(),
+              content: 'Quiz session missing. Please restart the quiz.',
+              role: 'assistant',
+              timestamp: new Date().toISOString(),
+            }
+          ]);
+          setIsLoading(false);
+          return;
+        }
+        setAnsweredQuizMessageId(
+          quizMessages.filter(m => m.role === 'assistant' && m.question && Array.isArray(m.question.options)).slice(-1)[0]?.id || null
+        );
+        const resp: SubmitAnswerResponse = await submitQuizAnswer(quizSessionId as string, answerToSend);
+        let feedbackMsg = resp.feedback?.explanation || (resp.correct ? 'Correct!' : 'Incorrect.');
+        setQuizMessages(prev => [
+          ...prev,
+          {
+            id: (Date.now() + 2).toString(),
+            content: feedbackMsg,
+            role: 'assistant',
+            timestamp: new Date().toISOString(),
+          }
+        ]);
+        if (resp.session_complete) {
+          setQuizMessages(prev => [
+            ...prev,
+            {
+              id: (Date.now() + 3).toString(),
+              content: `Quiz complete! Your score: ${quizScore + (resp.correct ? 1 : 0)}`,
+              role: 'assistant',
+              timestamp: new Date().toISOString(),
+            }
+          ]);
+          setQuizFinished(true);
+        } else if (resp.next_question) {
+          // Robust normalization: handle both {question: {...}} and {...} API shapes
+          let rawQuestion = resp.next_question.question ? resp.next_question.question : resp.next_question;
+          let options: string[] = [];
+          if (Array.isArray(rawQuestion.options)) {
+            options = rawQuestion.options as string[];
+          } else if (typeof rawQuestion.options === 'string') {
+            try {
+              const parsed = JSON.parse(rawQuestion.options);
+              if (Array.isArray(parsed)) options = parsed as string[];
+            } catch {
+              // fallback: do not split by comma to prevent splitting a string into an array of characters
+              options = [rawQuestion.options];
+            }
+          } else {
+            options = Array.isArray(options) ? options : [];
+          }
+          const normQuestion = {
+            ...rawQuestion,
+            text: rawQuestion.question_text || rawQuestion.text,
+            options: Array.isArray(options) ? options : [],
+          };
+          setCurrentQuizQuestion(normQuestion);
+          setQuizQuestionNumber(q => q + 1);
+          setQuizMessages(prev => [
+            ...prev,
+            {
+              id: (Date.now() + 4).toString(),
+              content: formatQuizQuestion(normQuestion, quizQuestionNumber + 1),
+              role: 'assistant',
+              timestamp: new Date().toISOString(),
+              question: normQuestion
+            } as any
+          ]);
+          setAnsweredQuizMessageId(null);
+          if (resp.correct) setQuizScore(s => s + 1);
+        }
+      } catch (err) {
+        setQuizMessages(prev => [
+          ...prev,
+          {
+            id: (Date.now() + 5).toString(),
+            content: 'Sorry, there was a problem submitting your answer. Please try again.',
+            role: 'assistant',
+            timestamp: new Date().toISOString(),
+          }
+        ]);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      // Chat mode: send message to backend
+      setIsLoading(true);
+      const userMessage: ChatMessage = {
+        id: Date.now().toString(),
+        content: inputText,
+        role: 'user',
+        timestamp: new Date().toISOString(),
+      };
+      setChatMessages(prev => [...prev, userMessage]);
+      const messageText = inputText.trim();
+      setInputText('');
+      setIsLoading(true);
+
+      try {
+        const response = await fetch(`${BASE_URL}/chat`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -95,9 +305,9 @@ const ChatScreen: React.FC = () => {
           role: 'assistant',
           timestamp: new Date().toISOString(),
         };
-        setMessages(prev => [...prev, aiResponse]);
+        setChatMessages(prev => [...prev, aiResponse]);
       } catch (err) {
-        setMessages(prev => [
+        setChatMessages(prev => [
           ...prev,
           {
             id: (Date.now() + 1).toString(),
@@ -109,58 +319,6 @@ const ChatScreen: React.FC = () => {
       } finally {
         setIsLoading(false);
       }
-    } else {
-      // Quiz mode logic
-      setTimeout(() => {
-        if (quizFinished) {
-          setIsLoading(false);
-          return;
-        }
-        const currentQ = mockQuizQuestions[quizIndex];
-        let correct = false;
-        // Accept answer by number or text
-        if (currentQ.choices) {
-          const idx = parseInt(messageText.trim(), 10);
-          if (!isNaN(idx) && currentQ.choices[idx-1]) {
-            correct = currentQ.choices[idx-1].toLowerCase() === currentQ.answer.toLowerCase();
-          } else {
-            correct = messageText.trim().toLowerCase() === currentQ.answer.toLowerCase();
-          }
-        } else {
-          correct = messageText.trim().toLowerCase() === currentQ.answer.toLowerCase();
-        }
-        let feedback = correct ? 'Correct!' : `Incorrect. The answer is: ${currentQ.answer}`;
-        if (correct) setQuizScore(s => s + 1);
-        let nextIndex = quizIndex + 1;
-        let newMessages = [
-          ...messages,
-          {
-            id: (Date.now() + 2).toString(),
-            content: feedback,
-            role: 'assistant',
-            timestamp: new Date().toISOString(),
-          }
-        ];
-        if (nextIndex < mockQuizQuestions.length) {
-          newMessages.push({
-            id: (Date.now() + 3).toString(),
-            content: mockQuizQuestions[nextIndex].question + (mockQuizQuestions[nextIndex].choices ? '\n' + mockQuizQuestions[nextIndex].choices.map((c, i) => `${i+1}. ${c}`).join('\n') : ''),
-            role: 'assistant',
-            timestamp: new Date().toISOString(),
-          });
-          setQuizIndex(nextIndex);
-        } else {
-          newMessages.push({
-            id: (Date.now() + 4).toString(),
-            content: `Quiz complete! Your score: ${quizScore + (correct ? 1 : 0)} / ${mockQuizQuestions.length}`,
-            role: 'assistant',
-            timestamp: new Date().toISOString(),
-          });
-          setQuizFinished(true);
-        }
-        setMessages(newMessages);
-        setIsLoading(false);
-      }, 800);
     }
   };
 
@@ -168,30 +326,183 @@ const ChatScreen: React.FC = () => {
     flatListRef.current?.scrollToEnd({ animated: true });
   };
 
-  const renderMessage = ({ item }: { item: ChatMessage }) => (
-    <View style={styles.messageWrapper}>
-      {item.role === 'assistant' && (
-        <View style={styles.avatarContainer}>
-          <Text style={styles.avatar}>🧙‍♂️</Text>
-        </View>
-      )}
-      <View style={[
-        styles.messageContainer,
-        item.role === 'user' ? styles.userMessage : styles.assistantMessage
-      ]}>
-        <Text style={[
-          styles.messageText,
-          item.role === 'user' ? styles.userMessageText : styles.assistantMessageText
+  // Track which assistant message (by id) is the latest unanswered quiz question
+  const [answeredQuizMessageId, setAnsweredQuizMessageId] = useState<string | null>(null);
+
+  const renderMessage = ({ item }: { item: ChatMessage }) => {
+    // Show options if this is an assistant quiz message with options, and not yet answered
+    // Defensive: ensure options is always a string[] if possible
+    let fixedQuestion = item.question;
+    if (
+      quizMode &&
+      item.role === 'assistant' &&
+      item.question &&
+      (!Array.isArray(item.question.options) || typeof item.question.options === 'string')
+    ) {
+      // Try to coerce options to string[]
+      let opts = item.question.options;
+      if (typeof opts === 'string') {
+        try {
+          const parsed = JSON.parse(opts);
+          if (Array.isArray(parsed)) opts = parsed;
+          else opts = [opts];
+        } catch {
+          if (opts.includes(',')) opts = opts.split(',').map((x: string) => x.trim());
+          else opts = [opts];
+        }
+      } else if (!Array.isArray(opts)) {
+        opts = [];
+      }
+      fixedQuestion = { ...item.question, options: opts };
+      // Optionally log for dev
+      if (__DEV__) console.log('[QUIZ PATCH] Fixed options for assistant message:', item, fixedQuestion);
+    }
+    const showQuizOptions = quizMode && item.role === 'assistant' && fixedQuestion && Array.isArray(fixedQuestion.options) && fixedQuestion.options.length > 0 && !quizFinished && (!answeredQuizMessageId || answeredQuizMessageId !== item.id);
+    return (
+      <View style={styles.messageWrapper}>
+        {item.role === 'assistant' && (
+          <View style={styles.avatarContainer}>
+            <Text style={styles.avatar}>🧙‍♂️</Text>
+          </View>
+        )}
+        <View style={[
+          styles.messageContainer,
+          item.role === 'user' ? styles.userMessage : styles.assistantMessage
         ]}>
-          {item.content}
-        </Text>
-        <Text style={styles.timestamp}>
-          {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-        </Text>
+          <Text style={[
+            styles.messageText,
+            item.role === 'user' ? styles.userMessageText : styles.assistantMessageText
+          ]}>
+            {/* Always show normalized question text if present for quiz messages */}
+            {item.question
+              ? normalizeQuestionText(item.question.text || item.question.question || item.question)
+              : item.content}
+          </Text>
+          {/* Debug overlays removed for production. Uncomment for debugging only. */}
+          {/*
+          <View style={{ backgroundColor: 'rgba(255,255,0,0.15)', padding: 4, marginBottom: 4 }}>
+            <Text style={{ fontSize: 11, color: '#444' }}>
+              showQuizOptions: {showQuizOptions ? 'true' : 'false'} | quizMode: {quizMode ? 'true' : 'false'} | role: {item.role}
+            </Text>
+            <Text style={{ fontSize: 11, color: '#444' }}>
+              question: {item.question ? 'yes' : 'no'} | options: {item.question && Array.isArray(item.question.options) ? item.question.options.length : 'none'}
+            </Text>
+            <Text style={{ fontSize: 11, color: '#444' }}>
+              quizFinished: {quizFinished ? 'true' : 'false'} | answeredQuizMessageId: {answeredQuizMessageId} | item.id: {item.id}
+            </Text>
+          </View>
+          {item.role === 'assistant' && item.question && (
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.04)', padding: 4, marginBottom: 4 }}>
+              <Text style={{ fontSize: 10, color: '#333' }}>
+                question: {JSON.stringify(item.question, null, 2)}
+              </Text>
+              {!Array.isArray(item.question.options) && (
+                <Text style={{ fontSize: 10, color: 'red' }}>
+                  WARNING: options is not an array. Actual type: {typeof item.question.options} Value: {JSON.stringify(item.question.options)}
+                </Text>
+              )}
+            </View>
+          )}
+          */}
+          {showQuizOptions && Array.isArray(item.question.options) && item.question.options.length > 0 ? (
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 8 }}>
+              {item.question.options.map((opt: string, idx: number) => (
+                <TouchableOpacity
+                  key={idx}
+                  style={{
+                    backgroundColor: '#e0e7ef',
+                    borderRadius: 14,
+                    paddingHorizontal: 12,
+                    paddingVertical: 6,
+                    marginRight: 6,
+                    marginBottom: 6,
+                    borderWidth: 1,
+                    borderColor: '#b5c1d8',
+                  }}
+                  onPress={async () => {
+                    if (isLoading || answeredQuizMessageId === item.id) return;
+                    setAnsweredQuizMessageId(item.id);
+                    if (!quizSessionId) return;
+                    setIsLoading(true);
+                    const userMessage = {
+                      id: Date.now().toString(),
+                      content: opt,
+                      role: 'user' as const,
+                      timestamp: new Date().toISOString(),
+                    };
+                    setQuizMessages(prev => [...prev, userMessage]);
+                    try {
+                      const resp: SubmitAnswerResponse = await submitQuizAnswer(quizSessionId as string, opt);
+                      let feedbackMsg = resp.feedback?.explanation || (resp.correct ? 'Correct!' : 'Incorrect.');
+                      setQuizMessages(prev => [
+                        ...prev,
+                        {
+                          id: (Date.now() + 2).toString(),
+                          content: feedbackMsg,
+                          role: 'assistant' as const,
+                          timestamp: new Date().toISOString(),
+                        }
+                      ]);
+                      if (resp.session_complete) {
+                        setQuizMessages(prev => [
+                          ...prev,
+                          {
+                            id: (Date.now() + 3).toString(),
+                            content: `Quiz complete! Your score: ${quizScore + (resp.correct ? 1 : 0)}`,
+                            role: 'assistant' as const,
+                            timestamp: new Date().toISOString(),
+                          }
+                        ]);
+                        setQuizFinished(true);
+                      } else if (resp.next_question) {
+                        setCurrentQuizQuestion(resp.next_question);
+                        setQuizQuestionNumber(q => q + 1);
+                        setQuizMessages(prev => [
+                          ...prev,
+                          {
+                            id: (Date.now() + 4).toString(),
+                            content: formatQuizQuestion(resp.next_question, quizQuestionNumber + 1),
+                            role: 'assistant' as const,
+                            timestamp: new Date().toISOString(),
+                            question: resp.next_question
+                          } as any
+                        ]);
+                        setAnsweredQuizMessageId(null);
+                        if (resp.correct) setQuizScore(s => s + 1);
+                      }
+                    } catch (err) {
+                      setQuizMessages(prev => [
+                        ...prev,
+                        {
+                          id: (Date.now() + 5).toString(),
+                          content: 'Sorry, there was a problem submitting your answer. Please try again.',
+                          role: 'assistant' as const,
+                          timestamp: new Date().toISOString(),
+                        }
+                      ]);
+                    } finally {
+                      setIsLoading(false);
+                    }
+                  }}
+                  disabled={isLoading || answeredQuizMessageId === item.id}
+                >
+                  <Text style={{ color: '#2a3a5e', fontWeight: '600', fontSize: 15 }}>{opt}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : null}
+          <Text style={styles.timestamp}>
+            {item.timestamp && !isNaN(new Date(item.timestamp).getTime())
+              ? new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+              : '--:--'}
+          </Text>
+        </View>
+        {item.role === 'user' && <View style={styles.spacer} />}
       </View>
-      {item.role === 'user' && <View style={styles.spacer} />}
-    </View>
-  );
+    );
+  };
+
+  const currentMessages = quizMode ? quizMessages : chatMessages;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -229,7 +540,7 @@ const ChatScreen: React.FC = () => {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
       >
         <View style={styles.messagesContainer}>
-          {messages.length === 0 ? (
+          {currentMessages.length === 0 ? (
             <View style={styles.welcomeContainer}>
               <Text style={styles.welcomeAvatar}>🧙‍♂️</Text>
               <Text style={styles.welcomeTitle}>Welcome to The Grey Tutor</Text>
@@ -238,23 +549,25 @@ const ChatScreen: React.FC = () => {
               </Text>
             </View>
           ) : (
-            <FlatList
-              ref={flatListRef}
-              data={messages}
-              renderItem={renderMessage}
-              keyExtractor={(item) => item.id}
-              style={styles.messagesList}
-              contentContainerStyle={styles.messagesContent}
-              showsVerticalScrollIndicator={false}
-              onContentSizeChange={() => {
-                setTimeout(() => {
-                  flatListRef.current?.scrollToEnd({ animated: true });
-                }, 100);
-              }}
-            />
+            <>
+              <FlatList
+                ref={flatListRef}
+                data={currentMessages}
+                renderItem={renderMessage}
+                keyExtractor={(item) => item.id}
+                style={styles.messagesList}
+                contentContainerStyle={styles.messagesContent}
+                showsVerticalScrollIndicator={false}
+                onContentSizeChange={() => {
+                  setTimeout(() => {
+                    flatListRef.current?.scrollToEnd({ animated: true });
+                  }, 100);
+                }}
+              />
+            </>
           )}
 
-          {messages.length > 3 && (
+          {currentMessages.length > 3 && (
             <TouchableOpacity style={styles.scrollButton} onPress={scrollToBottom}>
               <Ionicons name="chevron-down" size={20} color="#FFFFFF" />
             </TouchableOpacity>

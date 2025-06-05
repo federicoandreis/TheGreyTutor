@@ -447,48 +447,61 @@ class PathRAGRetriever:
         )
     
     def _extract_entities(self, query: str) -> List[str]:
-        """Extract potential entities from the query with multi-word support."""
-        words = query.split()
-        entities = []
-        
-        # Extract single capitalized words
-        for i, word in enumerate(words):
-            # Remove punctuation
+        """
+        Robust entity extraction:
+        - Case-insensitive extraction of all non-stopword tokens as fallback
+        - Filters out stopwords and common verbs
+        - Always includes non-stopword tokens if nothing else is found
+        - Expands singular/plural forms
+        """
+        import re
+        import logging
+        STOPWORDS = {
+            "who", "what", "where", "when", "why", "is", "the", "a", "an", "of", "in", "to", "and", "with", "on", "for", "by", "about", "how", "does", "do", "did", "are", "was", "were", "will", "can", "could", "should", "would",
+            "tell", "show", "find", "describe", "explain", "give", "me", "please", "let", "get", "answer", "list", "explain", "summarize", "say", "be", "have", "has", "had"
+        }
+        entity_candidates = set()
+        # Extract multi-word capitalized phrases (allow connectors)
+        phrase_pattern = r"([A-Z][a-z]+(?: (?:of|the|and|in|to|son|daughter|[A-Z][a-z]+)){1,3})"
+        for match in re.finditer(phrase_pattern, query):
+            entity = match.group(1).strip()
+            if entity:
+                entity_candidates.add(entity)
+        # Extract single capitalized words (after stripping punctuation)
+        for word in query.split():
             clean_word = word.strip('.,?!;:"\'\'()')
-            
-            # Check if it's capitalized (but not at the start of the sentence unless it's a proper noun)
-            if clean_word and clean_word[0].isupper() and (i > 0 or len(clean_word) > 3):
-                entities.append(clean_word)
-        
-        # Extract multi-word entities (e.g., "Bilbo Baggins", "War of the Ring")
-        i = 0
-        while i < len(words) - 1:
-            # If current word is capitalized, check if it's part of a multi-word entity
-            current_word = words[i].strip('.,?!;:"\'\'()')
-            if current_word and current_word[0].isupper():
-                # Try to find the longest multi-word entity
-                found_multi_word = False
-                for j in range(min(4, len(words) - i), 1, -1):  # Try up to 4-word entities
-                    potential_entity = ' '.join(word.strip('.,?!;:"\'\'()') for word in words[i:i+j])
-                    # Add if all words are capitalized or common connectors
-                    if all(w[0].isupper() or w.lower() in ['of', 'the', 'and', 'in', 'to', 'son', 'daughter'] 
-                           for w in potential_entity.split() if w):
-                        entities.append(potential_entity)
-                        i += j - 1  # Skip the words we just added
-                        found_multi_word = True
-                        break
-                if not found_multi_word:
-                    i += 1
-            else:
-                i += 1
-        
-        # Remove duplicates while preserving order
-        unique_entities = []
-        for entity in entities:
-            if entity not in unique_entities:
-                unique_entities.append(entity)
-        
-        return unique_entities
+            if clean_word and clean_word[0].isupper() and clean_word.isalpha():
+                entity_candidates.add(clean_word)
+        # Also extract all non-stopword tokens (case-insensitive)
+        tokens = re.findall(r'\b\w+\b', query.lower())
+        for token in tokens:
+            if token not in STOPWORDS and len(token) > 1:
+                entity_candidates.add(token)
+        entities = sorted([e for e in entity_candidates if e.lower() not in STOPWORDS], key=lambda x: -len(x))
+        if not entities:
+            # fallback: last non-stopword word (lowercase)
+            words = [w.strip('.,?!;:"\'\'()').lower() for w in query.split() if w.strip('.,?!;:"\'\'()')]
+            fallback = None
+            for w in reversed(words):
+                if w not in STOPWORDS and w:
+                    fallback = w
+                    break
+            if fallback:
+                entities = [fallback]
+                logging.getLogger(__name__).info(f"[DEBUG] Fallback entity extraction used: {entities}")
+        else:
+            logging.getLogger(__name__).info(f"[DEBUG] Extracted entities for search (single+multi): {entities}")
+        # Expand entity list to include singular/plural forms
+        expanded_entities = set(entities)
+        for ent in entities:
+            if len(ent) > 3 and ent.lower().endswith('s'):
+                expanded_entities.add(ent[:-1])  # singular
+            elif len(ent) > 2 and not ent.lower().endswith('s'):
+                expanded_entities.add(ent + 's')  # plural
+        expanded_entities = sorted(expanded_entities, key=lambda x: -len(x))
+        logging.getLogger(__name__).info(f"[DEBUG] Final entity list with singular/plural expansion: {expanded_entities}")
+        return expanded_entities
+
     
     def _find_relevant_communities(self, entities: List[str]) -> List[Dict[str, Any]]:
         """Find communities that contain the extracted entities."""
@@ -497,18 +510,20 @@ class PathRAGRetriever:
         
         communities = []
         
-        # Build a query to find communities containing any of the entities
+        # Robust Cypher: match nodes whose name (string or list) contains any entity (case-insensitive)
         query = """
         MATCH (n)
-        WHERE (n.name IN $entities OR 
-              ANY(alias IN n.aliases WHERE alias IN $entities))
+        WHERE n.name IS NOT NULL
+        WITH n, (CASE WHEN n.name =~ '.*' THEN [n.name] ELSE n.name END) AS names
+        UNWIND names AS nameVal
+        WITH n, nameVal
+        WHERE ANY(entity IN $entities WHERE toLower(nameVal) CONTAINS toLower(entity))
         MATCH (n)-[:BELONGS_TO_COMMUNITY]->(c:Community)
         RETURN DISTINCT c.id AS id, c.name AS name, c.summary AS summary, 
                c.node_count AS node_count, c.node_types AS node_types
         ORDER BY c.node_count DESC
         LIMIT $max_communities
         """
-        
         result = execute_query(query, {
             "entities": entities,
             "max_communities": self.max_communities
@@ -533,18 +548,17 @@ class PathRAGRetriever:
         community_ids = [c["id"] for c in communities]
         entities = []
         
-        # Find the most central entities in each community
+        # Robust Cypher: extract central entities, handling string/list names
         query = """
         MATCH (n)-[:BELONGS_TO_COMMUNITY]->(c:Community)
-        WHERE c.id IN $community_ids
-        WITH n, c
-        MATCH (n)-[r]-()
-        WITH n, count(r) AS rel_count, c
+        WHERE c.id IN $community_ids AND n.name IS NOT NULL
+        WITH n, c, (CASE WHEN n.name =~ '.*' THEN [n.name] ELSE n.name END) AS names
+        UNWIND names AS nameVal
+        WITH n, c, nameVal, count { (n)--() } AS rel_count
         ORDER BY rel_count DESC
-        RETURN n.name AS name, labels(n) AS labels, rel_count, c.id AS community_id
+        RETURN DISTINCT nameVal AS name, labels(n) AS labels, rel_count, c.id AS community_id
         LIMIT 15
         """
-        
         result = execute_query(query, {"community_ids": community_ids})
         
         for record in result:
@@ -563,19 +577,22 @@ class PathRAGRetriever:
         
         # For each query entity, find paths to community entities
         for query_entity in query_entities:
-            # Build a query to find paths
-            query = """
+            # Robust Cypher: match source/target by any string/list name containing entity (case-insensitive)
+            query = f"""
             MATCH (source)
-            WHERE (source.name = $source_entity OR $source_entity IN source.aliases)
-            MATCH (target) 
-            WHERE (target.name IN $target_entities OR 
-                  ANY(alias IN target.aliases WHERE alias IN $target_entities))
-            AND source <> target
-            MATCH path = shortestPath((source)-[*..{max_path_length}]-(target))
+            WHERE source.name IS NOT NULL
+            WITH source, (CASE WHEN source.name =~ '.*' THEN [source.name] ELSE source.name END) AS names
+            UNWIND names AS sourceName
+            WITH source, sourceName WHERE ANY(entity IN [$source_entity] WHERE toLower(sourceName) CONTAINS toLower(entity))
+            MATCH (target)
+            WHERE target.name IS NOT NULL
+            WITH source, sourceName, target, (CASE WHEN target.name =~ '.*' THEN [target.name] ELSE target.name END) AS tnames
+            UNWIND tnames AS targetName
+            WITH source, sourceName, target, targetName WHERE ANY(entity IN $target_entities WHERE toLower(targetName) CONTAINS toLower(entity)) AND source <> target
+            MATCH path = shortestPath((source)-[*..{self.max_path_length}]-(target))
             RETURN path
             LIMIT $max_paths_per_entity
-            """.format(max_path_length=self.max_path_length)
-            
+            """
             result = execute_query(query, {
                 "source_entity": query_entity,
                 "target_entities": community_entities,
@@ -590,6 +607,17 @@ class PathRAGRetriever:
         
         return paths
     
+    @staticmethod
+    def format_relationship_for_display(rel):
+        # Minimal formatter for Neo4j Relationship objects
+        return {
+            "id": getattr(rel, "element_id", getattr(rel, "id", None)),
+            "type": getattr(rel, "type", None),
+            "start_node": getattr(rel, "start_node", None),
+            "end_node": getattr(rel, "end_node", None),
+            "properties": dict(rel) if hasattr(rel, "__iter__") else {}
+        }
+    
     def _format_path(self, path) -> Dict[str, Any]:
         """Format a path for display, preserving node and relationship information."""
         nodes = []
@@ -600,49 +628,22 @@ class PathRAGRetriever:
             nodes.append(formatted_node)
         
         for rel in path.relationships:
-            start_id = rel.start_node.element_id if hasattr(rel.start_node, 'element_id') else str(rel.start_node.id)
-            end_id = rel.end_node.element_id if hasattr(rel.end_node, 'element_id') else str(rel.end_node.id)
-            rel_info = {
-                "id": rel.element_id if hasattr(rel, 'element_id') else str(rel.id),
-                "type": rel.type,
-                "start_node": start_id,
-                "end_node": end_id,
-                "properties": dict(rel)
-            }
-            relationships.append(rel_info)
+            formatted_rel = PathRAGRetriever.format_relationship_for_display(rel)
+            relationships.append(formatted_rel)
         
         return {
-            "length": len(path.relationships),
             "nodes": nodes,
-            "relationships": relationships
+            "relationships": relationships,
+            "length": len(nodes) - 1
         }
     
     def _prune_paths(self, paths: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Prune paths to reduce redundancy and improve relevance."""
-        if not paths:
-            return []
-        
-        # Sort paths by length (shorter paths first)
-        sorted_paths = sorted(paths, key=lambda p: p["length"])
-        
-        # Keep track of nodes we've already covered
-        covered_nodes = set()
+        """Prune paths to reduce redundancy."""
         pruned_paths = []
-        
-        for path in sorted_paths:
-            # Check if this path adds new information
-            path_nodes = set(node["id"] for node in path["nodes"])
-            new_nodes = path_nodes - covered_nodes
-            
-            # If the path adds at least one new node, keep it
-            if new_nodes:
-                pruned_paths.append(path)
-                covered_nodes.update(path_nodes)
-            
-            # Limit to a reasonable number of paths
+        for path in paths:
             if len(pruned_paths) >= 5:
                 break
-        
+            pruned_paths.append(path)
         return pruned_paths
     
     def _extract_nodes_and_relationships(self, paths: List[Dict[str, Any]]) -> tuple:

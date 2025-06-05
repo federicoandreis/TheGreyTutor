@@ -1,0 +1,82 @@
+{
+  "strategy": "pathrag",
+  "query": "Who are the nine?",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:405",
+      "labels": [
+        "__Entity__",
+        "Artifact",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "name": "Nine"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:473",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Hornblowers"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:475",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Bracegirdles"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:644",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": [
+          "Gandalf the Grey",
+          "Gandalf"
+        ],
+        "title": [
+          "Wizard",
+          ""
+        ]
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:631",
+      "labels": [
+        "Chunk",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "text": "ng us wood quick to burn, and lay it all about us, and beneath;\nand pour oil upon it. And when I bid you thrust in a torch. Do this\nand speak no more to me. Farewell!\u2019\n\u2018By your leave, lord!\u2019 said Pippin and turned and fled in terror\nfrom the deathly house. \u2018Poor Faramir!\u2019 he thought. \u2018I must find\nGandalf. Poor Faramir! Quite likely he needs medicine more than\ntears. Oh, where can I find Gandalf ? In the thick of things, I suppose;\nand he will have no time to spare for dying men or madmen.\u2019\nAt "
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:493",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Event"
+      ],
+      "properties": {
+        "name": "search for Gandalf"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:17483",
+      "type": "DIFFICULTY_PROGRESSION",
+      "start_node": 

@@ -1,0 +1,366 @@
+{
+  "strategy": "pathrag",
+  "query": "Tell me about the relationship between Aragorn and Arwen",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Aragorn",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Elrond",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:64",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Denethor",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:289",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Boromir",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:357",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Gollum",
+        "title": "creature"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:870",
+      "labels": [
+        "Chunk",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "text": " he first told me about himself. I almost wish\nthat my adventures were not over, and that I could go with him when\nhis day comes.\u2019\nAragorn smiled at him; then he turned to Boromir again. \u2018For my\npart I forgive your doubt,\u2019 he said. \u2018Little do I resemble the figures\nof Elendil and Isildur as they stand carven in their majesty in the\nhalls of Denethor. I am but the heir of Isildur, not Isildur himself. I\nhave had a hard life and a long; and the leagues that lie between here\nand Gondor are a small "
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:283",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Location"
+      ],
+      "properties": {
+        "name": "Denethor"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5644",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:4788",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:64",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6301",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:289",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6665",
+      "type": "KNOWS_ABOUT",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:357",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5472",
+      "type": "FROM_CHUNK",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:870",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5600",
+      "type": "FROM_CHUNK",
+      "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:283",
+      "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:870",
+      "properties": {}
+    }
+  ],
+  "paths": [
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Character"
+          ],
+          "properties": {
+            "name": "Aragorn",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Character"
+          ],
+          "properties": {
+            "name": "Elrond",
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5644",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Character"
+          ],
+          "properties": {
+            "name": "Aragorn",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:64",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Character"
+          ],
+          "properties": {
+            "name": "Denethor",
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:4788",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:64",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Character"
+          ],
+          "properties": {
+            "name": "Aragorn",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:289",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Character"
+          ],
+          "properties": {
+            "name": "Boromir",
+            "title": ""
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6301",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:289",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 1,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Character"
+          ],
+          "properties": {
+            "name": "Aragorn",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:357",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Character"
+          ],
+          "properties": {
+            "name": "Gollum",
+            "title": "creature"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6665",
+          "type": "KNOWS_ABOUT",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:357",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "length": 2,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Character"
+          ],
+          "properties": {
+            "name": "Aragorn",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:870",
+          "labels": [
+            "Chunk",
+            "__KGBuilder__"
+          ],
+          "properties": {
+            "text": " he first told me about himself. I almost wish\nthat my adventures were not over, and that I could go with him when\nhis day comes.\u2019\nAragorn smiled at him; then he turned to Boromir again. \u2018For my\npart I forgive your doubt,\u2019 he said. \u2018Little do I resemble the figures\nof Elendil and Isildur as they stand carven in their majesty in the\nhalls of Denethor. I am but the heir of Isildur, not Isildur himself. I\nhave had a hard life and a long; and the leagues that lie between here\nand Gondor are a small "
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:283",
+          "labels": [
+            "__Entity__",
+            "__KGBuilder__",
+            "Location"
+          ],
+          "properties": {
+            "name": "Denethor"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5472",
+          "type": "FROM_CHUNK",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:28",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:870",
+          "properties": {}
+        },
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5600",
+          "type": "FROM_CHUNK",
+          "start_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:283",
+          "end_node": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:870",
+          "properties": {}
+        }
+      ]
+    }
+  ],
+  "execution_time": 0.13086891174316406,
+  "total_results": 18,
+  "metadata": {
+    "entities": [
+      "Tell",
+      "Aragorn",
+      "Arwen",
+      "Aragorn and Arwen"
+    ],
+    "communities": [
+      82,
+      191,
+      185
+    ],
+    "community_entities": [
+      "Elrond",
+      "Denethor",
+      [
+        "Saruman the White",
+        "Saruman the Wise",
+        "Saruman"
+      ],
+      "Gollum",
+      "Boromir",
+      "Aragorn"
+    ]
+  }
+}

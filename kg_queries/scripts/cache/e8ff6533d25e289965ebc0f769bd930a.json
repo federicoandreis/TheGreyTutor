@@ -1,0 +1,17 @@
+{
+  "strategy": "pathrag",
+  "query": "What do you know of the Ents?",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.021811485290527344,
+  "total_results": 0,
+  "metadata": {
+    "entities": [
+      "What",
+      "Ents"
+    ],
+    "communities": [],
+    "community_entities": []
+  }
+}

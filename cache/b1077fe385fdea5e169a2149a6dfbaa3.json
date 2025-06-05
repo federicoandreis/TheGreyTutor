@@ -1,0 +1,16 @@
+{
+  "strategy": "pathrag",
+  "query": "who was Beorn",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.16472959518432617,
+  "total_results": 0,
+  "metadata": {
+    "entities": [
+      "Beorn"
+    ],
+    "communities": [],
+    "community_entities": []
+  }
+}

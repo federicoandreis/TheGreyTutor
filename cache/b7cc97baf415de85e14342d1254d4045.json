@@ -1,0 +1,86 @@
+{
+  "strategy": "pathrag",
+  "query": "Who is Galadriel?",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:746",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Galadriel",
+        "title": "Lady of Lothlorien"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Elrond",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:376",
+      "labels": [
+        "__Entity__",
+        "Artifact",
+        "__KGBuilder__"
+      ],
+      "properties": {
+        "name": "hood"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:102",
+      "labels": [
+        "Community"
+      ],
+      "properties": {
+        "name": "Saruman the White & Others (Characters)"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:105",
+      "labels": [
+        "Community"
+      ],
+      "properties": {
+        "name": "Saruman the White & Others (Characters)"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:318",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Location"
+      ],
+      "properties": {
+        "name": "Grey Havens"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:412",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Sauron",
+        "title": "Enemy of old"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:3681",
+      "type": "DIFFICULTY_PROGRESSION",
+      "start_node": 

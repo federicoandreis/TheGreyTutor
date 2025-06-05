@@ -294,24 +294,16 @@ class FactualQuestionGenerator(QuestionGenerator):
         display_property = format_property(property_name)
         
         # Format the question with proper entity and property display
-        try:
-            question_text = template["template"].format(
-                entity=display_entity,
-                property=display_property
-            )
-            
-            # Validate the question text
-            if not question_text.endswith('?'):
-                question_text += '?'
-                
-            # Check for malformed questions
-            if len(question_text.strip()) < 10 or '?' not in question_text:
-                # Use a fallback template
-                question_text = f"According to the lore of Middle-earth, what is the {display_property} of {display_entity}?"
-        except Exception as e:
-            logger.warning(f"Error formatting question: {e}")
-            # Use a fallback template
-            question_text = f"According to the lore of Middle-earth, what is the {display_property} of {display_entity}?"
+        question_text = template["template"].format(
+            entity=entity_name,
+            property=property_name
+        )
+        import re
+        question_text = re.sub(r"(Is it:|Which of the following|Choose one:)[^?]*[?]", "", question_text, flags=re.IGNORECASE).strip()
+        if not question_text.endswith('?'):
+            question_text += '?'
+        if len(question_text) < 10:
+            question_text = f"What is {entity_name}?"
         
         # Create the question object
         question = {

@@ -1,0 +1,98 @@
+{
+  "strategy": "relationship_aware",
+  "query": "What is the connection between Gandalf and Saruman?",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:795",
+      "labels": [
+        "Community"
+      ],
+      "properties": {}
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {}
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:105",
+      "labels": [
+        "Community"
+      ],
+      "properties": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5088",
+      "type": "BELONGS_TO_COMMUNITY",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5084",
+      "type": "BELONGS_TO_COMMUNITY",
+      "properties": {}
+    }
+  ],
+  "paths": [
+    {
+      "length": 2,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:795",
+          "labels": [
+            "Community"
+          ],
+          "properties": {
+            "name": "Gandalf the Grey & Others (Characters)"
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:7",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Elrond",
+            "title": ""
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:105",
+          "labels": [
+            "Community"
+          ],
+          "properties": {
+            "name": "Saruman the White & Others (Characters)"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5088",
+          "type": "BELONGS_TO_COMMUNITY",
+          "properties": {}
+        },
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:5084",
+          "type": "BELONGS_TO_COMMUNITY",
+          "properties": {}
+        }
+      ]
+    }
+  ],
+  "execution_time": 0.049028635025024414,
+  "total_results": 6,
+  "metadata": {
+    "entities_found": [
+      "Gandalf",
+      "Saruman"
+    ]
+  }
+}

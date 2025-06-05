@@ -1,0 +1,152 @@
+{
+  "strategy": "hybrid",
+  "query": "How did Frodo destroy the Ring?",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1505",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Frodo Baggins"
+      },
+      "matched_in": [
+        "name"
+      ]
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:550",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Ringwraiths"
+      },
+      "matched_in": [
+        "name"
+      ]
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:567",
+      "labels": [
+        "__KGBuilder__",
+        "Event",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "taking of the Ring"
+      },
+      "matched_in": [
+        "name"
+      ]
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1282",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Ring"
+      },
+      "matched_in": [
+        "name"
+      ]
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1494",
+      "labels": [
+        "__KGBuilder__",
+        "Event",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Tale of the Ring"
+      },
+      "matched_in": [
+        "name"
+      ]
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2015",
+      "labels": [
+        "Community"
+      ],
+      "properties": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:9176",
+      "type": "BELONGS_TO_COMMUNITY",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:9171",
+      "type": "BELONGS_TO_COMMUNITY",
+      "properties": {}
+    }
+  ],
+  "paths": [
+    {
+      "length": 2,
+      "nodes": [
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1505",
+          "labels": [
+            "__KGBuilder__",
+            "Character",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Frodo Baggins",
+            "title": "Heir of Bilbo"
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2015",
+          "labels": [
+            "Community"
+          ],
+          "properties": {
+            "name": "wizard & Others (Characters)"
+          }
+        },
+        {
+          "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1494",
+          "labels": [
+            "__KGBuilder__",
+            "Event",
+            "__Entity__"
+          ],
+          "properties": {
+            "name": "Tale of the Ring"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:9176",
+          "type": "BELONGS_TO_COMMUNITY",
+          "properties": {}
+        },
+        {
+          "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:9171",
+          "type": "BELONGS_TO_COMMUNITY",
+          "properties": {}
+        }
+      ]
+    }
+  ],
+  "execution_time": 0.10095381736755371,
+  "total_results": 9,
+  "metadata": {
+    "entity_results": 5,
+    "relationship_results": 5
+  }
+}

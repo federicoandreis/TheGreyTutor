@@ -1,0 +1,14 @@
+{
+  "strategy": "pathrag",
+  "query": "tell me about romance in tolkien role",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.0009999275207519531,
+  "total_results": 0,
+  "metadata": {
+    "entities": [],
+    "communities": [],
+    "community_entities": []
+  }
+}

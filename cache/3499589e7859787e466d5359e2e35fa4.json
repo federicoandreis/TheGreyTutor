@@ -1,0 +1,29 @@
+{
+  "strategy": "entity_centric",
+  "query": "Who is Frodo?",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1505",
+      "labels": [
+        "__KGBuilder__",
+        "__Entity__",
+        "Character"
+      ],
+      "properties": {
+        "name": "Frodo Baggins"
+      },
+      "matched_in": [
+        "name"
+      ]
+    }
+  ],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.02369523048400879,
+  "total_results": 1,
+  "metadata": {
+    "entities_found": [
+      "Frodo"
+    ]
+  }
+}

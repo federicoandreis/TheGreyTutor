@@ -1,0 +1,78 @@
+{
+  "strategy": "pathrag",
+  "query": "Tell me about the ents",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:23",
+      "labels": [
+        "__Entity__",
+        "__KGBuilder__",
+        "Artifact"
+      ],
+      "properties": {
+        "name": "bottle of ointment"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1478",
+      "labels": [
+        "Character",
+        "__KGBuilder__",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Gorbadoc",
+        "title": "Master"
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1",
+      "labels": [
+        "Character",
+        "__KGBuilder__",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": [
+          "Bilbo Baggins",
+          "Bilbo"
+        ],
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:5",
+      "labels": [
+        "Character",
+        "__KGBuilder__",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Pippin",
+        "title": ""
+      }
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:27",
+      "labels": [
+        "Character",
+        "__KGBuilder__",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": [
+          "Frodo Baggins",
+          "Frodo"
+        ],
+        "title": [
+          "",
+          "heir of Bilbo"
+        ]
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:33156",
+      "type": "DIFFICULTY_PROGRESSION",
+      "start_node": 

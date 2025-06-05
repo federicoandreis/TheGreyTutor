@@ -1,0 +1,16 @@
+{
+  "strategy": "pathrag",
+  "query": "What is your favourite topic?",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.053871870040893555,
+  "total_results": 0,
+  "metadata": {
+    "entities": [
+      "What"
+    ],
+    "communities": [],
+    "community_entities": []
+  }
+}

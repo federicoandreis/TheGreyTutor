@@ -1,0 +1,19 @@
+{
+  "strategy": "pathrag",
+  "query": "What about the dragons of Middle Earth?",
+  "nodes": [],
+  "relationships": [],
+  "paths": [],
+  "execution_time": 0.0260164737701416,
+  "total_results": 0,
+  "metadata": {
+    "entities": [
+      "What",
+      "Middle",
+      "Earth",
+      "Middle Earth"
+    ],
+    "communities": [],
+    "community_entities": []
+  }
+}

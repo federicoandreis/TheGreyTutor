@@ -2,6 +2,7 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "module": "Node16",
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -38,7 +39,7 @@
       "dom",
       "esnext"
     ],
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,

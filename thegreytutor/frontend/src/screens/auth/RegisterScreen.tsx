@@ -18,9 +18,9 @@ const RegisterScreen: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
   const [displayName, setDisplayName] = useState('');
-  const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(selectAuthLoading);
-  const error = useAppSelector(selectAuthError);
+  const { state, dispatch } = useAppState();
+  const isLoading = state.isLoading;
+  const error = state.error;
 
   const handleRegister = async () => {
     if (!email || !password || !username || !displayName) {
@@ -38,10 +38,24 @@ const RegisterScreen: React.FC = () => {
       return;
     }
 
+    dispatch({ type: 'SET_LOADING', payload: true });
+    dispatch({ type: 'SET_ERROR', payload: null });
     try {
-      await dispatch(registerUser({ email, password, username, displayName })).unwrap();
-    } catch (error) {
-      Alert.alert('Registration Failed', error as string);
+      // Simulate registration API call
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      // Fake user object
+      const user = {
+        id: Date.now().toString(),
+        email,
+        displayName,
+      };
+      dispatch({ type: 'SET_USER', payload: user });
+      dispatch({ type: 'SET_LOADING', payload: false });
+      // Optionally, navigate away or show success
+    } catch (err) {
+      dispatch({ type: 'SET_ERROR', payload: 'Registration failed' });
+      dispatch({ type: 'SET_LOADING', payload: false });
+      Alert.alert('Registration Failed', 'An error occurred.');
     }
   };
 

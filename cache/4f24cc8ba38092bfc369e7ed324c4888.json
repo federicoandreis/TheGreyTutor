@@ -1,0 +1,89 @@
+{
+  "strategy": "hybrid",
+  "query": "Who is Frodo?",
+  "nodes": [
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1505",
+      "labels": [
+        "__KGBuilder__",
+        "Character",
+        "__Entity__"
+      ],
+      "properties": {
+        "name": "Frodo Baggins"
+      },
+      "matched_in": [
+        "name"
+      ]
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:2015",
+      "labels": [
+        "Community"
+      ],
+      "properties": {}
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1684",
+      "labels": [
+        "Community"
+      ],
+      "properties": {}
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1964",
+      "labels": [
+        "Community"
+      ],
+      "properties": {}
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:1671",
+      "labels": [
+        "Community"
+      ],
+      "properties": {}
+    },
+    {
+      "id": "4:bea90507-3768-49ba-92f9-8e7bd4ce7692:96",
+      "labels": [
+        "Community"
+      ],
+      "properties": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:9176",
+      "type": "BELONGS_TO_COMMUNITY",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:9175",
+      "type": "BELONGS_TO_COMMUNITY",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:8667",
+      "type": "BELONGS_TO_COMMUNITY",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6017",
+      "type": "BELONGS_TO_COMMUNITY",
+      "properties": {}
+    },
+    {
+      "id": "5:bea90507-3768-49ba-92f9-8e7bd4ce7692:6013",
+      "type": "BELONGS_TO_COMMUNITY",
+      "properties": {}
+    }
+  ],
+  "paths": [],
+  "execution_time": 0.051561832427978516,
+  "total_results": 11,
+  "metadata": {
+    "entity_results": 1,
+    "relationship_results": 11
+  }
+}
