@@ -7,9 +7,16 @@ from typing import List, Optional
 import os
 from pathlib import Path
 
+
 class Settings(BaseSettings):
     """Application settings with environment variable support."""
-    
+    model_config = {
+        "extra": "allow",
+        "env_file": ".env",
+        "env_file_encoding": "utf-8",
+        "case_sensitive": True,
+    }
+
     # Application
     APP_NAME: str = "The Grey Tutor"
     VERSION: str = "1.0.0"
@@ -24,11 +31,22 @@ class Settings(BaseSettings):
     
     # CORS
     ALLOWED_ORIGINS: List[str] = [
+        # Localhost and common dev ports
         "http://localhost:3000",
         "http://localhost:8081",
         "http://localhost:19006",
+        "http://127.0.0.1:19006",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:8081",
+        # Expo/React Native (Metro bundler, LAN, etc.)
         "exp://localhost:19000",
-        "exp://192.168.1.100:19000"  # Add your local IP for mobile testing
+        "exp://127.0.0.1:19000",
+        "exp://192.168.1.100:19000",
+        "http://192.168.1.100:19006",
+        "http://192.168.1.100:8081",
+        # Add more LAN IPs or ports as needed for your dev environment
+        # Wildcard for dev (uncomment for maximum flexibility, not for prod)
+        # "*"
     ]
     
     # Database Configuration
@@ -89,10 +107,6 @@ class Settings(BaseSettings):
     CONTENT_BASE_PATH: str = str(Path(__file__).parent.parent.parent.parent / "docs" / "sources")
     ENABLE_CONTENT_UPDATES: bool = True
     
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = True
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

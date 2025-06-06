@@ -1,29 +1,36 @@
 """
-Conversation models for The Grey Tutor.
+Conversation models for The Grey Tutor database.
 
-This module contains SQLAlchemy models for conversation data.
+This module defines the SQLAlchemy models for conversations, messages, questions, and answers.
 """
-import uuid
+import logging
+import json
+from typing import Dict, List, Any, Optional
 from datetime import datetime
-from typing import Dict, Any, Optional
-from sqlalchemy import Column, String, Float, Integer, Boolean, DateTime, ForeignKey, JSON, Text
-from sqlalchemy.orm import relationship
+import uuid
 
+from sqlalchemy import Column, String, Integer, Float, Boolean, DateTime, ForeignKey, JSON, Text
+from sqlalchemy.orm import relationship
 from database.connection import Base
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 
 class Conversation(Base):
     """Conversation model."""
+    
     __tablename__ = "conversations"
     
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     session_id = Column(String, ForeignKey("user_sessions.id"), nullable=True)
-    conversation_type = Column(String, nullable=False)
+    conversation_type = Column(String, nullable=False, default="chat")
     quiz_id = Column(String, nullable=True)
     start_time = Column(DateTime, nullable=False, default=datetime.utcnow)
     end_time = Column(DateTime, nullable=True)
-    duration_seconds = Column(Float, nullable=True)
+    duration_seconds = Column(Integer, nullable=True)
     meta_data = Column(JSON, nullable=False, default=dict)
     
     # Relationships
@@ -32,12 +39,32 @@ class Conversation(Base):
     messages = relationship("Message", back_populates="conversation", cascade="all, delete-orphan")
     parameters = relationship("ConversationParameters", back_populates="conversation", uselist=False, cascade="all, delete-orphan")
     
-    def __repr__(self) -> str:
-        return f"<Conversation {self.id}>"
+    def __repr__(self):
+        return f"<Conversation(id='{self.id}', user_id='{self.user_id}', conversation_type='{self.conversation_type}')>"
 
+class ConversationParameters(Base):
+    """Conversation parameters model."""
+    
+    __tablename__ = "conversation_parameters"
+    
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    conversation_id = Column(String, ForeignKey("conversations.id"), nullable=False, unique=True)
+    mode = Column(String, nullable=False, default="chat")
+    strategy = Column(String, nullable=False, default="default")
+    theme = Column(String, nullable=True)
+    fussiness = Column(Integer, nullable=True)
+    tier = Column(String, nullable=True)
+    use_llm = Column(Boolean, nullable=True)
+    
+    # Relationships
+    conversation = relationship("Conversation", back_populates="parameters")
+    
+    def __repr__(self):
+        return f"<ConversationParameters(id='{self.id}', conversation_id='{self.conversation_id}', mode='{self.mode}')>"
 
 class Message(Base):
     """Message model."""
+    
     __tablename__ = "messages"
     
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -49,22 +76,22 @@ class Message(Base):
     
     # Relationships
     conversation = relationship("Conversation", back_populates="messages")
-    questions = relationship("Question", back_populates="message", cascade="all, delete-orphan")
-    answers = relationship("Answer", back_populates="message", cascade="all, delete-orphan")
+    question = relationship("Question", back_populates="message", uselist=False, cascade="all, delete-orphan")
+    answer = relationship("Answer", back_populates="message", uselist=False, cascade="all, delete-orphan")
     
-    def __repr__(self) -> str:
-        return f"<Message {self.id}>"
-
+    def __repr__(self):
+        return f"<Message(id='{self.id}', conversation_id='{self.conversation_id}', role='{self.role}')>"
 
 class Question(Base):
     """Question model."""
+    
     __tablename__ = "questions"
     
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    message_id = Column(String, ForeignKey("messages.id"), nullable=False)
-    type = Column(String, nullable=False)
-    difficulty = Column(Integer, nullable=False)
-    entity = Column(String, nullable=False)
+    message_id = Column(String, ForeignKey("messages.id"), nullable=False, unique=True)
+    type = Column(String, nullable=False, default="multiple_choice")
+    difficulty = Column(String, nullable=False, default="medium")
+    entity = Column(String, nullable=True)
     tier = Column(String, nullable=True)
     options = Column(JSON, nullable=True)
     correct_answer = Column(String, nullable=True)
@@ -72,56 +99,28 @@ class Question(Base):
     meta_data = Column(JSON, nullable=False, default=dict)
     
     # Relationships
-    message = relationship("Message", back_populates="questions")
+    message = relationship("Message", back_populates="question")
     answers = relationship("Answer", back_populates="question", cascade="all, delete-orphan")
     
-    def __repr__(self) -> str:
-        return f"<Question {self.id}>"
-
+    def __repr__(self):
+        return f"<Question(id='{self.id}', message_id='{self.message_id}', type='{self.type}')>"
 
 class Answer(Base):
     """Answer model."""
+    
     __tablename__ = "answers"
     
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    message_id = Column(String, ForeignKey("messages.id"), nullable=False)
-    question_id = Column(String, ForeignKey("questions.id"), nullable=True)
+    message_id = Column(String, ForeignKey("messages.id"), nullable=False, unique=True)
+    question_id = Column(String, ForeignKey("questions.id"), nullable=False)
     content = Column(Text, nullable=False)
     correct = Column(Boolean, nullable=True)
     quality_score = Column(Float, nullable=True)
-    feedback = Column(JSON, nullable=True)
+    feedback = Column(Text, nullable=True)
     
     # Relationships
-    message = relationship("Message", back_populates="answers")
+    message = relationship("Message", back_populates="answer")
     question = relationship("Question", back_populates="answers")
     
-    def __repr__(self) -> str:
-        return f"<Answer {self.id}>"
-
-
-class ConversationParameters(Base):
-    """Conversation parameters model."""
-    __tablename__ = "conversation_parameters"
-    
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    conversation_id = Column(String, ForeignKey("conversations.id"), nullable=False)
-    parameter_type = Column(String, nullable=False)
-    max_communities = Column(Integer, nullable=True)
-    max_path_length = Column(Integer, nullable=True)
-    max_paths_per_entity = Column(Integer, nullable=True)
-    use_cache = Column(Boolean, nullable=True)
-    verbose = Column(Boolean, nullable=True)
-    llm_model = Column(String, nullable=True)
-    temperature = Column(Float, nullable=True)
-    max_tokens = Column(Integer, nullable=True)
-    strategy = Column(String, nullable=True)
-    tier = Column(String, nullable=True)
-    use_llm = Column(Boolean, nullable=True)
-    fussiness = Column(Integer, nullable=True)
-    theme = Column(String, nullable=True)
-    
-    # Relationships
-    conversation = relationship("Conversation", back_populates="parameters")
-    
-    def __repr__(self) -> str:
-        return f"<ConversationParameters {self.id}>"
+    def __repr__(self):
+        return f"<Answer(id='{self.id}', message_id='{self.message_id}', question_id='{self.question_id}')>"

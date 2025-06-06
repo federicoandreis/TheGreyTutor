@@ -5,6 +5,7 @@ A multi-agent AI system for Middle Earth learning with Gandalf's wisdom.
 """
 
 from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from contextlib import asynccontextmanager
@@ -13,11 +14,12 @@ import uvicorn
 
 from .core.config import settings
 from .core.logging import setup_logging
-# from .api.routes import auth, chat, agents, health, analytics
+from .api.routes import auth, chat, session, agents, health, analytics
 from .ingestion import api_graphrag
-# from .database.connection import init_db, close_db
-# from .services.cache import init_redis, close_redis
-# from .services.agent_orchestrator import AgentOrchestrator
+from . import auth_api
+from .database.connection import init_db, close_db
+from .services.cache import init_redis, close_redis
+from .services.agent_orchestrator import AgentOrchestrator
 
 # Setup structured logging
 setup_logging()
@@ -30,19 +32,22 @@ security = HTTPBearer()
 async def lifespan(app: FastAPI):
     """Application lifespan manager for startup and shutdown events."""
     logger.info("Starting The Grey Tutor backend...")
-    # Disabled: Database, Redis, and Agent Orchestrator initialization for minimal ingestion API
-    # await init_db()
-    # logger.info("Database initialized")
-    # await init_redis()
-    # logger.info("Redis cache initialized")
-    # orchestrator = AgentOrchestrator()
-    # await orchestrator.initialize()
-    # app.state.orchestrator = orchestrator
-    # logger.info("Agent orchestrator initialized")
-    logger.info("The Grey Tutor backend started successfully (minimal mode)")
+    # Database, Redis, and Agent Orchestrator initialization for full API
+    await init_db()
+    logger.info("Database initialized")
+    await init_redis()
+    logger.info("Redis cache initialized")
+    orchestrator = AgentOrchestrator()
+    await orchestrator.initialize()
+    app.state.orchestrator = orchestrator
+    logger.info("Agent orchestrator initialized")
+    logger.info("The Grey Tutor backend started successfully (full mode)")
     yield
-    # logger.info("Shutting down The Grey Tutor backend...")
-    # await orchestrator.shutdown()
+    logger.info("Shutting down The Grey Tutor backend...")
+    await orchestrator.shutdown()
+    await close_redis()
+    await close_db()
+    logger.info("The Grey Tutor backend shut down successfully")
     # await close_redis()
     # await close_db()
     # logger.info("The Grey Tutor backend shut down successfully")
@@ -63,15 +68,17 @@ app.add_middleware(
     allow_origins=settings.ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["*"],
+    allow_headers=["Content-Type", "Authorization", "*"],
 )
 
 # Include routers
-# app.include_router(health.router, prefix="/health", tags=["health"])
-# app.include_router(auth.router, prefix="/auth", tags=["authentication"])
-# app.include_router(chat.router, prefix="/chat", tags=["chat"])
-# app.include_router(agents.router, prefix="/agents", tags=["agents"])
-# app.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
+app.include_router(auth_api.router)
+app.include_router(health.router, prefix="/health", tags=["health"])
+app.include_router(auth.router, prefix="/auth", tags=["authentication"])
+app.include_router(chat.router, prefix="/chat", tags=["chat"])
+app.include_router(session.router, prefix="/session", tags=["session"])
+app.include_router(agents.router, prefix="/agents", tags=["agents"])
+app.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
 app.include_router(api_graphrag.router, prefix="/ingestion", tags=["ingestion"])
 
 @app.get("/")
@@ -96,6 +103,11 @@ async def status():
         "cache_connected": True
     }
 
+# Minimal CORS diagnostic endpoint
+@app.options("/test-cors")
+async def test_cors():
+    return JSONResponse(content={"message": "CORS OK"})
+
 # Error handlers
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request, exc):
@@ -107,12 +119,7 @@ async def http_exception_handler(request, exc):
         path=request.url.path,
         method=request.method
     )
-    return {
-        "error": True,
-        "status_code": exc.status_code,
-        "message": exc.detail,
-        "gandalf_wisdom": "Even the very wise cannot see all ends."
-    }
+    return JSONResponse(status_code=exc.status_code, content={"detail": exc.detail})
 
 @app.exception_handler(Exception)
 async def general_exception_handler(request, exc):
@@ -124,12 +131,7 @@ async def general_exception_handler(request, exc):
         method=request.method,
         exc_info=True
     )
-    return {
-        "error": True,
-        "status_code": 500,
-        "message": "An unexpected error occurred",
-        "gandalf_wisdom": "I will not say: do not weep; for not all tears are an evil."
-    }
+    return JSONResponse(status_code=500, content={"detail": "Internal server error"})
 
 if __name__ == "__main__":
     uvicorn.run(

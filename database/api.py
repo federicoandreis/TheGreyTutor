@@ -1,40 +1,37 @@
 """
-API module for The Grey Tutor database.
+Database API module for The Grey Tutor.
 
-This module provides API functions for interacting with the database.
+This module provides a simple API for interacting with the database.
 """
 import logging
+import json
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 import uuid
-import json
 
 from sqlalchemy.orm import Session
-from database.connection import get_db
+from sqlalchemy.exc import SQLAlchemyError
+
+from database.connection import get_db_session
 from database.models.user import User, UserProfile, UserSession
-from database.models.conversation import Conversation, Message, Question, Answer
+from database.models.conversation import Conversation, ConversationParameters, Message, Question, Answer
+from database.models.cache import Cache, QuestionCache, AssessmentCache
 from database.repositories.user import UserRepository, UserProfileRepository, UserSessionRepository
-from database.repositories.conversation import (
-    ConversationRepository, MessageRepository, QuestionRepository, AnswerRepository
-)
-from database.repositories.cache import CacheRepository
+from database.repositories.conversation import ConversationRepository, MessageRepository, QuestionRepository, AnswerRepository
+from database.repositories.cache import CacheRepository, QuestionCacheRepository, AssessmentCacheRepository
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-
 class DatabaseAPI:
-    """API for interacting with the database."""
+    """Database API for The Grey Tutor."""
     
-    def __init__(self, db: Optional[Session] = None):
-        """
-        Initialize the API.
+    def __init__(self):
+        """Initialize the database API."""
+        self.db = get_db_session()
         
-        Args:
-            db: SQLAlchemy session (optional, will create one if not provided)
-        """
-        self.db = db or next(get_db())
+        # Create repositories
         self.user_repo = UserRepository(self.db)
         self.profile_repo = UserProfileRepository(self.db)
         self.session_repo = UserSessionRepository(self.db)
@@ -43,14 +40,65 @@ class DatabaseAPI:
         self.question_repo = QuestionRepository(self.db)
         self.answer_repo = AnswerRepository(self.db)
         self.cache_repo = CacheRepository(self.db)
+        self.question_cache_repo = QuestionCacheRepository(self.db)
+        self.assessment_cache_repo = AssessmentCacheRepository(self.db)
     
-    def close(self) -> None:
-        """Close the database session."""
+    def close(self):
+        """Close the database connection."""
         self.db.close()
+    
+    def __enter__(self):
+        """Enter context manager."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Exit context manager."""
+        self.close()
     
     # User methods
     
-    def get_user(self, username: str) -> Optional[Dict[str, Any]]:
+    def get_user(self, user_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get a user by ID.
+        
+        Args:
+            user_id: User ID
+            
+        Returns:
+            User data if found, None otherwise
+        """
+        user = self.user_repo.get_by_id(user_id)
+        if not user:
+            return None
+        
+        # Get user profile
+        profile = self.profile_repo.get_by_user_id(user.id)
+        
+        # Convert to dict
+        user_data = {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "name": user.name,
+            "role": user.role,
+            "created_at": user.created_at.isoformat() if user.created_at else None,
+            "last_login": user.last_login.isoformat() if user.last_login else None,
+            "profile": {
+                "id": profile.id,
+                "community_mastery": profile.community_mastery,
+                "entity_familiarity": profile.entity_familiarity,
+                "question_type_performance": profile.question_type_performance,
+                "difficulty_performance": profile.difficulty_performance,
+                "overall_mastery": profile.overall_mastery,
+                "mastered_objectives": profile.mastered_objectives,
+                "current_objective": profile.current_objective,
+                "last_updated": profile.last_updated.isoformat() if profile.last_updated else None,
+            } if profile else None,
+        }
+        
+        return user_data
+    
+    def get_user_by_username(self, username: str) -> Optional[Dict[str, Any]]:
         """
         Get a user by username.
         
@@ -64,97 +112,116 @@ class DatabaseAPI:
         if not user:
             return None
         
-        return {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
-            "name": user.name,
-            "role": user.role,
-            "created_at": user.created_at.isoformat() if user.created_at else None,
-            "last_login": user.last_login.isoformat() if user.last_login else None
-        }
+        return self.get_user(user.id)
     
-    def get_user_profile(self, username: str) -> Optional[Dict[str, Any]]:
+    def get_users(self) -> List[Dict[str, Any]]:
         """
-        Get a user profile by username.
+        Get all users.
+        
+        Returns:
+            List of user data
+        """
+        users = self.user_repo.get_all()
+        return [self.get_user(user.id) for user in users]
+    
+    def create_user(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Create a new user.
         
         Args:
-            username: Username
+            data: User data
             
         Returns:
-            User profile data if found, None otherwise
+            Created user data
         """
-        user = self.user_repo.get_by_username(username)
-        if not user:
-            return None
-        
-        profile = self.profile_repo.get_by_user_id(user.id)
-        if not profile:
-            return None
-        
-        return {
-            "user_id": profile.user_id,
-            "community_mastery": profile.community_mastery,
-            "entity_familiarity": profile.entity_familiarity,
-            "question_type_performance": profile.question_type_performance,
-            "difficulty_performance": profile.difficulty_performance,
-            "overall_mastery": profile.overall_mastery,
-            "mastered_objectives": profile.mastered_objectives,
-            "current_objective": profile.current_objective,
-            "last_updated": profile.last_updated.isoformat() if profile.last_updated else None
-        }
+        try:
+            # Extract profile data
+            profile_data = data.pop("profile", {})
+            
+            # Create user
+            user = self.user_repo.create(data)
+            
+            # Create profile
+            if profile_data:
+                profile_data["user_id"] = user.id
+                self.profile_repo.create(profile_data)
+            else:
+                # Create default profile
+                self.profile_repo.create({
+                    "user_id": user.id,
+                })
+            
+            return self.get_user(user.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error creating user: {e}")
+            raise
     
-    def update_user_profile(self, username: str, profile_data: Dict[str, Any]) -> bool:
+    def update_user(self, user_id: str, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """
-        Update a user profile.
+        Update a user.
         
         Args:
-            username: Username
-            profile_data: Profile data to update
+            user_id: User ID
+            data: User data
             
         Returns:
-            True if successful, False otherwise
+            Updated user data if found, None otherwise
         """
-        user = self.user_repo.get_by_username(username)
-        if not user:
-            return False
+        try:
+            # Extract profile data
+            profile_data = data.pop("profile", None)
+            
+            # Update user
+            user = self.user_repo.update(user_id, data)
+            if not user:
+                return None
+            
+            # Update profile
+            if profile_data:
+                self.profile_repo.update_by_user_id(user.id, profile_data)
+            
+            return self.get_user(user.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error updating user: {e}")
+            raise
+    
+    def delete_user(self, user_id: str) -> bool:
+        """
+        Delete a user.
         
-        profile = self.profile_repo.get_by_user_id(user.id)
-        if not profile:
-            return False
-        
-        # Update profile
-        profile_data["last_updated"] = datetime.utcnow()
-        updated_profile = self.profile_repo.update(profile.user_id, profile_data, pk_name="user_id")
-        
-        return updated_profile is not None
+        Args:
+            user_id: User ID
+            
+        Returns:
+            True if deleted, False otherwise
+        """
+        try:
+            return self.user_repo.delete(user_id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error deleting user: {e}")
+            raise
     
     # Session methods
     
-    def create_session(self, username: str, session_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def get_session(self, session_id: str) -> Optional[Dict[str, Any]]:
         """
-        Create a new user session.
+        Get a session by ID.
         
         Args:
-            username: Username
-            session_data: Session data
+            session_id: Session ID
             
         Returns:
-            Session data if successful, None otherwise
+            Session data if found, None otherwise
         """
-        user = self.user_repo.get_by_username(username)
-        if not user:
-            return None
-        
-        # Create session
-        session_data["user_id"] = user.id
-        session_data["start_time"] = datetime.utcnow()
-        session = self.session_repo.create(session_data)
-        
+        session = self.session_repo.get_by_id(session_id)
         if not session:
             return None
         
-        return {
+        # Convert to dict
+        session_data = {
             "id": session.id,
             "user_id": session.user_id,
             "session_type": session.session_type,
@@ -170,59 +237,124 @@ class DatabaseAPI:
             "fussiness": session.fussiness,
             "tier": session.tier,
             "use_llm": session.use_llm,
-            "parameters": session.parameters
+            "parameters": session.parameters,
         }
+        
+        return session_data
     
-    def end_session(self, session_id: str, session_data: Dict[str, Any]) -> bool:
+    def get_user_sessions(self, user_id: str) -> List[Dict[str, Any]]:
         """
-        End a user session.
+        Get sessions by user ID.
+        
+        Args:
+            user_id: User ID
+            
+        Returns:
+            List of session data
+        """
+        sessions = self.session_repo.get_by_user_id(user_id)
+        return [self.get_session(session.id) for session in sessions]
+    
+    def create_session(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Create a new session.
+        
+        Args:
+            data: Session data
+            
+        Returns:
+            Created session data
+        """
+        try:
+            session = self.session_repo.create(data)
+            return self.get_session(session.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error creating session: {e}")
+            raise
+    
+    def update_session(self, session_id: str, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """
+        Update a session.
         
         Args:
             session_id: Session ID
-            session_data: Session data to update
+            data: Session data
             
         Returns:
-            True if successful, False otherwise
+            Updated session data if found, None otherwise
         """
-        session = self.session_repo.get_by_id(session_id)
-        if not session:
-            return False
+        try:
+            session = self.session_repo.update(session_id, data)
+            if not session:
+                return None
+            
+            return self.get_session(session.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error updating session: {e}")
+            raise
+    
+    def end_session(self, session_id: str, data: Dict[str, Any] = None) -> Optional[Dict[str, Any]]:
+        """
+        End a session.
         
-        # Update session
-        session_data["end_time"] = datetime.utcnow()
-        updated_session = self.session_repo.update(session_id, session_data)
+        Args:
+            session_id: Session ID
+            data: Session data (optional)
+            
+        Returns:
+            Updated session data if found, None otherwise
+        """
+        try:
+            session = self.session_repo.end_session(session_id, data)
+            if not session:
+                return None
+            
+            return self.get_session(session.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error ending session: {e}")
+            raise
+    
+    def delete_session(self, session_id: str) -> bool:
+        """
+        Delete a session.
         
-        return updated_session is not None
+        Args:
+            session_id: Session ID
+            
+        Returns:
+            True if deleted, False otherwise
+        """
+        try:
+            return self.session_repo.delete(session_id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error deleting session: {e}")
+            raise
     
     # Conversation methods
     
-    def create_conversation(
-        self, username: str, conversation_data: Dict[str, Any], parameters_data: Dict[str, Any]
-    ) -> Optional[Dict[str, Any]]:
+    def get_conversation(self, conversation_id: str) -> Optional[Dict[str, Any]]:
         """
-        Create a new conversation.
+        Get a conversation by ID.
         
         Args:
-            username: Username
-            conversation_data: Conversation data
-            parameters_data: Parameters data
+            conversation_id: Conversation ID
             
         Returns:
-            Conversation data if successful, None otherwise
+            Conversation data if found, None otherwise
         """
-        user = self.user_repo.get_by_username(username)
-        if not user:
-            return None
-        
-        # Create conversation
-        conversation_data["user_id"] = user.id
-        conversation_data["start_time"] = datetime.utcnow()
-        conversation = self.conversation_repo.create_with_parameters(conversation_data, parameters_data)
-        
+        conversation = self.conversation_repo.get_by_id(conversation_id)
         if not conversation:
             return None
         
-        return {
+        # Get messages
+        messages = self.message_repo.get_by_conversation_id(conversation.id)
+        
+        # Convert to dict
+        conversation_data = {
             "id": conversation.id,
             "user_id": conversation.user_id,
             "session_id": conversation.session_id,
@@ -231,10 +363,104 @@ class DatabaseAPI:
             "start_time": conversation.start_time.isoformat() if conversation.start_time else None,
             "end_time": conversation.end_time.isoformat() if conversation.end_time else None,
             "duration_seconds": conversation.duration_seconds,
-            "meta_data": conversation.meta_data
+            "meta_data": conversation.meta_data,
+            "messages": [
+                {
+                    "id": message.id,
+                    "role": message.role,
+                    "content": message.content,
+                    "timestamp": message.timestamp.isoformat() if message.timestamp else None,
+                    "meta_data": message.meta_data,
+                }
+                for message in messages
+            ],
         }
+        
+        return conversation_data
     
-    def end_conversation(self, conversation_id: str) -> bool:
+    def get_user_conversations(self, user_id: str) -> List[Dict[str, Any]]:
+        """
+        Get conversations by user ID.
+        
+        Args:
+            user_id: User ID
+            
+        Returns:
+            List of conversation data
+        """
+        conversations = self.conversation_repo.get_by_user_id(user_id)
+        return [self.get_conversation(conversation.id) for conversation in conversations]
+    
+    def get_session_conversations(self, session_id: str) -> List[Dict[str, Any]]:
+        """
+        Get conversations by session ID.
+        
+        Args:
+            session_id: Session ID
+            
+        Returns:
+            List of conversation data
+        """
+        conversations = self.conversation_repo.get_by_session_id(session_id)
+        return [self.get_conversation(conversation.id) for conversation in conversations]
+    
+    def create_conversation(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Create a new conversation.
+        
+        Args:
+            data: Conversation data
+            
+        Returns:
+            Created conversation data
+        """
+        try:
+            # Extract messages
+            messages = data.pop("messages", [])
+            
+            # Extract parameters
+            parameters = data.pop("parameters", None)
+            
+            # Create conversation
+            if parameters:
+                conversation = self.conversation_repo.create_with_parameters(data, parameters)
+            else:
+                conversation = self.conversation_repo.create(data)
+            
+            # Create messages
+            for message_data in messages:
+                message_data["conversation_id"] = conversation.id
+                self.message_repo.create(message_data)
+            
+            return self.get_conversation(conversation.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error creating conversation: {e}")
+            raise
+    
+    def update_conversation(self, conversation_id: str, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """
+        Update a conversation.
+        
+        Args:
+            conversation_id: Conversation ID
+            data: Conversation data
+            
+        Returns:
+            Updated conversation data if found, None otherwise
+        """
+        try:
+            conversation = self.conversation_repo.update(conversation_id, data)
+            if not conversation:
+                return None
+            
+            return self.get_conversation(conversation.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error updating conversation: {e}")
+            raise
+    
+    def end_conversation(self, conversation_id: str) -> Optional[Dict[str, Any]]:
         """
         End a conversation.
         
@@ -242,154 +468,251 @@ class DatabaseAPI:
             conversation_id: Conversation ID
             
         Returns:
-            True if successful, False otherwise
+            Updated conversation data if found, None otherwise
         """
-        conversation = self.conversation_repo.get_by_id(conversation_id)
-        if not conversation:
-            return False
-        
-        # Calculate duration
-        end_time = datetime.utcnow()
-        duration_seconds = (end_time - conversation.start_time).total_seconds() if conversation.start_time else 0
-        
-        # Update conversation
-        updated_conversation = self.conversation_repo.update(
-            conversation_id, 
-            {
-                "end_time": end_time,
-                "duration_seconds": duration_seconds
-            }
-        )
-        
-        return updated_conversation is not None
+        try:
+            conversation = self.conversation_repo.end_conversation(conversation_id)
+            if not conversation:
+                return None
+            
+            return self.get_conversation(conversation.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error ending conversation: {e}")
+            raise
     
-    def add_message(self, conversation_id: str, message_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def delete_conversation(self, conversation_id: str) -> bool:
         """
-        Add a message to a conversation.
+        Delete a conversation.
         
         Args:
             conversation_id: Conversation ID
-            message_data: Message data
             
         Returns:
-            Message data if successful, None otherwise
+            True if deleted, False otherwise
         """
-        conversation = self.conversation_repo.get_by_id(conversation_id)
-        if not conversation:
-            return None
+        try:
+            return self.conversation_repo.delete(conversation_id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error deleting conversation: {e}")
+            raise
+    
+    # Message methods
+    
+    def get_message(self, message_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get a message by ID.
         
-        # Create message
-        message_data["conversation_id"] = conversation_id
-        message_data["timestamp"] = datetime.utcnow()
-        message = self.message_repo.create(message_data)
-        
+        Args:
+            message_id: Message ID
+            
+        Returns:
+            Message data if found, None otherwise
+        """
+        message = self.message_repo.get_by_id(message_id)
         if not message:
             return None
         
-        return {
+        # Get question and answer
+        question = self.question_repo.get_by_message_id(message.id)
+        answer = self.answer_repo.get_by_message_id(message.id)
+        
+        # Convert to dict
+        message_data = {
             "id": message.id,
             "conversation_id": message.conversation_id,
             "role": message.role,
             "content": message.content,
             "timestamp": message.timestamp.isoformat() if message.timestamp else None,
-            "meta_data": message.meta_data
+            "meta_data": message.meta_data,
+            "question": {
+                "id": question.id,
+                "type": question.type,
+                "difficulty": question.difficulty,
+                "entity": question.entity,
+                "tier": question.tier,
+                "options": question.options,
+                "correct_answer": question.correct_answer,
+                "community_id": question.community_id,
+                "meta_data": question.meta_data,
+            } if question else None,
+            "answer": {
+                "id": answer.id,
+                "question_id": answer.question_id,
+                "content": answer.content,
+                "correct": answer.correct,
+                "quality_score": answer.quality_score,
+                "feedback": answer.feedback,
+            } if answer else None,
         }
+        
+        return message_data
     
-    def add_question(self, message_id: str, question_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def get_conversation_messages(self, conversation_id: str) -> List[Dict[str, Any]]:
         """
-        Add a question to a message.
+        Get messages by conversation ID.
+        
+        Args:
+            conversation_id: Conversation ID
+            
+        Returns:
+            List of message data
+        """
+        messages = self.message_repo.get_by_conversation_id(conversation_id)
+        return [self.get_message(message.id) for message in messages]
+    
+    def create_message(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Create a new message.
+        
+        Args:
+            data: Message data
+            
+        Returns:
+            Created message data
+        """
+        try:
+            # Extract question and answer
+            question_data = data.pop("question", None)
+            answer_data = data.pop("answer", None)
+            
+            # Create message
+            message = self.message_repo.create(data)
+            
+            # Create question
+            if question_data:
+                question_data["message_id"] = message.id
+                self.question_repo.create(question_data)
+            
+            # Create answer
+            if answer_data:
+                answer_data["message_id"] = message.id
+                self.answer_repo.create(answer_data)
+            
+            return self.get_message(message.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error creating message: {e}")
+            raise
+    
+    def update_message(self, message_id: str, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """
+        Update a message.
         
         Args:
             message_id: Message ID
-            question_data: Question data
+            data: Message data
             
         Returns:
-            Question data if successful, None otherwise
+            Updated message data if found, None otherwise
         """
-        message = self.message_repo.get_by_id(message_id)
-        if not message:
-            return None
-        
-        # Create question
-        question_data["message_id"] = message_id
-        question = self.question_repo.create(question_data)
-        
-        if not question:
-            return None
-        
-        return {
-            "id": question.id,
-            "message_id": question.message_id,
-            "type": question.type,
-            "difficulty": question.difficulty,
-            "entity": question.entity,
-            "tier": question.tier,
-            "options": question.options,
-            "correct_answer": question.correct_answer,
-            "community_id": question.community_id,
-            "meta_data": question.meta_data
-        }
+        try:
+            # Extract question and answer
+            question_data = data.pop("question", None)
+            answer_data = data.pop("answer", None)
+            
+            # Update message
+            message = self.message_repo.update(message_id, data)
+            if not message:
+                return None
+            
+            # Update question
+            if question_data:
+                question = self.question_repo.get_by_message_id(message.id)
+                if question:
+                    self.question_repo.update(question.id, question_data)
+                else:
+                    question_data["message_id"] = message.id
+                    self.question_repo.create(question_data)
+            
+            # Update answer
+            if answer_data:
+                answer = self.answer_repo.get_by_message_id(message.id)
+                if answer:
+                    self.answer_repo.update(answer.id, answer_data)
+                else:
+                    answer_data["message_id"] = message.id
+                    self.answer_repo.create(answer_data)
+            
+            return self.get_message(message.id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error updating message: {e}")
+            raise
     
-    def add_answer(self, message_id: str, answer_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def delete_message(self, message_id: str) -> bool:
         """
-        Add an answer to a message.
+        Delete a message.
         
         Args:
             message_id: Message ID
-            answer_data: Answer data
             
         Returns:
-            Answer data if successful, None otherwise
+            True if deleted, False otherwise
         """
-        message = self.message_repo.get_by_id(message_id)
-        if not message:
-            return None
-        
-        # Create answer
-        answer_data["message_id"] = message_id
-        answer = self.answer_repo.create(answer_data)
-        
-        if not answer:
-            return None
-        
-        return {
-            "id": answer.id,
-            "message_id": answer.message_id,
-            "question_id": answer.question_id,
-            "content": answer.content,
-            "correct": answer.correct,
-            "quality_score": answer.quality_score,
-            "feedback": answer.feedback
-        }
+        try:
+            return self.message_repo.delete(message_id)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error deleting message: {e}")
+            raise
     
     # Cache methods
     
     def get_cache(self, cache_type: str, key: str) -> Optional[Dict[str, Any]]:
         """
-        Get a cache entry.
+        Get a cache entry by type and key.
         
         Args:
             cache_type: Cache type
             key: Cache key
             
         Returns:
-            Cache entry if found, None otherwise
+            Cache data if found, None otherwise
         """
-        entry = self.cache_repo.get_by_key(cache_type, key)
-        if not entry:
+        cache = self.cache_repo.get_by_key(cache_type, key)
+        if not cache:
             return None
         
-        return {
-            "id": entry.id,
-            "cache_type": entry.cache_type,
-            "key": entry.key,
-            "value": entry.value,
-            "created_at": entry.created_at.isoformat() if entry.created_at else None,
-            "last_accessed": entry.last_accessed.isoformat() if entry.last_accessed else None,
-            "access_count": entry.access_count
+        # Convert to dict
+        cache_data = {
+            "id": cache.id,
+            "cache_type": cache.cache_type,
+            "key": cache.key,
+            "value": cache.value,
+            "created_at": cache.created_at.isoformat() if cache.created_at else None,
+            "last_accessed": cache.last_accessed.isoformat() if cache.last_accessed else None,
+            "access_count": cache.access_count,
         }
+        
+        return cache_data
     
-    def set_cache(self, cache_type: str, key: str, value: Any) -> Optional[Dict[str, Any]]:
+    def get_cache_by_type(self, cache_type: str) -> List[Dict[str, Any]]:
+        """
+        Get cache entries by type.
+        
+        Args:
+            cache_type: Cache type
+            
+        Returns:
+            List of cache data
+        """
+        caches = self.cache_repo.get_by_type(cache_type)
+        return [
+            {
+                "id": cache.id,
+                "cache_type": cache.cache_type,
+                "key": cache.key,
+                "value": cache.value,
+                "created_at": cache.created_at.isoformat() if cache.created_at else None,
+                "last_accessed": cache.last_accessed.isoformat() if cache.last_accessed else None,
+                "access_count": cache.access_count,
+            }
+            for cache in caches
+        ]
+    
+    def set_cache(self, cache_type: str, key: str, value: Any) -> Dict[str, Any]:
         """
         Set a cache entry.
         
@@ -399,21 +722,32 @@ class DatabaseAPI:
             value: Cache value
             
         Returns:
-            Cache entry if successful, None otherwise
+            Cache data
         """
-        entry = self.cache_repo.set(cache_type, key, value)
-        if not entry:
-            return None
-        
-        return {
-            "id": entry.id,
-            "cache_type": entry.cache_type,
-            "key": entry.key,
-            "value": entry.value,
-            "created_at": entry.created_at.isoformat() if entry.created_at else None,
-            "last_accessed": entry.last_accessed.isoformat() if entry.last_accessed else None,
-            "access_count": entry.access_count
-        }
+        try:
+            cache = self.cache_repo.get_by_key(cache_type, key)
+            if cache:
+                cache = self.cache_repo.update_by_key(cache_type, key, value)
+            else:
+                cache = self.cache_repo.create({
+                    "cache_type": cache_type,
+                    "key": key,
+                    "value": value,
+                })
+            
+            return {
+                "id": cache.id,
+                "cache_type": cache.cache_type,
+                "key": cache.key,
+                "value": cache.value,
+                "created_at": cache.created_at.isoformat() if cache.created_at else None,
+                "last_accessed": cache.last_accessed.isoformat() if cache.last_accessed else None,
+                "access_count": cache.access_count,
+            }
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error setting cache: {e}")
+            raise
     
     def delete_cache(self, cache_type: str, key: str) -> bool:
         """
@@ -424,6 +758,28 @@ class DatabaseAPI:
             key: Cache key
             
         Returns:
-            True if successful, False otherwise
+            True if deleted, False otherwise
         """
-        return self.cache_repo.delete_by_key(cache_type, key)
+        try:
+            return self.cache_repo.delete_by_key(cache_type, key)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error deleting cache: {e}")
+            raise
+    
+    def clear_cache(self, cache_type: str) -> int:
+        """
+        Clear cache entries by type.
+        
+        Args:
+            cache_type: Cache type
+            
+        Returns:
+            Number of deleted entries
+        """
+        try:
+            return self.cache_repo.delete_by_type(cache_type)
+        except SQLAlchemyError as e:
+            self.db.rollback()
+            logger.error(f"Error clearing cache: {e}")
+            raise

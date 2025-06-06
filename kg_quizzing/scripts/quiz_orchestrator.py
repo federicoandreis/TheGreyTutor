@@ -41,7 +41,8 @@ class QuizOrchestrator:
 
     def __init__(self, student_id: str = None, student_name: str = None, 
                  strategy: str = "adaptive", conversation_dir: str = "conversation_history", 
-                 use_llm: bool = True, tier: str = None, fussiness: int = 3, theme: str = None):
+                 use_llm: bool = True, tier: str = None, fussiness: int = 3, theme: str = None,
+                 use_database: bool = False):
         """Initialize the quiz orchestrator.
         
         Args:
@@ -53,6 +54,7 @@ class QuizOrchestrator:
             tier: The question tier to use (basic, intermediate, advanced)
             fussiness: Gandalf's fussiness (1=very lenient, 10=very strict)
             theme: The theme of the quiz
+            use_database: Whether to use the database for conversation history
         """
         self.current_session = None
         self.conversation_dir = conversation_dir
@@ -63,6 +65,7 @@ class QuizOrchestrator:
         self.tier = tier
         self.fussiness = fussiness
         self.theme = theme
+        self.use_database = use_database
 
         # Create the conversation directory if it doesn't exist
         os.makedirs(conversation_dir, exist_ok=True)
@@ -111,7 +114,8 @@ class QuizOrchestrator:
             use_llm=self.use_llm,
             tier=self.tier,
             fussiness=self.fussiness,
-            theme=theme
+            theme=theme,
+            use_database=self.use_database
         )
 
     def run_interactive_session(self):

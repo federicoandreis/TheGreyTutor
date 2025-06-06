@@ -32,7 +32,8 @@ class QuizSession:
     def __init__(self, student_id: str, student_name: str, 
                  strategy: str = "adaptive", models_dir: str = "student_models",
                  conversation_dir: str = "conversation_history", use_llm: bool = True,
-                 tier: str = None, fussiness: int = 3, theme: str = None):
+                 tier: str = None, fussiness: int = 3, theme: str = None,
+                 use_database: bool = False):
         self.student_id = student_id
         self.student_name = student_name
         self.strategy = strategy
@@ -42,6 +43,7 @@ class QuizSession:
         self.tier = tier  # Store the tier preference
         self.fussiness = fussiness
         self.theme = theme
+        self.use_database = use_database
         self.student_model = load_or_create_student_model(
             student_id, student_name, models_dir
         )
@@ -57,7 +59,7 @@ class QuizSession:
             "question_history": []
         }
         self.current_question = None
-        self.conversation_manager = ConversationHistoryManager(conversation_dir)
+        self.conversation_manager = ConversationHistoryManager(conversation_dir, use_database=use_database)
         metadata = {
             "student_name": student_name,
             "strategy": strategy,

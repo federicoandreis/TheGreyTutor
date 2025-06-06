@@ -1,13 +1,25 @@
 #!/bin/bash
-# Script to start Neo4j, backend FastAPI quiz API, and Expo frontend for The Grey Tutor
+# Script to start Neo4j, database, backend FastAPI quiz API, and Expo frontend for The Grey Tutor
+
+# Load environment variables from .env if it exists
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+  echo "Loaded environment variables from .env"
+fi
+
+# Check if database is initialized
+if [ ! -f thegreytutor.db ]; then
+  echo "Database not found. Running setup_database.sh..."
+  ./setup_database.sh
+fi
 
 # 1. Start Neo4j (docker-compose)
 echo "Starting Neo4j via docker-compose..."
 docker-compose up -d
 
-# 2. Start backend FastAPI quiz API (from project root, as Python module)
-echo "Starting backend FastAPI quiz API..."
-uvicorn kg_quizzing.scripts.quiz_api:app --reload --host 0.0.0.0 --port 8000 &
+# 2. Start backend FastAPI app (from project root, as Python module)
+echo "Starting backend FastAPI app..."
+uvicorn thegreytutor.backend.src.main:app --reload --host 0.0.0.0 --port 8000 &
 BACKEND_PID=$!
 
 # 3. Start Expo frontend (from thegreytutor/frontend directory)

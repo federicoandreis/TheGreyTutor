@@ -15,7 +15,7 @@ import uuid
 import bcrypt
 
 from sqlalchemy.orm import Session
-from database.connection import get_db, init_db
+from database.connection import get_db, create_tables
 from database.models.user import User, UserProfile
 from database.repositories.user import UserRepository, UserProfileRepository
 from database.utils.import_data import import_conversation_history, import_assessment_conversations
@@ -33,7 +33,7 @@ def init_database(args: argparse.Namespace) -> None:
         args: Command-line arguments
     """
     logger.info("Initializing database...")
-    init_db()
+    create_tables()
     logger.info("Database initialized successfully.")
 
 

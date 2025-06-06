@@ -9,13 +9,16 @@ import logging
 import json
 import time
 import uuid
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Union
 from datetime import datetime
 from pathlib import Path
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+# Check if database should be used
+USE_DATABASE = os.getenv("USE_DATABASE", "false").lower() in ("true", "1", "yes")
 
 class ConversationMessage:
     """Class representing a message in a conversation."""
@@ -280,19 +283,34 @@ class QuizConversation:
 class ConversationHistoryManager:
     """Manager for storing and retrieving conversation history."""
     
-    def __init__(self, storage_dir: str = "conversation_history"):
+    def __init__(self, storage_dir: str = "conversation_history", use_database: Optional[bool] = None):
         """
         Initialize the conversation history manager.
         
         Args:
             storage_dir: Directory to store conversation history
+            use_database: Whether to use the database (defaults to USE_DATABASE environment variable)
         """
         self.storage_dir = storage_dir
+        self.use_database = use_database if use_database is not None else USE_DATABASE
+        self.db_manager = None
         
         # Create the storage directory if it doesn't exist
         os.makedirs(storage_dir, exist_ok=True)
         
-        logger.info(f"Initialized ConversationHistoryManager with storage directory: {storage_dir}")
+        # Initialize database manager if needed
+        if self.use_database:
+            try:
+                from .database_adapter import DatabaseConversationManager
+                self.db_manager = DatabaseConversationManager(storage_dir)
+                logger.info(f"Initialized ConversationHistoryManager with database and storage directory: {storage_dir}")
+            except ImportError as e:
+                logger.warning(f"Failed to import DatabaseConversationManager: {e}")
+                logger.warning("Falling back to file-based storage")
+                self.use_database = False
+                logger.info(f"Initialized ConversationHistoryManager with storage directory: {storage_dir}")
+        else:
+            logger.info(f"Initialized ConversationHistoryManager with storage directory: {storage_dir}")
     
     def save_conversation(self, conversation: QuizConversation) -> str:
         """
@@ -302,8 +320,18 @@ class ConversationHistoryManager:
             conversation: The conversation to save
             
         Returns:
-            Path to the saved conversation file
+            Path to the saved conversation file or database ID
         """
+        # Use database if enabled
+        if self.use_database and self.db_manager:
+            try:
+                result = self.db_manager.save_conversation(conversation)
+                logger.info(f"Saved conversation {conversation.conversation_id} to database")
+                return result
+            except Exception as e:
+                logger.error(f"Failed to save conversation to database: {e}")
+                logger.info("Falling back to file-based storage")
+        
         # Create student directory if it doesn't exist
         student_dir = os.path.join(self.storage_dir, conversation.student_id or "anonymous")
         os.makedirs(student_dir, exist_ok=True)
@@ -331,6 +359,18 @@ class ConversationHistoryManager:
         Returns:
             QuizConversation instance
         """
+        # Use database if enabled and the file_path looks like a UUID
+        if self.use_database and self.db_manager and len(file_path) == 36 and '-' in file_path:
+            try:
+                # This is a database ID, not a file path
+                # For now, we don't have a direct method to load from database ID
+                # This would need to be implemented in the database adapter
+                pass
+            except Exception as e:
+                logger.error(f"Failed to load conversation from database: {e}")
+                logger.info("Falling back to file-based storage")
+        
+        # Load from file
         with open(file_path, 'r') as f:
             data = json.load(f)
         
@@ -350,6 +390,14 @@ class ConversationHistoryManager:
         Returns:
             List of file paths to conversations
         """
+        # Use database if enabled
+        if self.use_database and self.db_manager:
+            try:
+                return self.db_manager.get_conversations_for_student(student_id)
+            except Exception as e:
+                logger.error(f"Failed to get conversations from database: {e}")
+                logger.info("Falling back to file-based storage")
+        
         student_dir = os.path.join(self.storage_dir, student_id)
         
         if not os.path.exists(student_dir):
@@ -374,6 +422,14 @@ class ConversationHistoryManager:
         Returns:
             List of file paths to conversations
         """
+        # Use database if enabled
+        if self.use_database and self.db_manager:
+            try:
+                return self.db_manager.get_all_conversations()
+            except Exception as e:
+                logger.error(f"Failed to get all conversations from database: {e}")
+                logger.info("Falling back to file-based storage")
+        
         all_files = []
         
         # Walk through all subdirectories
@@ -397,6 +453,17 @@ class ConversationHistoryManager:
         Returns:
             True if the file was deleted, False otherwise
         """
+        # Use database if enabled and the file_path looks like a UUID
+        if self.use_database and self.db_manager and len(file_path) == 36 and '-' in file_path:
+            try:
+                # This is a database ID, not a file path
+                # For now, we don't have a direct method to delete from database ID
+                # This would need to be implemented in the database adapter
+                pass
+            except Exception as e:
+                logger.error(f"Failed to delete conversation from database: {e}")
+                logger.info("Falling back to file-based storage")
+        
         try:
             os.remove(file_path)
             logger.info(f"Deleted conversation file: {file_path}")
@@ -404,6 +471,14 @@ class ConversationHistoryManager:
         except Exception as e:
             logger.error(f"Failed to delete conversation file {file_path}: {e}")
             return False
+    
+    def __del__(self):
+        """Clean up resources when the object is destroyed."""
+        if self.use_database and self.db_manager:
+            try:
+                self.db_manager.close()
+            except Exception as e:
+                logger.error(f"Failed to close database connection: {e}")
 
 
 class ConversationExporter:

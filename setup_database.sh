@@ -1,48 +1,42 @@
 #!/bin/bash
-
-# Setup script for The Grey Tutor database
+# Script to set up the database for The Grey Tutor
 
 # Exit on error
 set -e
 
 echo "Setting up The Grey Tutor database..."
 
-# Install dependencies
-echo "Installing dependencies..."
+# Check if Python is installed
+if ! command -v python &> /dev/null; then
+    echo "Error: Python 3 is required but not installed."
+    exit 1
+fi
+
+# Check if pip is installed
+if ! command -v pip &> /dev/null; then
+    echo "Error: pip is required but not installed."
+    exit 1
+fi
+
+# Install required packages
+echo "Installing required packages..."
 pip install -r requirements.txt
 
-# Start PostgreSQL if not already running
-echo "Starting PostgreSQL..."
-docker-compose up -d postgres
-
-# Wait for PostgreSQL to be ready
-echo "Waiting for PostgreSQL to be ready..."
-sleep 5
+# Create database directory if it doesn't exist
+mkdir -p database/migrations/versions
 
 # Initialize the database
 echo "Initializing the database..."
-python -m database.cli init
+python -c "from database.init import init_database; init_database()"
 
-# Create admin user if it doesn't exist
-echo "Creating admin user..."
-python -m database.cli create-user admin --role admin --email admin@thegreytutor.com
+# Import data
+echo "Importing data..."
+python -c "from database.init import import_all; import_all()"
 
-# Import data if directories exist
-if [ -d "conversation_history" ]; then
-    echo "Importing conversation history..."
-    python -m database.cli import --conversations conversation_history
-fi
-
-if [ -d "assessment_conversations" ]; then
-    echo "Importing assessment conversations..."
-    python -m database.cli import --assessments assessment_conversations
-fi
-
-if [ -d "kg_quizzing/scripts/assessment_conversations" ]; then
-    echo "Importing KG quizzing assessment conversations..."
-    python -m database.cli import --assessments kg_quizzing/scripts/assessment_conversations
-fi
-
-echo "Database setup complete!"
-echo "You can now use the database CLI with 'python -m database.cli'"
-echo "For help, run 'python -m database.cli --help'"
+echo "Database setup complete."
+echo "You can now use the database admin tool to manage the database:"
+echo "  python -m database.admin list-users"
+echo "  python -m database.admin get-user --username test_user"
+echo "  python -m database.admin create-user --username new_user --name 'New User' --email 'new.user@example.com'"
+echo "  python -m database.admin list-conversations --username test_user"
+echo "  python -m database.admin get-conversation --id <conversation_id> --messages"

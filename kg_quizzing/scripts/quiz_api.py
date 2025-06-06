@@ -58,7 +58,9 @@ app.add_middleware(
 
 # Standalone conversation history manager for assessments
 assessment_convo_dir = "assessment_conversations"
-assessment_history_manager = ConversationHistoryManager(assessment_convo_dir)
+# Check if database should be used
+USE_DATABASE = os.getenv("USE_DATABASE", "false").lower() in ("true", "1", "yes")
+assessment_history_manager = ConversationHistoryManager(assessment_convo_dir, use_database=USE_DATABASE)
 
 
 # In-memory session storage (for demonstration/testing)
@@ -155,6 +157,10 @@ class SessionStateResponse(BaseModel):
 @app.post("/session", response_model=StartSessionResponse)
 def start_session(req: StartSessionRequest):
     session_id = str(uuid.uuid4())
+    
+    # Check if we should use the database
+    use_database = os.getenv("USE_DATABASE", "false").lower() in ("true", "1", "yes")
+    
     orchestrator = QuizOrchestrator(
         student_id=req.student_id,
         student_name=req.student_name,
@@ -163,7 +169,8 @@ def start_session(req: StartSessionRequest):
         use_llm=req.use_llm,
         tier=req.tier,
         fussiness=req.fussiness,
-        theme=req.theme
+        theme=req.theme,
+        use_database=use_database
     )
     orchestrator.start_session()
     sessions[session_id] = orchestrator

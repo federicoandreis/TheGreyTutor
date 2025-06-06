@@ -82,18 +82,25 @@ export function useAppState() {
   return context;
 }
 
-// Mock login function
+// Real login function (calls backend API)
 export async function loginUser(email: string, password: string): Promise<User> {
-  // Simulate API call
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  if (email === 'test@example.com' && password === 'password') {
-    return {
-      id: '1',
-      email: 'test@example.com',
-      displayName: 'Test User',
-    };
+  const response = await fetch('http://localhost:8000/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.detail || 'Login failed');
   }
-  
-  throw new Error('Invalid credentials');
+
+  const data = await response.json();
+  return {
+    id: data.user_id,
+    email: email,
+    displayName: data.name || data.username || email,
+  };
 }

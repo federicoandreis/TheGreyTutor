@@ -56,6 +56,11 @@ function ChatScreen() {
   }
 
   const startQuiz = async () => {
+    // If already in quiz mode or an active quiz session exists, just switch mode and do not reset messages/state
+    if (quizMode || quizSessionId) {
+      setQuizMode(true);
+      return;
+    }
     setQuizMode(true);
     setQuizScore(0);
     setQuizFinished(false);
@@ -225,7 +230,7 @@ function ChatScreen() {
           ]);
           setQuizFinished(true);
         } else if (resp.next_question) {
-          // Robust normalization: handle both {question: {...}} and {...} API shapes
+          // Robust normalization: handle both {question: {...}} and {...} API shapes (PATCHED)
           let rawQuestion = resp.next_question.question ? resp.next_question.question : resp.next_question;
           let options: string[] = [];
           if (Array.isArray(rawQuestion.options)) {
@@ -234,17 +239,16 @@ function ChatScreen() {
             try {
               const parsed = JSON.parse(rawQuestion.options);
               if (Array.isArray(parsed)) options = parsed as string[];
+              else if (typeof parsed === 'string') options = [parsed];
             } catch {
-              // fallback: do not split by comma to prevent splitting a string into an array of characters
               options = [rawQuestion.options];
             }
-          } else {
-            options = Array.isArray(options) ? options : [];
           }
+          if (!Array.isArray(options)) options = [];
           const normQuestion = {
             ...rawQuestion,
-            text: rawQuestion.question_text || rawQuestion.text,
-            options: Array.isArray(options) ? options : [],
+            text: rawQuestion.question_text || rawQuestion.text || rawQuestion.question,
+            options,
           };
           setCurrentQuizQuestion(normQuestion);
           setQuizQuestionNumber(q => q + 1);
@@ -404,7 +408,7 @@ function ChatScreen() {
             </View>
           )}
           */}
-          {showQuizOptions && Array.isArray(item.question.options) && item.question.options.length > 0 ? (
+          {item.role === 'assistant' && item.question && Array.isArray(item.question.options) && item.question.options.length > 0 ? (
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 8 }}>
               {item.question.options.map((opt: string, idx: number) => (
                 <TouchableOpacity
@@ -574,7 +578,30 @@ function ChatScreen() {
           )}
         </View>
 
-        <View style={styles.inputContainer}>
+        {quizMode && currentQuizQuestion && Array.isArray(currentQuizQuestion.options) && currentQuizQuestion.options.length > 0 ? (
+  <View style={{ flexDirection: 'row', flexWrap: 'wrap', margin: 12, justifyContent: 'center' }}>
+    {currentQuizQuestion.options.map((opt: string, idx: number) => (
+      <TouchableOpacity
+        key={idx}
+        style={{
+          backgroundColor: '#e0e7ef',
+          borderRadius: 14,
+          paddingHorizontal: 12,
+          paddingVertical: 6,
+          marginRight: 6,
+          marginBottom: 6,
+          borderWidth: 1,
+          borderColor: '#b5c1d8',
+        }}
+        onPress={() => setInputText(opt)}
+      >
+        <Text style={{ color: '#2a3a5e', fontWeight: '600', fontSize: 15 }}>{opt}</Text>
+      </TouchableOpacity>
+    ))}
+  </View>
+) : null}
+
+<View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
             value={inputText}
