@@ -1,9 +1,9 @@
-# PowerShell script to start Neo4j, PostgreSQL, backend FastAPI, and Expo frontend for The Grey Tutor
+# PowerShell script to start Neo4j, PostgreSQL, Redis, backend FastAPI, and Expo frontend for The Grey Tutor
 
 Write-Host "=== The Grey Tutor Startup Script ===" -ForegroundColor Cyan
 
-# 1. Start Docker containers (Neo4j + PostgreSQL)
-Write-Host "`n[1/4] Starting Docker containers (Neo4j + PostgreSQL)..." -ForegroundColor Yellow
+# 1. Start Docker containers (Neo4j + PostgreSQL + Redis)
+Write-Host "`n[1/4] Starting Docker containers (Neo4j + PostgreSQL + Redis)..." -ForegroundColor Yellow
 docker-compose up -d
 
 # Wait for Neo4j to be ready
@@ -12,7 +12,11 @@ Start-Sleep -Seconds 10
 
 # Wait for PostgreSQL to be ready
 Write-Host "Waiting for PostgreSQL to be ready..." -ForegroundColor Gray
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 3
+
+# Wait for Redis to be ready
+Write-Host "Waiting for Redis to be ready..." -ForegroundColor Gray
+Start-Sleep -Seconds 2
 
 # 2. Start backend FastAPI app
 Write-Host "`n[2/4] Starting backend FastAPI app on http://localhost:8000..." -ForegroundColor Yellow
@@ -30,8 +34,10 @@ Write-Host @"
 
 === Services Running ===
 - Neo4j Browser:    http://localhost:7474
+- Redis:            localhost:6379
 - Backend API:      http://localhost:8000
 - API Docs:         http://localhost:8000/docs
+- Cache Stats:      http://localhost:8000/cache/stats
 - Expo Dev Server:  Check the new terminal window
 
 Press Ctrl+C to stop (then run: docker-compose down)

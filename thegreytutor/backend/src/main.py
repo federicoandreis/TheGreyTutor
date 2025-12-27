@@ -14,7 +14,7 @@ import uvicorn
 
 from .core.config import settings
 from .core.logging import setup_logging
-from .api.routes import auth, chat, session, agents, health, analytics
+from .api.routes import auth, chat, session, agents, health, analytics, cache
 from .ingestion import api_graphrag
 from . import auth_api
 from .database.connection import init_db, close_db
@@ -79,6 +79,7 @@ app.include_router(chat.router, prefix="/chat", tags=["chat"])
 app.include_router(session.router, prefix="/session", tags=["session"])
 app.include_router(agents.router, prefix="/agents", tags=["agents"])
 app.include_router(analytics.router, prefix="/analytics", tags=["analytics"])
+app.include_router(cache.router, prefix="/cache", tags=["cache"])
 app.include_router(api_graphrag.router, prefix="/ingestion", tags=["ingestion"])
 
 @app.get("/")

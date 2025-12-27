@@ -40,7 +40,21 @@ except Exception as e:
     logger.warning(f"Error initializing OpenAI client: {e}. Using mock LLM implementation.")
     OPENAI_AVAILABLE = False
 
-# LLM response cache to avoid redundant API calls
+# Redis cache for LLM responses (with in-memory fallback)
+try:
+    import sys
+    backend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../thegreytutor/backend/src'))
+    if backend_path not in sys.path:
+        sys.path.insert(0, backend_path)
+    from services.redis_cache import LLMCache
+    REDIS_CACHE_AVAILABLE = True
+    logger.info("Redis cache module loaded successfully")
+except ImportError as e:
+    logger.warning(f"Redis cache not available: {e}. Using in-memory fallback.")
+    REDIS_CACHE_AVAILABLE = False
+    LLMCache = None
+
+# Fallback in-memory cache if Redis not available
 LLM_CACHE = {}
 
 def create_llm_prompt(query: str, result: Any) -> str:
@@ -349,10 +363,15 @@ def call_llm(prompt: str, use_cache: bool = True) -> str:
     Returns:
         The LLM's response
     """
-    # Check cache first if enabled
-    if use_cache and prompt in LLM_CACHE:
-        logger.info("Using cached LLM response")
-        return LLM_CACHE[prompt]
+    # Check Redis cache first if available and enabled
+    if use_cache:
+        if REDIS_CACHE_AVAILABLE and LLMCache:
+            cached = LLMCache.get(prompt)
+            if cached:
+                return cached
+        elif prompt in LLM_CACHE:
+            logger.info("Using in-memory cached LLM response")
+            return LLM_CACHE[prompt]
     
     # Log prompt (truncated for readability)
     logger.info("Calling LLM with prompt (truncated):\n" + prompt[:500] + "...")
@@ -418,7 +437,10 @@ def call_llm(prompt: str, use_cache: bool = True) -> str:
     
     # Cache response if caching is enabled
     if use_cache:
-        LLM_CACHE[prompt] = response
+        if REDIS_CACHE_AVAILABLE and LLMCache:
+            LLMCache.set(prompt, response)
+        else:
+            LLM_CACHE[prompt] = response
     
     return response
 
@@ -438,6 +460,27 @@ def process_query(query: str, use_cache: bool = True, verbose: bool = False,
     Returns:
         A dictionary with the query, answer, and timing information
     """
+    # Check query-level cache FIRST (before KG retrieval)
+    # This caches based on the user's question, not the full LLM prompt
+    if use_cache and REDIS_CACHE_AVAILABLE and LLMCache:
+        cached_answer = LLMCache.get(query)  # Cache on query, not prompt
+        if cached_answer:
+            logger.info(f"[CACHE HIT] Returning cached answer for query: {query[:50]}...")
+            return {
+                "query": query,
+                "answer": cached_answer,
+                "retrieval_time": 0,
+                "llm_time": 0,
+                "total_time": 0,
+                "result_count": 0,
+                "cached": True,
+                "parameters": {
+                    "max_communities": max_communities,
+                    "max_path_length": max_path_length,
+                    "max_paths_per_entity": max_paths_per_entity
+                }
+            }
+    
     # Initialize GraphRAG retriever with optimized PathRAG parameters
     logger.info(f"Initializing GraphRAG retriever with optimized PathRAG parameters")
     retriever = GraphRAGRetriever(
@@ -461,12 +504,16 @@ def process_query(query: str, use_cache: bool = True, verbose: bool = False,
         print("\n=== LLM Prompt ===\n")
         print(prompt)
     
-    # Call LLM
+    # Call LLM (no caching here - we cache at query level above)
     logger.info("Calling LLM for answer synthesis")
     start_time = time.time()
-    answer = call_llm(prompt, use_cache=use_cache)
+    answer = call_llm(prompt, use_cache=False)  # Disable prompt-level cache
     llm_time = time.time() - start_time
     logger.info(f"LLM processing completed in {llm_time:.3f}s")
+    
+    # Cache the answer at query level
+    if use_cache and REDIS_CACHE_AVAILABLE and LLMCache:
+        LLMCache.set(query, answer)  # Cache on query, not prompt
     
     return {
         "query": query,

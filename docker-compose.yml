@@ -33,6 +33,20 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: thegreytutor-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - thegreytutor_redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
   thegreytutor_neo4j_data:
     external: true
@@ -43,3 +57,4 @@ volumes:
   thegreytutor_neo4j_plugins:
     external: true
   thegreytutor_postgres_data:
+  thegreytutor_redis_data:
