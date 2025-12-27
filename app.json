@@ -25,7 +25,6 @@
     "web": {
       "bundler": "metro"
     },
-    "main": "./App.tsx",
     "scheme": "thegreytutor",
     "extra": {
       "eas": {

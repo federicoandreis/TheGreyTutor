@@ -90,6 +90,7 @@ assessment_cache/
 student_models/
 assessment_conversations/
 conversation_history/
+thegreytutor.db
 
 # Ignore JSON dumps in cache and conversation directories only
 cache/**/*.json
