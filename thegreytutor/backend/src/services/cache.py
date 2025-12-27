@@ -1,8 +1,6 @@
-# Stub cache service for The Grey Tutor
-# Replace with real cache (e.g., Redis) logic as needed
+# Cache service for The Grey Tutor
+# Uses Redis for persistent caching with in-memory fallback
 
-async def init_redis():
-    pass
+from .redis_cache import init_redis, close_redis, LLMCache, QuizQuestionCache, get_redis_client
 
-async def close_redis():
-    pass
+__all__ = ['init_redis', 'close_redis', 'LLMCache', 'QuizQuestionCache', 'get_redis_client']
