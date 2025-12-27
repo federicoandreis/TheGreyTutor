@@ -1,6 +1,6 @@
 # The Grey Tutor
 
-An interactive Middle Earth-themed chat and quiz app, built with React Native and Expo. The Grey Tutor allows users to explore Tolkien lore, ask questions, and test their knowledge with a dynamic quiz mode. All responses are powered by a rich, extensible mock database for easy demonstration and testing.
+An interactive Middle Earth-themed chat and quiz app, built with React Native and Expo SDK 54. The Grey Tutor allows users to explore Tolkien lore, ask questions, and test their knowledge with a dynamic quiz mode powered by a Neo4j knowledge graph and LLM-generated questions.
 
 ---
 
@@ -9,7 +9,8 @@ An interactive Middle Earth-themed chat and quiz app, built with React Native an
   - Ask about characters, places, events, and lore from Tolkien's world.
   - Instant answers using regex-powered keyword matching.
 - **Quiz Mode:**
-  - Toggleable quiz experience with multiple choice questions.
+  - Toggleable quiz experience with multiple choice and free-text questions.
+  - LLM-generated questions from Neo4j knowledge graph.
   - Tracks score and provides instant feedback.
 - **Modern UI:**
   - Mobile-friendly, clean, and accessible interface.
@@ -39,20 +40,33 @@ frontend/
 ---
 
 ## 🛠️ Getting Started
+
+### Prerequisites
+- Node.js 18+
+- Docker (for Neo4j)
+- Expo Go app on your mobile device (SDK 54)
+
+### Quick Start
 1. **Clone the repo:**
    ```sh
    git clone https://github.com/federicoandreis/TheGreyTutor.git
-   cd TheGreyTutor/frontend
+   cd TheGreyTutor
    ```
 2. **Install dependencies:**
    ```sh
    npm install
    ```
-3. **Start the app:**
+3. **Start all services:**
    ```sh
+   # Windows PowerShell
+   .\start_all.ps1
+   
+   # Or manually:
+   docker-compose up -d                    # Start Neo4j
+   python -m uvicorn thegreytutor.backend.src.main:app --reload --host 0.0.0.0 --port 8000
    npx expo start
    ```
-4. **Test on device or emulator.**
+4. **Scan QR code with Expo Go** to test on your mobile device.
 
 ---
 
@@ -82,10 +96,16 @@ This repo now includes powerful backend components for knowledge graph managemen
 
 ---
 
+## ⚡ Tech Stack
+- **Frontend:** React Native + Expo SDK 54, React Navigation v7
+- **Backend:** FastAPI + Python
+- **Database:** Neo4j (knowledge graph), PostgreSQL (users)
+- **LLM:** OpenAI GPT-4o-mini for question generation and assessment
+
 ## ⚡ Work in Progress
 - The app and backend are in active development.
-- **Chat Mode**: Fully functional with a regex-driven mock Q&A database.
-- **Quiz Mode**: Demo-ready with scoring.
+- **Chat Mode**: Fully functional with Gandalf-themed LLM responses.
+- **Quiz Mode**: LLM-generated questions from knowledge graph with mixed question types.
 - **Knowledge Graph Deduplication**: Robust, LLM-assisted, and production-grade.
 - Simple, accessible, and mobile-first UI.
 
