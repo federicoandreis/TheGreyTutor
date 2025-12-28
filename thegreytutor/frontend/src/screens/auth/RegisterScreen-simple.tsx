@@ -10,9 +10,15 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import { useAppState } from '../../store/store-minimal';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useAppState, registerUser } from '../../store/store-minimal';
+import { RootStackParamList } from '../../types';
+
+type RegisterScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Register'>;
 
 const RegisterScreen: React.FC = () => {
+  const navigation = useNavigation<RegisterScreenNavigationProp>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -40,20 +46,14 @@ const RegisterScreen: React.FC = () => {
 
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      
-      // Simulate registration
-      const newUser = {
-        id: Date.now().toString(),
-        email: email.trim(),
-        username: username.trim(),
-        displayName: displayName.trim(),
-      };
-      
-      dispatch({ type: 'SET_USER', payload: newUser });
+      const user = await registerUser(username.trim(), email.trim(), password, displayName.trim());
+      dispatch({ type: 'SET_USER', payload: user });
       Alert.alert('Success', 'Welcome to The Grey Tutor!');
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Registration failed. Please try again.' });
-      Alert.alert('Registration Failed', 'Please try again.');
+      dispatch({ type: 'SET_LOADING', payload: false });
+      const errorMessage = error instanceof Error ? error.message : 'Registration failed. Please try again.';
+      dispatch({ type: 'SET_ERROR', payload: errorMessage });
+      Alert.alert('Registration Failed', errorMessage);
     }
   };
 
@@ -138,7 +138,7 @@ const RegisterScreen: React.FC = () => {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.linkButton}>
+          <TouchableOpacity style={styles.linkButton} onPress={() => navigation.goBack()}>
             <Text style={styles.linkText}>
               Already have an account? Return to Login
             </Text>

@@ -10,9 +10,15 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { useAppState, loginUser } from '../../store/store-minimal';
+import { RootStackParamList } from '../../types';
+
+type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
 const LoginScreen: React.FC = () => {
+  const navigation = useNavigation<LoginScreenNavigationProp>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { state, dispatch } = useAppState();
@@ -30,6 +36,7 @@ const LoginScreen: React.FC = () => {
       const user = await loginUser(email.trim(), password);
       dispatch({ type: 'SET_USER', payload: user });
     } catch (error) {
+      dispatch({ type: 'SET_LOADING', payload: false });
       dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Login failed' });
       Alert.alert('Login Failed', error instanceof Error ? error.message : 'Login failed');
     }
@@ -40,8 +47,7 @@ const LoginScreen: React.FC = () => {
   };
 
   const handleSignUp = () => {
-    // Navigation will be handled by the navigation system
-    console.log('Navigate to Sign Up');
+    navigation.navigate('Register');
   };
 
   return (
@@ -105,12 +111,12 @@ const LoginScreen: React.FC = () => {
 
           {/* Footer */}
           <View style={styles.footer}>
-            <Text style={styles.signUpText}>
-              Don't have an account?{' '}
-              <Text style={styles.signUpLink} onPress={handleSignUp}>
-                Sign Up
-              </Text>
-            </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <Text style={styles.signUpText}>Don't have an account? </Text>
+              <TouchableOpacity onPress={handleSignUp}>
+                <Text style={styles.signUpLink}>Sign Up</Text>
+              </TouchableOpacity>
+            </View>
             <Text style={styles.termsText}>
               By signing in, you agree to our Terms of Service and Privacy Policy
             </Text>

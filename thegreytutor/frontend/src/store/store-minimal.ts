@@ -1,16 +1,20 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
+import { authApi, AuthUser, AuthResponse } from '../services/authApi';
 
-// Simple state management without Redux
+// User interface matching backend response
 interface User {
   id: string;
   email: string;
   displayName: string;
+  username?: string;
+  role?: string;
 }
 
 interface AppState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isInitialized: boolean;
   error: string | null;
 }
 
@@ -18,12 +22,14 @@ type AppAction =
   | { type: 'SET_USER'; payload: User }
   | { type: 'CLEAR_USER' }
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: string | null };
+  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'SET_INITIALIZED'; payload: boolean };
 
 const initialState: AppState = {
   user: null,
   isAuthenticated: false,
   isLoading: false,
+  isInitialized: false,
   error: null,
 };
 
@@ -54,6 +60,11 @@ function appReducer(state: AppState, action: AppAction): AppState {
         error: action.payload,
         isLoading: false,
       };
+    case 'SET_INITIALIZED':
+      return {
+        ...state,
+        isInitialized: action.payload,
+      };
     default:
       return state;
   }
@@ -82,25 +93,50 @@ export function useAppState() {
   return context;
 }
 
-// Real login function (calls backend API)
-export async function loginUser(email: string, password: string): Promise<User> {
-  const response = await fetch('http://localhost:8000/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  });
-
-  if (!response.ok) {
-    const data = await response.json().catch(() => ({}));
-    throw new Error(data.detail || 'Login failed');
-  }
-
-  const data = await response.json();
+// Helper to convert AuthUser to User
+function authUserToUser(authUser: AuthUser): User {
   return {
-    id: data.user_id,
-    email: email,
-    displayName: data.name || data.username || email,
+    id: authUser.id,
+    email: authUser.email,
+    displayName: authUser.name || authUser.username,
+    username: authUser.username,
+    role: authUser.role,
   };
+}
+
+// Login function using real auth API
+export async function loginUser(email: string, password: string): Promise<User> {
+  const response = await authApi.login({ email, password });
+  return authUserToUser(response.user);
+}
+
+// Register function using real auth API
+export async function registerUser(
+  username: string,
+  email: string,
+  password: string,
+  name?: string
+): Promise<User> {
+  const response = await authApi.register({ username, email, password, name });
+  return authUserToUser(response.user);
+}
+
+// Logout function
+export async function logoutUser(): Promise<void> {
+  await authApi.logout();
+}
+
+// Initialize auth state (check for existing session)
+export async function initializeAuth(): Promise<User | null> {
+  const hasToken = await authApi.initialize();
+  if (hasToken) {
+    try {
+      const authUser = await authApi.getCurrentUser();
+      return authUserToUser(authUser);
+    } catch (error) {
+      console.error('Failed to restore session:', error);
+      return null;
+    }
+  }
+  return null;
 }
