@@ -32,6 +32,9 @@
       "bundler": "metro"
     },
     "main": "./App.tsx",
-    "scheme": "thegreytutor"
+    "scheme": "thegreytutor",
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }

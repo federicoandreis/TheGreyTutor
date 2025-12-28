@@ -10,7 +10,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import { useAppState } from '../../store/store-minimal';
+import { useAppState, registerUser } from '../../store/store-minimal';
 
 const RegisterScreen: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -41,21 +41,14 @@ const RegisterScreen: React.FC = () => {
     dispatch({ type: 'SET_LOADING', payload: true });
     dispatch({ type: 'SET_ERROR', payload: null });
     try {
-      // Simulate registration API call
-      await new Promise(resolve => setTimeout(resolve, 1200));
-      // Fake user object
-      const user = {
-        id: Date.now().toString(),
-        email,
-        displayName,
-      };
+      const user = await registerUser(username, email, password, displayName);
       dispatch({ type: 'SET_USER', payload: user });
       dispatch({ type: 'SET_LOADING', payload: false });
-      // Optionally, navigate away or show success
     } catch (err) {
-      dispatch({ type: 'SET_ERROR', payload: 'Registration failed' });
+      const errorMessage = err instanceof Error ? err.message : 'Registration failed';
+      dispatch({ type: 'SET_ERROR', payload: errorMessage });
       dispatch({ type: 'SET_LOADING', payload: false });
-      Alert.alert('Registration Failed', 'An error occurred.');
+      Alert.alert('Registration Failed', errorMessage);
     }
   };
 
