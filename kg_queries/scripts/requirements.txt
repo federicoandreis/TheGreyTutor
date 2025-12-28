@@ -1,5 +1,5 @@
 neo4j==5.14.0
 openai==1.12.0
 python-dotenv==1.0.0
-tqdm==4.66.1
+tqdm>=4.66.3  # CVE-2024-34062 fix
 numpy==1.24.3
