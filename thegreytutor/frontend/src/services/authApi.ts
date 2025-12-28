@@ -7,7 +7,8 @@
 
 import * as SecureStore from 'expo-secure-store';
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000';
+// Use computer's IP for mobile device access (localhost doesn't work from phone)
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.0.225:8000';
 
 // Token storage keys
 const ACCESS_TOKEN_KEY = 'access_token';
@@ -162,7 +163,10 @@ class AuthApiService {
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({ detail: 'Registration failed' }));
-      throw new Error(error.detail || 'Registration failed');
+      const message = typeof error.detail === 'string' 
+        ? error.detail 
+        : (error.message || JSON.stringify(error.detail) || 'Registration failed');
+      throw new Error(message);
     }
 
     const result: AuthResponse = await response.json();
@@ -184,7 +188,10 @@ class AuthApiService {
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({ detail: 'Login failed' }));
-      throw new Error(error.detail || 'Invalid email or password');
+      const message = typeof error.detail === 'string' 
+        ? error.detail 
+        : (error.message || JSON.stringify(error.detail) || 'Invalid email or password');
+      throw new Error(message);
     }
 
     const result: AuthResponse = await response.json();

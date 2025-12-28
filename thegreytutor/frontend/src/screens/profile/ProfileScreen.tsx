@@ -24,7 +24,11 @@ const ProfileScreen: React.FC = () => {
         { 
           text: 'Logout', 
           style: 'destructive',
-          onPress: () => dispatch({ type: 'CLEAR_USER' })
+          onPress: () => {
+            dispatch({ type: 'SET_LOADING', payload: false });
+            dispatch({ type: 'SET_ERROR', payload: null });
+            dispatch({ type: 'CLEAR_USER' });
+          }
         },
       ]
     );
