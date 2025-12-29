@@ -31,6 +31,7 @@ ENV/
 node_modules/
 .expo/
 .expo-shared/
+.claude/
 
 # Build and cache directories
 .cache/
