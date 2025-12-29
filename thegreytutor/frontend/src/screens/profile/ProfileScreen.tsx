@@ -11,7 +11,11 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useAppState } from '../../store/store-minimal';
 
-const ProfileScreen: React.FC = () => {
+interface ProfileScreenProps {
+  navigation: any;
+}
+
+const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { state, dispatch } = useAppState();
   const user = state.user;
 
@@ -39,7 +43,16 @@ const ProfileScreen: React.FC = () => {
       id: '1',
       title: 'Edit Profile',
       icon: 'person-outline',
-      onPress: () => console.log('Edit Profile'),
+      onPress: () => {
+        console.log('Edit Profile pressed, navigating...');
+        console.log('Navigation object:', navigation);
+        try {
+          navigation.navigate('EditProfile');
+        } catch (error) {
+          console.error('Navigation error:', error);
+          Alert.alert('Navigation Error', 'Could not navigate to Edit Profile');
+        }
+      },
     },
     {
       id: '2',
@@ -80,7 +93,7 @@ const ProfileScreen: React.FC = () => {
           {/* Profile Header */}
           <View style={styles.profileHeader}>
             <View style={styles.avatarContainer}>
-              <Text style={styles.avatar}>🧙‍♂️</Text>
+              <Text style={styles.avatar}>{user?.avatar || '🧙‍♂️'}</Text>
             </View>
             <Text style={styles.userName}>{user?.displayName || 'Fede'}</Text>
             <Text style={styles.userEmail}>{user?.email || 'fede@greytutor.com'}</Text>
