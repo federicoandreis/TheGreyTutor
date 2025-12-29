@@ -2,10 +2,15 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import { Alert } from 'react-native';
 import EditProfileScreen from '../../../src/screens/profile/EditProfileScreen';
-import * as ImagePicker from 'expo-image-picker';
+import { authApi } from '../../../src/services/authApi';
 
 // Mock dependencies
-jest.mock('expo-image-picker');
+jest.mock('../../../src/services/authApi', () => ({
+  authApi: {
+    authenticatedFetch: jest.fn(),
+  },
+}));
+
 jest.mock('../../../src/store/store-minimal', () => ({
   useAppState: () => ({
     state: {
@@ -45,7 +50,7 @@ describe('EditProfileScreen', () => {
     expect(getByPlaceholderText('Enter username')).toBeTruthy();
     expect(getByPlaceholderText('Enter email')).toBeTruthy();
     expect(getByPlaceholderText('Enter display name')).toBeTruthy();
-    expect(getByText('Change Avatar')).toBeTruthy();
+    expect(getByText('Choose Avatar')).toBeTruthy();
   });
 
   it('displays current user data in form fields', () => {
@@ -176,43 +181,36 @@ describe('EditProfileScreen', () => {
     });
   });
 
-  it('calls image picker when Change Avatar is pressed', async () => {
-    const mockImagePicker = ImagePicker as jest.Mocked<typeof ImagePicker>;
-    mockImagePicker.requestMediaLibraryPermissionsAsync = jest.fn().mockResolvedValue({
-      granted: true,
-    });
-    mockImagePicker.launchImageLibraryAsync = jest.fn().mockResolvedValue({
-      canceled: false,
-      assets: [{ uri: 'file://test-avatar.jpg' }],
-    });
+  it('shows emoji picker when Choose Avatar is pressed', async () => {
+    const { getByText, queryByText } = render(<EditProfileScreen navigation={mockNavigation} />);
 
-    const { getByText } = render(<EditProfileScreen navigation={mockNavigation} />);
-
-    const changeAvatarButton = getByText('Change Avatar');
-    fireEvent.press(changeAvatarButton);
+    const chooseAvatarButton = getByText('Choose Avatar');
+    fireEvent.press(chooseAvatarButton);
 
     await waitFor(() => {
-      expect(mockImagePicker.requestMediaLibraryPermissionsAsync).toHaveBeenCalled();
-      expect(mockImagePicker.launchImageLibraryAsync).toHaveBeenCalled();
+      expect(queryByText('Choose Your Avatar')).toBeTruthy();
+      expect(queryByText('Hide Avatars')).toBeTruthy();
     });
   });
 
-  it('shows alert when permission is denied', async () => {
-    const mockImagePicker = ImagePicker as jest.Mocked<typeof ImagePicker>;
-    mockImagePicker.requestMediaLibraryPermissionsAsync = jest.fn().mockResolvedValue({
-      granted: false,
-    });
+  it('hides emoji picker when Hide Avatars is pressed', async () => {
+    const { getByText, queryByText } = render(<EditProfileScreen navigation={mockNavigation} />);
 
-    const { getByText } = render(<EditProfileScreen navigation={mockNavigation} />);
-
-    const changeAvatarButton = getByText('Change Avatar');
-    fireEvent.press(changeAvatarButton);
+    // Show emoji picker
+    const chooseAvatarButton = getByText('Choose Avatar');
+    fireEvent.press(chooseAvatarButton);
 
     await waitFor(() => {
-      expect(Alert.alert).toHaveBeenCalledWith(
-        'Permission Required',
-        'Permission to access camera roll is required!'
-      );
+      expect(queryByText('Hide Avatars')).toBeTruthy();
+    });
+
+    // Hide emoji picker
+    const hideAvatarsButton = getByText('Hide Avatars');
+    fireEvent.press(hideAvatarsButton);
+
+    await waitFor(() => {
+      expect(queryByText('Choose Your Avatar')).toBeFalsy();
+      expect(queryByText('Choose Avatar')).toBeTruthy();
     });
   });
 
@@ -246,6 +244,20 @@ describe('EditProfileScreen', () => {
   });
 
   it('successfully saves valid profile changes', async () => {
+    // Mock successful API response
+    const mockAuthenticatedFetch = authApi.authenticatedFetch as jest.Mock;
+    mockAuthenticatedFetch.mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        id: 'test-user-id',
+        username: 'newusername',
+        email: 'newemail@example.com',
+        name: 'New Display Name',
+        avatar: '🧙‍♂️',
+        role: 'user',
+      }),
+    });
+
     const { getByPlaceholderText, getByText } = render(
       <EditProfileScreen navigation={mockNavigation} />
     );
@@ -262,6 +274,7 @@ describe('EditProfileScreen', () => {
     fireEvent.press(saveButton);
 
     await waitFor(() => {
+      expect(mockAuthenticatedFetch).toHaveBeenCalled();
       expect(Alert.alert).toHaveBeenCalledWith(
         'Success',
         'Profile updated successfully!',
