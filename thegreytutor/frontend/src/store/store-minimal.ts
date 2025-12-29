@@ -8,6 +8,7 @@ interface User {
   displayName: string;
   username?: string;
   role?: string;
+  avatar?: string;
 }
 
 interface AppState {

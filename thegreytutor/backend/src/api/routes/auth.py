@@ -21,6 +21,7 @@ from ..schemas.auth import (
     AuthResponse,
     LogoutRequest,
     PasswordChangeRequest,
+    UserUpdateRequest,
     ErrorResponse,
 )
 from ..deps import get_current_user_id, get_current_user_payload
@@ -248,6 +249,90 @@ async def get_current_user(
     )
 
 
+@router.put("/me", response_model=UserResponse)
+async def update_profile(
+    request: UserUpdateRequest,
+    user_id: str = Depends(get_current_user_id),
+    db: Session = Depends(get_db)
+):
+    """
+    Update the current user's profile information.
+
+    Allows updating username, email, name, and avatar.
+    """
+    from database.models.user import User
+
+    user = db.query(User).filter(User.id == user_id).first()
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+
+    # Check if new username is already taken by another user
+    if request.username and request.username != user.username:
+        existing_user = db.query(User).filter(
+            User.username == request.username,
+            User.id != user_id
+        ).first()
+        if existing_user:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Username already taken"
+            )
+
+    # Check if new email is already taken by another user
+    if request.email and request.email != user.email:
+        existing_email = db.query(User).filter(
+            User.email == request.email,
+            User.id != user_id
+        ).first()
+        if existing_email:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Email already registered"
+            )
+
+    # Update user fields if provided
+    if request.username is not None:
+        user.username = request.username
+    if request.email is not None:
+        user.email = request.email
+    if request.name is not None:
+        user.name = request.name
+    if request.avatar is not None:
+        user.avatar = request.avatar
+
+    try:
+        db.commit()
+        db.refresh(user)
+        logger.info("Profile updated", user_id=user_id, fields_updated={
+            "username": request.username is not None,
+            "email": request.email is not None,
+            "name": request.name is not None,
+            "avatar": request.avatar is not None
+        })
+    except Exception as e:
+        db.rollback()
+        logger.error("Profile update failed", user_id=user_id, error=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to update profile"
+        )
+
+    return UserResponse(
+        id=user.id,
+        username=user.username,
+        email=user.email,
+        name=user.name,
+        avatar=user.avatar,
+        role=user.role,
+        created_at=user.created_at,
+        last_login=user.last_login,
+    )
+
+
 @router.put("/me/password")
 async def change_password(
     request: PasswordChangeRequest,
@@ -258,26 +343,26 @@ async def change_password(
     Change the current user's password.
     """
     from database.models.user import User
-    
+
     user = db.query(User).filter(User.id == user_id).first()
-    
+
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User not found"
         )
-    
+
     # Verify current password
     if not auth_service.verify_password(request.current_password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Current password is incorrect"
         )
-    
+
     # Update password
     user.password_hash = auth_service.hash_password(request.new_password)
     db.commit()
-    
+
     logger.info("Password changed", user_id=user_id)
-    
+
     return {"success": True, "message": "Password changed successfully"}

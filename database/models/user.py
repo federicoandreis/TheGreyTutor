@@ -21,14 +21,15 @@ logger = logging.getLogger(__name__)
 
 class User(Base):
     """User model."""
-    
+
     __tablename__ = "users"
-    
+
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     username = Column(String, unique=True, nullable=False, index=True)
     email = Column(String, unique=True, nullable=True)
     password_hash = Column(String, nullable=True)
     name = Column(String, nullable=True)
+    avatar = Column(String, nullable=True)
     role = Column(String, nullable=False, default="user")
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     last_login = Column(DateTime, nullable=True)

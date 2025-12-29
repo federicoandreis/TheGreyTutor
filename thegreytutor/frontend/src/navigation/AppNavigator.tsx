@@ -11,11 +11,47 @@ import RegisterScreen from '../screens/auth/RegisterScreen-simple';
 import ChatScreen from '../screens/chat/ChatScreen-simple';
 import LearningScreen from '../screens/learning/LearningScreen-simple';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+import EditProfileScreen from '../screens/profile/EditProfileScreen';
 
 import { RootStackParamList, TabParamList } from '../types';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
+const ProfileStack = createStackNavigator();
+
+// Profile Stack Navigator for nested screens
+const ProfileStackNavigator: React.FC = () => {
+  return (
+    <ProfileStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#6C7B7F',
+        },
+        headerTintColor: '#FFFFFF',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <ProfileStack.Screen
+        name="ProfileMain"
+        component={ProfileScreen}
+        options={{
+          title: 'Profile',
+          headerShown: true,
+        }}
+      />
+      <ProfileStack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          title: 'Edit Profile',
+          headerShown: false,
+        }}
+      />
+    </ProfileStack.Navigator>
+  );
+};
 
 // Main Tab Navigator for authenticated users
 const MainTabNavigator: React.FC = () => {
@@ -40,47 +76,47 @@ const MainTabNavigator: React.FC = () => {
         },
       }}
     >
-      <Tab.Screen 
-        name="ChatTab" 
+      <Tab.Screen
+        name="ChatTab"
         component={ChatScreen}
-        options={{ 
+        options={{
           title: 'The Grey Tutor',
           headerTitle: 'The Grey Tutor',
           tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => (
-            <Ionicons 
-              name={focused ? 'chatbubbles' : 'chatbubbles-outline'} 
-              size={size} 
-              color={color} 
+            <Ionicons
+              name={focused ? 'chatbubbles' : 'chatbubbles-outline'}
+              size={size}
+              color={color}
             />
           ),
         }}
       />
-      <Tab.Screen 
-        name="LearningTab" 
+      <Tab.Screen
+        name="LearningTab"
         component={LearningScreen}
-        options={{ 
+        options={{
           title: 'Learning Paths',
           headerTitle: 'Learning Paths',
           tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => (
-            <Ionicons 
-              name={focused ? 'library' : 'library-outline'} 
-              size={size} 
-              color={color} 
+            <Ionicons
+              name={focused ? 'library' : 'library-outline'}
+              size={size}
+              color={color}
             />
           ),
         }}
       />
-      <Tab.Screen 
-        name="ProfileTab" 
-        component={ProfileScreen}
-        options={{ 
+      <Tab.Screen
+        name="ProfileTab"
+        component={ProfileStackNavigator}
+        options={{
           title: 'Profile',
-          headerTitle: 'Profile',
+          headerShown: false,
           tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => (
-            <Ionicons 
-              name={focused ? 'person' : 'person-outline'} 
-              size={size} 
-              color={color} 
+            <Ionicons
+              name={focused ? 'person' : 'person-outline'}
+              size={size}
+              color={color}
             />
           ),
         }}
