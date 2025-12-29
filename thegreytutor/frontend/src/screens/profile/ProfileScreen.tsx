@@ -11,7 +11,11 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useAppState } from '../../store/store-minimal';
 
-const ProfileScreen: React.FC = () => {
+interface ProfileScreenProps {
+  navigation: any;
+}
+
+const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { state, dispatch } = useAppState();
   const user = state.user;
 
@@ -39,7 +43,7 @@ const ProfileScreen: React.FC = () => {
       id: '1',
       title: 'Edit Profile',
       icon: 'person-outline',
-      onPress: () => console.log('Edit Profile'),
+      onPress: () => navigation.navigate('EditProfile'),
     },
     {
       id: '2',

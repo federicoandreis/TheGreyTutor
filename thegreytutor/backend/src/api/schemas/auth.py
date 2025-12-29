@@ -62,10 +62,11 @@ class UserResponse(BaseModel):
     username: str
     email: str
     name: Optional[str] = None
+    avatar: Optional[str] = None
     role: str = "user"
     created_at: datetime
     last_login: Optional[datetime] = None
-    
+
     class Config:
         from_attributes = True
 
@@ -100,6 +101,23 @@ class PasswordChangeRequest(BaseModel):
         if not re.search(r"\d", v):
             raise ValueError("Password must contain at least one digit")
         return v
+
+
+class UserUpdateRequest(BaseModel):
+    """Request schema for updating user profile."""
+    username: Optional[str] = Field(None, min_length=3, max_length=50, description="Unique username")
+    email: Optional[EmailStr] = Field(None, description="User email address")
+    name: Optional[str] = Field(None, max_length=100, description="Display name")
+    avatar: Optional[str] = Field(None, description="Avatar URL or base64 encoded image")
+
+    @field_validator("username")
+    @classmethod
+    def validate_username(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        if not re.match(r"^[a-zA-Z0-9_-]+$", v):
+            raise ValueError("Username can only contain letters, numbers, underscores, and hyphens")
+        return v.lower()
 
 
 class ErrorResponse(BaseModel):

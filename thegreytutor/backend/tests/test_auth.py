@@ -432,9 +432,9 @@ class TestAuthEndpoints:
                 "password": "TestPass123",
             }
         )
-        
+
         token = register_response.json()["tokens"]["access_token"]
-        
+
         # Try to change password with wrong current password
         response = client.put(
             "/auth/me/password",
@@ -444,8 +444,178 @@ class TestAuthEndpoints:
                 "new_password": "NewTestPass456",
             }
         )
-        
+
         assert response.status_code == 400
+
+    def test_update_profile_success(self, client, test_db):
+        """Test successful profile update."""
+        # Register
+        register_response = client.post(
+            "/auth/register",
+            json={
+                "username": "testuser",
+                "email": "test@example.com",
+                "password": "TestPass123",
+                "name": "Original Name"
+            }
+        )
+
+        token = register_response.json()["tokens"]["access_token"]
+
+        # Update profile
+        response = client.put(
+            "/auth/me",
+            headers={"Authorization": f"Bearer {token}"},
+            json={
+                "username": "updateduser",
+                "email": "updated@example.com",
+                "name": "Updated Name",
+                "avatar": "🧙‍♂️"
+            }
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["username"] == "updateduser"
+        assert data["email"] == "updated@example.com"
+        assert data["name"] == "Updated Name"
+        assert data["avatar"] == "🧙‍♂️"
+
+    def test_update_profile_partial(self, client, test_db):
+        """Test partial profile update."""
+        # Register
+        register_response = client.post(
+            "/auth/register",
+            json={
+                "username": "testuser",
+                "email": "test@example.com",
+                "password": "TestPass123",
+                "name": "Test User"
+            }
+        )
+
+        token = register_response.json()["tokens"]["access_token"]
+
+        # Update only name
+        response = client.put(
+            "/auth/me",
+            headers={"Authorization": f"Bearer {token}"},
+            json={
+                "name": "New Name Only"
+            }
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["name"] == "New Name Only"
+        assert data["username"] == "testuser"  # Should remain unchanged
+        assert data["email"] == "test@example.com"  # Should remain unchanged
+
+    def test_update_profile_duplicate_username(self, client, test_db):
+        """Test profile update with duplicate username fails."""
+        # Register two users
+        client.post(
+            "/auth/register",
+            json={
+                "username": "user1",
+                "email": "user1@example.com",
+                "password": "TestPass123",
+            }
+        )
+
+        register_response = client.post(
+            "/auth/register",
+            json={
+                "username": "user2",
+                "email": "user2@example.com",
+                "password": "TestPass123",
+            }
+        )
+
+        token = register_response.json()["tokens"]["access_token"]
+
+        # Try to update to user1's username
+        response = client.put(
+            "/auth/me",
+            headers={"Authorization": f"Bearer {token}"},
+            json={
+                "username": "user1"
+            }
+        )
+
+        assert response.status_code == 400
+        assert "already taken" in response.json()["detail"]
+
+    def test_update_profile_duplicate_email(self, client, test_db):
+        """Test profile update with duplicate email fails."""
+        # Register two users
+        client.post(
+            "/auth/register",
+            json={
+                "username": "user1",
+                "email": "user1@example.com",
+                "password": "TestPass123",
+            }
+        )
+
+        register_response = client.post(
+            "/auth/register",
+            json={
+                "username": "user2",
+                "email": "user2@example.com",
+                "password": "TestPass123",
+            }
+        )
+
+        token = register_response.json()["tokens"]["access_token"]
+
+        # Try to update to user1's email
+        response = client.put(
+            "/auth/me",
+            headers={"Authorization": f"Bearer {token}"},
+            json={
+                "email": "user1@example.com"
+            }
+        )
+
+        assert response.status_code == 400
+        assert "already registered" in response.json()["detail"]
+
+    def test_update_profile_invalid_username(self, client, test_db):
+        """Test profile update with invalid username fails validation."""
+        # Register
+        register_response = client.post(
+            "/auth/register",
+            json={
+                "username": "testuser",
+                "email": "test@example.com",
+                "password": "TestPass123",
+            }
+        )
+
+        token = register_response.json()["tokens"]["access_token"]
+
+        # Try to update with invalid username (contains spaces)
+        response = client.put(
+            "/auth/me",
+            headers={"Authorization": f"Bearer {token}"},
+            json={
+                "username": "invalid username"
+            }
+        )
+
+        assert response.status_code == 422  # Validation error
+
+    def test_update_profile_no_auth(self, client, test_db):
+        """Test profile update without authentication fails."""
+        response = client.put(
+            "/auth/me",
+            json={
+                "name": "New Name"
+            }
+        )
+
+        assert response.status_code == 401
 
 
 if __name__ == "__main__":
