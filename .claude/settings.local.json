@@ -3,7 +3,8 @@
     "allow": [
       "Bash(python -m alembic revision:*)",
       "Bash(python -m pytest:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
