@@ -13,8 +13,8 @@ import {
   Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
 import { useAppState } from '../../store/store-minimal';
+import { authApi } from '../../services/authApi';
 
 interface EditProfileScreenProps {
   navigation: any;
@@ -32,6 +32,35 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({ navigation }) => 
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  // LOTR-themed avatar emojis
+  const avatarOptions = [
+    '🧙‍♂️', // Gandalf/Wizard
+    '🧙', // Saruman
+    '🧝‍♂️', // Legolas/Elf
+    '🧝‍♀️', // Galadriel/Arwen
+    '🧔', // Aragorn
+    '👨‍🦰', // Boromir
+    '🧒', // Frodo/Hobbit
+    '👦', // Sam/Pippin/Merry
+    '⚔️', // Sword
+    '🗡️', // Dagger/Sting
+    '🏹', // Bow
+    '🛡️', // Shield
+    '👑', // Crown
+    '💍', // The Ring
+    '🌋', // Mount Doom
+    '🏔️', // Mountains
+    '🌲', // Fangorn
+    '🐴', // Shadowfax
+    '🦅', // Eagles
+    '🐉', // Smaug/Dragon
+    '👁️', // Eye of Sauron
+    '🔥', // Fire
+    '⚡', // Lightning
+    '✨', // Magic
+  ];
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
@@ -63,31 +92,9 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({ navigation }) => 
     return Object.keys(newErrors).length === 0;
   };
 
-  const handlePickImage = async () => {
-    try {
-      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-      if (permissionResult.granted === false) {
-        Alert.alert('Permission Required', 'Permission to access camera roll is required!');
-        return;
-      }
-
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 0.5,
-      });
-
-      if (!result.canceled && result.assets[0]) {
-        // In a real app, you would upload this to a server
-        // For now, we'll just use the local URI
-        setFormData({ ...formData, avatar: result.assets[0].uri });
-      }
-    } catch (error) {
-      console.error('Error picking image:', error);
-      Alert.alert('Error', 'Failed to pick image');
-    }
+  const handleSelectEmoji = (emoji: string) => {
+    setFormData({ ...formData, avatar: emoji });
+    setShowEmojiPicker(false);
   };
 
   const handleSave = async () => {
@@ -98,33 +105,35 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({ navigation }) => 
     setIsLoading(true);
 
     try {
-      // TODO: Replace with actual API call
-      // const response = await fetch('http://localhost:8000/auth/me', {
-      //   method: 'PUT',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${token}`,
-      //   },
-      //   body: JSON.stringify({
-      //     username: formData.username,
-      //     email: formData.email,
-      //     name: formData.displayName,
-      //     avatar: formData.avatar,
-      //   }),
-      // });
+      // Call the actual backend API
+      const apiUrl = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.0.225:8000';
+      const response = await authApi.authenticatedFetch(`${apiUrl}/auth/me`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          name: formData.displayName,
+          avatar: formData.avatar,
+        }),
+      });
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ detail: 'Update failed' }));
+        throw new Error(error.detail || 'Failed to update profile');
+      }
 
-      // Update local state
+      const updatedUser = await response.json();
+
+      // Update local state with response from server
       dispatch({
         type: 'SET_USER',
         payload: {
-          ...user,
-          username: formData.username,
-          email: formData.email,
-          displayName: formData.displayName,
-          avatar: formData.avatar,
+          id: updatedUser.id,
+          username: updatedUser.username,
+          email: updatedUser.email,
+          displayName: updatedUser.name || updatedUser.username,
+          role: updatedUser.role,
+          avatar: updatedUser.avatar || formData.avatar,
         },
       });
 
@@ -140,7 +149,7 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({ navigation }) => 
       );
     } catch (error) {
       console.error('Error updating profile:', error);
-      Alert.alert('Error', 'Failed to update profile. Please try again.');
+      Alert.alert('Error', error instanceof Error ? error.message : 'Failed to update profile. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -206,10 +215,36 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({ navigation }) => 
               <View style={styles.avatarContainer}>
                 <Text style={styles.avatar}>{formData.avatar}</Text>
               </View>
-              <TouchableOpacity onPress={handlePickImage} style={styles.changeAvatarButton}>
-                <Ionicons name="camera" size={20} color="#007AFF" />
-                <Text style={styles.changeAvatarText}>Change Avatar</Text>
+              <TouchableOpacity
+                onPress={() => setShowEmojiPicker(!showEmojiPicker)}
+                style={styles.changeAvatarButton}
+              >
+                <Ionicons name="happy-outline" size={20} color="#007AFF" />
+                <Text style={styles.changeAvatarText}>
+                  {showEmojiPicker ? 'Hide Avatars' : 'Choose Avatar'}
+                </Text>
               </TouchableOpacity>
+
+              {/* Emoji Picker */}
+              {showEmojiPicker && (
+                <View style={styles.emojiPicker}>
+                  <Text style={styles.emojiPickerTitle}>Choose Your Avatar</Text>
+                  <View style={styles.emojiGrid}>
+                    {avatarOptions.map((emoji, index) => (
+                      <TouchableOpacity
+                        key={index}
+                        style={[
+                          styles.emojiOption,
+                          formData.avatar === emoji && styles.emojiOptionSelected,
+                        ]}
+                        onPress={() => handleSelectEmoji(emoji)}
+                      >
+                        <Text style={styles.emojiText}>{emoji}</Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                </View>
+              )}
             </View>
 
             {/* Form Section */}
@@ -377,6 +412,45 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#007AFF',
     marginLeft: 6,
+  },
+  emojiPicker: {
+    width: '100%',
+    marginTop: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#E5E5EA',
+  },
+  emojiPickerTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1C1C1E',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  emojiGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  emojiOption: {
+    width: 50,
+    height: 50,
+    margin: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#E5E5EA',
+    backgroundColor: '#FFFFFF',
+  },
+  emojiOptionSelected: {
+    borderColor: '#007AFF',
+    backgroundColor: '#E3F2FD',
+  },
+  emojiText: {
+    fontSize: 28,
   },
   formSection: {
     marginBottom: 24,
