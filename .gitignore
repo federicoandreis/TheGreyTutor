@@ -112,6 +112,7 @@ student_models/**/*.json
 
 # Neo4j
 *.jar
+neo4j_plugins/
 
 # Local development
 tmp/
