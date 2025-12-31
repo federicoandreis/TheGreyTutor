@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 import structlog
 
 # Import from the main database module
-from database.connection import SessionLocal, create_tables, check_connection
+from database.connection import SessionLocal, create_tables, check_connection, get_db_session
 
 logger = structlog.get_logger(__name__)
 

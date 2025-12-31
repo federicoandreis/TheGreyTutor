@@ -301,6 +301,7 @@ export type RootStackParamList = {
   Quiz: { quizId: string };
   Achievement: { achievementId: string };
   Location: { locationId: string };
+  RegionDetail: { regionName: string };
 };
 
 export type AuthStackParamList = {
@@ -312,6 +313,7 @@ export type AuthStackParamList = {
 export type TabParamList = {
   ChatTab: undefined;
   LearningTab: undefined;
+  MapTab: undefined;
   ProfileTab: undefined;
 };
 
