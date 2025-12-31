@@ -12,6 +12,8 @@ import ChatScreen from '../screens/chat/ChatScreen-simple';
 import LearningScreen from '../screens/learning/LearningScreen-simple';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import EditProfileScreen from '../screens/profile/EditProfileScreen';
+import MapScreen from '../screens/journey/MapScreen';
+import RegionDetailScreen from '../screens/journey/RegionDetailScreen';
 
 import { RootStackParamList, TabParamList } from '../types';
 
@@ -107,6 +109,21 @@ const MainTabNavigator: React.FC = () => {
         }}
       />
       <Tab.Screen
+        name="MapTab"
+        component={MapScreen}
+        options={{
+          title: 'Journey Map',
+          headerTitle: 'Middle Earth Journey',
+          tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => (
+            <Ionicons
+              name={focused ? 'map' : 'map-outline'}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="ProfileTab"
         component={ProfileStackNavigator}
         options={{
@@ -137,27 +154,37 @@ const AppNavigator: React.FC = () => {
     >
       {isAuthenticated ? (
         // Authenticated screens with tab navigation
-        <Stack.Screen 
-          name="MainTabs" 
-          component={MainTabNavigator}
-        />
+        <>
+          <Stack.Screen
+            name="MainTabs"
+            component={MainTabNavigator}
+          />
+          <Stack.Screen
+            name="RegionDetail"
+            component={RegionDetailScreen}
+            options={{
+              presentation: 'modal',
+              headerShown: false,
+            }}
+          />
+        </>
       ) : (
         // Authentication screens
         <>
-          <Stack.Screen 
-            name="Login" 
+          <Stack.Screen
+            name="Login"
             component={LoginScreen}
-            options={{ 
+            options={{
               title: 'Welcome to Middle Earth',
-              headerShown: false 
+              headerShown: false
             }}
           />
-          <Stack.Screen 
-            name="Register" 
+          <Stack.Screen
+            name="Register"
             component={RegisterScreen}
-            options={{ 
+            options={{
               title: 'Join the Fellowship',
-              headerShown: false 
+              headerShown: false
             }}
           />
         </>
