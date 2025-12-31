@@ -6,6 +6,14 @@ An interactive Middle Earth-themed chat and quiz app, built with React Native an
 
 ## 🚀 Features
 
+- **Journey Map & Gamification:**
+  - Interactive SVG-based map of Middle Earth with 8 unlockable regions
+  - Gamified progression system: Shire → Bree → Rivendell → Moria → Lothlórien → Rohan → Gondor → Mordor
+  - Three journey paths: Fellowship of the Ring, Two Towers, Return of the King
+  - Knowledge points earned through quizzes unlock new regions
+  - Achievement system with 12 badges from common to legendary rarity
+  - Visual progress tracking with completion percentages per region
+
 - **Chat Mode:**
   - Converse with Gandalf about characters, places, events, and lore from Tolkien's world
   - LLM-powered responses with strict adherence to Tolkien lore
@@ -16,6 +24,7 @@ An interactive Middle Earth-themed chat and quiz app, built with React Native an
   - Multiple question types: factual, relationship, multiple-choice, synthesis, application
   - Fully LLM-generated immersive questions with Gandalf's narrative voice
   - Student modeling with mastery tracking across topics
+  - Quiz completion awards knowledge points and unlocks journey progression
 
 - **Knowledge Graph:**
   - Neo4j-based knowledge graph with Tolkien lore entities and relationships
@@ -25,6 +34,7 @@ An interactive Middle Earth-themed chat and quiz app, built with React Native an
 - **Modern UI:**
   - Cross-platform (iOS, Android, Web) with React Native Expo
   - Mobile-friendly, accessible interface with Middle Earth theming
+  - Scrollable/zoomable map with region markers and difficulty indicators
 
 ---
 
@@ -37,12 +47,15 @@ thegreytutor/
 │   │   └── src/
 │   │       ├── main.py         # Application entry point
 │   │       ├── api/            # REST API endpoints
+│   │       ├── agents/         # Journey Agent & business logic
 │   │       ├── services/       # Business logic
 │   │       └── core/           # Configuration & utilities
 │   └── frontend/               # React Native Expo app
 │       └── src/
-│           ├── screens/        # UI screens
-│           ├── store/          # Redux state management
+│           ├── screens/        # UI screens (Chat, Quiz, Journey Map, Profile)
+│           ├── components/     # Reusable components (RegionMarker, Map, etc.)
+│           ├── store/          # Context-based state management
+│           ├── services/       # API clients (journeyApi, authApi)
 │           └── navigation/     # React Navigation setup
 │
 ├── src/                        # Root-level React Native components
@@ -51,7 +64,7 @@ thegreytutor/
 │   └── store/                  # Redux slices
 │
 ├── database/                   # PostgreSQL database layer
-│   ├── models/                 # SQLAlchemy models (User, Conversation, Cache)
+│   ├── models/                 # SQLAlchemy models (User, Conversation, Journey, Cache)
 │   ├── repositories/           # Data access layer
 │   ├── migrations/             # Alembic migrations
 │   ├── api.py                  # Database API endpoints
@@ -84,8 +97,14 @@ thegreytutor/
 │       ├── llm_group_dedup_decision.py # LLM-based dedup decisions
 │       └── llm_node_consolidator.py    # Node consolidation
 │
+├── docs/                       # Documentation
+│   ├── DEVELOPMENT_GUIDE.md    # Development workflow & cache management
+│   ├── JOURNEY_INTEGRATION_GUIDE.md  # Journey Agent integration guide
+│   └── RESTART_CLEAN.md        # Clean restart procedures
+│
+├── setup_journey.py            # Initialize journey tables & seed data
 ├── docker-compose.yml          # Neo4j & PostgreSQL services
-├── start_all.ps1               # Windows startup script
+├── start_all.ps1               # Windows startup script (with PYTHONPATH config)
 ├── requirements.txt            # Python dependencies
 └── package.json                # Node.js dependencies
 ```
@@ -142,6 +161,9 @@ python -m database.cli init
 # Create an admin user
 python -m database.cli create-user --admin
 
+# Initialize Journey Map with Middle Earth regions
+python setup_journey.py
+
 # Import existing data (if available)
 python -m database.cli import
 ```
@@ -149,6 +171,16 @@ python -m database.cli import
 ---
 
 ## 🧙 Core Components
+
+### Journey Agent & Gamified Map
+
+- **Journey State Management:** Tracks user progress, knowledge points, and unlocked regions
+- **Region Progression System:** 8 Middle Earth regions with prerequisite and knowledge point requirements
+- **Achievement System:** 12 achievements from common to legendary rarity
+- **Journey Paths:** Three predefined paths (Fellowship, Two Towers, Return of the King)
+- **Interactive Map:** SVG-based scrollable/zoomable map with visual progress indicators
+- **Region Details:** Modal screens showing unlock requirements, quiz themes, and lore snippets
+- **Travel System:** Gandalf-narrated transitions between regions
 
 ### Knowledge Graph Querying (kg_queries)
 
@@ -164,6 +196,7 @@ python -m database.cli import
 - **LLM Question Generation:** Immersive, narrative-driven questions in Gandalf's voice
 - **LLM Assessment:** Evaluates open-ended answers with detailed feedback
 - **Conversation History:** Full tracking and export of quiz sessions
+- **Journey Integration:** Quiz completion awards knowledge points and unlocks regions
 
 ### Knowledge Graph Consolidation (kg_consolidation)
 
@@ -175,6 +208,7 @@ python -m database.cli import
 ### Database Layer (database)
 
 - **User Management:** User accounts, profiles, sessions
+- **Journey Tracking:** User journey states, region progress, achievements
 - **Conversation Storage:** Full conversation history with parameters
 - **Caching:** Response and query caching for performance
 - **Migrations:** Alembic-managed schema evolution
@@ -194,30 +228,34 @@ python -m database.cli import
 
 ## ✅ Completed Features
 
+- [x] **Journey Map & Gamification:** Interactive Middle Earth map with 8 regions, 3 paths, and 12 achievements
+- [x] **Region Progression:** Knowledge points unlock new regions with prerequisite requirements
 - [x] **Adaptive Quizzing:** Full adaptive strategy engine with student modeling
 - [x] **LLM Question Generation:** Immersive, narrative-driven questions
 - [x] **PathRAG:** Optimized path-based retrieval with community detection
 - [x] **Gandalf Persona:** Strict Tolkien lore adherence in all LLM responses
 - [x] **Deduplication Pipeline:** Transitive grouping with LLM-assisted decisions
 - [x] **Conversation History:** Full tracking, storage, and export capabilities
-- [x] **Database Layer:** PostgreSQL with user management and caching
+- [x] **Database Layer:** PostgreSQL with user management, journey tracking, and caching
 - [x] **Error Handling:** Hardened JSON parsing and API error reporting
 - [x] **Security:** Environment-based secrets, gitignored sensitive data
+- [x] **User Authentication:** JWT-based auth with session management
 
 ## 🚧 Roadmap
 
-- [ ] **User Authentication:** JWT-based auth with session management
+- [ ] **Quiz-Journey Integration:** Connect quiz completion to journey progress and achievements
 - [ ] **Leaderboards:** Persistent user scores and rankings
-- [ ] **UI/UX Polish:** Animations and enhanced theming
+- [ ] **UI/UX Polish:** Animations, transitions, and enhanced theming
 - [ ] **Offline Mode:** Local storage for offline learning
 - [ ] **Multi-agent System:** Specialized AI agents for different learning aspects
-- [ ] **Achievements:** Quest system with progress tracking
+- [ ] **Extended Achievement System:** More achievements, quests, and badges
+- [ ] **Neo4j Integration:** Journey Agent integration with knowledge graph communities
 
 ---
 
 ## 📝 Repo Description
 
-> The Grey Tutor: An interactive Middle Earth chat and quiz app for exploring Tolkien lore. Features Gandalf-themed AI chat with PathRAG knowledge retrieval, adaptive quizzing with LLM-generated questions, and a Neo4j knowledge graph. Built with React Native + Expo, FastAPI, and PostgreSQL.
+> The Grey Tutor: An interactive Middle Earth chat and quiz app for exploring Tolkien lore. Features a gamified journey map through Middle Earth, Gandalf-themed AI chat with PathRAG knowledge retrieval, adaptive quizzing with LLM-generated questions, and achievement tracking. Built with React Native + Expo, FastAPI, Neo4j, and PostgreSQL.
 
 ---
 
