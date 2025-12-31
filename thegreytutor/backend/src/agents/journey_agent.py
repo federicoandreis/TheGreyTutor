@@ -77,8 +77,8 @@ class JourneyAgent:
             state = UserJourneyState(
                 user_id=user_id,
                 knowledge_points=0,
-                unlocked_regions=["the_shire"],
-                current_region="the_shire"
+                unlocked_regions=["shire"],
+                current_region="shire"
             )
             self.db.add(state)
             self.db.commit()

@@ -137,7 +137,11 @@ class JourneyApiClient {
    * Get the complete journey state for the current user.
    */
   async getJourneyState(): Promise<JourneyState> {
-    return await authApi.authenticatedFetch(`${API_URL}/journey/state`);
+    const response = await authApi.authenticatedFetch(`${API_URL}/api/journey/state`);
+    if (!response.ok) {
+      throw new Error(`Failed to get journey state: ${response.statusText}`);
+    }
+    return await response.json();
   }
 
   /**
@@ -147,10 +151,14 @@ class JourneyApiClient {
    * @returns Travel response with success status and Gandalf's narration
    */
   async travelToRegion(regionName: string): Promise<TravelResponse> {
-    return await authApi.authenticatedFetch(`${API_URL}/journey/travel`, {
+    const response = await authApi.authenticatedFetch(`${API_URL}/api/journey/travel`, {
       method: 'POST',
       body: JSON.stringify({ region_name: regionName }),
     });
+    if (!response.ok) {
+      throw new Error(`Failed to travel to region: ${response.statusText}`);
+    }
+    return await response.json();
   }
 
   /**
@@ -170,10 +178,14 @@ class JourneyApiClient {
       [key: string]: any;
     }>;
   }): Promise<QuizCompletionResponse> {
-    return await authApi.authenticatedFetch(`${API_URL}/journey/complete-quiz`, {
+    const response = await authApi.authenticatedFetch(`${API_URL}/api/journey/complete-quiz`, {
       method: 'POST',
       body: JSON.stringify(params),
     });
+    if (!response.ok) {
+      throw new Error(`Failed to complete quiz: ${response.statusText}`);
+    }
+    return await response.json();
   }
 
   /**
@@ -183,7 +195,11 @@ class JourneyApiClient {
    * @returns Detailed region information
    */
   async getRegionDetails(regionName: string): Promise<RegionDetail> {
-    return await authApi.authenticatedFetch(`${API_URL}/journey/regions/${regionName}`);
+    const response = await authApi.authenticatedFetch(`${API_URL}/api/journey/regions/${regionName}`);
+    if (!response.ok) {
+      throw new Error(`Failed to get region details: ${response.statusText}`);
+    }
+    return await response.json();
   }
 
   /**
@@ -192,7 +208,11 @@ class JourneyApiClient {
    * @returns Array of all regions with basic info and unlock status
    */
   async listRegions(): Promise<Region[]> {
-    return await authApi.authenticatedFetch(`${API_URL}/journey/regions`);
+    const response = await authApi.authenticatedFetch(`${API_URL}/api/journey/regions`);
+    if (!response.ok) {
+      throw new Error(`Failed to list regions: ${response.statusText}`);
+    }
+    return await response.json();
   }
 
   /**
@@ -201,7 +221,11 @@ class JourneyApiClient {
    * @returns Array of journey paths
    */
   async listPaths(): Promise<JourneyPath[]> {
-    return await authApi.authenticatedFetch(`${API_URL}/journey/paths`);
+    const response = await authApi.authenticatedFetch(`${API_URL}/api/journey/paths`);
+    if (!response.ok) {
+      throw new Error(`Failed to list paths: ${response.statusText}`);
+    }
+    return await response.json();
   }
 
   /**
@@ -210,7 +234,11 @@ class JourneyApiClient {
    * @returns Array of achievements
    */
   async listAchievements(): Promise<Achievement[]> {
-    return await authApi.authenticatedFetch(`${API_URL}/journey/achievements`);
+    const response = await authApi.authenticatedFetch(`${API_URL}/api/journey/achievements`);
+    if (!response.ok) {
+      throw new Error(`Failed to list achievements: ${response.statusText}`);
+    }
+    return await response.json();
   }
 }
 

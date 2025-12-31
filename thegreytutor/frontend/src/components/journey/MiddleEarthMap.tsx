@@ -129,17 +129,26 @@ import { Text } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ECF0F1',
+    backgroundColor: '#2C3E50',
   },
   scrollView: {
     flex: 1,
   },
   scrollContent: {
-    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
   },
   mapContainer: {
     position: 'relative',
     backgroundColor: '#F5E6D3',
+    borderRadius: 12,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
   legend: {
     position: 'absolute',

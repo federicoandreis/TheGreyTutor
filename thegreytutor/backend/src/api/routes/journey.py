@@ -15,8 +15,8 @@ from sqlalchemy.orm import Session
 
 from database.connection import get_db_session
 from database.models.user import User
-from src.agents.journey_agent import JourneyAgent
-from src.api.deps import get_current_user_id
+from ...agents.journey_agent import JourneyAgent
+from ..deps import get_current_user_id
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

@@ -57,7 +57,7 @@ const MapScreenContent: React.FC = () => {
     console.log('Region pressed:', regionName);
 
     // Find the region data
-    const region = state.journeyState?.region_statuses.find(
+    const region = state.journeyState?.region_statuses?.find(
       r => r.name === regionName
     );
 
@@ -128,7 +128,7 @@ const MapScreenContent: React.FC = () => {
         <View style={styles.statsRow}>
           <View style={styles.statItem}>
             <Ionicons name="star" size={20} color="#FFD700" />
-            <Text style={styles.statValue}>{journeyState.knowledge_points}</Text>
+            <Text style={styles.statValue}>{journeyState.knowledge_points || 0}</Text>
             <Text style={styles.statLabel}>Knowledge Points</Text>
           </View>
 
@@ -136,7 +136,7 @@ const MapScreenContent: React.FC = () => {
 
           <View style={styles.statItem}>
             <Ionicons name="location" size={20} color="#007AFF" />
-            <Text style={styles.statValue}>{journeyState.unlocked_regions.length}</Text>
+            <Text style={styles.statValue}>{journeyState.unlocked_regions?.length || 0}</Text>
             <Text style={styles.statLabel}>Regions Unlocked</Text>
           </View>
 
@@ -144,7 +144,7 @@ const MapScreenContent: React.FC = () => {
 
           <View style={styles.statItem}>
             <Ionicons name="checkmark-circle" size={20} color="#34C759" />
-            <Text style={styles.statValue}>{journeyState.total_regions_completed}</Text>
+            <Text style={styles.statValue}>{journeyState.total_regions_completed || 0}</Text>
             <Text style={styles.statLabel}>Completed</Text>
           </View>
         </View>
@@ -152,11 +152,11 @@ const MapScreenContent: React.FC = () => {
 
       {/* Map */}
       <MiddleEarthMap
-        regionStatuses={journeyState.region_statuses}
-        journeyPaths={journeyState.available_paths}
-        currentRegion={journeyState.current_region}
+        regionStatuses={journeyState.region_statuses || []}
+        journeyPaths={journeyState.available_paths || []}
+        currentRegion={journeyState.current_region || null}
         onRegionPress={handleRegionPress}
-        activePath={journeyState.current_path}
+        activePath={journeyState.current_path || null}
       />
 
       {/* Current region indicator */}
@@ -165,7 +165,7 @@ const MapScreenContent: React.FC = () => {
           <Ionicons name="navigate" size={20} color="#FFFFFF" />
           <Text style={styles.currentRegionText}>
             Current Region: {
-              journeyState.region_statuses.find(
+              journeyState.region_statuses?.find(
                 r => r.name === journeyState.current_region
               )?.display_name || journeyState.current_region
             }

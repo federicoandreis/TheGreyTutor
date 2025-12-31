@@ -20,7 +20,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { useJourneyStore, travelToRegion } from '../../store/journeyStore';
+import { useJourneyStore, travelToRegion, JourneyProvider } from '../../store/journeyStore';
 import { journeyApi, RegionDetail } from '../../services/journeyApi';
 import { RootStackParamList } from '../../types';
 
@@ -31,7 +31,7 @@ type RegionDetailRouteProp = RouteProp<
 
 type RegionDetailNavigationProp = StackNavigationProp<RootStackParamList>;
 
-const RegionDetailScreen: React.FC = () => {
+const RegionDetailScreenContent: React.FC = () => {
   const route = useRoute<RegionDetailRouteProp>();
   const navigation = useNavigation<RegionDetailNavigationProp>();
   const { state, dispatch } = useJourneyStore();
@@ -584,5 +584,16 @@ const styles = StyleSheet.create({
     color: '#6D6D70',
   },
 });
+
+/**
+ * Main RegionDetailScreen component with JourneyProvider
+ */
+const RegionDetailScreen: React.FC = () => {
+  return (
+    <JourneyProvider>
+      <RegionDetailScreenContent />
+    </JourneyProvider>
+  );
+};
 
 export default RegionDetailScreen;

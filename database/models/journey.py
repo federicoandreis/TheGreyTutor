@@ -11,6 +11,7 @@ import uuid
 from sqlalchemy import Column, String, Integer, Float, Boolean, DateTime, ForeignKey, JSON, Text, CheckConstraint
 from sqlalchemy.orm import relationship
 from database.connection import Base
+from database.models.user import User  # Import User model for relationships
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
