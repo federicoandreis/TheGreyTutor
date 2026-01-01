@@ -6,14 +6,20 @@
  */
 
 import React, { useState, useRef } from 'react';
-import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, StyleSheet, Dimensions, ScrollView, Text } from 'react-native';
 import Svg, { Rect, Image as SvgImage } from 'react-native-svg';
 import { RegionMarker } from './RegionMarker';
 import { JourneyPath } from './JourneyPath';
-import { RegionStatus, JourneyPath as JourneyPathType } from '../../services/journeyApi';
+import { RegionProgress } from '../../services/api/journey';
+
+// Type for journey paths (simplified for now)
+interface JourneyPathType {
+  name: string;
+  points: Array<{ x: number; y: number }>;
+}
 
 interface MiddleEarthMapProps {
-  regionStatuses: RegionStatus[];
+  regionStatuses: RegionProgress[];
   journeyPaths: JourneyPathType[];
   currentRegion: string | null;
   onRegionPress: (regionName: string) => void;
@@ -77,24 +83,24 @@ export const MiddleEarthMap: React.FC<MiddleEarthMapProps> = ({
               /> */}
             </Svg>
 
-            {/* Journey paths (rendered below markers) */}
-            {journeyPaths.map((path) => (
+            {/* Journey paths (rendered below markers) - TODO: Update JourneyPath component */}
+            {/* {journeyPaths.map((path) => (
               <JourneyPath
                 key={path.name}
                 path={path}
                 regionStatuses={regionStatuses}
                 isActive={activePath === path.name}
               />
-            ))}
+            ))} */}
 
-            {/* Region markers */}
+            {/* Region markers - TODO: Update RegionMarker component for RegionProgress type */}
             {regionStatuses.map((region) => (
-              <RegionMarker
-                key={region.name}
-                region={region}
-                onPress={onRegionPress}
-                isCurrentRegion={currentRegion === region.name}
-              />
+              <View key={region.region_name}>
+                {/* Placeholder for region markers */}
+                <Text style={{position: 'absolute', top: 100, left: 100}}>
+                  {region.region_name}
+                </Text>
+              </View>
             ))}
           </View>
         </ScrollView>
@@ -122,9 +128,6 @@ export const MiddleEarthMap: React.FC<MiddleEarthMapProps> = ({
     </View>
   );
 };
-
-// Import Text from react-native
-import { Text } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

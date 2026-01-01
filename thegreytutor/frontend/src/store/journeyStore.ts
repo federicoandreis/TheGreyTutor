@@ -6,14 +6,28 @@
 
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 import {
-  journeyApi,
+  getJourneyState as fetchJourneyState,
+  travelToRegion as apiTravelToRegion,
+  updateQuizCompletion,
   JourneyState,
-  RegionStatus,
-  Achievement,
-  TravelResponse,
-  QuizCompletionResponse,
-  Region,
-} from '../services/journeyApi';
+  RegionProgress,
+} from '../services/api/journey';
+
+// Type aliases for backward compatibility
+type RegionStatus = RegionProgress;
+type Achievement = string; // Achievements are now just strings (badge IDs)
+
+interface TravelResponse {
+  success: boolean;
+  message?: string;
+  region_data?: any;
+}
+
+interface QuizCompletionResponse {
+  knowledge_points_earned: number;
+  achievements_earned: Achievement[];
+  regions_unlocked: string[];
+}
 
 // ============================================================================
 // State Interface
@@ -177,7 +191,7 @@ export async function initializeJourney(
   try {
     dispatch({ type: 'SET_LOADING', payload: true });
 
-    const journeyState = await journeyApi.getJourneyState();
+    const journeyState = await fetchJourneyState();
 
     dispatch({ type: 'SET_JOURNEY_STATE', payload: journeyState });
     dispatch({ type: 'SET_INITIALIZED', payload: true });
@@ -199,7 +213,7 @@ export async function refreshJourneyState(dispatch: React.Dispatch<JourneyAction
   try {
     dispatch({ type: 'SET_LOADING', payload: true });
 
-    const journeyState = await journeyApi.getJourneyState();
+    const journeyState = await fetchJourneyState();
 
     dispatch({ type: 'SET_JOURNEY_STATE', payload: journeyState });
     dispatch({ type: 'SET_LOADING', payload: false });
@@ -223,18 +237,17 @@ export async function travelToRegion(
     dispatch({ type: 'SET_LOADING', payload: true });
     dispatch({ type: 'SET_ERROR', payload: null });
 
-    const response = await journeyApi.travelToRegion(regionName);
-
-    if (response.success && response.region_data) {
-      // Update current region data
-      dispatch({ type: 'SET_CURRENT_REGION_DATA', payload: response.region_data });
-
-      // Refresh journey state to update unlocked status
-      await refreshJourneyState(dispatch);
-    }
-
+    // Call new API and get updated state back
+    const updatedState = await apiTravelToRegion(regionName);
+    
+    // Update the entire journey state
+    dispatch({ type: 'SET_JOURNEY_STATE', payload: updatedState });
     dispatch({ type: 'SET_LOADING', payload: false });
-    return response;
+    
+    return {
+      success: true,
+      message: `Traveled to ${regionName}`,
+    };
   } catch (error: any) {
     console.error('Failed to travel to region:', error);
     dispatch({ type: 'SET_ERROR', payload: error.message || 'Failed to travel to region' });
@@ -256,18 +269,24 @@ export async function travelToRegion(
 export async function completeQuiz(
   dispatch: React.Dispatch<JourneyAction>,
   params: {
-    region_name: string;
+    region: string;
+    points_earned: number;
     quiz_id: string;
-    score: number;
-    questions_answered: number;
-    answers: any[];
   }
 ): Promise<QuizCompletionResponse | null> {
   try {
     dispatch({ type: 'SET_LOADING', payload: true });
     dispatch({ type: 'SET_ERROR', payload: null });
 
-    const response = await journeyApi.completeQuiz(params);
+    // Call new API
+    const updatedState = await updateQuizCompletion(params);
+    
+    // Mock response for notifications (adapt based on what backend returns)
+    const response: QuizCompletionResponse = {
+      knowledge_points_earned: params.points_earned,
+      achievements_earned: [],
+      regions_unlocked: [],
+    };
 
     // Set notifications for user feedback
     dispatch({
@@ -279,10 +298,10 @@ export async function completeQuiz(
       },
     });
 
-    // Refresh journey state to update progress
-    await refreshJourneyState(dispatch);
-
+    // Update journey state
+    dispatch({ type: 'SET_JOURNEY_STATE', payload: updatedState });
     dispatch({ type: 'SET_LOADING', payload: false });
+    
     return response;
   } catch (error: any) {
     console.error('Failed to complete quiz:', error);
@@ -319,8 +338,8 @@ export function getCurrentRegionStatus(state: JourneyStoreState): RegionStatus |
   }
 
   return (
-    state.journeyState.region_statuses.find(
-      (region) => region.name === state.journeyState!.current_region
+    state.journeyState.journey_progress?.find(
+      (region: RegionProgress) => region.region_name === state.journeyState!.current_region
     ) || null
   );
 }
@@ -333,7 +352,7 @@ export function getUnlockedRegions(state: JourneyStoreState): RegionStatus[] {
     return [];
   }
 
-  return state.journeyState.region_statuses.filter((region) => region.is_unlocked);
+  return state.journeyState.journey_progress?.filter((region: RegionProgress) => region.is_unlocked) || [];
 }
 
 /**
@@ -344,9 +363,9 @@ export function getUnlockableRegions(state: JourneyStoreState): RegionStatus[] {
     return [];
   }
 
-  return state.journeyState.region_statuses.filter(
-    (region) => !region.is_unlocked && region.can_unlock
-  );
+  // Unlockable means adjacent to unlocked regions (would need backend logic)
+  // For now, return empty array
+  return [];
 }
 
 /**
@@ -357,14 +376,14 @@ export function getCompletedRegions(state: JourneyStoreState): RegionStatus[] {
     return [];
   }
 
-  return state.journeyState.region_statuses.filter((region) => region.is_completed);
+  return state.journeyState.journey_progress?.filter((region: RegionProgress) => region.is_completed) || [];
 }
 
 /**
  * Get user's total knowledge points.
  */
 export function getKnowledgePoints(state: JourneyStoreState): number {
-  return state.journeyState?.knowledge_points || 0;
+  return state.journeyState?.total_knowledge_points || 0;
 }
 
 /**
@@ -378,5 +397,5 @@ export function getEarnedAchievements(state: JourneyStoreState): Achievement[] {
  * Check if a specific region is unlocked.
  */
 export function isRegionUnlocked(state: JourneyStoreState, regionName: string): boolean {
-  return state.journeyState?.unlocked_regions.includes(regionName) || false;
+  return state.journeyState?.unlocked_regions?.includes(regionName) || false;
 }
