@@ -180,7 +180,16 @@ const MapScreenContent: React.FC = () => {
 
       {/* Map */}
       <MiddleEarthMap
-        regionStatuses={journeyState.journey_progress || []}
+        regionStatuses={
+          // Backend returns region_statuses, map to journey_progress format
+          (journeyState.journey_progress || (journeyState as any).region_statuses || []).map((region: any) => ({
+            region_name: region.region_name || region.name,
+            knowledge_points: region.knowledge_points || 0,
+            quizzes_completed: region.quizzes_completed || 0,
+            is_unlocked: region.is_unlocked || false,
+            is_completed: region.is_completed || false,
+          }))
+        }
         journeyPaths={[]} // Paths not yet implemented in new API
         currentRegion={journeyState.current_region || null}
         onRegionPress={handleRegionPress}
