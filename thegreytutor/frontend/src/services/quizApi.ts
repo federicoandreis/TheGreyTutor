@@ -1,17 +1,34 @@
-// quizApi.ts
-// Service for interacting with the backend quiz API endpoints
+/**
+ * Quiz API - Updated to use centralized API client from Phase 1.1
+ * 
+ * Provides backward-compatible wrapper functions for existing quiz functionality
+ * in ChatScreen while using the new centralized API infrastructure.
+ */
 
-export const BASE_URL = 'http://192.168.0.225:8000';
+import {
+  createQuizSession,
+  getNextQuestion as apiGetNextQuestion,
+  submitAnswer as apiSubmitAnswer,
+  getSessionSummary,
+  QuizSession as ApiQuizSession,
+  Question,
+  AnswerResponse,
+} from './api/quiz';
+import { config } from '../utils/config';
 
+// Export BASE_URL for backward compatibility
+export const BASE_URL = config.apiUrl;
+
+// Legacy interfaces for backward compatibility with ChatScreen
 export interface QuizSession {
   session_id: string;
-  student_id: string;
-  student_name: string;
-  questions_asked: number;
-  correct: number;
-  incorrect: number;
-  current_question: any;
-  finished: boolean;
+  student_id?: string;
+  student_name?: string;
+  questions_asked?: number;
+  correct?: number;
+  incorrect?: number;
+  current_question?: any;
+  finished?: boolean;
 }
 
 export interface QuestionResponse {
@@ -26,37 +43,92 @@ export interface SubmitAnswerResponse {
   feedback?: any;
   next_question?: any;
   session_complete: boolean;
-  session_id: string;
+  session_id?: string;
 }
 
-export async function startQuizSession(student_id: string, student_name: string) {
-  const res = await fetch(`${BASE_URL}/session`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ student_id, student_name }),
-  });
-  if (!res.ok) throw new Error('Failed to start quiz session');
-  return await res.json();
+/**
+ * Start a new quiz session
+ * Maps old parameters to new API
+ */
+export async function startQuizSession(
+  student_id: string,
+  student_name: string
+): Promise<QuizSession> {
+  try {
+    const session = await createQuizSession({
+      // community: undefined, // Can be added later
+      // difficulty: undefined,
+      num_questions: 10, // Default number
+    });
+
+    return {
+      session_id: session.session_id,
+      student_id,
+      student_name,
+      questions_asked: session.question_number - 1,
+      correct: 0,
+      incorrect: 0,
+      current_question: session.question,
+      finished: false,
+    };
+  } catch (error) {
+    console.error('[quizApi] Failed to start quiz session:', error);
+    throw new Error('Failed to start quiz session');
+  }
 }
 
-export async function getNextQuestion(session_id: string) {
-  const res = await fetch(`${BASE_URL}/session/${session_id}/question`);
-  if (!res.ok) throw new Error('Failed to get next question');
-  return await res.json();
+/**
+ * Get the next question in a quiz session
+ */
+export async function getNextQuestion(session_id: string): Promise<QuestionResponse> {
+  try {
+    const question = await apiGetNextQuestion(session_id);
+
+    return {
+      question,
+      session_id,
+      question_number: 1, // Would need to track this
+    };
+  } catch (error) {
+    console.error('[quizApi] Failed to get next question:', error);
+    throw new Error('Failed to get next question');
+  }
 }
 
-export async function submitQuizAnswer(session_id: string, answer: string) {
-  const res = await fetch(`${BASE_URL}/session/${session_id}/answer`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ answer }),
-  });
-  if (!res.ok) throw new Error('Failed to submit answer');
-  return await res.json();
+/**
+ * Submit an answer for the current question
+ */
+export async function submitQuizAnswer(
+  session_id: string,
+  answer: string
+): Promise<SubmitAnswerResponse> {
+  try {
+    const response = await apiSubmitAnswer(session_id, answer);
+
+    return {
+      correct: response.is_correct,
+      feedback: {
+        explanation: response.feedback,
+      },
+      next_question: response.next_question,
+      session_complete: response.session_complete,
+      session_id,
+    };
+  } catch (error) {
+    console.error('[quizApi] Failed to submit answer:', error);
+    throw new Error('Failed to submit answer');
+  }
 }
 
-export async function getQuizSessionState(session_id: string) {
-  const res = await fetch(`${BASE_URL}/session/${session_id}`);
-  if (!res.ok) throw new Error('Failed to get session state');
-  return await res.json();
+/**
+ * Get quiz session state
+ */
+export async function getQuizSessionState(session_id: string): Promise<any> {
+  try {
+    const summary = await getSessionSummary(session_id);
+    return summary;
+  } catch (error) {
+    console.error('[quizApi] Failed to get session state:', error);
+    throw new Error('Failed to get session state');
+  }
 }
