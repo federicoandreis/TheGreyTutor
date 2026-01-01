@@ -45,7 +45,8 @@ const createApiClient = (): AxiosInstance => {
     async (requestConfig: InternalAxiosRequestConfig) => {
       try {
         // Retrieve JWT token from secure storage
-        const token = await SecureStore.getItemAsync('jwt_token');
+        // Use 'access_token' to match authApi storage key
+        const token = await SecureStore.getItemAsync('access_token');
         
         if (token && requestConfig.headers) {
           requestConfig.headers.Authorization = `Bearer ${token}`;
@@ -86,12 +87,12 @@ const createApiClient = (): AxiosInstance => {
         originalRequest._retry = true;
         
         try {
-          // Check if a token exists
-          const existingToken = await SecureStore.getItemAsync('jwt_token');
+          // Check if a token exists (use 'access_token' to match authApi)
+          const existingToken = await SecureStore.getItemAsync('access_token');
           
           if (existingToken) {
             // Token exists but was rejected - it's expired or invalid
-            await SecureStore.deleteItemAsync('jwt_token');
+            await SecureStore.deleteItemAsync('access_token');
             throw new ApiError('Session expired. Please login again.', 401, error);
           } else {
             // No token exists - user needs to login
