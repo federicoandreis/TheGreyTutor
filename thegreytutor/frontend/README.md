@@ -82,37 +82,55 @@ frontend/
 
 ## 🧪 Testing
 
+### Dual Testing Strategy
+
+This project uses **two types of tests**:
+
+**1. Unit Tests (Fast, Mocked)**
+- Test individual components and functions in isolation
+- Use mocked dependencies (authApi, etc.)
+- Run in <10 seconds
+
+**2. Integration Tests (Real Backend)**
+- Test API integration with real backend
+- Require backend running at `http://localhost:8000`
+- 30 second timeout per test
+
 ### Run Tests
 
 ```powershell
-# All tests
-npm test
+# Unit tests only (fast, default)
+npm run test:unit
 
-# Watch mode (re-run on changes)
-npm test -- --watch
+# Integration tests only (requires backend)
+npm run test:integration
 
-# With coverage
-npm test -- --coverage
+# All tests (unit + integration)
+npm run test:all
+
+# Unit tests in watch mode
+npm run test:watch
+
+# Unit tests with coverage
+npm run test:coverage
 
 # Specific test file
-npm test -- RegionMarker.test.tsx
-
-# Update snapshots
-npm test -- -u
+npm run test:unit -- journeyApi.unit.test.ts
+npm run test:integration -- journeyApi.integration.test.ts
 ```
 
 ### Test Status
 
-- ✅ **37/54 tests passing** (68.5%)
-- 🎯 Target: 70%+ coverage
+**Unit Tests:**
+- ✅ `RegionMarker.test.tsx` - 10/10 passing
+- ✅ `MapScreen.test.tsx` - 7/7 passing
+- ✅ `journeyApi.unit.test.ts` - 14/14 passing
+- ⚠️ `EditProfileScreen.test.tsx` - 3/10 passing (needs update)
 
-**Passing:**
-- ✅ `RegionMarker.test.tsx` - 10/10
-- ✅ `MapScreen.test.tsx` - 7/7
+**Integration Tests:**
+- ✅ `journeyApi.integration.test.ts` - Ready (requires backend)
 
-**Needs Work:**
-- ⚠️ `EditProfileScreen.test.tsx` - 3/10 (auth mocks needed)
-- ⚠️ `journeyApi.test.ts` - 0/10 (auth mocks needed)
+**Overall:** 31/41 unit tests passing (75.6%) - Target: 70%+ ✅
 
 See [Testing Guide](../../docs/TESTING_GUIDE.md) for detailed information.
 

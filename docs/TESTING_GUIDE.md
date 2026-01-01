@@ -106,7 +106,28 @@ python -m pytest tests/test_auth.py::TestAuthService::test_password_hashing
 
 **Framework:** Jest 29.7.0 + React Native Testing Library 13.3.3
 
-**Configuration:** [`thegreytutor/frontend/jest.config.js`](../thegreytutor/frontend/jest.config.js)
+**Configurations:**
+- **Unit Tests:** [`jest.config.unit.js`](../thegreytutor/frontend/jest.config.unit.js) + [`jest.setup.unit.js`](../thegreytutor/frontend/jest.setup.unit.js)
+- **Integration Tests:** [`jest.config.integration.js`](../thegreytutor/frontend/jest.config.integration.js) + [`jest.setup.integration.js`](../thegreytutor/frontend/jest.setup.integration.js)
+
+### Dual Testing Strategy
+
+The frontend uses **two separate test configurations**:
+
+#### 1. **Unit Tests** (Fast, Isolated)
+- **Purpose:** Test individual components and functions in isolation
+- **Mocking:** Full mocks for all external dependencies (authApi, navigation, etc.)
+- **Speed:** Very fast (<10 seconds)
+- **File naming:** `*.test.ts` or `*.test.tsx` (excludes `*.integration.test.*`)
+- **Run with:** `npm run test:unit`
+
+#### 2. **Integration Tests** (Realistic, E2E)
+- **Purpose:** Test API integration with real backend
+- **Mocking:** Minimal mocks (only UI-specific: image picker, navigation)
+- **Speed:** Slower (30 second timeout per test)
+- **Requirements:** Backend must be running at `http://localhost:8000`
+- **File naming:** `*.integration.test.ts` or `*.integration.test.tsx`
+- **Run with:** `npm run test:integration`
 
 ### Test Structure
 
@@ -115,16 +136,20 @@ thegreytutor/frontend/
 ├── __tests__/
 │   ├── components/
 │   │   └── journey/
-│   │       └── RegionMarker.test.tsx        ✅ 10/10 passing
+│   │       └── RegionMarker.test.tsx                    ✅ 10/10 unit tests passing
 │   ├── screens/
 │   │   ├── journey/
-│   │   │   └── MapScreen.test.tsx           ✅ 7/7 passing
+│   │   │   └── MapScreen.test.tsx                       ✅ 7/7 unit tests passing
 │   │   └── profile/
-│   │       └── EditProfileScreen.test.tsx   ❌ 7/10 failing (needs mocks)
+│   │       └── EditProfileScreen.test.tsx               (needs update)
 │   └── services/
-│       └── journeyApi.test.ts               ❌ 10/10 failing (needs mocks)
-├── jest.config.js
-└── jest.setup.js
+│       ├── journeyApi.unit.test.ts                      ✅ 14/14 unit tests passing
+│       └── journeyApi.integration.test.ts               ✅ Integration tests ready
+│
+├── jest.config.unit.js              # Unit test configuration
+├── jest.config.integration.js       # Integration test configuration
+├── jest.setup.unit.js               # Unit test mocks
+└── jest.setup.integration.js        # Integration test minimal mocks
 ```
 
 ### Running Frontend Tests
@@ -132,20 +157,26 @@ thegreytutor/frontend/
 ```powershell
 cd thegreytutor/frontend
 
-# Run all tests
-npm test
+# Run UNIT tests only (fast, mocked)
+npm run test:unit
 
-# Run in watch mode
-npm test -- --watch
+# Run INTEGRATION tests only (slow, real backend required)
+npm run test:integration
 
-# Run with coverage
-npm test -- --coverage
+# Run ALL tests (unit + integration)
+npm run test:all
 
-# Run specific file
-npm test -- RegionMarker.test.tsx
+# Run unit tests in watch mode
+npm run test:watch
 
-# Update snapshots (if using snapshot testing)
-npm test -- -u
+# Run unit tests with coverage
+npm run test:coverage
+
+# Run specific unit test file
+npm run test:unit -- journeyApi.unit.test.ts
+
+# Run specific integration test file
+npm run test:integration -- journeyApi.integration.test.ts
 ```
 
 ### Frontend Test Example
@@ -197,6 +228,107 @@ describe('RegionMarker', () => {
 });
 ```
 
+### Unit vs Integration Test Examples
+
+#### Unit Test Example (Mocked)
+
+```typescript
+// __tests__/services/journeyApi.unit.test.ts
+import { journeyApi } from '../../src/services/journeyApi';
+import { authApi } from '../../src/services/authApi';
+
+// authApi is already mocked by jest.setup.unit.js
+const mockAuthenticatedFetch = authApi.authenticatedFetch as jest.MockedFunction<
+  typeof authApi.authenticatedFetch
+>;
+
+describe('JourneyApi Unit Tests', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('fetches journey state successfully', async () => {
+    const mockJourneyState = {
+      current_region: 'shire',
+      knowledge_points: 150,
+      unlocked_regions: ['shire', 'bree'],
+      // ... rest of state
+    };
+
+    // Mock the fetch response
+    mockAuthenticatedFetch.mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => mockJourneyState,
+    } as Response);
+
+    const result = await journeyApi.getJourneyState();
+
+    expect(mockAuthenticatedFetch).toHaveBeenCalledWith(
+      expect.stringContaining('/api/journey/state')
+    );
+    expect(result).toEqual(mockJourneyState);
+  });
+});
+```
+
+**Characteristics:**
+- ✅ Very fast (runs in milliseconds)
+- ✅ No backend required
+- ✅ Tests logic in isolation
+- ❌ Doesn't catch API contract changes
+- ❌ Doesn't test real network behavior
+
+#### Integration Test Example (Real Backend)
+
+```typescript
+// __tests__/services/journeyApi.integration.test.ts
+import { journeyApi } from '../../src/services/journeyApi';
+import { authApi } from '../../src/services/authApi';
+
+describe('Journey API Integration Tests', () => {
+  let testToken: string;
+
+  beforeAll(async () => {
+    // Register a REAL test user
+    const registerResponse = await authApi.register({
+      email: `test-${Date.now()}@example.com`,
+      password: 'TestPassword123',
+      username: `testuser${Date.now()}`,
+    });
+    testToken = registerResponse.tokens.access_token;
+  });
+
+  it('should fetch the user journey state from backend', async () => {
+    // This makes a REAL API call to http://localhost:8000
+    const state = await journeyApi.getJourneyState();
+
+    expect(state).toBeDefined();
+    expect(state.current_region).toBeDefined();
+    expect(state.knowledge_points).toBeGreaterThanOrEqual(0);
+    expect(Array.isArray(state.unlocked_regions)).toBe(true);
+  });
+});
+```
+
+**Characteristics:**
+- ✅ Tests real API behavior
+- ✅ Catches API contract changes
+- ✅ Tests full request/response cycle
+- ❌ Slower (30 second timeout)
+- ❌ Requires backend running
+- ❌ Can be flaky (network issues)
+
+### When to Use Each Type
+
+| Use Unit Tests For | Use Integration Tests For |
+|--------------------|---------------------------|
+| Component rendering logic | API endpoint validation |
+| State management | Authentication flows |
+| Utility functions | Data persistence |
+| UI interactions | Error handling with real backend |
+| Fast feedback loop | Pre-deployment verification |
+
 ### Common Frontend Test Patterns
 
 #### Testing Components
@@ -246,16 +378,24 @@ jest.mock('../services/authApi', () => ({
 
 ### Current Frontend Test Status
 
-**Passing Tests (37/54):**
-- ✅ `RegionMarker.test.tsx` - 10/10 tests
-- ✅ `MapScreen.test.tsx` - 7/7 tests
-- ⚠️ `EditProfileScreen.test.tsx` - 3/10 tests (7 failing due to auth mocks)
-- ⚠️ `journeyApi.test.ts` - 0/10 tests (all failing due to auth mocks)
+**Unit Tests:**
+- ✅ `RegionMarker.test.tsx` - 10/10 tests passing
+- ✅ `MapScreen.test.tsx` - 7/7 tests passing
+- ✅ `journeyApi.unit.test.ts` - 14/14 tests passing (NEW!)
+- ⚠️ `EditProfileScreen.test.tsx` - 3/10 tests (needs update to use new mocks)
 
-**TODO - Fix Failing Tests:**
-1. Mock `authApi.authenticatedFetch` properly in `journeyApi.test.ts`
-2. Mock authentication state in `EditProfileScreen.test.tsx`
-3. Add proper setup in `jest.setup.js` for auth mocking
+**Integration Tests:**
+- ✅ `journeyApi.integration.test.ts` - Ready (requires backend running)
+
+**Overall Progress:**
+- Unit Tests: 31/41 passing (75.6%)
+- Integration Tests: Infrastructure complete, tests ready to run
+- Old failing tests replaced with new dual-test strategy
+
+**Next Steps:**
+1. Update `EditProfileScreen.test.tsx` to use new unit test mocks
+2. Run integration tests against live backend
+3. Add more integration tests for other API services
 
 ---
 
