@@ -140,6 +140,12 @@ global.console = {
 };
 
 // Mock Alert for React Native
-jest.mock('react-native/Libraries/Alert/Alert', () => ({
+// Export the mock so tests can access it for assertions
+const mockAlert = {
   alert: jest.fn(),
-}));
+};
+
+jest.mock('react-native/Libraries/Alert/Alert', () => mockAlert);
+
+// Make Alert accessible via jest.requireMock for test assertions
+global.__mockAlert = mockAlert;
