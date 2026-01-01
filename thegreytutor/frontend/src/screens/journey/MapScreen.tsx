@@ -56,9 +56,10 @@ const MapScreenContent: React.FC = () => {
   const handleRegionPress = (regionName: string) => {
     console.log('Region pressed:', regionName);
 
-    // Find the region data
-    const region = state.journeyState?.journey_progress?.find(
-      (r) => r.region_name === regionName
+    // Find the region data from region_statuses or journey_progress
+    const regionStatuses = (state.journeyState as any)?.region_statuses || state.journeyState?.journey_progress || [];
+    const region = regionStatuses.find(
+      (r: any) => (r.region_name === regionName || r.name === regionName)
     );
 
     if (!region) {
@@ -67,7 +68,8 @@ const MapScreenContent: React.FC = () => {
     }
 
     // TODO: Navigate to region detail screen when implemented
-    Alert.alert('Region Selected', `You selected ${regionName}`);
+    const displayName = region.display_name || region.region_name || region.name;
+    Alert.alert('Region Selected', `You selected ${displayName}\n\nRegion detail screen coming in Phase 1.5`);
     // navigation.navigate('RegionDetail' as never, { regionName } as never);
   };
 
@@ -144,6 +146,11 @@ const MapScreenContent: React.FC = () => {
 
   const { journeyState } = state;
 
+  // Debug logging
+  console.log('[MapScreen] Journey state:', journeyState);
+  console.log('[MapScreen] Region count:', journeyState.journey_progress?.length || 0);
+  console.log('[MapScreen] Regions:', journeyState.journey_progress?.map(r => r.region_name));
+
   return (
     <View style={styles.container}>
       {/* Header with stats */}
@@ -175,7 +182,16 @@ const MapScreenContent: React.FC = () => {
 
       {/* Map */}
       <MiddleEarthMap
-        regionStatuses={journeyState.journey_progress || []}
+        regionStatuses={
+          // Backend returns region_statuses, map to journey_progress format
+          (journeyState.journey_progress || (journeyState as any).region_statuses || []).map((region: any) => ({
+            region_name: region.region_name || region.name,
+            knowledge_points: region.knowledge_points || 0,
+            quizzes_completed: region.quizzes_completed || 0,
+            is_unlocked: region.is_unlocked || false,
+            is_completed: region.is_completed || false,
+          }))
+        }
         journeyPaths={[]} // Paths not yet implemented in new API
         currentRegion={journeyState.current_region || null}
         onRegionPress={handleRegionPress}
