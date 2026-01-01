@@ -1,5 +1,7 @@
 """
-API module for The Grey Tutor backend.
+The Grey Tutor API Routes Package
 
-Contains all API routes and endpoints.
+API routes for authentication, chat, quiz sessions, and journey management.
 """
+
+__all__ = ["routes"]
