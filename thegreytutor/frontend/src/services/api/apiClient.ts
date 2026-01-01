@@ -11,6 +11,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import { config } from '../../utils/config';
+import { authApi } from '../authApi';
 
 /**
  * Custom error class for API errors
@@ -89,27 +90,37 @@ const createApiClient = (): AxiosInstance => {
         try {
           // Check if a token exists (use 'access_token' to match authApi)
           const existingToken = await SecureStore.getItemAsync('access_token');
+          const refreshToken = await SecureStore.getItemAsync('refresh_token');
           
-          if (existingToken) {
-            // Token exists but was rejected - it's expired or invalid
-            await SecureStore.deleteItemAsync('access_token');
+          if (existingToken && refreshToken) {
+            // Token exists and expired - try to refresh
+            console.log('[API Client] Token expired, attempting refresh...');
+            
+            const refreshSuccess = await authApi.refreshAccessToken();
+            
+            if (refreshSuccess) {
+              console.log('[API Client] Token refresh successful, retrying request');
+              // Get the new token and retry the original request
+              const newToken = await SecureStore.getItemAsync('access_token');
+              if (newToken && originalRequest.headers) {
+                originalRequest.headers.Authorization = `Bearer ${newToken}`;
+                return client(originalRequest);
+              }
+            }
+            
+            // Refresh failed - session truly expired
+            console.log('[API Client] Token refresh failed, clearing session');
             throw new ApiError('Session expired. Please login again.', 401, error);
           } else {
             // No token exists - user needs to login
             throw new ApiError('Please login to access this feature', 401, error);
           }
-          
-          // TODO: Implement token refresh logic for expired tokens
-          // const newToken = await refreshToken();
-          // await SecureStore.setItemAsync('jwt_token', newToken);
-          // originalRequest.headers.Authorization = `Bearer ${newToken}`;
-          // return client(originalRequest);
         } catch (refreshError) {
           // If it's already an ApiError, re-throw it
           if (refreshError instanceof ApiError) {
             throw refreshError;
           }
-          console.error('[API Client] Token refresh failed:', refreshError);
+          console.error('[API Client] Token refresh error:', refreshError);
           throw new ApiError('Authentication failed', 401, error);
         }
       }
