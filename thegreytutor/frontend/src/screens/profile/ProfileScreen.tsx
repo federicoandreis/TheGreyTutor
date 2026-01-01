@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,9 +7,10 @@ import {
   ScrollView,
   SafeAreaView,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useAppState } from '../../store/store-minimal';
+import { useAppState, logoutUser } from '../../store/store-minimal';
 
 interface ProfileScreenProps {
   navigation: any;
@@ -18,8 +19,9 @@ interface ProfileScreenProps {
 const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const { state, dispatch } = useAppState();
   const user = state.user;
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     Alert.alert(
       'Logout',
       'Are you sure you want to logout?',
@@ -28,10 +30,29 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         { 
           text: 'Logout', 
           style: 'destructive',
-          onPress: () => {
-            dispatch({ type: 'SET_LOADING', payload: false });
-            dispatch({ type: 'SET_ERROR', payload: null });
-            dispatch({ type: 'CLEAR_USER' });
+          onPress: async () => {
+            try {
+              setIsLoggingOut(true);
+              dispatch({ type: 'SET_LOADING', payload: true });
+              
+              // Call authApi logout to clear tokens
+              await logoutUser();
+              
+              // Clear app state
+              dispatch({ type: 'CLEAR_USER' });
+              dispatch({ type: 'SET_LOADING', payload: false });
+              
+              // Navigate to login
+              navigation.reset({
+                index: 0,
+                routes: [{ name: 'Login' }],
+              });
+            } catch (error) {
+              console.error('Logout failed:', error);
+              Alert.alert('Logout Error', 'Failed to logout. Please try again.');
+              dispatch({ type: 'SET_LOADING', payload: false });
+              setIsLoggingOut(false);
+            }
           }
         },
       ]
