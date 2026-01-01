@@ -1,9 +1,11 @@
-import React from 'react';
-import { Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Platform, View, ActivityIndicator, Text, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppState } from '../store/store-minimal';
+import * as SecureStore from 'expo-secure-store';
+import { authApi } from '../services/authApi';
 
 // Import screens
 import LoginScreen from '../screens/auth/LoginScreen';
