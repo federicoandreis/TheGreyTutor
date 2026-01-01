@@ -93,15 +93,69 @@ export const MiddleEarthMap: React.FC<MiddleEarthMapProps> = ({
               />
             ))} */}
 
-            {/* Region markers - TODO: Update RegionMarker component for RegionProgress type */}
-            {regionStatuses.map((region) => (
-              <View key={region.region_name}>
-                {/* Placeholder for region markers */}
-                <Text style={{position: 'absolute', top: 100, left: 100}}>
-                  {region.region_name}
-                </Text>
-              </View>
-            ))}
+            {/* Region markers - Simple implementation for Phase 1 */}
+            {regionStatuses.map((region, index) => {
+              // Simple grid layout for now
+              const col = index % 3;
+              const row = Math.floor(index / 3);
+              const left = 100 + col * 200;
+              const top = 150 + row * 150;
+              
+              // Determine color based on status
+              let backgroundColor = '#95A5A6'; // Locked (default)
+              if (region.is_completed) {
+                backgroundColor = '#2ECC71'; // Completed (green)
+              } else if (region.is_unlocked) {
+                backgroundColor = '#3498DB'; // Unlocked (blue)
+              }
+              // Locked regions stay gray
+              
+              return (
+                <View
+                  key={region.region_name}
+                  style={{
+                    position: 'absolute',
+                    left,
+                    top,
+                    alignItems: 'center',
+                  }}
+                  onTouchEnd={() => onRegionPress(region.region_name)}
+                >
+                  <View
+                    style={{
+                      width: 60,
+                      height: 60,
+                      borderRadius: 30,
+                      backgroundColor,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      borderWidth: region.region_name === currentRegion ? 3 : 0,
+                      borderColor: '#FFD700',
+                      shadowColor: '#000',
+                      shadowOffset: { width: 0, height: 2 },
+                      shadowOpacity: 0.3,
+                      shadowRadius: 4,
+                      elevation: 4,
+                    }}
+                  >
+                    <Text style={{ fontSize: 24 }}>📍</Text>
+                  </View>
+                  <Text
+                    style={{
+                      marginTop: 4,
+                      fontSize: 10,
+                      fontWeight: 'bold',
+                      color: '#2C3E50',
+                      textAlign: 'center',
+                      maxWidth: 80,
+                    }}
+                    numberOfLines={2}
+                  >
+                    {region.region_name}
+                  </Text>
+                </View>
+              );
+            })}
           </View>
         </ScrollView>
       </ScrollView>
