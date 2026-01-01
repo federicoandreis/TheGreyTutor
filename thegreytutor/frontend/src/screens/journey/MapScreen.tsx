@@ -144,6 +144,11 @@ const MapScreenContent: React.FC = () => {
 
   const { journeyState } = state;
 
+  // Debug logging
+  console.log('[MapScreen] Journey state:', journeyState);
+  console.log('[MapScreen] Region count:', journeyState.journey_progress?.length || 0);
+  console.log('[MapScreen] Regions:', journeyState.journey_progress?.map(r => r.region_name));
+
   return (
     <View style={styles.container}>
       {/* Header with stats */}
