@@ -95,14 +95,36 @@ const MapScreenContent: React.FC = () => {
 
   // Show error state
   if (state.error && !state.journeyState) {
+    // Check if it's an authentication error
+    const isAuthError = state.error.includes('login') || state.error.includes('Authentication');
+    
     return (
       <View style={styles.centerContainer}>
-        <Ionicons name="warning-outline" size={64} color="#FF3B30" />
-        <Text style={styles.errorTitle}>Journey Unavailable</Text>
+        <Ionicons 
+          name={isAuthError ? "lock-closed-outline" : "warning-outline"} 
+          size={64} 
+          color={isAuthError ? "#007AFF" : "#FF3B30"} 
+        />
+        <Text style={styles.errorTitle}>
+          {isAuthError ? 'Login Required' : 'Journey Unavailable'}
+        </Text>
         <Text style={styles.errorMessage}>{state.error}</Text>
-        <TouchableOpacity style={styles.retryButton} onPress={handleRefresh}>
-          <Text style={styles.retryButtonText}>Retry</Text>
-        </TouchableOpacity>
+        
+        {isAuthError ? (
+          <TouchableOpacity 
+            style={[styles.retryButton, { backgroundColor: '#007AFF' }]}
+            onPress={() => {
+              // TODO: Navigate to login screen
+              Alert.alert('Login', 'Login screen will be implemented in Phase 1.4');
+            }}
+          >
+            <Text style={styles.retryButtonText}>Go to Login</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.retryButton} onPress={handleRefresh}>
+            <Text style={styles.retryButtonText}>Retry</Text>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }

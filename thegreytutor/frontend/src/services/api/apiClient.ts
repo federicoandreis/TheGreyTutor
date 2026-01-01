@@ -45,7 +45,8 @@ const createApiClient = (): AxiosInstance => {
     async (requestConfig: InternalAxiosRequestConfig) => {
       try {
         // Retrieve JWT token from secure storage
-        const token = await SecureStore.getItemAsync('jwt_token');
+        // Use 'access_token' to match authApi storage key
+        const token = await SecureStore.getItemAsync('access_token');
         
         if (token && requestConfig.headers) {
           requestConfig.headers.Authorization = `Bearer ${token}`;
@@ -81,21 +82,33 @@ const createApiClient = (): AxiosInstance => {
     async (error: AxiosError) => {
       const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
-      // Handle 401 Unauthorized - Token expired
+      // Handle 401 Unauthorized - Token expired or not authenticated
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         
         try {
-          // TODO: Implement token refresh logic
+          // Check if a token exists (use 'access_token' to match authApi)
+          const existingToken = await SecureStore.getItemAsync('access_token');
+          
+          if (existingToken) {
+            // Token exists but was rejected - it's expired or invalid
+            await SecureStore.deleteItemAsync('access_token');
+            throw new ApiError('Session expired. Please login again.', 401, error);
+          } else {
+            // No token exists - user needs to login
+            throw new ApiError('Please login to access this feature', 401, error);
+          }
+          
+          // TODO: Implement token refresh logic for expired tokens
           // const newToken = await refreshToken();
           // await SecureStore.setItemAsync('jwt_token', newToken);
           // originalRequest.headers.Authorization = `Bearer ${newToken}`;
           // return client(originalRequest);
-          
-          // For now, just clear the token and throw error
-          await SecureStore.deleteItemAsync('jwt_token');
-          throw new ApiError('Session expired. Please login again.', 401, error);
         } catch (refreshError) {
+          // If it's already an ApiError, re-throw it
+          if (refreshError instanceof ApiError) {
+            throw refreshError;
+          }
           console.error('[API Client] Token refresh failed:', refreshError);
           throw new ApiError('Authentication failed', 401, error);
         }
