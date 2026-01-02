@@ -160,6 +160,7 @@ async def login(request: UserLoginRequest, db: Session = Depends(get_db)):
             username=user.username,
             email=user.email,
             name=user.name,
+            avatar=user.avatar,  # Include avatar from database
             role=user.role,
             created_at=user.created_at,
             last_login=user.last_login,
@@ -243,6 +244,7 @@ async def get_current_user(
         username=user.username,
         email=user.email,
         name=user.name,
+        avatar=user.avatar,  # Include avatar from database
         role=user.role,
         created_at=user.created_at,
         last_login=user.last_login,

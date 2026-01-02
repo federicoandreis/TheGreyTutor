@@ -10,6 +10,8 @@ import { get, post } from './apiClient';
  * API Types
  */
 export interface QuizSessionParams {
+  student_id: string;
+  student_name: string;
   community?: string;
   difficulty?: number;
   num_questions?: number;
@@ -35,12 +37,19 @@ export interface AnswerSubmission {
 }
 
 export interface AnswerResponse {
-  is_correct: boolean;
-  feedback: string;
+  correct: boolean;
+  quality?: number;
+  feedback?: {
+    explanation?: string;
+    strengths?: string[];
+    weaknesses?: string[];
+    suggestions?: string[];
+  };
   correct_answer?: string;
-  next_question?: Question;
-  knowledge_points_earned: number;
+  next_question?: any;
+  knowledge_points_earned?: number;
   session_complete: boolean;
+  session_id?: string;
 }
 
 export interface SessionSummary {
@@ -55,16 +64,17 @@ export interface SessionSummary {
  * Create a new quiz session
  */
 export const createQuizSession = async (
-  params: QuizSessionParams = {}
+  params: QuizSessionParams
 ): Promise<QuizSession> => {
-  return post<QuizSession>('/api/session', params);
+  return post<QuizSession>('/session', params);
 };
 
 /**
  * Get the next question in a session
+ * Backend returns QuestionResponse: { question: {...}, session_id: string, question_number: number }
  */
-export const getNextQuestion = async (sessionId: string): Promise<Question> => {
-  return get<Question>(`/api/session/${sessionId}/question`);
+export const getNextQuestion = async (sessionId: string): Promise<any> => {
+  return get<any>(`/session/${sessionId}/question`);
 };
 
 /**
@@ -74,12 +84,12 @@ export const submitAnswer = async (
   sessionId: string,
   answer: string
 ): Promise<AnswerResponse> => {
-  return post<AnswerResponse>(`/api/session/${sessionId}/answer`, { answer });
+  return post<AnswerResponse>(`/session/${sessionId}/answer`, { answer });
 };
 
 /**
  * Get session details and summary
  */
 export const getSessionSummary = async (sessionId: string): Promise<SessionSummary> => {
-  return get<SessionSummary>(`/api/session/${sessionId}`);
+  return get<SessionSummary>(`/session/${sessionId}`);
 };

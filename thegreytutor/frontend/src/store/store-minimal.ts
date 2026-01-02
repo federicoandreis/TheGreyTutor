@@ -102,6 +102,7 @@ function authUserToUser(authUser: AuthUser): User {
     displayName: authUser.name || authUser.username,
     username: authUser.username,
     role: authUser.role,
+    avatar: authUser.avatar || '🧙‍♂️',  // Include avatar from backend, default to wizard
   };
 }
 

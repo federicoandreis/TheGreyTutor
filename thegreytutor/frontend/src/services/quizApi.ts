@@ -56,6 +56,8 @@ export async function startQuizSession(
 ): Promise<QuizSession> {
   try {
     const session = await createQuizSession({
+      student_id,
+      student_name,
       // community: undefined, // Can be added later
       // difficulty: undefined,
       num_questions: 10, // Default number
@@ -79,16 +81,13 @@ export async function startQuizSession(
 
 /**
  * Get the next question in a quiz session
+ * Backend already returns QuestionResponse format, just pass it through
  */
 export async function getNextQuestion(session_id: string): Promise<QuestionResponse> {
   try {
-    const question = await apiGetNextQuestion(session_id);
-
-    return {
-      question,
-      session_id,
-      question_number: 1, // Would need to track this
-    };
+    // apiGetNextQuestion returns the full QuestionResponse from backend
+    const response = await apiGetNextQuestion(session_id);
+    return response;
   } catch (error) {
     console.error('[quizApi] Failed to get next question:', error);
     throw new Error('Failed to get next question');
@@ -105,14 +104,15 @@ export async function submitQuizAnswer(
   try {
     const response = await apiSubmitAnswer(session_id, answer);
 
+    // Backend returns: { correct, quality, feedback: {explanation, strengths, weaknesses, suggestions}, ... }
+    // Pass through directly without transformation
     return {
-      correct: response.is_correct,
-      feedback: {
-        explanation: response.feedback,
-      },
+      correct: response.correct,
+      quality: response.quality,
+      feedback: response.feedback,  // Already an object, don't wrap again
       next_question: response.next_question,
       session_complete: response.session_complete,
-      session_id,
+      session_id: response.session_id || session_id,
     };
   } catch (error) {
     console.error('[quizApi] Failed to submit answer:', error);

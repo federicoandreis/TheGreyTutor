@@ -263,8 +263,11 @@ const RegionDetailScreenContent: React.FC = () => {
                   key={index}
                   style={styles.quizThemeCard}
                   onPress={() => {
-                    // TODO: Navigate to quiz screen with this theme
-                    Alert.alert('Quiz', `Start quiz on: ${theme}`);
+                    // Navigate to dedicated Quiz screen
+                    navigation.navigate('Quiz', {
+                      theme: theme,
+                      location: regionDetail.name,
+                    });
                   }}
                 >
                   <Ionicons name="book-outline" size={24} color="#007AFF" />
