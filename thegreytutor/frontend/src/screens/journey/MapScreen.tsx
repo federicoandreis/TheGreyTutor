@@ -67,10 +67,9 @@ const MapScreenContent: React.FC = () => {
       return;
     }
 
-    // TODO: Navigate to region detail screen when implemented
-    const displayName = region.display_name || region.region_name || region.name;
-    Alert.alert('Region Selected', `You selected ${displayName}\n\nRegion detail screen coming in Phase 1.5`);
-    // navigation.navigate('RegionDetail' as never, { regionName } as never);
+    // Navigate to region detail screen
+    const actualRegionName = region.name || region.region_name;
+    (navigation as any).navigate('RegionDetail', { regionName: actualRegionName });
   };
 
   // Handle refresh
