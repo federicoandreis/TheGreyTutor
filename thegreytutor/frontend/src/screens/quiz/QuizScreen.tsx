@@ -411,7 +411,9 @@ const QuizScreen: React.FC = () => {
               size={48}
               color={isCorrect ? '#34C759' : '#FF3B30'}
             />
-            <Text style={styles.feedbackText}>{feedback}</Text>
+            <Text style={styles.feedbackText}>
+              {typeof feedback === 'string' ? feedback : JSON.stringify(feedback)}
+            </Text>
           </Animated.View>
         )}
       </ScrollView>
