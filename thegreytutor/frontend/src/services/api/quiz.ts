@@ -10,6 +10,8 @@ import { get, post } from './apiClient';
  * API Types
  */
 export interface QuizSessionParams {
+  student_id: string;
+  student_name: string;
   community?: string;
   difficulty?: number;
   num_questions?: number;

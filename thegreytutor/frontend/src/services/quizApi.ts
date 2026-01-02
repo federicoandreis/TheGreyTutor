@@ -56,6 +56,8 @@ export async function startQuizSession(
 ): Promise<QuizSession> {
   try {
     const session = await createQuizSession({
+      student_id,
+      student_name,
       // community: undefined, // Can be added later
       // difficulty: undefined,
       num_questions: 10, // Default number
