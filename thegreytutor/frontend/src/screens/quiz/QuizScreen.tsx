@@ -186,12 +186,34 @@ const QuizScreen: React.FC = () => {
         answerToSend = currentQuestion.options[selectedOption];
       }
 
+      console.log('[QuizScreen] Submitting answer:', answerToSend);
       const response: SubmitAnswerResponse = await submitQuizAnswer(sessionId, answerToSend);
+      console.log('[QuizScreen] Submit response:', JSON.stringify(response, null, 2));
 
       // Show feedback
       setIsCorrect(response.correct || false);
-      setFeedback(response.feedback?.explanation || (response.correct ? 'Correct!' : 'Incorrect.'));
+
+      // Safely extract feedback text
+      let feedbackText = '';
+      if (response.feedback) {
+        if (typeof response.feedback === 'string') {
+          feedbackText = response.feedback;
+        } else if (response.feedback.explanation) {
+          feedbackText = response.feedback.explanation;
+        } else {
+          feedbackText = response.correct ? 'Correct!' : 'Incorrect.';
+        }
+      } else {
+        feedbackText = response.correct ? 'Correct!' : 'Incorrect.';
+      }
+
+      setFeedback(feedbackText);
       setShowFeedback(true);
+
+      // Update score
+      if (response.correct) {
+        setScore((s) => s + 1);
+      }
 
       // Animate feedback
       Animated.sequence([
@@ -210,12 +232,8 @@ const QuizScreen: React.FC = () => {
         setShowFeedback(false);
         proceedToNext(response);
       });
-
-      if (response.correct) {
-        setScore((s) => s + 1);
-      }
     } catch (error) {
-      console.error('Failed to submit answer:', error);
+      console.error('[QuizScreen] Failed to submit answer:', error);
       Alert.alert('Submission Error', 'Failed to submit answer. Please try again.');
     } finally {
       setIsLoading(false);
@@ -223,19 +241,32 @@ const QuizScreen: React.FC = () => {
   };
 
   const proceedToNext = (response: SubmitAnswerResponse) => {
-    if (response.session_complete) {
-      setQuizComplete(true);
-    } else if (response.next_question) {
-      // Wrap the raw question in a QuestionResponse structure
-      const questionResponse: QuestionResponse = {
-        question: response.next_question,
-        session_id: sessionId || '',
-        question_number: questionNumber + 1,
-      };
-      loadQuestion(questionResponse, questionNumber + 1);
-    } else {
-      // No next question but not complete - likely an error
-      Alert.alert('Quiz Error', 'Something went wrong. Please restart the quiz.');
+    console.log('[QuizScreen] proceedToNext called with:', {
+      session_complete: response.session_complete,
+      has_next_question: !!response.next_question,
+    });
+
+    try {
+      if (response.session_complete) {
+        console.log('[QuizScreen] Session complete, showing results');
+        setQuizComplete(true);
+      } else if (response.next_question) {
+        console.log('[QuizScreen] Loading next question');
+        // Wrap the raw question in a QuestionResponse structure
+        const questionResponse: QuestionResponse = {
+          question: response.next_question,
+          session_id: sessionId || '',
+          question_number: questionNumber + 1,
+        };
+        loadQuestion(questionResponse, questionNumber + 1);
+      } else {
+        // No next question but not complete - likely an error
+        console.warn('[QuizScreen] No next question and not complete');
+        Alert.alert('Quiz Error', 'Something went wrong. Please restart the quiz.');
+      }
+    } catch (error) {
+      console.error('[QuizScreen] Error in proceedToNext:', error);
+      Alert.alert('Quiz Error', 'Failed to load next question. Please try again.');
     }
   };
 
