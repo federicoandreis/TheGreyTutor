@@ -242,8 +242,17 @@ Database / External API
 - ✅ CORS configuration
 - ✅ Input validation (Pydantic)
 - ✅ SQL injection prevention (SQLAlchemy ORM)
+- ✅ **Removed insecure auth bypass** (Jan 2, 2026 - Security fix)
 - ⏳ Rate limiting (TODO)
 - ⏳ API versioning (TODO)
+
+### Recent Security Updates
+
+**Jan 2, 2026:** Removed development auth bypass endpoint (`auth_api.py`)
+- The bypass endpoint allowed login without credential validation
+- All authentication now properly routed through `/auth/login` with full security
+- Frontend was already using secure endpoint, no client changes needed
+- Deprecated file: `src/auth_api.py.deprecated` (can be deleted after verification)
 
 ---
 

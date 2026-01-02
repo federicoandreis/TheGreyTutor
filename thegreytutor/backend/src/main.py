@@ -16,7 +16,6 @@ from .core.config import settings
 from .core.logging import setup_logging
 from .api.routes import auth, chat, session, agents, health, analytics, cache, journey
 from .ingestion import api_graphrag
-from . import auth_api
 from .database.connection import init_db, close_db
 from .services.cache import init_redis, close_redis
 from .services.agent_orchestrator import AgentOrchestrator
@@ -72,7 +71,6 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(auth_api.router)
 app.include_router(health.router, prefix="/health", tags=["health"])
 app.include_router(auth.router, prefix="/auth", tags=["authentication"])
 app.include_router(chat.router, prefix="/chat", tags=["chat"])
