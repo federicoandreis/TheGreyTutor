@@ -34,8 +34,9 @@ frontend/
 │   ├── screens/              # Screen components
 │   │   ├── auth/             # Login, Register
 │   │   ├── chat/             # Chat with Gandalf
-│   │   ├── learning/         # Learning paths, Quiz
-│   │   ├── journey/          # Journey Map
+│   │   ├── learning/         # Learning paths
+│   │   ├── journey/          # Journey Map, Region Details
+│   │   ├── quiz/             # Dedicated Quiz Screen
 │   │   └── profile/          # User profile, Settings
 │   │
 │   ├── components/           # Reusable components
@@ -64,6 +65,8 @@ frontend/
 │   ├── screens/
 │   │   ├── journey/
 │   │   │   └── MapScreen.test.tsx     ✅ 7/7 passing
+│   │   ├── quiz/
+│   │   │   └── QuizScreen.test.tsx    ✅ 5/5 passing (new)
 │   │   └── profile/
 │   │       └── EditProfileScreen.test.tsx  ⚠️ 3/10 passing
 │   └── services/

@@ -263,13 +263,11 @@ const RegionDetailScreenContent: React.FC = () => {
                   key={index}
                   style={styles.quizThemeCard}
                   onPress={() => {
-                    // Navigate to Chat screen with quiz context
-                    navigation.navigate('Chat', {
+                    // Navigate to dedicated Quiz screen
+                    navigation.navigate('Quiz', {
+                      theme: theme,
                       location: regionDetail.name,
-                      // Pass theme as part of location context for quiz initialization
-                      quizTheme: theme,
-                      autoStartQuiz: true,
-                    } as any);
+                    });
                   }}
                 >
                   <Ionicons name="book-outline" size={24} color="#007AFF" />

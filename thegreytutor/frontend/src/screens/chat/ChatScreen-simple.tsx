@@ -226,7 +226,21 @@ function ChatScreen() {
           quizMessages.filter(m => m.role === 'assistant' && m.question && Array.isArray(m.question.options)).slice(-1)[0]?.id || null
         );
         const resp: SubmitAnswerResponse = await submitQuizAnswer(quizSessionId as string, answerToSend);
-        let feedbackMsg = resp.feedback?.explanation || (resp.correct ? 'Correct!' : 'Incorrect.');
+
+        // Extract feedback text safely - backend returns object {explanation, strengths, weaknesses, suggestions}
+        let feedbackMsg = '';
+        if (resp.feedback) {
+          if (typeof resp.feedback === 'string') {
+            feedbackMsg = resp.feedback;
+          } else if (typeof resp.feedback === 'object' && resp.feedback.explanation) {
+            feedbackMsg = resp.feedback.explanation;
+          } else {
+            feedbackMsg = resp.correct ? 'Correct!' : 'Incorrect.';
+          }
+        } else {
+          feedbackMsg = resp.correct ? 'Correct!' : 'Incorrect.';
+        }
+
         setQuizMessages(prev => [
           ...prev,
           {
@@ -455,7 +469,21 @@ function ChatScreen() {
                     setQuizMessages(prev => [...prev, userMessage]);
                     try {
                       const resp: SubmitAnswerResponse = await submitQuizAnswer(quizSessionId as string, opt);
-                      let feedbackMsg = resp.feedback?.explanation || (resp.correct ? 'Correct!' : 'Incorrect.');
+
+                      // Extract feedback text safely - backend returns object {explanation, strengths, weaknesses, suggestions}
+                      let feedbackMsg = '';
+                      if (resp.feedback) {
+                        if (typeof resp.feedback === 'string') {
+                          feedbackMsg = resp.feedback;
+                        } else if (typeof resp.feedback === 'object' && resp.feedback.explanation) {
+                          feedbackMsg = resp.feedback.explanation;
+                        } else {
+                          feedbackMsg = resp.correct ? 'Correct!' : 'Incorrect.';
+                        }
+                      } else {
+                        feedbackMsg = resp.correct ? 'Correct!' : 'Incorrect.';
+                      }
+
                       setQuizMessages(prev => [
                         ...prev,
                         {
@@ -477,16 +505,36 @@ function ChatScreen() {
                         ]);
                         setQuizFinished(true);
                       } else if (resp.next_question) {
-                        setCurrentQuizQuestion(resp.next_question);
+                        // Normalize next_question same as text input handler
+                        let rawQuestion = resp.next_question.question ? resp.next_question.question : resp.next_question;
+                        let options: string[] = [];
+                        if (Array.isArray(rawQuestion.options)) {
+                          options = rawQuestion.options as string[];
+                        } else if (typeof rawQuestion.options === 'string') {
+                          try {
+                            const parsed = JSON.parse(rawQuestion.options);
+                            if (Array.isArray(parsed)) options = parsed as string[];
+                            else if (typeof parsed === 'string') options = [parsed];
+                          } catch {
+                            options = [rawQuestion.options];
+                          }
+                        }
+                        if (!Array.isArray(options)) options = [];
+                        const normQuestion = {
+                          ...rawQuestion,
+                          text: rawQuestion.question_text || rawQuestion.text || rawQuestion.question,
+                          options,
+                        };
+                        setCurrentQuizQuestion(normQuestion);
                         setQuizQuestionNumber(q => q + 1);
                         setQuizMessages(prev => [
                           ...prev,
                           {
                             id: (Date.now() + 4).toString(),
-                            content: formatQuizQuestion(resp.next_question, quizQuestionNumber + 1),
+                            content: formatQuizQuestion(normQuestion, quizQuestionNumber + 1),
                             role: 'assistant' as const,
                             timestamp: new Date().toISOString(),
-                            question: resp.next_question
+                            question: normQuestion
                           } as any
                         ]);
                         setAnsweredQuizMessageId(null);
