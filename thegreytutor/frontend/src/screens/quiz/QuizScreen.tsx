@@ -198,13 +198,19 @@ const QuizScreen: React.FC = () => {
       if (response.feedback) {
         if (typeof response.feedback === 'string') {
           feedbackText = response.feedback;
-        } else if (response.feedback.explanation) {
-          feedbackText = response.feedback.explanation;
+        } else if (typeof response.feedback === 'object') {
+          // Backend returns object with {explanation, strengths, weaknesses, suggestions}
+          feedbackText = response.feedback.explanation || JSON.stringify(response.feedback);
         } else {
           feedbackText = response.correct ? 'Correct!' : 'Incorrect.';
         }
       } else {
         feedbackText = response.correct ? 'Correct!' : 'Incorrect.';
+      }
+
+      // Ensure feedbackText is always a string
+      if (typeof feedbackText !== 'string') {
+        feedbackText = String(feedbackText);
       }
 
       setFeedback(feedbackText);
