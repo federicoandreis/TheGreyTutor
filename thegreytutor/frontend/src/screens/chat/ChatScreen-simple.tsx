@@ -226,7 +226,21 @@ function ChatScreen() {
           quizMessages.filter(m => m.role === 'assistant' && m.question && Array.isArray(m.question.options)).slice(-1)[0]?.id || null
         );
         const resp: SubmitAnswerResponse = await submitQuizAnswer(quizSessionId as string, answerToSend);
-        let feedbackMsg = resp.feedback?.explanation || (resp.correct ? 'Correct!' : 'Incorrect.');
+
+        // Extract feedback text safely - backend returns object {explanation, strengths, weaknesses, suggestions}
+        let feedbackMsg = '';
+        if (resp.feedback) {
+          if (typeof resp.feedback === 'string') {
+            feedbackMsg = resp.feedback;
+          } else if (typeof resp.feedback === 'object' && resp.feedback.explanation) {
+            feedbackMsg = resp.feedback.explanation;
+          } else {
+            feedbackMsg = resp.correct ? 'Correct!' : 'Incorrect.';
+          }
+        } else {
+          feedbackMsg = resp.correct ? 'Correct!' : 'Incorrect.';
+        }
+
         setQuizMessages(prev => [
           ...prev,
           {
@@ -455,7 +469,21 @@ function ChatScreen() {
                     setQuizMessages(prev => [...prev, userMessage]);
                     try {
                       const resp: SubmitAnswerResponse = await submitQuizAnswer(quizSessionId as string, opt);
-                      let feedbackMsg = resp.feedback?.explanation || (resp.correct ? 'Correct!' : 'Incorrect.');
+
+                      // Extract feedback text safely - backend returns object {explanation, strengths, weaknesses, suggestions}
+                      let feedbackMsg = '';
+                      if (resp.feedback) {
+                        if (typeof resp.feedback === 'string') {
+                          feedbackMsg = resp.feedback;
+                        } else if (typeof resp.feedback === 'object' && resp.feedback.explanation) {
+                          feedbackMsg = resp.feedback.explanation;
+                        } else {
+                          feedbackMsg = resp.correct ? 'Correct!' : 'Incorrect.';
+                        }
+                      } else {
+                        feedbackMsg = resp.correct ? 'Correct!' : 'Incorrect.';
+                      }
+
                       setQuizMessages(prev => [
                         ...prev,
                         {
