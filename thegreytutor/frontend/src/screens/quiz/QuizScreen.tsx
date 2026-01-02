@@ -72,9 +72,10 @@ const QuizScreen: React.FC = () => {
   const normalizeQuestionText = (text: any): string => {
     if (!text) return '';
     if (typeof text === 'string') return text;
-    if (Array.isArray(text)) return text.join('');
+    if (Array.isArray(text)) return text.join(' ');
     if (typeof text === 'object') {
-      return Object.values(text).join('');
+      // This was causing duplication - if it's an object, stringify it
+      return JSON.stringify(text);
     }
     return String(text);
   };
@@ -129,13 +130,17 @@ const QuizScreen: React.FC = () => {
   };
 
   const loadQuestion = (questionData: QuestionResponse, number: number) => {
+    // Backend returns { question: {...}, session_id, question_number }
+    // where question object has: { question, text, type, options, answer, difficulty, entity, ... }
     const rawQuestion = questionData.question || questionData;
+
     const normalizedQuestion: NormalizedQuestion = {
-      text: normalizeQuestionText(
-        rawQuestion.question_text || rawQuestion.text || rawQuestion.question
-      ),
-      options: normalizeOptions(rawQuestion.options),
-      question_type: rawQuestion.question_type || 'multiple_choice',
+      // Backend uses 'question' or 'text' field for the question text
+      text: normalizeQuestionText(rawQuestion.question || rawQuestion.text || ''),
+      // Backend returns 'options' array (empty for open-ended)
+      options: normalizeOptions(rawQuestion.options || []),
+      // Backend uses 'type' field
+      question_type: rawQuestion.type || rawQuestion.question_type || 'open_ended',
     };
 
     setCurrentQuestion(normalizedQuestion);
@@ -210,7 +215,13 @@ const QuizScreen: React.FC = () => {
     if (response.session_complete) {
       setQuizComplete(true);
     } else if (response.next_question) {
-      loadQuestion(response.next_question, questionNumber + 1);
+      // Wrap the raw question in a QuestionResponse structure
+      const questionResponse: QuestionResponse = {
+        question: response.next_question,
+        session_id: sessionId || '',
+        question_number: questionNumber + 1,
+      };
+      loadQuestion(questionResponse, questionNumber + 1);
     } else {
       // No next question but not complete - likely an error
       Alert.alert('Quiz Error', 'Something went wrong. Please restart the quiz.');
