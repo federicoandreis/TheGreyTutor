@@ -303,7 +303,11 @@ export type RootStackParamList = {
   };
   Learning: { location?: string };
   Profile: undefined;
-  Quiz: { quizId: string };
+  Quiz: {
+    quizId?: string;
+    theme?: string;
+    location?: string;
+  };
   Achievement: { achievementId: string };
   Location: { locationId: string };
   RegionDetail: { regionName: string };

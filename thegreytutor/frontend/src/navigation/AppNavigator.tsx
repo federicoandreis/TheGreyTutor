@@ -14,6 +14,7 @@ import ProfileScreen from '../screens/profile/ProfileScreen';
 import EditProfileScreen from '../screens/profile/EditProfileScreen';
 import MapScreen from '../screens/journey/MapScreen';
 import RegionDetailScreen from '../screens/journey/RegionDetailScreen';
+import QuizScreen from '../screens/quiz/QuizScreen';
 
 import { RootStackParamList, TabParamList } from '../types';
 
@@ -164,6 +165,14 @@ const AppNavigator: React.FC = () => {
             component={RegionDetailScreen}
             options={{
               presentation: 'modal',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Quiz"
+            component={QuizScreen}
+            options={{
+              presentation: 'card',
               headerShown: false,
             }}
           />
