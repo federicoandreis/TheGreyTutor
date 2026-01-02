@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRoute, RouteProp } from '@react-navigation/native';
 import { getMockAnswer } from '../../services/mockChatDatabase';
 import {
   startQuizSession,
@@ -21,6 +22,7 @@ import {
   SubmitAnswerResponse
 } from '../../services/quizApi';
 import { BASE_URL } from '../../services/quizApi';
+import { RootStackParamList } from '../../types';
 
 interface ChatMessage {
   id: string;
@@ -30,7 +32,10 @@ interface ChatMessage {
   question?: any; // allow quiz question object for assistant messages
 }
 
+type ChatScreenRouteProp = RouteProp<RootStackParamList, 'Chat'>;
+
 function ChatScreen() {
+  const route = useRoute<ChatScreenRouteProp>();
   const [inputText, setInputText] = useState('');
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [quizMessages, setQuizMessages] = useState<ChatMessage[]>([]);
@@ -42,6 +47,19 @@ function ChatScreen() {
   const [currentQuizQuestion, setCurrentQuizQuestion] = useState<any | null>(null);
   const [quizQuestionNumber, setQuizQuestionNumber] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+
+  // Auto-start quiz if navigated from Region Details
+  useEffect(() => {
+    if (route.params?.autoStartQuiz && !quizMode && !quizSessionId) {
+      const theme = route.params?.quizTheme;
+      const location = route.params?.location;
+      console.log(`Auto-starting quiz for theme: ${theme}, location: ${location}`);
+      // Start quiz after a brief delay to ensure component is mounted
+      setTimeout(() => {
+        startQuiz();
+      }, 300);
+    }
+  }, [route.params]);
 
   // Utility: Normalize question text (handles string, array, object)
   function normalizeQuestionText(text: any): string {

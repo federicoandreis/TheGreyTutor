@@ -295,7 +295,12 @@ export type RootStackParamList = {
   MainTabs: undefined;
   Login: undefined;
   Register: undefined;
-  Chat: { sessionId?: string; location?: string };
+  Chat: {
+    sessionId?: string;
+    location?: string;
+    quizTheme?: string;
+    autoStartQuiz?: boolean;
+  };
   Learning: { location?: string };
   Profile: undefined;
   Quiz: { quizId: string };
