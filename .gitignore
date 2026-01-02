@@ -74,6 +74,7 @@ legacy/
 kg_consolidation/legacy/
 kg_queries/legacy/
 kg_queries/quizzing/legacy/
+*.old
 
 # Test coverage
 coverage/
