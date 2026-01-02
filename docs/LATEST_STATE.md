@@ -61,6 +61,20 @@ This session focused on identifying architectural gaps and fixing critical user 
 - **Branch:** `bugfix/remove-auth-bypass`
 - **Documentation:** Updated backend README with security notes
 
+#### ✅ Feature: Quiz Launch Navigation (Jan 2, 2026 - Evening)
+- **Problem:** Tapping quiz themes in Region Detail screen showed only an alert, didn't actually launch quiz.
+- **Implementation:**
+  - Updated `RegionDetailScreen.tsx` to navigate to Chat screen with quiz context parameters
+  - Extended `RootStackParamList` types to include `quizTheme` and `autoStartQuiz` parameters
+  - Added auto-start quiz logic in `ChatScreen-simple.tsx` via useEffect hook
+- **User Flow:**
+  1. User views region details (e.g., "The Shire")
+  2. Taps on quiz theme card (e.g., "Hobbits and Their Culture")
+  3. Automatically navigated to Chat screen
+  4. Quiz session starts immediately with theme context
+- **Branch:** `feature-quiz-navigation`
+- **Files Modified:** `RegionDetailScreen.tsx`, `ChatScreen-simple.tsx`, `types/index.ts`
+
 ---
 
 ## 3. Latest Assessment & Planning
