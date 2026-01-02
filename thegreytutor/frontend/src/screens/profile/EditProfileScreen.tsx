@@ -125,6 +125,7 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({ navigation }) => 
       const updatedUser = await response.json();
 
       // Update local state with response from server
+      // Use formData.avatar to ensure the selected avatar persists
       dispatch({
         type: 'SET_USER',
         payload: {
@@ -133,7 +134,7 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({ navigation }) => 
           email: updatedUser.email,
           displayName: updatedUser.name || updatedUser.username,
           role: updatedUser.role,
-          avatar: updatedUser.avatar || formData.avatar,
+          avatar: formData.avatar, // Always use the avatar the user selected
         },
       });
 
