@@ -7,8 +7,9 @@
 
 import * as SecureStore from 'expo-secure-store';
 
-// Use computer's IP for mobile device access (localhost doesn't work from phone)
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.0.225:8000';
+// API URL: Configure via EXPO_PUBLIC_API_URL environment variable
+// For mobile device testing, set to your computer's local IP (e.g., http://192.168.0.225:8000)
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000';
 
 // Token storage keys
 const ACCESS_TOKEN_KEY = 'access_token';

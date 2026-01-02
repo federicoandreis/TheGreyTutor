@@ -56,9 +56,10 @@ const MapScreenContent: React.FC = () => {
   const handleRegionPress = (regionName: string) => {
     console.log('Region pressed:', regionName);
 
-    // Find the region data
-    const region = state.journeyState?.region_statuses?.find(
-      r => r.name === regionName
+    // Find the region data from region_statuses or journey_progress
+    const regionStatuses = (state.journeyState as any)?.region_statuses || state.journeyState?.journey_progress || [];
+    const region = regionStatuses.find(
+      (r: any) => (r.region_name === regionName || r.name === regionName)
     );
 
     if (!region) {
@@ -67,7 +68,8 @@ const MapScreenContent: React.FC = () => {
     }
 
     // Navigate to region detail screen
-    navigation.navigate('RegionDetail' as never, { regionName } as never);
+    const actualRegionName = region.name || region.region_name;
+    (navigation as any).navigate('RegionDetail', { regionName: actualRegionName });
   };
 
   // Handle refresh
@@ -94,14 +96,36 @@ const MapScreenContent: React.FC = () => {
 
   // Show error state
   if (state.error && !state.journeyState) {
+    // Check if it's an authentication error
+    const isAuthError = state.error.includes('login') || state.error.includes('Authentication');
+    
     return (
       <View style={styles.centerContainer}>
-        <Ionicons name="warning-outline" size={64} color="#FF3B30" />
-        <Text style={styles.errorTitle}>Journey Unavailable</Text>
+        <Ionicons 
+          name={isAuthError ? "lock-closed-outline" : "warning-outline"} 
+          size={64} 
+          color={isAuthError ? "#007AFF" : "#FF3B30"} 
+        />
+        <Text style={styles.errorTitle}>
+          {isAuthError ? 'Login Required' : 'Journey Unavailable'}
+        </Text>
         <Text style={styles.errorMessage}>{state.error}</Text>
-        <TouchableOpacity style={styles.retryButton} onPress={handleRefresh}>
-          <Text style={styles.retryButtonText}>Retry</Text>
-        </TouchableOpacity>
+        
+        {isAuthError ? (
+          <TouchableOpacity 
+            style={[styles.retryButton, { backgroundColor: '#007AFF' }]}
+            onPress={() => {
+              // TODO: Navigate to login screen
+              Alert.alert('Login', 'Login screen will be implemented in Phase 1.4');
+            }}
+          >
+            <Text style={styles.retryButtonText}>Go to Login</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.retryButton} onPress={handleRefresh}>
+            <Text style={styles.retryButtonText}>Retry</Text>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
@@ -121,6 +145,11 @@ const MapScreenContent: React.FC = () => {
 
   const { journeyState } = state;
 
+  // Debug logging
+  console.log('[MapScreen] Journey state:', journeyState);
+  console.log('[MapScreen] Region count:', journeyState.journey_progress?.length || 0);
+  console.log('[MapScreen] Regions:', journeyState.journey_progress?.map(r => r.region_name));
+
   return (
     <View style={styles.container}>
       {/* Header with stats */}
@@ -128,7 +157,7 @@ const MapScreenContent: React.FC = () => {
         <View style={styles.statsRow}>
           <View style={styles.statItem}>
             <Ionicons name="star" size={20} color="#FFD700" />
-            <Text style={styles.statValue}>{journeyState.knowledge_points || 0}</Text>
+            <Text style={styles.statValue}>{journeyState.total_knowledge_points || 0}</Text>
             <Text style={styles.statLabel}>Knowledge Points</Text>
           </View>
 
@@ -144,7 +173,7 @@ const MapScreenContent: React.FC = () => {
 
           <View style={styles.statItem}>
             <Ionicons name="checkmark-circle" size={20} color="#34C759" />
-            <Text style={styles.statValue}>{journeyState.total_regions_completed || 0}</Text>
+            <Text style={styles.statValue}>{journeyState.completed_regions?.length || 0}</Text>
             <Text style={styles.statLabel}>Completed</Text>
           </View>
         </View>
@@ -152,11 +181,20 @@ const MapScreenContent: React.FC = () => {
 
       {/* Map */}
       <MiddleEarthMap
-        regionStatuses={journeyState.region_statuses || []}
-        journeyPaths={journeyState.available_paths || []}
+        regionStatuses={
+          // Backend returns region_statuses, map to journey_progress format
+          (journeyState.journey_progress || (journeyState as any).region_statuses || []).map((region: any) => ({
+            region_name: region.region_name || region.name,
+            knowledge_points: region.knowledge_points || 0,
+            quizzes_completed: region.quizzes_completed || 0,
+            is_unlocked: region.is_unlocked || false,
+            is_completed: region.is_completed || false,
+          }))
+        }
+        journeyPaths={[]} // Paths not yet implemented in new API
         currentRegion={journeyState.current_region || null}
         onRegionPress={handleRegionPress}
-        activePath={journeyState.current_path || null}
+        activePath={null}
       />
 
       {/* Current region indicator */}
@@ -165,9 +203,9 @@ const MapScreenContent: React.FC = () => {
           <Ionicons name="navigate" size={20} color="#FFFFFF" />
           <Text style={styles.currentRegionText}>
             Current Region: {
-              journeyState.region_statuses?.find(
-                r => r.name === journeyState.current_region
-              )?.display_name || journeyState.current_region
+              journeyState.journey_progress?.find(
+                r => r.region_name === journeyState.current_region
+              )?.region_name || journeyState.current_region
             }
           </Text>
         </View>

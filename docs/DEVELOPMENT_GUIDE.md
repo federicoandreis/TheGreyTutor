@@ -346,9 +346,27 @@ git push origin feature-name
 
 ## Environment Variables
 
-Create `.env` files if needed:
+### Frontend Setup
 
-**Backend (.env in project root):**
+Copy the example environment file and configure as needed:
+```powershell
+cd thegreytutor/frontend
+cp .env.example .env
+```
+
+**For mobile device testing via Expo Go:**
+
+Edit `.env` to use your computer's local IP address:
+```env
+# Find your IP: ipconfig | findstr "IPv4" (Windows)
+EXPO_PUBLIC_API_URL=http://YOUR_LOCAL_IP:8000
+```
+
+> **Note:** Your phone and computer must be on the same WiFi network for mobile testing.
+
+### Backend Setup
+
+Create `.env` in the project root if needed:
 ```env
 NEO4J_URI=bolt://localhost:7687
 NEO4J_USER=neo4j
@@ -356,11 +374,6 @@ NEO4J_PASSWORD=password
 POSTGRES_URI=postgresql://postgres:postgres@localhost:5432/thegreytutor
 REDIS_URL=redis://localhost:6379
 JWT_SECRET=your-secret-key
-```
-
-**Frontend (thegreytutor/frontend/.env):**
-```env
-EXPO_PUBLIC_API_URL=http://localhost:8000
 ```
 
 ## Additional Resources

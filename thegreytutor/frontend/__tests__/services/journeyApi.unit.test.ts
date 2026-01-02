@@ -1,12 +1,21 @@
+/**
+ * Unit Tests for Journey API
+ *
+ * These tests use MOCKED authApi (fast, isolated tests).
+ * The authApi mock is configured in jest.setup.unit.js
+ *
+ * Run with: npm run test:unit
+ */
+
 import { journeyApi } from '../../src/services/journeyApi';
-import * as authApi from '../../src/services/authApi';
+import { authApi } from '../../src/services/authApi';
 
-// Mock authApi
-jest.mock('../../src/services/authApi', () => ({
-  authenticatedFetch: jest.fn(),
-}));
+// authApi is already mocked by jest.setup.unit.js
+const mockAuthenticatedFetch = authApi.authenticatedFetch as jest.MockedFunction<
+  typeof authApi.authenticatedFetch
+>;
 
-describe('JourneyApi', () => {
+describe('JourneyApi Unit Tests', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -29,22 +38,31 @@ describe('JourneyApi', () => {
         available_paths: [],
       };
 
-      (authApi.authenticatedFetch as jest.Mock).mockResolvedValue(mockJourneyState);
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        json: async () => mockJourneyState,
+      } as Response);
 
       const result = await journeyApi.getJourneyState();
 
-      expect(authApi.authenticatedFetch).toHaveBeenCalledWith('/api/journey/state', {
-        method: 'GET',
-      });
+      expect(mockAuthenticatedFetch).toHaveBeenCalledWith(
+        expect.stringContaining('/api/journey/state')
+      );
       expect(result).toEqual(mockJourneyState);
     });
 
     it('throws error when fetch fails', async () => {
-      (authApi.authenticatedFetch as jest.Mock).mockRejectedValue(
-        new Error('Network error')
-      );
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: false,
+        status: 500,
+        statusText: 'Internal Server Error',
+      } as Response);
 
-      await expect(journeyApi.getJourneyState()).rejects.toThrow('Network error');
+      await expect(journeyApi.getJourneyState()).rejects.toThrow(
+        'Failed to get journey state'
+      );
     });
   });
 
@@ -56,33 +74,45 @@ describe('JourneyApi', () => {
         region_data: {
           name: 'bree',
           display_name: 'Bree',
+          description: 'A town of Men',
+          difficulty_level: 'beginner',
+          lore_depth: 'medium',
+          available_quiz_themes: ['history', 'characters'],
+          lore_snippets: [],
+          visit_count: 1,
+          completion_percentage: 0,
         },
       };
 
-      (authApi.authenticatedFetch as jest.Mock).mockResolvedValue(mockResponse);
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        json: async () => mockResponse,
+      } as Response);
 
       const result = await journeyApi.travelToRegion('bree');
 
-      expect(authApi.authenticatedFetch).toHaveBeenCalledWith('/api/journey/travel', {
-        method: 'POST',
-        body: JSON.stringify({ region_name: 'bree' }),
-      });
+      expect(mockAuthenticatedFetch).toHaveBeenCalledWith(
+        expect.stringContaining('/api/journey/travel'),
+        expect.objectContaining({
+          method: 'POST',
+          body: JSON.stringify({ region_name: 'bree' }),
+        })
+      );
       expect(result).toEqual(mockResponse);
     });
 
     it('handles travel failure', async () => {
-      const mockResponse = {
-        success: false,
-        message: 'Region is locked',
-        region_data: null,
-      };
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: false,
+        status: 403,
+        statusText: 'Forbidden',
+      } as Response);
 
-      (authApi.authenticatedFetch as jest.Mock).mockResolvedValue(mockResponse);
-
-      const result = await journeyApi.travelToRegion('rivendell');
-
-      expect(result.success).toBe(false);
-      expect(result.message).toBe('Region is locked');
+      await expect(journeyApi.travelToRegion('rivendell')).rejects.toThrow(
+        'Failed to travel to region'
+      );
     });
   });
 
@@ -95,7 +125,12 @@ describe('JourneyApi', () => {
         regions_unlocked: [],
       };
 
-      (authApi.authenticatedFetch as jest.Mock).mockResolvedValue(mockResponse);
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        json: async () => mockResponse,
+      } as Response);
 
       const quizData = {
         region_name: 'shire',
@@ -107,12 +142,12 @@ describe('JourneyApi', () => {
 
       const result = await journeyApi.completeQuiz(quizData);
 
-      expect(authApi.authenticatedFetch).toHaveBeenCalledWith(
-        '/api/journey/complete-quiz',
-        {
+      expect(mockAuthenticatedFetch).toHaveBeenCalledWith(
+        expect.stringContaining('/api/journey/complete-quiz'),
+        expect.objectContaining({
           method: 'POST',
           body: JSON.stringify(quizData),
-        }
+        })
       );
       expect(result).toEqual(mockResponse);
     });
@@ -125,12 +160,20 @@ describe('JourneyApi', () => {
           {
             code: 'shire_master',
             name: 'Shire Master',
+            description: 'Master all Shire quizzes',
+            category: 'region' as const,
+            rarity: 'rare' as const,
           },
         ],
         regions_unlocked: ['bree'],
       };
 
-      (authApi.authenticatedFetch as jest.Mock).mockResolvedValue(mockResponse);
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        json: async () => mockResponse,
+      } as Response);
 
       const quizData = {
         region_name: 'shire',
@@ -153,7 +196,7 @@ describe('JourneyApi', () => {
         name: 'shire',
         display_name: 'The Shire',
         description: 'A peaceful region',
-        difficulty_level: 'beginner' as const,
+        difficulty_level: 'beginner',
         map_coordinates: { x: 100, y: 150, radius: 20 },
         prerequisite_regions: [],
         knowledge_points_required: 0,
@@ -163,26 +206,30 @@ describe('JourneyApi', () => {
         completion_percentage: 50,
       };
 
-      (authApi.authenticatedFetch as jest.Mock).mockResolvedValue(mockRegionDetail);
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        json: async () => mockRegionDetail,
+      } as Response);
 
       const result = await journeyApi.getRegionDetails('shire');
 
-      expect(authApi.authenticatedFetch).toHaveBeenCalledWith(
-        '/api/journey/regions/shire',
-        {
-          method: 'GET',
-        }
+      expect(mockAuthenticatedFetch).toHaveBeenCalledWith(
+        expect.stringContaining('/api/journey/regions/shire')
       );
       expect(result).toEqual(mockRegionDetail);
     });
 
     it('handles region not found', async () => {
-      (authApi.authenticatedFetch as jest.Mock).mockRejectedValue(
-        new Error('Region not found')
-      );
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: false,
+        status: 404,
+        statusText: 'Not Found',
+      } as Response);
 
       await expect(journeyApi.getRegionDetails('invalid')).rejects.toThrow(
-        'Region not found'
+        'Failed to get region details'
       );
     });
   });
@@ -208,13 +255,18 @@ describe('JourneyApi', () => {
         },
       ];
 
-      (authApi.authenticatedFetch as jest.Mock).mockResolvedValue(mockRegions);
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        json: async () => mockRegions,
+      } as Response);
 
       const result = await journeyApi.listRegions();
 
-      expect(authApi.authenticatedFetch).toHaveBeenCalledWith('/api/journey/regions', {
-        method: 'GET',
-      });
+      expect(mockAuthenticatedFetch).toHaveBeenCalledWith(
+        expect.stringContaining('/api/journey/regions')
+      );
       expect(result).toEqual(mockRegions);
       expect(result).toHaveLength(2);
     });
@@ -234,13 +286,18 @@ describe('JourneyApi', () => {
         },
       ];
 
-      (authApi.authenticatedFetch as jest.Mock).mockResolvedValue(mockPaths);
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        json: async () => mockPaths,
+      } as Response);
 
       const result = await journeyApi.listPaths();
 
-      expect(authApi.authenticatedFetch).toHaveBeenCalledWith('/api/journey/paths', {
-        method: 'GET',
-      });
+      expect(mockAuthenticatedFetch).toHaveBeenCalledWith(
+        expect.stringContaining('/api/journey/paths')
+      );
       expect(result).toEqual(mockPaths);
       expect(result).toHaveLength(1);
     });
@@ -253,8 +310,8 @@ describe('JourneyApi', () => {
           code: 'first_steps',
           name: 'First Steps',
           description: 'Complete your first quiz',
-          category: 'learning',
-          rarity: 'common',
+          category: 'quiz' as const,
+          rarity: 'common' as const,
           icon_name: 'star',
           badge_color: '#FFD700',
           is_earned: true,
@@ -263,23 +320,25 @@ describe('JourneyApi', () => {
           code: 'shire_master',
           name: 'Shire Master',
           description: 'Master all Shire quizzes',
-          category: 'exploration',
-          rarity: 'rare',
+          category: 'region' as const,
+          rarity: 'rare' as const,
           icon_name: 'trophy',
           badge_color: '#C0392B',
           is_earned: false,
         },
       ];
 
-      (authApi.authenticatedFetch as jest.Mock).mockResolvedValue(mockAchievements);
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        json: async () => mockAchievements,
+      } as Response);
 
       const result = await journeyApi.listAchievements();
 
-      expect(authApi.authenticatedFetch).toHaveBeenCalledWith(
-        '/api/journey/achievements',
-        {
-          method: 'GET',
-        }
+      expect(mockAuthenticatedFetch).toHaveBeenCalledWith(
+        expect.stringContaining('/api/journey/achievements')
       );
       expect(result).toEqual(mockAchievements);
       expect(result).toHaveLength(2);
@@ -288,9 +347,7 @@ describe('JourneyApi', () => {
 
   describe('error handling', () => {
     it('handles network errors', async () => {
-      (authApi.authenticatedFetch as jest.Mock).mockRejectedValue(
-        new Error('Network request failed')
-      );
+      mockAuthenticatedFetch.mockRejectedValue(new Error('Network request failed'));
 
       await expect(journeyApi.getJourneyState()).rejects.toThrow(
         'Network request failed'
@@ -298,13 +355,25 @@ describe('JourneyApi', () => {
     });
 
     it('handles authentication errors', async () => {
-      (authApi.authenticatedFetch as jest.Mock).mockRejectedValue(
-        new Error('Unauthorized')
-      );
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: false,
+        status: 401,
+        statusText: 'Unauthorized',
+      } as Response);
 
       await expect(journeyApi.travelToRegion('shire')).rejects.toThrow(
-        'Unauthorized'
+        'Failed to travel to region'
       );
+    });
+
+    it('handles server errors', async () => {
+      mockAuthenticatedFetch.mockResolvedValue({
+        ok: false,
+        status: 500,
+        statusText: 'Internal Server Error',
+      } as Response);
+
+      await expect(journeyApi.listRegions()).rejects.toThrow('Failed to list regions');
     });
   });
 });
