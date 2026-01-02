@@ -81,16 +81,13 @@ export async function startQuizSession(
 
 /**
  * Get the next question in a quiz session
+ * Backend already returns QuestionResponse format, just pass it through
  */
 export async function getNextQuestion(session_id: string): Promise<QuestionResponse> {
   try {
-    const question = await apiGetNextQuestion(session_id);
-
-    return {
-      question,
-      session_id,
-      question_number: 1, // Would need to track this
-    };
+    // apiGetNextQuestion returns the full QuestionResponse from backend
+    const response = await apiGetNextQuestion(session_id);
+    return response;
   } catch (error) {
     console.error('[quizApi] Failed to get next question:', error);
     throw new Error('Failed to get next question');

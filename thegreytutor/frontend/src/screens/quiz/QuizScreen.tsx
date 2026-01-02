@@ -130,13 +130,23 @@ const QuizScreen: React.FC = () => {
   };
 
   const loadQuestion = (questionData: QuestionResponse, number: number) => {
+    console.log('[QuizScreen] Raw questionData received:', JSON.stringify(questionData, null, 2));
+
     // Backend returns { question: {...}, session_id, question_number }
     const rawQuestion = questionData.question || questionData;
+
+    console.log('[QuizScreen] Extracted rawQuestion:', JSON.stringify(rawQuestion, null, 2));
 
     // Match ChatScreen's extraction logic - check question_text FIRST
     const questionText = rawQuestion.question_text || rawQuestion.text || rawQuestion.question || '';
     const questionOptions = rawQuestion.options || [];
     const questionType = rawQuestion.type || rawQuestion.question_type || 'open_ended';
+
+    console.log('[QuizScreen] Extracted fields:', {
+      questionText,
+      questionOptions,
+      questionType
+    });
 
     const normalizedQuestion: NormalizedQuestion = {
       text: typeof questionText === 'string' ? questionText : String(questionText),

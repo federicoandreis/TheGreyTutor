@@ -64,9 +64,10 @@ export const createQuizSession = async (
 
 /**
  * Get the next question in a session
+ * Backend returns QuestionResponse: { question: {...}, session_id: string, question_number: number }
  */
-export const getNextQuestion = async (sessionId: string): Promise<Question> => {
-  return get<Question>(`/session/${sessionId}/question`);
+export const getNextQuestion = async (sessionId: string): Promise<any> => {
+  return get<any>(`/session/${sessionId}/question`);
 };
 
 /**
