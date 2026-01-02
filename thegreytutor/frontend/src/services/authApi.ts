@@ -22,6 +22,7 @@ export interface AuthUser {
   email: string;
   name: string | null;
   role: string;
+  avatar?: string;  // Add avatar field
   created_at: string;
   last_login: string | null;
 }
