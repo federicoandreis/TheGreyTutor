@@ -37,12 +37,19 @@ export interface AnswerSubmission {
 }
 
 export interface AnswerResponse {
-  is_correct: boolean;
-  feedback: string;
+  correct: boolean;
+  quality?: number;
+  feedback?: {
+    explanation?: string;
+    strengths?: string[];
+    weaknesses?: string[];
+    suggestions?: string[];
+  };
   correct_answer?: string;
-  next_question?: Question;
-  knowledge_points_earned: number;
+  next_question?: any;
+  knowledge_points_earned?: number;
   session_complete: boolean;
+  session_id?: string;
 }
 
 export interface SessionSummary {
@@ -57,7 +64,7 @@ export interface SessionSummary {
  * Create a new quiz session
  */
 export const createQuizSession = async (
-  params: QuizSessionParams = {}
+  params: QuizSessionParams
 ): Promise<QuizSession> => {
   return post<QuizSession>('/session', params);
 };

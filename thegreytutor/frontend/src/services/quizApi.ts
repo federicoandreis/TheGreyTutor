@@ -104,14 +104,15 @@ export async function submitQuizAnswer(
   try {
     const response = await apiSubmitAnswer(session_id, answer);
 
+    // Backend returns: { correct, quality, feedback: {explanation, strengths, weaknesses, suggestions}, ... }
+    // Pass through directly without transformation
     return {
-      correct: response.is_correct,
-      feedback: {
-        explanation: response.feedback,
-      },
+      correct: response.correct,
+      quality: response.quality,
+      feedback: response.feedback,  // Already an object, don't wrap again
       next_question: response.next_question,
       session_complete: response.session_complete,
-      session_id,
+      session_id: response.session_id || session_id,
     };
   } catch (error) {
     console.error('[quizApi] Failed to submit answer:', error);

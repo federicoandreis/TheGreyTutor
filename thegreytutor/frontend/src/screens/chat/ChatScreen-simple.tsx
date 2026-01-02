@@ -505,16 +505,36 @@ function ChatScreen() {
                         ]);
                         setQuizFinished(true);
                       } else if (resp.next_question) {
-                        setCurrentQuizQuestion(resp.next_question);
+                        // Normalize next_question same as text input handler
+                        let rawQuestion = resp.next_question.question ? resp.next_question.question : resp.next_question;
+                        let options: string[] = [];
+                        if (Array.isArray(rawQuestion.options)) {
+                          options = rawQuestion.options as string[];
+                        } else if (typeof rawQuestion.options === 'string') {
+                          try {
+                            const parsed = JSON.parse(rawQuestion.options);
+                            if (Array.isArray(parsed)) options = parsed as string[];
+                            else if (typeof parsed === 'string') options = [parsed];
+                          } catch {
+                            options = [rawQuestion.options];
+                          }
+                        }
+                        if (!Array.isArray(options)) options = [];
+                        const normQuestion = {
+                          ...rawQuestion,
+                          text: rawQuestion.question_text || rawQuestion.text || rawQuestion.question,
+                          options,
+                        };
+                        setCurrentQuizQuestion(normQuestion);
                         setQuizQuestionNumber(q => q + 1);
                         setQuizMessages(prev => [
                           ...prev,
                           {
                             id: (Date.now() + 4).toString(),
-                            content: formatQuizQuestion(resp.next_question, quizQuestionNumber + 1),
+                            content: formatQuizQuestion(normQuestion, quizQuestionNumber + 1),
                             role: 'assistant' as const,
                             timestamp: new Date().toISOString(),
-                            question: resp.next_question
+                            question: normQuestion
                           } as any
                         ]);
                         setAnsweredQuizMessageId(null);
