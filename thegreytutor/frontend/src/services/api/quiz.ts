@@ -57,14 +57,14 @@ export interface SessionSummary {
 export const createQuizSession = async (
   params: QuizSessionParams = {}
 ): Promise<QuizSession> => {
-  return post<QuizSession>('/api/session', params);
+  return post<QuizSession>('/session', params);
 };
 
 /**
  * Get the next question in a session
  */
 export const getNextQuestion = async (sessionId: string): Promise<Question> => {
-  return get<Question>(`/api/session/${sessionId}/question`);
+  return get<Question>(`/session/${sessionId}/question`);
 };
 
 /**
@@ -74,12 +74,12 @@ export const submitAnswer = async (
   sessionId: string,
   answer: string
 ): Promise<AnswerResponse> => {
-  return post<AnswerResponse>(`/api/session/${sessionId}/answer`, { answer });
+  return post<AnswerResponse>(`/session/${sessionId}/answer`, { answer });
 };
 
 /**
  * Get session details and summary
  */
 export const getSessionSummary = async (sessionId: string): Promise<SessionSummary> => {
-  return get<SessionSummary>(`/api/session/${sessionId}`);
+  return get<SessionSummary>(`/session/${sessionId}`);
 };
