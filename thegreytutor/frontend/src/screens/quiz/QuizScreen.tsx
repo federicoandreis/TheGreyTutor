@@ -131,16 +131,17 @@ const QuizScreen: React.FC = () => {
 
   const loadQuestion = (questionData: QuestionResponse, number: number) => {
     // Backend returns { question: {...}, session_id, question_number }
-    // where question object has: { question, text, type, options, answer, difficulty, entity, ... }
     const rawQuestion = questionData.question || questionData;
 
+    // Match ChatScreen's extraction logic - check question_text FIRST
+    const questionText = rawQuestion.question_text || rawQuestion.text || rawQuestion.question || '';
+    const questionOptions = rawQuestion.options || [];
+    const questionType = rawQuestion.type || rawQuestion.question_type || 'open_ended';
+
     const normalizedQuestion: NormalizedQuestion = {
-      // Backend uses 'question' or 'text' field for the question text
-      text: normalizeQuestionText(rawQuestion.question || rawQuestion.text || ''),
-      // Backend returns 'options' array (empty for open-ended)
-      options: normalizeOptions(rawQuestion.options || []),
-      // Backend uses 'type' field
-      question_type: rawQuestion.type || rawQuestion.question_type || 'open_ended',
+      text: typeof questionText === 'string' ? questionText : String(questionText),
+      options: Array.isArray(questionOptions) ? questionOptions : [],
+      question_type: questionType,
     };
 
     setCurrentQuestion(normalizedQuestion);
